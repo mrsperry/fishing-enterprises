@@ -2,22 +2,48 @@
 <head>
 	<title>Fisher</title>
 	<link rel="stylesheet" href="css/index.css">
+	<script src="javascript/messenger.js"></script>
 	<script src="javascript/lights.js"></script>
+	<script src="javascript/fishing.js"></script>
+	<script src="javascript/main.js"></script>
+	<script>
+		window.setInterval(function() { update(); }, 1250);
+	</script>
 </head>
 <body>
-	<div id="container">
-		<div id="left">
-			<p></p>
+	<div class="container">
+		<div class="left">
+			<div class="container">
+				<div class="left">
+					<span id="worms" class="hidden">Worms: 
+						<span id="worm_count">0</span>
+					</span>
+					<br>
+					<span id="small_fish" class="hidden">Small fish: 
+						<span id="small_fish_count">0</span>
+					</span>
+					<br>
+				</div>
+				<div class="right">
+					<p>
+						<button id="forage_for_worms_button" onclick="increment_worms()">Forage for worms</button>
+					</p>
+					<p id="fishing_buttons" class="hidden">
+						<button id="cast_out_line_button" onclick="cast_out_line()">Cast out line</button>
+						<button id="reel_in_line_button" onclick="reel_in_line()" disabled>Reel in line</button>
+					</p>
+				</div>
+			</div>
 		</div>
-		<div id="right">
-			<p></p>
+		<div class="right">
+			<p>~ aesthetics ~</p>
 		</div>
 	</div>
 </body>
 <footer>
-	<div id="bottom">
+	<div class="bottom">
 		- <a id="lights" class="link" onclick="toggle_lights()">lights off</a> |
-		<a class="link">github</a> |
-		<a class="link">twitter</a> -
+		<a class="link" href="https://github.com/mrsperry/mrsperry.github.io" target="_blank">github</a> |
+		<a class="link" href="">twitter</a> -
 	</div>
 </footer>
