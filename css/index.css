@@ -1,0 +1,42 @@
+body {
+	font-family: monospace;
+	font-size: 12pt;
+}
+
+a {
+	color: #0066ff;
+}
+
+a:hover {
+	color: #0099ff;
+}
+
+#container {
+	width: 100%;
+	height: 100%;
+	border: 1px dashed black;
+}
+
+#left {
+	/* remove */
+	border: 1px dashed red;
+	width: 50%;
+	height: 75%;
+	float: left;
+}
+
+#right {
+	/* remove */
+	border: 1px dashed blue;
+	margin-left: 50%;
+	height: 75%;
+}
+
+#bottom {
+	position: fixed;
+	bottom: 0;
+	width: 95%;
+	text-align: center;
+	padding-bottom: 20px;
+	/*border: 1px dashed;*/
+}
