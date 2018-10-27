@@ -28,6 +28,16 @@ button:disabled {
 	background-color: #eeeeee;
 }
 
+.bottom_border {
+	border-bottom: 1px solid black;
+}
+
+.history {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	white-space: pre;
+}
+
 .container {
 	width: 100%;
 	height: 100%;
@@ -54,4 +64,24 @@ button:disabled {
 
 .hidden {
 	visibility: hidden;
+}
+
+#history_1 {
+	opacity: 1.0;
+}
+
+#history_2 {
+	opacity: 0.8;
+}
+
+#history_3 {
+	opacity: 0.6;
+}
+
+#history_4 {
+	opacity: 0.4;
+}
+
+#history_5 {
+	opacity: 0.2;
 }
