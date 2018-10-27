@@ -1,4 +1,4 @@
-var lines = ["5", "4", "3", "2", "1"];
+var lines = ["", "", "", "", ""];
 
 function write_message(text) {
 	console.log(text);
