@@ -11,7 +11,7 @@ function write_message(text) {
 
 		lines[0] = text;
 	}
-
+	
 	for (var index = 0; index < 5; index++) {
 		document.getElementById("history_message_" + (index + 1).toString()).innerText = lines[index];
 	}
