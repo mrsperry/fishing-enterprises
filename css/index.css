@@ -1,88 +1,88 @@
 body {
-	font-family: monospace;
-	font-size: 11pt;
+    font-family: monospace;
+    font-size: 11pt;
 }
 
 a {
-	color: #0066ff;
-	text-decoration: none;
+    color: #0066ff;
+    text-decoration: none;
 }
 
 a:hover {
-	color: #0099ff;
-	cursor: pointer;
+    color: #0099ff;
+    cursor: pointer;
 }
 
 button {
-	background-color: white;
-	text-align: center;
-	width: 30%;
-	height: 40px;
-	border: 1px solid black;
+    background-color: white;
+    text-align: center;
+    width: 30%;
+    height: 40px;
+    border: 1px solid black;
 }
 
 button:hover {
-	background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
 button:disabled {
-	background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
 .bottom_border {
-	border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .history {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	white-space: pre;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    white-space: pre;
 }
 
 .container {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .left {
-	width: 50%;
-	height: 75%;
-	float: left;
+    width: 50%;
+    height: 75%;
+    float: left;
 }
 
 .right {
-	margin-left: 50%;
-	height: 75%;
+    margin-left: 50%;
+    height: 75%;
 }
 
 .bottom {
-	position: fixed;
-	bottom: 0;
-	width: 95%;
-	text-align: center;
-	padding-bottom: 1%;
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    text-align: center;
+    padding-bottom: 1%;
 }
 
 .hidden {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 #history_1 {
-	opacity: 1.0;
+    opacity: 1.0;
 }
 
 #history_2 {
-	opacity: 0.8;
+    opacity: 0.8;
 }
 
 #history_3 {
-	opacity: 0.6;
+    opacity: 0.6;
 }
 
 #history_4 {
-	opacity: 0.4;
+    opacity: 0.4;
 }
 
 #history_5 {
-	opacity: 0.2;
+    opacity: 0.2;
 }
