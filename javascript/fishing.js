@@ -1,29 +1,29 @@
-var is_fishing = false;
+let is_fishing = false;
 
-var found_worms = false;
-var caught_small_fish = false;
-var caught_medium_fish = false;
-var caught_large_fish = false;
+let found_worms = false;
+let caught_small_fish = false;
+let caught_medium_fish = false;
+let caught_large_fish = false;
 
-var worm_count = 0;
-var guppy_count = 0;
-var small_fish_count = 0;
-var medium_fish_count = 0;
-var large_fish_count = 0;
+let worm_count = 0;
+let guppy_count = 0;
+let small_fish_count = 0;
+let medium_fish_count = 0;
+let large_fish_count = 0;
 
 // TODO: implement maxes
-var worm_max = 30;
-var guppy_max = 10;
-var small_fish_max = 10;
-var medium_fish_max = 5;
-var large_fish_max = 3;
+let worm_max = 30;
+let guppy_max = 10;
+let small_fish_max = 10;
+let medium_fish_max = 5;
+let large_fish_max = 3;
 
 function fishing_update() {
     if (is_fishing) {
         // multipliers for catching fish, chances without bait are low
-        var small_fish_multiplier = 1;
-        var medium_fish_multiplier = 0;
-        var large_fish_multiplier = 0;
+        let small_fish_multiplier = 1;
+        let medium_fish_multiplier = 0;
+        let large_fish_multiplier = 0;
 
         // set the small fish multiplier if they have bait
         if (worm_count > 0) {
@@ -45,9 +45,9 @@ function fishing_update() {
         }
 
         // initialize the non-bait chances of catching fish
-        var small_fish_chance = get_random(1, 10) * small_fish_multiplier;
-        var medium_fish_chance = get_random(1, 5) * medium_fish_multiplier;
-        var large_fish_chance = get_random(1, 1) * large_fish_multiplier;
+        let small_fish_chance = get_random(1, 10) * small_fish_multiplier;
+        let medium_fish_chance = get_random(1, 5) * medium_fish_multiplier;
+        let large_fish_chance = get_random(1, 1) * large_fish_multiplier;
 
         // start checking chances of catching fish
         if (get_random(1, 100) < large_fish_chance) {
@@ -72,7 +72,7 @@ function fishing_update() {
                 }
             }
         } else if (get_random(1, 100) < small_fish_chance) {
-            var decrement = true;
+            let decrement = true;
 
             // 50% chance to get a guppy instead of small fish
             if (get_random(1, 2) == 1 && caught_small_fish) {
@@ -119,7 +119,7 @@ function reel_in_line() {
 function show_max_count(element_name, value) {
     document.getElementById(element_name).style.opacity = 0.5;
 
-    var max = document.getElementById(element_name + "_max");
+    let max = document.getElementById(element_name + "_max");
     max.innerText = "/" + value.toString();
     max.classList.remove("hidden");
     max.style.opacity = 0.5;
@@ -146,7 +146,7 @@ function increment_worms() {
 }
 
 function decrement_worms() {
-    var element = document.getElementById("worm_count");
+    let element = document.getElementById("worm_count");
     element.innerText = --worm_count;
     element.style.opacity = 1.0;
     document.getElementById("worm_count_max").style.opacity = 1.0;
