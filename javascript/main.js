@@ -1,18 +1,23 @@
 let main = {
     area: null,
 
-    initialize: function() {
+    initialize: function(delay) {
         messenger.write_message("lovely day for some fishing...");
 
         lake.initialize();
 
         window.setInterval(function() {
-                main.update(); 
-            }, 1500);
+                main.update();
+            }, delay);
     },
 
     update: function() {
         this.area.update();
+    },
+
+    clear: function() {
+        $("#left_content").empty();
+        $("#right_content").empty();
     },
 
     get_random: function(min, max) {
