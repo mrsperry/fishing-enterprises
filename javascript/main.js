@@ -1,14 +1,21 @@
-function initialize() {
-    write_message("lovely day for some fishing...");
-    window.setInterval(function() {
-            update(); 
-        }, 1500);
-}
+let main = {
+    area: null,
 
-function update() {
-    fishing_update();
-}
+    initialize: function() {
+        messenger.write_message("lovely day for some fishing...");
 
-function get_random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+        lake.initialize();
+
+        window.setInterval(function() {
+                main.update(); 
+            }, 1500);
+    },
+
+    update: function() {
+        this.area.update();
+    },
+
+    get_random: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 }

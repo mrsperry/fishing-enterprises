@@ -2,6 +2,7 @@
 <head>
     <title>Fisher</title>
     <link rel="stylesheet" href="css/index.css" type="text/css"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,39 +15,9 @@
                     <p id="history_2" class="history">-  <span id="history_message_2"></span></p>
                     <p id="history_1" class="history">~> <span id="history_message_1"></span></p>
                 </div>
-                <div class="left">
-                    <p>
-                        <span id="worms" class="hidden">Worms: 
-                            <span id="worm_count">0</span><span id="worm_count_max" class="hidden"></span>
-                        </span>
-                        <br>
-                        <span id="guppies" class="hidden">Guppies: 
-                            <span id="guppy_count">0</span><span id="guppy_count_max" class="hidden"></span>
-                        </span>
-                        <br>
-                        <span id="small_fish" class="hidden">Small fish: 
-                            <span id="small_fish_count">0</span>
-                        </span>
-                        <br>
-                        <span id="medium_fish" class="hidden">Medium fish: 
-                            <span id="medium_fish_count">0</span>
-                        </span>
-                        <br>
-                        <span id="large_fish" class="hidden">Large fish: 
-                            <span id="large_fish_count">0</span>
-                        </span>
-                        <br>
-                    </p>
-                </div>
-                <div class="right">
-                    <p>
-                        <button id="forage_for_worms_button" onclick="increment_worms()">Forage for worms</button>
-                    </p>
-                    <p id="fishing_buttons" class="hidden">
-                        <button id="cast_out_line_button" onclick="cast_out_line()">Cast out line</button>
-                        <button id="reel_in_line_button" onclick="reel_in_line()" disabled>Reel in line</button>
-                    </p>
-                </div>
+                <br>
+                <div id="left_content" class="left"></div>
+                <div id="right_content" class="right"></div>
             </div>
         </div>
         <div class="right">
@@ -59,11 +30,17 @@
     <script src="javascript/lights.js"></script>
     <script src="javascript/messenger.js"></script>
     <script src="javascript/fishing.js"></script>
-    <script>initialize();</script>
+    <script src="javascript/resources.js"></script>
+    <script src="javascript/locations/lake.js"></script>
+    <script>
+        $(document).ready(function() {
+            main.initialize();
+        });
+    </script>
 </body>
 <footer>
     <div class="bottom">
-        - <a id="lights" class="link" onclick="toggle_lights()">lights off</a> |
+        - <a id="lights" class="link" onclick="lights.toggle_lights()">lights off</a> |
         <a class="link" href="https://github.com/mrsperry/mrsperry.github.io" target="_blank">github</a> |
         <a class="link" href="">twitter</a> -
     </div>

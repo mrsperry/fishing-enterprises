@@ -1,18 +1,21 @@
-let lines = ["", "", "", "", ""];
+let messenger = {
+    lines: ["", "", "", "", ""],
 
-function write_message(text) {
-    console.log(text);
+    write_message: function(text) {
+        console.log(text);
 
-    if (lines[0] != text) {
-        // shift all the lines up one
-        for (let index = 4; index >= 0; index--) {
-            lines[index] = lines[index - 1];
+        if (this.lines[0] != text) {
+            // shift all the lines up one
+            for (let index = 4; index >= 0; index--) {
+                this.lines[index] = this.lines[index - 1];
+            }
+
+            this.lines[0] = text;
         }
-
-        lines[0] = text;
-    }
-    
-    for (let index = 0; index < 5; index++) {
-        document.getElementById("history_message_" + (index + 1).toString()).innerText = lines[index];
+        
+        for (let index = 0; index < 5; index++) {
+            $("#history_message_" + (index + 1).toString())
+                .text(this.lines[index]);
+        }
     }
 }
