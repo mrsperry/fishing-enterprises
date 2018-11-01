@@ -1,4 +1,4 @@
-let resources = {
+var resources = {
     money_count: 0,
 
     // lake bait
@@ -28,7 +28,7 @@ let resources = {
     caught_salmon: false,
 
     trout_count: 0,
-    trout_max: 10,
+    trout_max: 7,
     caught_trout: false,
 
     pike_count: 0,
@@ -78,10 +78,10 @@ let resources = {
             this.show_max_count("worms", this.worm_max);
         }
 
+        messenger.write_message("worms writhing in the mud can be used as bait");
+
         $("#worms_count")
             .text(this.worm_count);
-
-        messenger.write_message("worms writhing in the mud can be used as bait");
     },
 
    decrement_worms: function() {
@@ -94,11 +94,11 @@ let resources = {
         $("#guppies_count")
             .text(++this.guppies_count);
 
+        messenger.write_message("these little things would make great bait for larger fish");
+
         if (this.guppies_count == this.guppies_max) {
             this.show_max_count("guppies", this.guppies_max);
         }
-
-        messenger.write_message("these little things would make great bait for larger fish");
     },
 
     decrement_guppies: function() {
@@ -119,11 +119,13 @@ let resources = {
         $("#bass_count")
             .text(++this.bass_count);
 
+        messenger.write_message("you feel a slight tug; small fish aren't really special");
+
         if (this.bass_count == this.bass_max) {
             this.show_max_count("bass", this.bass_max);
-        }
 
-        messenger.write_message("you feel a slight tug; small fish aren't really special");
+            shop.unlock();
+        }      
     },
 
     decrement_bass: function() {
@@ -143,11 +145,13 @@ let resources = {
         $("#sturgeon_count")
             .text(++this.sturgeon_count);
 
+        messenger.write_message("an average sized fish but still nothing to scoff at");
+
         if (this.sturgeon_count == this.sturgeon_max) {
             this.show_max_count("sturgeon", this.sturgeon_max);
-        }
 
-        messenger.write_message("an average sized fish but still nothing to scoff at");
+            shop.unlock();
+        }
     },
 
     increment_chub: function() {
@@ -161,10 +165,12 @@ let resources = {
         $("#chub_count")
             .text(++this.chub_count);
 
+        messenger.write_message("quite the impressive catch; it looks to have been a fighter");
+
         if (this.chub_count == this.chub_max) {
             this.show_max_count("chub", this.chub_max);
-        }
 
-        messenger.write_message("quite the impressive catch; it looks to have been a fighter");
+            shop.unlock();
+        }
     }
 }

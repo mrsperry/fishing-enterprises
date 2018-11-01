@@ -1,4 +1,4 @@
-let messenger = {
+var messenger = {
     lines: ["", "", "", "", ""],
 
     write_message: function(text) {

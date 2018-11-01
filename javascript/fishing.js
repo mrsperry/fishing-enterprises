@@ -1,4 +1,4 @@
-let fishing = {
+var fishing = {
     cast_out_line: function() {
         $("#reel_in_line_button")
             .prop("disabled", false);

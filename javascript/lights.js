@@ -1,4 +1,4 @@
-let lights = {
+var lights = {
     light_switch: true,
 
     toggle_lights: function() {

@@ -1,4 +1,4 @@
-let lake = {
+var lake = {
     display: "lake",
 
     is_fishing: false,

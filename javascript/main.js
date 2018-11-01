@@ -1,4 +1,4 @@
-let main = {
+var main = {
     area: null,
 
     initialize: function(delay) {
@@ -54,7 +54,7 @@ let main = {
                 .click(function() {
                         window[name.toLowerCase()].initialize();
                     })
-                //.hide()
+                .hide()
                 .appendTo(parent);
             $("<br>")
                 .appendTo(parent);
