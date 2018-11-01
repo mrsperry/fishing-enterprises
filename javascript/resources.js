@@ -48,11 +48,11 @@ let resources = {
     black_drum_max: 3,
     caught_black_drum: false,
 
-    show_max_count: function(element_name, value) {
-        $("#" + element_name)
+    show_max_count: function(name, value) {
+        $("#" + name + "_count")
             .css("opacity", 0.5);
 
-        $("#" + element_name + "_max")
+        $("#" + name + "_max")
             .text("/" + value.toString())
             .css("opacity", 0.5)
             .show();
@@ -75,7 +75,7 @@ let resources = {
         if ((this.worm_count += main.get_random(1, 3)) >= this.worm_max) {
             this.worm_count = this.worm_max;
 
-            this.show_max_count("worms_count", this.worm_max);
+            this.show_max_count("worms", this.worm_max);
         }
 
         $("#worms_count")
@@ -92,18 +92,18 @@ let resources = {
 
     increment_guppies: function() {
         $("#guppies_count")
-            .text(++this.guppy_count);
+            .text(++this.guppies_count);
 
-        if (this.guppy_count == this.guppy_max) {
-            this.show_max_count("guppies_count", this.guppy_max);
+        if (this.guppies_count == this.guppies_max) {
+            this.show_max_count("guppies", this.guppies_max);
         }
 
         messenger.write_message("these little things would make great bait for larger fish");
     },
 
     decrement_guppies: function() {
-        $("#guppy_count")
-            .text(--this.guppy_count)
+        $("#guppies_count")
+            .text(--this.guppies_count)
             .css("opacity", 1.0);
     },
 
@@ -120,7 +120,7 @@ let resources = {
             .text(++this.bass_count);
 
         if (this.bass_count == this.bass_max) {
-            this.show_max_count("bass_count", this.bass_max);
+            this.show_max_count("bass", this.bass_max);
         }
 
         messenger.write_message("you feel a slight tug; small fish aren't really special");
@@ -144,7 +144,7 @@ let resources = {
             .text(++this.sturgeon_count);
 
         if (this.sturgeon_count == this.sturgeon_max) {
-            this.show_max_count("sturgeon_count", this.sturgeon_max);
+            this.show_max_count("sturgeon", this.sturgeon_max);
         }
 
         messenger.write_message("an average sized fish but still nothing to scoff at");
@@ -162,7 +162,7 @@ let resources = {
             .text(++this.chub_count);
 
         if (this.chub_count == this.chub_max) {
-            this.show_max_count("chub_count", this.chub_max);
+            this.show_max_count("chub", this.chub_max);
         }
 
         messenger.write_message("quite the impressive catch; it looks to have been a fighter");

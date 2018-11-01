@@ -51,10 +51,10 @@ let lake = {
     create_counters: function(names) {
         let content = $("#resource_counters");
 
-        let value = name + "_count";
-        let max = name + "_max";
         for (let index = 0; index < names.length; index++) {
             let name = names[index];
+            let value = name + "_count";
+            let max = name + "_max";
 
             let parent = $("<span>")
                 .attr("id", name)
@@ -63,11 +63,11 @@ let lake = {
                 .hide()
                 .appendTo(content);
             $("<span>")
-                .attr("id", name + "_count")
+                .attr("id", value)
                 .text(resources[value])
                 .appendTo(parent);
             $("<span>")
-                .attr("id", name + "_count_max")
+                .attr("id", max)
                 .text("/" + resources[max])
                 .hide()
                 .appendTo(parent);
@@ -89,14 +89,14 @@ let lake = {
                 messenger.write_message("won't catch much without worms...");
             }
 
-            // set the medium fish multiplier if they have caught a guppy
-            if (resources.worm_count > 0 && resources.guppy_count > 0) {
+            // set the medium fish multiplier if they have caught a guppies
+            if (resources.worm_count > 0 && resources.guppies_count > 0) {
                 sturgeon_multiplier = 3;
             }
 
             // set the large fish multiplier if they have caught medium fish & have small fish
             if (resources.caught_sturgeon) {
-                if (resources.worm_count > 0 && resources.guppy_count > 0 && resources.bass_count) {
+                if (resources.worm_count > 0 && resources.guppies_count > 0 && resources.bass_count) {
                     chub_multiplier = 5;
                 }
             }
@@ -132,9 +132,9 @@ let lake = {
             } else if (random < bass_chance) {
                 let decrement = false;
 
-                // 50% chance to get a guppy instead of small fish
+                // 50% chance to get a guppies instead of small fish
                 if (main.get_random(1, 2) == 1 && resources.caught_bass) {
-                    if (resources.guppy_count < resources.guppy_max) {
+                    if (resources.guppies_count < resources.guppies_max) {
                         resources.increment_guppies();
 
                         decrement = true;
