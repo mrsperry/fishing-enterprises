@@ -6,8 +6,8 @@ let resources = {
     worm_max: 30,
     found_worms: false,
 
-    guppy_count: 0,
-    guppy_max: 10,
+    guppies_count: 0,
+    guppies_max: 10,
 
     // lake fish
     bass_count: 0,
@@ -49,7 +49,8 @@ let resources = {
     caught_black_drum: false,
 
     show_max_count: function(element_name, value) {
-        $("#" + element_name).css("opacity", 0.5);
+        $("#" + element_name)
+            .css("opacity", 0.5);
 
         $("#" + element_name + "_max")
             .text("/" + value.toString())
@@ -60,8 +61,12 @@ let resources = {
     increment_worms: function() {
         // if this is the first time you find a worm, unlock fishing and show worm count
         if (!this.found_worms) {
-            $("#worms").fadeIn();
-            $("#fishing_buttons").fadeIn();
+            $("#worms")
+                .fadeIn();
+            $("#cast_out_line_button")
+                .fadeIn();
+            $("#reel_in_line_button")
+                .fadeIn();
 
             this.found_worms = true;
         }

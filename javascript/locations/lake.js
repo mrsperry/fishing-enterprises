@@ -1,4 +1,6 @@
 let lake = {
+    display: "lake",
+
     is_fishing: false,
 
     initialize: function() {
@@ -23,9 +25,7 @@ let lake = {
                 })
             .text("Forage for worms")
             .appendTo(content);
-        let parent = $("<p>")
-            .attr("id", "fishing_buttons")
-            .hide()
+        $("<br>")
             .appendTo(content);
         $("<button>")
             .attr("id", "cast_out_line_button")
@@ -33,8 +33,10 @@ let lake = {
                     fishing.cast_out_line()
                 })
             .text("Cast out line")
-            .css("margin-right", "10px")
-            .appendTo(parent);
+            .hide()
+            .appendTo(content);
+        $("<br>")
+            .appendTo(content);
         $("<button>")
             .attr("id", "reel_in_line_button")
             .click(function() { 
@@ -42,14 +44,15 @@ let lake = {
                 })
             .prop("disabled", true)
             .text("Reel in line")
-            .appendTo(parent);
+            .hide()
+            .appendTo(content);
     },
 
     create_counters: function(names) {
         let content = $("#resource_counters");
 
         let value = name + "_count";
-        let max = value + "_max";
+        let max = name + "_max";
         for (let index = 0; index < names.length; index++) {
             let name = names[index];
 

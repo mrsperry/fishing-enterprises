@@ -3,9 +3,19 @@ let main = {
 
     initialize: function(delay) {
         messenger.write_message("lovely day for some fishing...");
-
+        
         lake.initialize();
 
+        this.initialize_locations([
+            "Shop",
+            "Lake",
+            "River",
+            "Pier",
+            "Reef",
+            "Diving",
+            "Deep sea"
+        ]);
+        
         window.setInterval(function() {
                 main.update();
             }, delay);
@@ -18,8 +28,8 @@ let main = {
     clear: function() {
         let counters = $("#resource_counters");
         counters.empty();
-        $("#resource_buttons").empty();
-
+        $("#resource_buttons")
+            .empty();
 
         let parent = $("<span>")
             .text("Money: ")
@@ -30,6 +40,25 @@ let main = {
             .appendTo(parent);
         $("<br><br>")
             .appendTo(counters);
+    },
+
+    initialize_locations: function(names) {
+        for (let index = 0; index < names.length; index++) {
+            let name = names[index];
+
+            let parent = $("#area_selector");
+            $("<button>")
+                .attr("id", "location_" + name.toLowerCase())
+                .prop("disabled", this.area.display == name.toLowerCase())
+                .text(name)
+                .click(function() {
+                        window[name.toLowerCase()].initialize();
+                    })
+                //.hide()
+                .appendTo(parent);
+            $("<br>")
+                .appendTo(parent);
+        }
     },
 
     get_random: function(min, max) {

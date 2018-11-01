@@ -17,9 +17,10 @@ a:hover {
 button {
     background-color: white;
     text-align: center;
-    width: 20%;
+    width: 130px;
     height: 40px;
     border: 1px solid black;
+    margin-bottom: 10px;
 }
 
 button:hover {
@@ -28,6 +29,7 @@ button:hover {
 
 button:disabled {
     background-color: #eeeeee;
+    opacity: 0.4;
 }
 
 .bottom_border {
@@ -47,29 +49,11 @@ button:disabled {
 
 .left {
     width: 50%;
-    height: 75%;
     float: left;
 }
 
 .right {
     margin-left: 50%;
-    height: 75%;
-}
-
-.tri_left {
-    width: 33%;
-    height: 75%;
-    float: left;
-}
-
-.tri_middle {
-    margin-left: 33%;
-    height: 75%;
-}
-
-.tri_right {
-    margin-left: 66%;
-    height: 75%;
 }
 
 .bottom {
@@ -80,8 +64,18 @@ button:disabled {
     padding-bottom: 1%;
 }
 
-.hidden {
-    visibility: hidden;
+#resource_counters {
+    float: left;
+}
+
+#resource_buttons {
+    margin-left: 15%;
+    position: fixed;
+}
+
+#area_selector {
+    margin-left: 65%;
+    position: relative;
 }
 
 #history_1 {
