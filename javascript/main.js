@@ -16,8 +16,20 @@ let main = {
     },
 
     clear: function() {
-        $("#left_content").empty();
-        $("#right_content").empty();
+        let counters = $("#resource_counters");
+        counters.empty();
+        $("#resource_buttons").empty();
+
+
+        let parent = $("<span>")
+            .text("Money: ")
+            .appendTo(counters);
+        $("<span>")
+            .attr("id", "money")
+            .text("0")
+            .appendTo(parent);
+        $("<br><br>")
+            .appendTo(counters);
     },
 
     get_random: function(min, max) {

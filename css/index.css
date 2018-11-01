@@ -1,6 +1,7 @@
 body {
     font-family: monospace;
     font-size: 11pt;
+    margin-top: 5px;
 }
 
 a {
@@ -16,7 +17,7 @@ a:hover {
 button {
     background-color: white;
     text-align: center;
-    width: 30%;
+    width: 20%;
     height: 40px;
     border: 1px solid black;
 }
@@ -55,6 +56,22 @@ button:disabled {
     height: 75%;
 }
 
+.tri_left {
+    width: 33%;
+    height: 75%;
+    float: left;
+}
+
+.tri_middle {
+    margin-left: 33%;
+    height: 75%;
+}
+
+.tri_right {
+    margin-left: 66%;
+    height: 75%;
+}
+
 .bottom {
     position: fixed;
     bottom: 0;
@@ -72,17 +89,17 @@ button:disabled {
 }
 
 #history_2 {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #history_3 {
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 #history_4 {
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 #history_5 {
-    opacity: 0.2;
+    opacity: 0.6;
 }
