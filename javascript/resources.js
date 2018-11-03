@@ -2,12 +2,13 @@ var resources = {
     money_count: 0,
 
     // lake bait
-    worm_count: 0,
-    worm_max: 30,
-    found_worms: false,
+    worms_count: 0,
+    worms_max: 30,
+    caught_worms: false,
 
     guppies_count: 0,
     guppies_max: 10,
+    caught_guppies: false,
 
     // lake fish
     bass_count: 0,
@@ -60,7 +61,7 @@ var resources = {
 
     increment_worms: function() {
         // if this is the first time you find a worm, unlock fishing and show worm count
-        if (!this.found_worms) {
+        if (!this.caught_worms) {
             $("#worms")
                 .fadeIn();
             $("#cast_out_line_button")
@@ -68,25 +69,25 @@ var resources = {
             $("#reel_in_line_button")
                 .fadeIn();
 
-            this.found_worms = true;
+            this.caught_worms = true;
         }
 
         // get a random amount of worms between 1-3
-        if ((this.worm_count += main.get_random(1, 3)) >= this.worm_max) {
-            this.worm_count = this.worm_max;
+        if ((this.worms_count += main.get_random(1, 3)) >= this.worms_max) {
+            this.worms_count = this.worms_max;
 
-            this.show_max_count("worms", this.worm_max);
+            this.show_max_count("worms", this.worms_max);
         }
 
         messenger.write_message("worms writhing in the mud can be used as bait");
 
         $("#worms_count")
-            .text(this.worm_count);
+            .text(this.worms_count);
     },
 
    decrement_worms: function() {
         $("#worms_count")
-            .text(--this.worm_count)
+            .text(--this.worms_count)
             .css("opacity", 1.0);
     },
 
@@ -114,6 +115,7 @@ var resources = {
             $("#guppies").fadeIn();
 
             this.caught_bass = true;
+            this.caught_guppies = true;
         }
 
         $("#bass_count")

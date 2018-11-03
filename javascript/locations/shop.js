@@ -1,8 +1,10 @@
 var shop = {
     unlocked: false,
+    display: "shop",
 
     initialize: function() {
-        messenger.write_message("hello world");
+        main.clear();
+        main.initialize_locations(this);
     },
 
     update: function() {

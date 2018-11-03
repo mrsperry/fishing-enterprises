@@ -5,16 +5,6 @@ var main = {
         messenger.write_message("lovely day for some fishing...");
         
         lake.initialize();
-
-        this.initialize_locations([
-            "Shop",
-            "Lake",
-            "River",
-            "Pier",
-            "Reef",
-            "Diving",
-            "Deep sea"
-        ]);
         
         window.setInterval(function() {
                 main.update();
@@ -30,6 +20,8 @@ var main = {
         counters.empty();
         $("#resource_buttons")
             .empty();
+        $("#area_selector")
+            .empty();
 
         let parent = $("<span>")
             .text("Money: ")
@@ -42,7 +34,19 @@ var main = {
             .appendTo(counters);
     },
 
-    initialize_locations: function(names) {
+    initialize_locations: function(area) {
+        this.area = area;
+
+        let names = [
+            "Shop",
+            "Lake",
+            "River",
+            "Pier",
+            "Reef",
+            "Diving",
+            "Deep sea"
+        ];
+
         for (let index = 0; index < names.length; index++) {
             let name = names[index];
 

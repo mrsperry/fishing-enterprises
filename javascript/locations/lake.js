@@ -4,9 +4,8 @@ var lake = {
     is_fishing: false,
 
     initialize: function() {
-        main.area = this;
-
         main.clear();
+        main.initialize_locations(this);
 
         this.create_counters([
             "worms",
@@ -27,25 +26,30 @@ var lake = {
             .appendTo(content);
         $("<br>")
             .appendTo(content);
-        $("<button>")
+        let cast_button = $("<button>")
             .attr("id", "cast_out_line_button")
             .click(function() { 
                     fishing.cast_out_line()
                 })
             .text("Cast out line")
-            .hide()
             .appendTo(content);
         $("<br>")
             .appendTo(content);
-        $("<button>")
+        let reel_in_button = $("<button>")
             .attr("id", "reel_in_line_button")
             .click(function() { 
                     fishing.reel_in_line() 
                 })
             .prop("disabled", true)
             .text("Reel in line")
-            .hide()
             .appendTo(content);
+
+        if (!resources.caught_worms) {
+            $(cast_button)
+                .hide();
+            $(reel_in_button)
+                .hide();
+        }
     },
 
     create_counters: function(names) {
@@ -60,17 +64,32 @@ var lake = {
                 .attr("id", name)
                 // capatalizes the first letter
                 .text(name.charAt(0).toUpperCase() + name.slice(1) + ": ")
-                .hide()
                 .appendTo(content);
-            $("<span>")
+            // check if the counter should be hidden or not
+            if (!resources["caught_" + name]) {
+                $(parent)
+                    .hide();
+            }
+
+            let value_element = $("<span>")
                 .attr("id", value)
                 .text(resources[value])
                 .appendTo(parent);
-            $("<span>")
+            let max_element = $("<span>")
                 .attr("id", max)
                 .text("/" + resources[max])
-                .hide()
+                .css("opacity", 0.5)
                 .appendTo(parent);
+            // check if the max should be displayed
+            if (resources[value] != resources[max]) {
+                $(max_element)
+                    .hide();
+            } else {
+                // set opcaity if the count is at max
+                $(value_element)
+                    .css("opacity", 0.5);
+            }
+
             $("<br>").appendTo(content);
         }
     },
@@ -83,20 +102,20 @@ var lake = {
             let chub_multiplier = 0;
 
             // set the small fish multiplier if they have bait
-            if (resources.worm_count > 0) {
+            if (resources.worms_count > 0) {
                 bass_multiplier = 6;
             } else {
                 messenger.write_message("won't catch much without worms...");
             }
 
             // set the medium fish multiplier if they have caught a guppies
-            if (resources.worm_count > 0 && resources.guppies_count > 0) {
+            if (resources.worms_count > 0 && resources.guppies_count > 0) {
                 sturgeon_multiplier = 3;
             }
 
             // set the large fish multiplier if they have caught medium fish & have small fish
             if (resources.caught_sturgeon) {
-                if (resources.worm_count > 0 && resources.guppies_count > 0 && resources.bass_count) {
+                if (resources.worms_count > 0 && resources.guppies_count > 0 && resources.bass_count) {
                     chub_multiplier = 5;
                 }
             }
@@ -147,7 +166,7 @@ var lake = {
                     }
                 }
 
-                if (decrement && resources.worm_count > 0) {
+                if (decrement && resources.worms_count > 0) {
                     resources.decrement_worms();
                 }
 
