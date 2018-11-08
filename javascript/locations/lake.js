@@ -1,177 +1,122 @@
 var lake = {
-    display: "lake",
+    internal: "lake",
 
     is_fishing: false,
 
-    initialize: function() {
-        main.clear();
-        main.initialize_locations(this);
+    initialize() {
+        main.switch_area(this);
 
-        this.create_counters([
-            "worms",
-            "guppies",
-            "bass",
-            "sturgeon",
-            "chub"
-        ]);
-
-        // create the buttons
-        let content = $("#resource_buttons");
+        // initialize buttons
+        let parent = $("#resource_buttons");
         $("<button>")
-            .attr("id", "forage_for_worms_button")
-            .click(function() { 
-                    resources.increment_worms() 
-                })
             .text("Forage for worms")
-            .appendTo(content);
-        $("<br>")
-            .appendTo(content);
-        let cast_button = $("<button>")
+            .click(function() {
+                main.catch(resources.bait.worms, true);
+            })
+            .fadeIn()
+            .appendTo(parent);
+
+        let fishing_buttons = $("<div>")
+            .attr("id", "fishing_buttons")
+            .appendTo(parent);
+        $("<button>")
             .attr("id", "cast_out_line_button")
-            .click(function() { 
-                    fishing.cast_out_line()
-                })
             .text("Cast out line")
-            .appendTo(content);
+            .click(function() {
+                lake.toggle_fishing();
+            })
+            .appendTo(fishing_buttons);
         $("<br>")
-            .appendTo(content);
-        let reel_in_button = $("<button>")
+            .appendTo(fishing_buttons);
+        $("<button>")
             .attr("id", "reel_in_line_button")
-            .click(function() { 
-                    fishing.reel_in_line() 
-                })
-            .prop("disabled", true)
             .text("Reel in line")
-            .appendTo(content);
+            .prop("disabled", true)
+            .click(function() {
+                lake.toggle_fishing();
+            })
+            .appendTo(fishing_buttons);
 
-        if (!resources.caught_worms) {
-            $(cast_button)
-                .hide();
-            $(reel_in_button)
+        // only display fishing options if worms have been caught
+        if (resources.bait.worms.caught) {
+            $(fishing_buttons)
+                .fadeIn();
+        } else {
+            $(fishing_buttons)
                 .hide();
         }
     },
 
-    create_counters: function(names) {
-        let content = $("#resource_counters");
-
-        for (let index = 0; index < names.length; index++) {
-            let name = names[index];
-            let value = name + "_count";
-            let max = name + "_max";
-
-            let parent = $("<span>")
-                .attr("id", name)
-                // capatalizes the first letter
-                .text(name.charAt(0).toUpperCase() + name.slice(1) + ": ")
-                .appendTo(content);
-            // check if the counter should be hidden or not
-            if (!resources["caught_" + name]) {
-                $(parent)
-                    .hide();
-            }
-
-            let value_element = $("<span>")
-                .attr("id", value)
-                .text(resources[value])
-                .appendTo(parent);
-            let max_element = $("<span>")
-                .attr("id", max)
-                .text("/" + resources[max])
-                .css("opacity", 0.5)
-                .appendTo(parent);
-            // check if the max should be displayed
-            if (resources[value] != resources[max]) {
-                $(max_element)
-                    .hide();
-            } else {
-                // set opcaity if the count is at max
-                $(value_element)
-                    .css("opacity", 0.5);
-            }
-
-            $("<br>").appendTo(content);
-        }
-    },
-
-    update: function() {
+    update() {
         if (this.is_fishing) {
-            // multipliers for catching fish, chances without bait are low
-            let bass_multiplier = 1;
-            let sturgeon_multiplier = 0;
-            let chub_multiplier = 0;
+            // cancel fishing if you have no worms
+            if (resources.bait.worms.count == 0) {
+                this.toggle_fishing();
 
-            // set the small fish multiplier if they have bait
-            if (resources.worms_count > 0) {
-                bass_multiplier = 6;
-            } else {
-                messenger.write_message("won't catch much without worms...");
-            }
-
-            // set the medium fish multiplier if they have caught a guppies
-            if (resources.worms_count > 0 && resources.guppies_count > 0) {
-                sturgeon_multiplier = 3;
-            }
-
-            // set the large fish multiplier if they have caught medium fish & have small fish
-            if (resources.caught_sturgeon) {
-                if (resources.worms_count > 0 && resources.guppies_count > 0 && resources.bass_count) {
-                    chub_multiplier = 5;
-                }
-            }
-
-            // initialize the non-bait chances of catching fish
-            let bass_chance = main.get_random(1, 10) * bass_multiplier;
-            let sturgeon_chance = main.get_random(1, 5) * sturgeon_multiplier;
-            let chub_chance = main.get_random(1, 1) * chub_multiplier;
-
-            // start checking chances of catching fish
-            let random = main.get_random(1, 100);
-            if (random < chub_chance) {
-                if (resources.caught_sturgeon) {
-                    if (resources.chub_count < resources.chub_max) {
-                        resources.increment_chub();
-                        resources.decrement_worms();
-                        resources.decrement_guppies();
-                        resources.decrement_bass();
-
-                        return;
-                    }
-                }
-            } else if (random < sturgeon_chance) {
-                if (resources.caught_bass) {
-                    if (resources.sturgeon_count < resources.sturgeon_max) {
-                        resources.increment_sturgeon();
-                        resources.decrement_worms();
-                        resources.decrement_guppies();
-
-                        return;
-                    }
-                }
-            } else if (random < bass_chance) {
-                let decrement = false;
-
-                // 50% chance to get a guppies instead of small fish
-                if (main.get_random(1, 2) == 1 && resources.caught_bass) {
-                    if (resources.guppies_count < resources.guppies_max) {
-                        resources.increment_guppies();
-
-                        decrement = true;
-                    }
-                } else {
-                    if (resources.bass_count < resources.bass_max) {
-                        resources.increment_bass();
-
-                        decrement = true;
-                    }
-                }
-
-                if (decrement && resources.worms_count > 0) {
-                    resources.decrement_worms();
-                }
+                messenger.write_message("won't catch much without bait...");
 
                 return;
             }
+
+            let chance = main.random(1, 100);
+            // 60% chance for a bass/guppy
+            // 30% chance for a sturgeon
+            // 10% chance for a chub
+            if (chance <= 60) {
+                let decrement = false;
+                if (main.random(1, 2) == 1) {
+                    decrement = main.catch(resources.fish.bass, false);
+                } else {
+                    if (resources.fish.bass.caught) {
+                        decrement = main.catch(resources.bait.guppies, true);
+                    }
+                }
+
+                if (decrement) {
+                    resources.bait.worms.count--;
+                }
+            } else if (chance > 60 && chance <= 90) {
+                if (resources.bait.guppies.count > 0) {
+                    if (resources.fish.bass.caught) {
+                        if (main.catch(resources.fish.sturgeon, false)) {
+                            resources.bait.worms.count--;
+                            resources.bait.guppies.count--;
+                        }
+                    }
+                }
+            } else {
+                if (resources.bait.worms.count > 2 && resources.bait.guppies.count > 0) {
+                    if (resources.fish.sturgeon.caught) {
+                        if (main.catch(resources.fish.chub, false)) {
+                            resources.bait.worms.count -= 3;
+                            resources.bait.guppies.count--;
+                        }
+                    }
+                }
+            }
+
+            let worm_count = $("#worms_count")
+                .text(resources.bait.worms.count);
+            if (resources.bait.worms.count != resources.bait.worms.max) {
+                $(worm_count)
+                    .css("opacity", 1);
+            }
+
+            let guppy_count = $("#guppies_count")
+                .text(resources.bait.guppies.count);
+            if (resources.bait.guppies.count != resources.bait.guppies.max) {
+                $(guppy_count)
+                    .css("opacity", 1);
+            }
         }
+    },
+
+    toggle_fishing() {
+        $("#cast_out_line_button")
+            .prop("disabled", !this.is_fishing);
+        $("#reel_in_line_button")
+            .prop("disabled", this.is_fishing);
+
+        this.is_fishing = !this.is_fishing;
     }
 }

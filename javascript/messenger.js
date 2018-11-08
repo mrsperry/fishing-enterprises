@@ -1,7 +1,21 @@
 var messenger = {
     lines: ["", "", "", "", ""],
 
-    write_message: function(text) {
+    initialize() {
+        let parent = $("#history_panel");
+        for (let index = 4; index >= 0; index--) {
+            let item = $("<p>")
+                .addClass("history")
+                .text(index == 0 ? "~> " : "-  ")
+                .css("opacity", 1.0 - (index / 10))
+                .appendTo(parent);
+            $("<span>")
+                .attr("id", "history_message_" + index)
+                .appendTo(item);
+        }
+    },
+
+    write_message(text) {
         console.log(text);
 
         if (this.lines[0] != text) {
@@ -14,7 +28,7 @@ var messenger = {
         }
         
         for (let index = 0; index < 5; index++) {
-            $("#history_message_" + (index + 1).toString())
+            $("#history_message_" + index.toString())
                 .text(this.lines[index]);
         }
     }

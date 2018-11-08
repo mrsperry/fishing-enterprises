@@ -1,50 +1,41 @@
 <!DOCTYPE html>
 <head>
     <title>Fisher</title>
-    <link rel="stylesheet" href="css/index.css" type="text/css"/>
+    <link id="page_style" rel="stylesheet" href="css/light.css" type="text/css"/>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="left">
             <div class="container">
-                <div class="bottom_border">
-                    <p id="history_5" class="history">-  <span id="history_message_5"></span></p>
-                    <p id="history_4" class="history">-  <span id="history_message_4"></span></p>
-                    <p id="history_3" class="history">-  <span id="history_message_3"></span></p>
-                    <p id="history_2" class="history">-  <span id="history_message_2"></span></p>
-                    <p id="history_1" class="history">~> <span id="history_message_1"></span></p>
-                </div>
+                <div id="history_panel"></div>
                 <br>
                 <div id="resource_counters"></div>
+                <br>
                 <br>
                 <br>
                 <div id="resource_buttons"></div>
                 <div id="area_selector"></div>
             </div>
         </div>
-        <div class="right">
-            <!-- debug tools for now -->
-            <button onclick="worms_count = 1000">Worms</button>
-        </div>
+        <div class="right"></div>
     </div>
     <script src="javascript/main.js"></script>
     <script src="javascript/lights.js"></script>
     <script src="javascript/messenger.js"></script>
-    <script src="javascript/fishing.js"></script>
     <script src="javascript/resources.js"></script>
-    <script src="javascript/locations/lake.js"></script>
     <script src="javascript/locations/shop.js"></script>
+    <script src="javascript/locations/lake.js"></script>
     <script>
         $(document).ready(function() {
-            main.initialize(2000);
+            main.initialize(3000);
         });
     </script>
 </body>
 <footer>
     <div class="bottom">
-        - <a id="lights" class="link" onclick="lights.toggle_lights()">lights off</a> |
+        - <a class="link" onclick="lights.toggle_lights()">lights off</a> |
         <a class="link" href="https://github.com/mrsperry/mrsperry.github.io" target="_blank">github</a> |
-        <a class="link" href="">twitter</a> -
+        <a class="link" href="" target="_blank">twitter</a> -
     </div>
 </footer>
