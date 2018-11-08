@@ -52,40 +52,48 @@ var lake = {
 
     update() {
         if (this.is_fishing) {
-            let chance = main.random(1, 100);
             // 60% chance for a bass/guppy
             // 30% chance for a sturgeon
             // 10% chance for a chub
-            if (chance <= 60) {
-                let decrement = false;
-                if (main.random(1, 2) == 1) {
-                    decrement = main.catch(resources.fish.bass, false);
-                } else {
-                    if (resources.fish.bass.caught) {
-                        decrement = main.catch(resources.bait.guppies, true);
+            // hack because we can't use goto
+            while (true) {
+                if (main.random(1, 100) <= 60) {
+                    let decrement = false;
+                    if (main.random(1, 2) == 1) {
+                        decrement = main.catch(resources.fish.bass, false);
+                    } else {
+                        if (resources.fish.bass.caught) {
+                            decrement = main.catch(resources.bait.guppies, true);
+                        }
                     }
-                }
 
-                if (decrement) {
-                    resources.bait.worms.count--;
-                }
-            } else if (chance > 60 && chance <= 90) {
-                if (resources.bait.guppies.count > 0) {
-                    if (resources.fish.bass.caught) {
-                        if (main.catch(resources.fish.sturgeon, false)) {
-                            resources.bait.worms.count--;
-                            resources.bait.guppies.count--;
+                    if (decrement) {
+                        resources.bait.worms.count--;
+                    }
+
+                    break;
+                } else if (main.random(1, 100) <= 30) {
+                    if (resources.bait.guppies.count > 0) {
+                        if (resources.fish.bass.caught) {
+                            if (main.catch(resources.fish.sturgeon, false)) {
+                                resources.bait.worms.count--;
+                                resources.bait.guppies.count--;
+                            }
                         }
                     }
-                }
-            } else {
-                if (resources.bait.worms.count > 2 && resources.bait.guppies.count > 0) {
-                    if (resources.fish.sturgeon.caught) {
-                        if (main.catch(resources.fish.chub, false)) {
-                            resources.bait.worms.count -= 3;
-                            resources.bait.guppies.count--;
+
+                    break;
+                } else if (main.random(1, 100) <= 10) {
+                    if (resources.bait.worms.count > 2 && resources.bait.guppies.count > 0) {
+                        if (resources.fish.sturgeon.caught) {
+                            if (main.catch(resources.fish.chub, false)) {
+                                resources.bait.worms.count -= 3;
+                                resources.bait.guppies.count--;
+                            }
                         }
                     }
+
+                    break;
                 }
             }
 
