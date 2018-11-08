@@ -69,7 +69,7 @@ button:disabled {
 }
 
 #history_panel {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #666666;
 }
 
 /* resource counters */
@@ -84,7 +84,7 @@ button:disabled {
 #bait_counters, #fish_counters {
     display: block;
     padding: 3px;
-    border: solid #dddddd 1px;
+    border: solid #666666 1px;
     position: relative;
     margin-bottom: 5px;
 }
