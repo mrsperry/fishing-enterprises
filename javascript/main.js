@@ -58,6 +58,10 @@ var main = {
         $("#" + area.internal + "_button")
             .prop("disabled", true);
 
+        if (this.area != null) {
+            this.area.unload();
+        }
+        
         this.area = area;
     },
 
@@ -108,6 +112,7 @@ var main = {
                     // get the location based on name
                     window[item.internal].initialize();
                 })
+                .hide()
                 .appendTo(parent);
             $("<br>")
                 .appendTo(parent);

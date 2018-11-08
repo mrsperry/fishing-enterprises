@@ -2,6 +2,8 @@ var lake = {
     internal: "lake",
 
     is_fishing: false,
+    cast_out_message: false,
+    reel_in_message: false,
 
     initialize() {
         main.switch_area(this);
@@ -120,6 +122,12 @@ var lake = {
         }
     },
 
+    unload() {
+        if (this.is_fishing) {
+            this.toggle_fishing();
+        }
+    },
+
     toggle_fishing() {
         $("#cast_out_line_button")
             .prop("disabled", !this.is_fishing || !(resources.bait.worms.count > 0));
@@ -127,6 +135,14 @@ var lake = {
             .prop("disabled", this.is_fishing);
         $("#forage_for_worms_button")
             .prop("disabled", !this.is_fishing);
+
+        if (this.is_fishing && !this.reel_in_message) {
+            messenger.write_message("reeling in your line is always full of tedium");
+            this.reel_in_message = true;
+        } else if (!this.cast_out_message) {
+            messenger.write_message("you cast out your line as far as your arm permits");
+            this.cast_out_message = true;
+        }
 
         this.is_fishing = !this.is_fishing;
     }

@@ -1,5 +1,5 @@
-var shop = {
-    internal: "shop",
+var reef = {
+    internal: "reef",
 
     initialize() {
         main.switch_area(this);

@@ -1,5 +1,5 @@
-var shop = {
-    internal: "shop",
+var river = {
+    internal: "river",
 
     initialize() {
         main.switch_area(this);

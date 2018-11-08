@@ -1,5 +1,5 @@
-var shop = {
-    internal: "shop",
+var pier = {
+    internal: "pier",
 
     initialize() {
         main.switch_area(this);
