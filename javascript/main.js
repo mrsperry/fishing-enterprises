@@ -109,6 +109,8 @@ var main = {
                     window[item.internal].initialize();
                 })
                 .appendTo(parent);
+            $("<br>")
+                .appendTo(parent);
         }
     },
 
