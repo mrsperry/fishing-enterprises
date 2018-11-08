@@ -9,9 +9,12 @@ var lake = {
         // initialize buttons
         let parent = $("#resource_buttons");
         $("<button>")
+            .attr("id", "forage_for_worms_button")
             .text("Forage for worms")
             .click(function() {
                 main.catch(resources.bait.worms, true);
+                $("#cast_out_line_button")
+                    .prop("disabled", false);
             })
             .fadeIn()
             .appendTo(parent);
@@ -49,15 +52,6 @@ var lake = {
 
     update() {
         if (this.is_fishing) {
-            // cancel fishing if you have no worms
-            if (resources.bait.worms.count == 0) {
-                this.toggle_fishing();
-
-                messenger.write_message("won't catch much without bait...");
-
-                return;
-            }
-
             let chance = main.random(1, 100);
             // 60% chance for a bass/guppy
             // 30% chance for a sturgeon
@@ -108,14 +102,23 @@ var lake = {
                 $(guppy_count)
                     .css("opacity", 1);
             }
+
+            // cancel fishing if you have no worms
+            if (resources.bait.worms.count == 0) {
+                this.toggle_fishing();
+
+                messenger.write_message("won't catch much without any worms...");
+            }
         }
     },
 
     toggle_fishing() {
         $("#cast_out_line_button")
-            .prop("disabled", !this.is_fishing);
+            .prop("disabled", !this.is_fishing || !(resources.bait.worms.count > 0));
         $("#reel_in_line_button")
             .prop("disabled", this.is_fishing);
+        $("#forage_for_worms_button")
+            .prop("disabled", !this.is_fishing);
 
         this.is_fishing = !this.is_fishing;
     }
