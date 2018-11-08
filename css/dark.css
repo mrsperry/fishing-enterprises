@@ -21,8 +21,10 @@ a:hover {
 /* buttons */
 button {
     background-color: #222222;
+    font-family: monospace;
+    font-size: 11pt;
     text-align: center;
-    width: 130px;
+    width: 150px;
     height: 40px;
     border: 1px solid #666666;
     margin-bottom: 10px;
