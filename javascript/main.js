@@ -61,7 +61,7 @@ var main = {
         if (this.area != null) {
             this.area.unload();
         }
-        
+
         this.area = area;
     },
 
@@ -70,7 +70,7 @@ var main = {
 
         // create money counter
         let money = $("<div>")
-            .text("Money: ")
+            .text("Money: $")
             .appendTo(parent);
         $("<span>")
             .attr("id", "money")
@@ -196,7 +196,7 @@ var main = {
 
             return true;
         } else {
-            if (fish.internal != "worms") {
+            if (!is_bait) {
                 messenger.write_message("don't have anywhere to put this fish...");
             }
 
