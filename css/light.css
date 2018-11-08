@@ -1,0 +1,113 @@
+/* body */
+body {
+    font-family: monospace;
+    font-size: 11pt;
+    margin-top: 5px;
+}
+
+/* links */
+a {
+    color: #0066ff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0099ff;
+    cursor: pointer;
+}
+
+/* buttons */
+button {
+    background-color: white;
+    text-align: center;
+    width: 130px;
+    height: 40px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #eeeeee;
+}
+
+button:disabled {
+    background-color: #eeeeee;
+    opacity: 0.4;
+}
+
+/* containers */
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+    width: 50%;
+    float: left;
+}
+
+.right {
+    margin-left: 50%;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+/* history panel */
+.history {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    white-space: pre;
+}
+
+#history_panel {
+    border-bottom: 1px solid black;
+}
+
+/* resource counters */
+.value {
+    padding: 0px 7px;
+}
+
+#resource_counters {
+    float: left;
+}
+
+#bait_counters, #fish_counters {
+    display: block;
+    padding: 3px;
+    border: solid black 1px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+div#bait_counters:before, div#fish_counters:before {
+    position: absolute;
+    content: attr(display);
+    left: 5px;
+    top: -13px;
+    background: white;
+    padding: 0px 2px;
+}
+
+/* right side of the container of the left side 
+of the container of the body :^) */
+/* resource buttons & area selector */
+#resource_buttons {
+    margin-left: 15%;
+    position: fixed;
+}
+
+#area_selector {
+    margin-left: 65%;
+    position: relative;
+}
+
+#resource_buttons, #area_selector {
+    margin-top: -1px;
+}
