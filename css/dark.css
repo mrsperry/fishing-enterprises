@@ -133,5 +133,5 @@ div#bait_counters:before, div#fish_counters:before {
     background-color: #222222;
     color: #dddddd;
     padding: 0px 20px;
-    border: solid black 1px;
+    border: solid #666666 1px;
 }
