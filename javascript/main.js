@@ -119,6 +119,25 @@ var main = {
         }
     },
 
+    show_about() {
+        let overlay = $("<div>")
+            .attr("id", "overlay")
+            .appendTo($("body"));
+        let popup = $("<div>")
+            .attr("id", "about")
+            .appendTo(overlay);
+        $("<p>")
+            .text("about me or something")
+            .appendTo(popup);
+        $("<button>")
+            .text("Close")
+            .click(function() {
+                $(overlay)
+                    .remove();
+            })
+            .appendTo(popup);
+    },
+
     create_counter(id, item) {
         let counters = $("#" + id);
 

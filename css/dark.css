@@ -114,3 +114,24 @@ div#bait_counters:before, div#fish_counters:before {
 #resource_buttons, #area_selector {
     margin-top: -1px;
 }
+
+/* about popup */
+#overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1.0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#about {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    background-color: #222222;
+    color: #dddddd;
+    padding: 0px 20px;
+    border: solid black 1px;
+}
