@@ -126,10 +126,23 @@ var main = {
         let popup = $("<div>")
             .attr("id", "about")
             .appendTo(overlay);
-        $("<p>")
-            .text("about me or something")
+        let text = $.parseHTML("Fishing Enterprises was developed solely by me, Josh Sperry, in my "
+            + "free time to scratch the itch of an expansive idle game. It is heavily inspired by "
+            + "<a class='link' target='_blank' href='https://candybox2.github.io/candybox/'>Candybox 1</a>, "
+            + "<a class='link' target='_blank' href='https://candybox2.github.io/'>Candybox 2</a>, "
+            + "<a class='link' target='_blank' href='http://adarkroom.doublespeakgames.com/'>A Dark Room</a> and "
+            + "<a class='link' target='_blank' href='http://www.decisionproblem.com/paperclips/'>Universal Paperclips</a>.<br><br>"
+            + "The majority of the source code is written in "
+            + "<a class='link' target='_blank' href='https://www.javascript.com/'>Javascript</a> with "
+            + "<a class='link' target='_blank' href='https://jquery.com/'>jQuery</a> "
+            + "and is freely avaliable to view on "
+            + "<a class='link' target='_blank' href='https://github.com/mrsperry/mrsperry.github.io'>my Github</a>.");
+        let content = $("<p>")
             .appendTo(popup);
+        $(text)
+            .appendTo(content);
         $("<button>")
+            .attr("id", "close_button")
             .text("Close")
             .click(function() {
                 $(overlay)

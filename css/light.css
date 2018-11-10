@@ -127,10 +127,16 @@ of the container of the body :^) */
 
 #about {
     position: absolute;
-    top: 45%;
-    left: 45%;
+    top: 37%;
+    left: 37%;
+    width: 400px;
+    height: 235px;
     background-color: white;
     color: black;
     padding: 0px 20px;
     border: solid black 1px;
+}
+
+#close_button {
+    margin-left: 30%;
 }

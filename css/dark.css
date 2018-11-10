@@ -128,10 +128,16 @@ div#bait_counters:before, div#fish_counters:before {
 
 #about {
     position: absolute;
-    top: 45%;
-    left: 45%;
+    top: 37%;
+    left: 37%;
+    width: 400px;
+    height: 235px;
     background-color: #222222;
     color: #dddddd;
     padding: 0px 20px;
     border: solid #666666 1px;
+}
+
+#close_button {
+    margin-left: 30%;
 }
