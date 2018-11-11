@@ -111,10 +111,6 @@ div#bait_counters:before, div#fish_counters:before {
     position: relative;
 }
 
-#resource_buttons, #area_selector {
-    margin-top: -1px;
-}
-
 /* about popup */
 #overlay {
     position: fixed;

@@ -110,10 +110,6 @@ of the container of the body :^) */
     position: relative;
 }
 
-#resource_buttons, #area_selector {
-    margin-top: -1px;
-}
-
 /* about popup */
 #overlay {
     position: fixed;
