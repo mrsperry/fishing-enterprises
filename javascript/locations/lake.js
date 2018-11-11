@@ -1,15 +1,10 @@
 var lake = {
     internal: "lake",
-
-    is_fishing: false,
-    cast_out_message: false,
-    reel_in_message: false,
+    state: null,
 
     initialize() {
         main.switch_area(this);
 
-        // initialize buttons
-        let parent = $("#resource_buttons");
         $("<button>")
             .attr("id", "forage_for_worms_button")
             .text("Forage for worms")
@@ -19,28 +14,14 @@ var lake = {
                     .prop("disabled", false);
             })
             .fadeIn()
-            .appendTo(parent);
+            .appendTo($("#resource_buttons"));
 
-        let fishing_buttons = $("<div>")
-            .attr("id", "fishing_buttons")
-            .appendTo(parent);
-        $("<button>")
-            .attr("id", "cast_out_line_button")
-            .text("Cast out line")
-            .click(function() {
-                lake.toggle_fishing();
-            })
-            .appendTo(fishing_buttons);
-        $("<br>")
-            .appendTo(fishing_buttons);
-        $("<button>")
-            .attr("id", "reel_in_line_button")
-            .text("Reel in line")
-            .prop("disabled", true)
-            .click(function() {
-                lake.toggle_fishing();
-            })
-            .appendTo(fishing_buttons);
+        this.state = new fishing.state([
+            resources.bait.guppies,
+            resources.fish.bass,
+            resources.fish.sturgeon,
+            resources.fish.chub
+        ]);
 
         // only display fishing options if worms have been caught
         if (resources.bait.worms.caught) {
@@ -53,51 +34,8 @@ var lake = {
     },
 
     update() {
-        if (this.is_fishing) {
-            // 60% chance for a bass/guppy
-            // 30% chance for a sturgeon
-            // 10% chance for a chub
-            // hack because we can't use goto
-            while (true) {
-                if (main.random(1, 100) <= 60) {
-                    let decrement = false;
-                    if (main.random(1, 2) == 1) {
-                        decrement = main.catch(resources.fish.bass, false);
-                    } else {
-                        if (resources.fish.bass.caught) {
-                            decrement = main.catch(resources.bait.guppies, true);
-                        }
-                    }
-
-                    if (decrement) {
-                        resources.bait.worms.count--;
-                    }
-
-                    break;
-                } else if (main.random(1, 100) <= 30) {
-                    if (resources.bait.guppies.count > 0) {
-                        if (resources.fish.bass.caught) {
-                            if (main.catch(resources.fish.sturgeon, false)) {
-                                resources.bait.worms.count--;
-                                resources.bait.guppies.count--;
-                            }
-                        }
-                    }
-
-                    break;
-                } else if (main.random(1, 100) <= 10) {
-                    if (resources.bait.worms.count > 2 && resources.bait.guppies.count > 0) {
-                        if (resources.fish.sturgeon.caught) {
-                            if (main.catch(resources.fish.chub, false)) {
-                                resources.bait.worms.count -= 3;
-                                resources.bait.guppies.count--;
-                            }
-                        }
-                    }
-
-                    break;
-                }
-            }
+        if (resources.bait.worms.caught) {
+            fishing.update(this.state);
 
             let worm_count = $("#worms_count")
                 .text(resources.bait.worms.count);
@@ -114,8 +52,8 @@ var lake = {
             }
 
             // cancel fishing if you have no worms
-            if (resources.bait.worms.count == 0) {
-                this.toggle_fishing();
+            if (resources.bait.worms.count == 0 && this.state.is_fishing) {
+                fishing.toggle_state(this.state);
 
                 messenger.write_message("won't catch much without any worms...");
             }
@@ -123,27 +61,6 @@ var lake = {
     },
 
     unload() {
-        if (this.is_fishing) {
-            this.toggle_fishing();
-        }
+        fishing.unload(this.state);
     },
-
-    toggle_fishing() {
-        $("#cast_out_line_button")
-            .prop("disabled", !this.is_fishing || !(resources.bait.worms.count > 0));
-        $("#reel_in_line_button")
-            .prop("disabled", this.is_fishing);
-        $("#forage_for_worms_button")
-            .prop("disabled", !this.is_fishing);
-
-        if (this.is_fishing && !this.reel_in_message) {
-            messenger.write_message("reeling in your line is always full of tedium");
-            this.reel_in_message = true;
-        } else if (!this.cast_out_message) {
-            messenger.write_message("you cast out your line as far as your arm permits");
-            this.cast_out_message = true;
-        }
-
-        this.is_fishing = !this.is_fishing;
-    }
 }

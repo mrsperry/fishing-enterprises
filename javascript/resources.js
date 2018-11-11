@@ -4,6 +4,55 @@ var resources = {
         count: 0
     },
 
+    /* 
+        breakdown of the bait/fish objects
+        guppies: {
+            the name displayed on the resource counter
+            display: "Guppies",
+
+            the name used in internal references and IDs
+            internal: "guppies",
+
+            the message displayed when the fish is first caught
+            message: "these would make excellent bait for larger fish",
+
+            if this fish has been caught before
+            caught: false,
+
+            if the max number of this fish should be displayed on the resource counters
+            show_max: false,
+
+            the max number of this fish you can catch per bait used
+            max_caught: 2,
+
+            the current amount of this fish stored; set to 0 when you sell
+            count: 0,
+
+            the total amount of this fish caught (persists when you sell fish)
+            total: 0,
+
+            the max number of this fish you can store at once
+            max: 10
+
+            the chance to catch if you have avaliable bait
+            chance: 60,
+
+            disallow catching this fish before the specified fish is caught
+            after: "bass",
+
+            all of these baits must be avaliable to catch the fish
+            bait: [
+                {
+                    the type of bait
+                    type: "worms",
+
+                    the amount needed to catch the fish
+                    amount: 1
+                }
+            ]
+        }
+    */
+
     bait: {
         worms: {
             display: "Worms",
@@ -25,7 +74,15 @@ var resources = {
             max_caught: 2,
             count: 0,
             total: 0,
-            max: 10
+            max: 10,
+            chance: 60,
+            after: "bass",
+            bait: [
+                {
+                    type: "worms",
+                    amount: 1
+                }
+            ]
         }
     },
 
@@ -40,7 +97,15 @@ var resources = {
             max_caught: 1,
             count: 0,
             total: 0,
-            max: 10
+            max: 10,
+            chance: 60,
+            after: null,
+            bait: [
+                {
+                    type: "worms",
+                    amount: 1
+                }
+            ]
         },
         sturgeon: {
             display: "Sturgeon",
@@ -52,7 +117,19 @@ var resources = {
             max_caught: 1,
             count: 0,
             total: 0,
-            max: 7
+            max: 7,
+            chance: 40,
+            after: "bass",
+            bait: [
+                {
+                    type: "worms",
+                    amount: 1
+                },
+                {
+                    type: "guppies",
+                    amount: 1
+                }
+            ]
         },
         chub: {
             display: "Chub",
@@ -64,7 +141,19 @@ var resources = {
             max_caught: 1,
             count: 0,
             total: 0,
-            max: 3
+            max: 3,
+            chance: 30,
+            after: "sturgeon",
+            bait: [
+                {
+                    type: "worms",
+                    amount: 3
+                },
+                {
+                    type: "guppies",
+                    amount: 2
+                }
+            ]
         }
     }
 }
