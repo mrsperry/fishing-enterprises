@@ -88,6 +88,18 @@ var main = {
         $("<br>")
             .appendTo(parent);
 
+        // create tackle counter
+        $("<div>") 
+            .attr("id", "tackle_counters")
+            .attr("display", "Tackle")
+            .addClass("tackle")
+            .hide()
+            .appendTo(parent);
+        $("<br>")
+            .addClass("tackle")
+            .hide()
+            .appendTo(parent);
+
         // create fish counter
         $("<div>")
             .attr("id", "fish_counters")
@@ -166,74 +178,24 @@ var main = {
             .appendTo(parent);
     },
 
-    catch(fish, is_bait) {
-        console.log(fish);
-        if (!fish.caught) {
-            // handle guppies seperately
-            this.create_counter((is_bait ? "bait" : "fish") + "_counters", fish);
-            
-            if (fish.internal == "bass") {
-                // show the fish counters if this is the first fish
-                $("#fish_counters")
-                    .fadeIn();
-            } else if (fish.internal == "worms") {
-                // show fishing buttons
-                $("#fishing_buttons")
-                    .fadeIn();
-                // show the bait counters
-                $("#bait_counters")
-                    .fadeIn();
-            }
+    show_max(item) {
+        if (!item.show_max) {
+            $("<span>")
+                .attr("id", item.internal + "_max")
+                .text("/" + item.max)
+                .css("opacity", 0.5)
+                .appendTo($("#" + item.internal));
 
-            messenger.write_message(fish.message);
+            item.show_max = true;
         }
+    },
 
-        fish.caught = true;
-
-        if (fish.count != fish.max) {
-            let amount = this.random(1, fish.max_caught);
-            if (fish.count + amount >= fish.max) {
-                fish.count = fish.max;
-            } else {
-                fish.count += amount;
-            }
-            fish.total += amount;
-
-            $("#" + fish.internal + "_count")
-                .text(fish.count);
-
-            // check this after so we don't display the message until after the max has been hit
-            if (fish.count == fish.max) {
-                // unlock the shop
-                if (fish.internal != "worms" && fish.internal != "guppies") {
-                    $("#shop_button")
-                        .fadeIn();
-                    $("#lake_button")
-                        .fadeIn();
-                }
-
-                $("#" + fish.internal + "_count")
-                    .css("opacity", 0.5);
-
-                if (!fish.show_max) {
-                    $("<span>")
-                        .attr("id", fish.internal + "_max")
-                        .text("/" + fish.max)
-                        .css("opacity", 0.5)
-                        .appendTo($("#" + fish.internal));
-
-                    fish.show_max = true;
-                }
-            }
-
-            return true;
-        } else {
-            if (!is_bait) {
-                messenger.write_message("don't have anywhere to put this fish...");
-            }
-
-            return false;
-        }
+    remove(id) {
+        $("#" + id + "_button")
+            .fadeOut(400, (function() {
+                $("#" + id + "_button")
+                    .remove();
+            }));
     },
 
     random(min, max) {

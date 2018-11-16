@@ -1,22 +1,53 @@
 var shop = {
     internal: "shop",
 
+    buttons: {
+        sell_fish: {
+            data: {
+                parent: "resource_buttons",
+                id: "sell_fish",
+                text: function() {
+                    return "Sell fish ($" + shop.fish_value(false) + ")";
+                },
+                disabled: function() { 
+                    return shop.fish_value(false) == 0; 
+                }, 
+                on_click: function() {
+                    shop.sell_fish();
+                },
+            }
+        },
+        river_unlock: {
+            condition: function() {
+                return $("#river_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "resource_buttons",
+                id: "river_unlock",
+                text: "Unlock the River ($500)",
+                on_click: function() {
+                    river.purchase();
+                },
+                disabled: function() {
+                    return resources.money.count < 500;
+                }
+            }
+        }
+    },
+
     initialize() {
         main.switch_area(this);
 
-        let parent = $("#resource_buttons");
-
-        // create buttons
-        $("<button>")
-            .attr("id", "sell_button")
-            .text("Sell fish ($" + this.fish_value(false) + ")")
-            .click(function() {
-                shop.sell_fish();
-            })
-            .appendTo(parent);
-        if (this.fish_value(false) == 0) {
-            $(sell_button)
-                .prop("disabled", true);
+        for (let index in this.buttons) {
+            let item = this.buttons[index];
+            // check if the button is removed
+            if (item.removed == null || !item.removed) {
+                // check the item's display condition
+                if (item.condition == null || item.condition) {
+                    button.create(item.data);
+                }
+            }
         }
     },
 
@@ -26,6 +57,15 @@ var shop = {
 
     unload() {
         
+    },
+
+    update_money(value) {
+        $("#money")
+            .text(resources.money.count += value);
+
+        if (value > 0) {
+            resources.money.total += value;
+        }
     },
 
     fish_value(reset) {
@@ -48,11 +88,33 @@ var shop = {
     },
 
     sell_fish() {
-        $("#money")
-            .text(resources.money.count += this.fish_value(true));
+        shop.update_money(shop.fish_value(true));
 
-        $("#sell_button")
+        $("#sell_fish_button")
             .text("Sell fish ($0)")
             .prop("disabled", true);
+
+        shop.update();
+    },
+
+    purchase_item(item) {
+        if (item.count < item.max) {
+            if ($("#" + item.internal).length == 0) {
+                main.create_counter("tackle_counters", item);
+            }
+
+            this.update_money(-item.cost);
+
+            $("#" + item.internal + "_count")
+                .text(++item.count);
+            item.total++;
+        } else {
+            main.show_max(item);
+        }
+    },
+
+    remove_item(id) {
+        main.remove(id);
+        this.buttons[id].removed = true;
     }
 }

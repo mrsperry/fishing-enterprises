@@ -9,7 +9,7 @@ var lake = {
             .attr("id", "forage_for_worms_button")
             .text("Forage for worms")
             .click(function() {
-                main.catch(resources.bait.worms, true);
+                fishing.catch(resources.bait.worms, true);
                 $("#cast_out_line_button")
                     .prop("disabled", false);
             })

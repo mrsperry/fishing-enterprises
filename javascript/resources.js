@@ -1,7 +1,8 @@
 var resources = {
     money: {
         message: "money often costs too much, but I doubt the fish care",
-        count: 0
+        count: 0,
+        total: 0
     },
 
     /* 
@@ -82,7 +83,23 @@ var resources = {
                     type: "worms",
                     amount: 1
                 }
-            ]
+            ],
+            tackle: []
+        },
+
+    },
+
+    tackle: {
+        fly_tackle: {
+            display: "Fly Tackle",
+            internal: "fly_tackle",
+            message: "",
+            purchased: false,
+            show_max: false,
+            price: 2,
+            count: 0,
+            total: 0,
+            max: 20
         }
     },
 
@@ -105,7 +122,8 @@ var resources = {
                     type: "worms",
                     amount: 1
                 }
-            ]
+            ],
+            tackle: []
         },
         sturgeon: {
             display: "Sturgeon",
@@ -117,8 +135,8 @@ var resources = {
             max_caught: 1,
             count: 0,
             total: 0,
-            max: 7,
-            chance: 40,
+            max: 5,
+            chance: 45,
             after: "bass",
             bait: [
                 {
@@ -129,7 +147,8 @@ var resources = {
                     type: "guppies",
                     amount: 1
                 }
-            ]
+            ],
+            tackle: []
         },
         chub: {
             display: "Chub",
@@ -152,6 +171,85 @@ var resources = {
                 {
                     type: "guppies",
                     amount: 2
+                }
+            ],
+            tackle: []
+        },
+        salmon: {
+            display: "Salmon",
+            internal: "salmon",
+            message: "a large fish, looks to have been a fighter",
+            caught: false,
+            show_max: false,
+            price: 10,
+            max_caught: 1,
+            count: 0,
+            total: 0,
+            max: 7,
+            chance: 60,
+            after: null,
+            bait: [
+                {
+                    type: "worms",
+                    amount: 1
+                }
+            ],
+            tackle: [
+                {
+                    type: "fly_tackle",
+                    amount: 1
+                }
+            ]
+        },
+        trout: {
+            display: "Trout",
+            internal: "trout",
+            message: "a large fish, looks to have been a fighter",
+            caught: false,
+            show_max: false,
+            price: 15,
+            max_caught: 1,
+            count: 0,
+            total: 0,
+            max: 5,
+            chance: 40,
+            after: "salmon",
+            bait: [
+                {
+                    type: "worms",
+                    amount: 1
+                }
+            ],
+            tackle: [
+                {
+                    type: "fly_tackle",
+                    amount: 1
+                }
+            ]
+        },
+        pike: {
+            display: "Pike",
+            internal: "pike",
+            message: "a large fish, looks to have been a fighter",
+            caught: false,
+            show_max: false,
+            price: 20,
+            max_caught: 1,
+            count: 0,
+            total: 0,
+            max: 3,
+            chance: 30,
+            after: "trout",
+            bait: [
+                {
+                    type: "guppies",
+                    amount: 2
+                }
+            ],
+            tackle: [
+                {
+                    type: "fly_tackle",
+                    amount: 1
                 }
             ]
         }

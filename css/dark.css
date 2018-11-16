@@ -83,7 +83,7 @@ button:disabled {
     float: left;
 }
 
-#bait_counters, #fish_counters {
+#bait_counters, #tackle_counters, #fish_counters {
     display: block;
     padding: 3px;
     border: solid #666666 1px;
@@ -91,7 +91,7 @@ button:disabled {
     margin-bottom: 5px;
 }
 
-div#bait_counters:before, div#fish_counters:before {
+div#bait_counters:before, div#tackle_counters:before, div#fish_counters:before {
     position: absolute;
     content: attr(display);
     left: 5px;
