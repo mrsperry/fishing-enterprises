@@ -5,16 +5,16 @@ var lake = {
     initialize() {
         main.switch_area(this);
 
-        $("<button>")
-            .attr("id", "forage_for_worms_button")
-            .text("Forage for worms")
-            .click(function() {
+        button.create({
+            parent: "resource_buttons",
+            id: "forage_for_worms",
+            text: "Forage for worms",
+            on_click: function() {
                 fishing.catch(resources.bait.worms, true);
                 $("#cast_out_line_button")
                     .prop("disabled", false);
-            })
-            .fadeIn()
-            .appendTo($("#resource_buttons"));
+            }
+        });
 
         this.state = new fishing.state([
             resources.bait.guppies,

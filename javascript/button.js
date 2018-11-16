@@ -34,6 +34,11 @@ var button = {
             options.breaks = 1;
         }
 
+        if (options.hide == true) {
+            $(element)
+                .hide();
+        }
+
         for (let index = 0; index < options.breaks; index++) {
             $("<br>")
                 .appendTo(parent);

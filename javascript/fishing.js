@@ -7,28 +7,26 @@ var fishing = {
 
         this.fish = fish;
 
-        let parent = $("#resource_buttons")
-
         let fishing_buttons = $("<div>")
             .attr("id", "fishing_buttons")
-            .appendTo(parent);
-        $("<button>")
-            .attr("id", "cast_out_line_button")
-            .text("Cast out line")
-            .click(function() {
+            .appendTo($("#resource_buttons"));
+        button.create({
+            parent: "fishing_buttons",
+            id: "cast_out_line",
+            text: "Cast out line",
+            on_click: function() {
                 fishing.toggle_state(main.area.state);
-            })
-            .appendTo(fishing_buttons);
-        $("<br>")
-            .appendTo(fishing_buttons);
-        $("<button>")
-            .attr("id", "reel_in_line_button")
-            .text("Reel in line")
-            .prop("disabled", true)
-            .click(function() {
+            }
+        });
+        button.create({
+            parent: "fishing_buttons",
+            id: "reel_in_line",
+            text: "Reel in line",
+            disabled: true,
+            on_click: function() {
                 fishing.toggle_state(main.area.state);
-            })
-            .appendTo(fishing_buttons);
+            }
+        });
     },
 
     update(state) {

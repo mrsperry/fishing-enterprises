@@ -109,25 +109,21 @@ var main = {
     },
 
     initialize_locations() {
-        let parent = $("#area_selector");
         for (let index = 0; index < this.areas.length; index++) {
             let item = this.areas[index];
 
-            $("<button>")
-                .attr("id", item.internal + "_button")
-                .text(item.display)
-                .click(function() {
-                    // clears the buttons
+            button.create({
+                parent: "area_selector",
+                id: item.internal,
+                text: item.display,
+                hide: true,
+                on_click: function() {
                     $("#resource_buttons")
                         .empty();
 
-                    // get the location based on name
                     window[item.internal].initialize();
-                })
-                .hide()
-                .appendTo(parent);
-            $("<br>")
-                .appendTo(parent);
+                }
+            });
         }
     },
 
@@ -153,14 +149,16 @@ var main = {
             .appendTo(popup);
         $(text)
             .appendTo(content);
-        $("<button>")
-            .attr("id", "close_button")
-            .text("Close")
-            .click(function() {
+        button.create({
+            parent: "about",
+            id: "close",
+            text: "Close",
+            breaks: 0,
+            on_click: function() {
                 $(overlay)
                     .remove();
-            })
-            .appendTo(popup);
+            }
+        });
     },
 
     create_counter(id, item) {
