@@ -106,7 +106,7 @@ var fishing = {
     catch(fish, is_bait) {
         if (!fish.caught) {
             // handle guppies seperately
-            main.create_counter((is_bait ? "bait" : "fish") + "_counters", fish);
+            counters.create((is_bait ? "bait" : "fish") + "_counters", fish);
             
             if (fish.internal == "bass") {
                 // show the fish counters if this is the first fish
@@ -135,9 +135,6 @@ var fishing = {
             }
             fish.total += amount;
 
-            $("#" + fish.internal + "_count")
-                .text(fish.count);
-
             // check this after so we don't display the message until after the max has been hit
             if (fish.count == fish.max) {
                 // unlock the shop
@@ -148,18 +145,13 @@ var fishing = {
                         .fadeIn();
                 }
 
-                $("#" + fish.internal + "_count")
-                    .css("opacity", 0.5);
-
-                main.show_max(fish);
+                counters.show_max(fish);
             }
+
+            counters.update();
 
             return true;
         } else {
-            if (!is_bait) {
-                messenger.write_message("don't have anywhere to put this fish...");
-            }
-
             return false;
         }
     },

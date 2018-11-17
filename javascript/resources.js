@@ -85,8 +85,7 @@ var resources = {
                 }
             ],
             tackle: []
-        },
-
+        }
     },
 
     tackle: {
@@ -104,6 +103,7 @@ var resources = {
     },
 
     fish: {
+        // lake fish
         bass: {
             display: "Bass",
             internal: "bass",
@@ -175,6 +175,7 @@ var resources = {
             ],
             tackle: []
         },
+        // river fish
         salmon: {
             display: "Salmon",
             internal: "salmon",

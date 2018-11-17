@@ -28,10 +28,13 @@ var river = {
                             id: "fly_tackle",
                             text: "Fly Tackle ($2)",
                             on_click: function() {
-                                shop.purchase_item(resources.tackle.fly_tackle);
+                                shop.purchase_item(resources.fly_tackle);
                                 $(".tackle")
                                     .fadeIn();
                             },
+                            disabled: function() {
+                                return resources.money.count < 2;
+                            }
                         }
                     }
                     main.remove("river_troll");
@@ -64,9 +67,9 @@ var river = {
 
     create_state() {
         this.state = new fishing.state([
-            resources.fish.salmon,
-            resources.fish.trout,
-            resources.fish.pike
+            resources.salmon,
+            resources.trout,
+            resources.pike
         ]);
     }
 }

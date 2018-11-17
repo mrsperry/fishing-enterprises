@@ -9,12 +9,12 @@ var shop = {
                 text: function() {
                     return "Sell fish ($" + shop.fish_value(false) + ")";
                 },
-                disabled: function() { 
-                    return shop.fish_value(false) == 0; 
-                }, 
                 on_click: function() {
                     shop.sell_fish();
                 },
+                disabled: function() { 
+                    return shop.fish_value(false) == 0; 
+                }, 
             }
         },
         river_unlock: {
@@ -66,6 +66,13 @@ var shop = {
         if (value > 0) {
             resources.money.total += value;
         }
+
+        // update buttons
+        for (let id in this.buttons) {
+            let button = this.buttons[id];
+            $("#" + button.data.id + "_button")
+                .prop("disabled", button.data.disabled);
+        }
     },
 
     fish_value(reset) {
@@ -100,16 +107,16 @@ var shop = {
     purchase_item(item) {
         if (item.count < item.max) {
             if ($("#" + item.internal).length == 0) {
-                main.create_counter("tackle_counters", item);
+                counters.create("tackle_counters", item);
             }
 
-            this.update_money(-item.cost);
+            this.update_money(-item.price);
 
             $("#" + item.internal + "_count")
                 .text(++item.count);
             item.total++;
         } else {
-            main.show_max(item);
+            counters.show_max(item);
         }
     },
 
