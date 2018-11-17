@@ -28,7 +28,7 @@ var river = {
                             id: "fly_tackle",
                             text: "Fly Tackle ($2)",
                             on_click: function() {
-                                shop.purchase_item(resources.fly_tackle);
+                                shop.purchase_item(resources.tackle.fly_tackle);
                                 $(".tackle")
                                     .fadeIn();
                             },
