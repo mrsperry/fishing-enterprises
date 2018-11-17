@@ -60,8 +60,7 @@ var shop = {
     },
 
     update_money(value) {
-        $("#money")
-            .text(resources.money.count += value);
+        resources.money.count += value;
 
         if (value > 0) {
             resources.money.total += value;
@@ -73,23 +72,22 @@ var shop = {
             $("#" + button.data.id + "_button")
                 .prop("disabled", button.data.disabled);
         }
+
+        counters.update();
     },
 
     fish_value(reset) {
         let amount = 0;
-        let keys = Object.keys(resources.fish);
-        for (let index = 0; index < keys.length; index++) {
-            let fish = resources.fish[keys[index]];
+        for (let index in resources.fish) {
+            let fish = resources.fish[index];
             amount += fish.count * fish.price;
 
             if (reset) {
                 fish.count = 0;
-
-                $("#" + fish.internal + "_count")
-                    .text("0")
-                    .css("opacity", 1);
             }
         }
+
+        counters.update();
 
         return amount;
     },
@@ -112,9 +110,10 @@ var shop = {
 
             this.update_money(-item.price);
 
-            $("#" + item.internal + "_count")
-                .text(++item.count);
+            item.count++;
             item.total++;
+
+            counters.update();
         } else {
             counters.show_max(item);
         }
