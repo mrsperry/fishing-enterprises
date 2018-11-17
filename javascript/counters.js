@@ -47,13 +47,18 @@ var counters = {
         for (let type of keys) {
             for (let index in resources[type]) {
                 let item = resources[type][index];
-                $("#" + item.internal + "_count")
-                    .text(item.count)
-                    .css("opacity", (item.count == item.max ? 0.5 : 1.0));
-                $("#" + item.internal + "_max")
-                    .text("/" + item.max);
+                this.update_counter(item, item.internal + "_count");
             }
         }
+        this.update_counter(resources.money, "money");
+    },
+
+    update_counter(item, id) {
+        $("#" + id)
+            .text(item.count)
+            .css("opacity", (item.count == item.max ? 0.5 : 1.0));
+        $("#" + id + "_max")
+            .text("/" + item.max);
     },
 
     create(id, item) {
