@@ -33,7 +33,8 @@ var river = {
                                     .fadeIn();
                             },
                             disabled: function() {
-                                return resources.money.count < 2;
+                                let tackle = resources.tackle.fly_tackle;
+                                return resources.money.count < 2 || tackle.count == tackle.max;
                             }
                         }
                     }
@@ -67,9 +68,9 @@ var river = {
 
     create_state() {
         this.state = new fishing.state([
-            resources.salmon,
-            resources.trout,
-            resources.pike
+            resources.fish.salmon,
+            resources.fish.trout,
+            resources.fish.pike
         ]);
     }
 }

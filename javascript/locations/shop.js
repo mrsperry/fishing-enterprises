@@ -52,11 +52,15 @@ var shop = {
     },
 
     update() {
-
+        for (let id in this.buttons) {
+            let button = this.buttons[id];
+            $("#" + button.data.id + "_button")
+                .prop("disabled", button.data.disabled);
+        }
     },
 
     unload() {
-        
+
     },
 
     update_money(value) {
@@ -66,14 +70,8 @@ var shop = {
             resources.money.total += value;
         }
 
-        // update buttons
-        for (let id in this.buttons) {
-            let button = this.buttons[id];
-            $("#" + button.data.id + "_button")
-                .prop("disabled", button.data.disabled);
-        }
-
         counters.update();
+        this.update();
     },
 
     fish_value(reset) {
@@ -93,13 +91,10 @@ var shop = {
     },
 
     sell_fish() {
-        shop.update_money(shop.fish_value(true));
+        this.update_money(this.fish_value(true));
 
         $("#sell_fish_button")
-            .text("Sell fish ($0)")
-            .prop("disabled", true);
-
-        shop.update();
+            .text("Sell fish ($0)");
     },
 
     purchase_item(item) {
@@ -108,11 +103,12 @@ var shop = {
                 counters.create("tackle_counters", item);
             }
 
-            this.update_money(-item.price);
-
-            item.count++;
+            if (++item.count == item.max) {
+                counters.show_max(item);
+            }
             item.total++;
 
+            this.update_money(-item.price);
             counters.update();
         } else {
             counters.show_max(item);
