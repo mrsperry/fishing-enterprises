@@ -6,7 +6,7 @@ var resources = {
     },
 
     /* 
-        breakdown of the bait/fish objects
+        breakdown of the bait/tackle/fish objects
         guppies: {
             the name displayed on the resource counter
             display: "Guppies",
@@ -86,7 +86,7 @@ var resources = {
                     type: "worms",
                     amount: 1
                 }
-            ],
+            ]
         }
     },
 
@@ -114,7 +114,7 @@ var resources = {
                     type: "worms",
                     amount: 1
                 }
-            ],
+            ]
         },
         sturgeon: {
             display: "Sturgeon",
@@ -133,7 +133,7 @@ var resources = {
                     type: "guppies",
                     amount: 1
                 }
-            ],
+            ]
         },
         chub: {
             display: "Chub",
@@ -152,7 +152,7 @@ var resources = {
                     type: "guppies",
                     amount: 2
                 }
-            ],
+            ]
         },
         // river fish
         salmon: {
