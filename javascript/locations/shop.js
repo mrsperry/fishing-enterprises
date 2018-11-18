@@ -78,10 +78,12 @@ var shop = {
         let amount = 0;
         for (let index in resources.fish) {
             let fish = resources.fish[index];
-            amount += fish.count * fish.price;
+            if (fish.count != null) {
+                amount += fish.count * fish.price;
 
-            if (reset) {
-                fish.count = 0;
+                if (reset) {
+                    fish.count = 0;
+                }
             }
         }
 
@@ -98,6 +100,11 @@ var shop = {
     },
 
     purchase_item(item) {
+        if (item.count == null) {
+            item.count = 0;
+            item.total = 0;
+        }
+
         if (item.count < item.max) {
             if ($("#" + item.internal).length == 0) {
                 counters.create("tackle_counters", item);

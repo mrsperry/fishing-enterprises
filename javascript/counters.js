@@ -77,9 +77,9 @@ var counters = {
     },
 
     show_max(item) {
-        if (!item.show_max) {
+        if (item.show_max == null) {
             $("#" + item.internal + "_count")
-                    .css("opacity", 0.5);
+                .css("opacity", 0.5);
 
             $("<span>")
                 .attr("id", item.internal + "_max")

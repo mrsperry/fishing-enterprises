@@ -37,18 +37,25 @@ var fishing = {
                 if (main.random(1, 100) <= fish.chance) {
                     // make sure there is bait
                     let has_bait = true;
-                    for (let bait of fish.bait) {
-                        if (bait.amount > resources.bait[bait.type].count) {
-                            has_bait = false;
-                            break;
+                    if (fish.bait != null) {
+                        for (let bait of fish.bait) {
+                            let count = resources.bait[bait.type].count;
+                            if (bait.amount > (count == null ? 0 : count)) {
+                                has_bait = false;
+                                break;
+                            }
                         }
                     }
+
                     // make sure there is tackle
                     let has_tackle = true;
-                    for (let tackle of fish.tackle) {
-                        if (tackle.amount > resources.tackle[tackle.type].count) {
-                            has_tackle = false;
-                            break;
+                    if (fish.tackle != null) {
+                        for (let tackle of fish.tackle) {
+                            let count = resources.tackle[tackle.type].count;
+                            if (tackle.amount > (count == null ? 0 : count)) {
+                                has_tackle = false;
+                                break;
+                            }
                         }
                     }
 
@@ -62,12 +69,16 @@ var fishing = {
                         // check if the fish should append to bait
                         if (fishing.catch(fish, resources.bait[fish.internal] == null ? false : true)) {
                             // subtract the bait
-                            for (let bait of fish.bait) {
-                                resources.bait[bait.type].count -= bait.amount;
+                            if (fish.bait != null) {
+                                for (let bait of fish.bait) {
+                                    resources.bait[bait.type].count -= bait.amount;
+                                }
                             }
                             // subtract the tackle
-                            for (let tackle of fish.tackle) {
-                                resources.tackle[tackle.type].count -= tackle.amount;
+                            if (fish.tackle != null) {
+                                for (let tackle of fish.tackle) {
+                                    resources.tackle[tackle.type].count -= tackle.amount;
+                                }
                             }
                         }
 
@@ -104,7 +115,7 @@ var fishing = {
     },
 
     catch(fish, is_bait) {
-        if (!fish.caught) {
+        if (fish.caught == null) {
             // handle guppies seperately
             counters.create((is_bait ? "bait" : "fish") + "_counters", fish);
             
@@ -122,9 +133,15 @@ var fishing = {
             }
 
             messenger.write_message(fish.message);
+
+            fish.caught = true;
         }
 
-        fish.caught = true;
+        if (fish.count == null) {
+            fish.count = 0;
+            fish.total = 0;
+            fish.max_caught = fish.max_caught == null ? 1 : fish.max_caught;
+        }
 
         if (fish.count != fish.max) {
             let amount = main.random(1, fish.max_caught);
@@ -147,7 +164,7 @@ var fishing = {
 
                 counters.show_max(fish);
             }
-
+            
             counters.update();
 
             return true;
