@@ -138,7 +138,6 @@ var shop = {
         }
 
         counters.update();
-        purchases.update();
         this.update();
     },
 
