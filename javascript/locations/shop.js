@@ -17,11 +17,8 @@ var shop = {
                 }, 
             }
         },
+        // locations
         river_unlock: {
-            condition: function() {
-                return $("#river_button")
-                    .is(":hidden");
-            },
             data: {
                 parent: "resource_buttons",
                 id: "river_unlock",
@@ -33,6 +30,74 @@ var shop = {
                     return resources.money.count < 500;
                 }
             }
+        },
+        pier_unlock: {
+            condition: function() {
+                return !$("#river_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "resource_buttons",
+                id: "pier_unlock",
+                text: "Unlock the Pier ($500)",
+                on_click: function() {
+                    
+                },
+                disabled: function() {
+                    return resources.money.count < 500;
+                }
+            }
+        },
+        reef_unlock: {
+            condition: function() {
+                return !$("#pier_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "resource_buttons",
+                id: "reef_unlock",
+                text: "Unlock the Reef ($850)",
+                on_click: function() {
+                    
+                },
+                disabled: function() {
+                    return resources.money.count < 850;
+                }
+            }
+        },
+        spear_fishing_unlock: {
+            condition: function() {
+                return !$("#reef_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "resource_buttons",
+                id: "spear_fishing_unlock",
+                text: "Unlock Spear Fishing ($1,500)",
+                on_click: function() {
+                    
+                },
+                disabled: function() {
+                    return resources.money.count < 1250;
+                }
+            }
+        },
+        deep_sea_unlock: {
+            condition: function() {
+                return !$("#spear_fishing_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "resource_buttons",
+                id: "deep_sea_unlock",
+                text: "Unlock Deep Sea fishing ($2,000)",
+                on_click: function() {
+                    
+                },
+                disabled: function() {
+                    return resources.money.count < 2000;
+                }
+            }
         }
     },
 
@@ -41,21 +106,23 @@ var shop = {
 
         for (let index in this.buttons) {
             let item = this.buttons[index];
-            // check if the button is removed
-            if (item.removed == null || !item.removed) {
-                // check the item's display condition
-                if (item.condition == null || item.condition) {
-                    button.create(item.data);
-                }
+            if (this.check_button(item)) {
+                button.create(item.data);
             }
         }
     },
 
     update() {
         for (let id in this.buttons) {
-            let button = this.buttons[id];
-            $("#" + button.data.id + "_button")
-                .prop("disabled", button.data.disabled);
+            let item = this.buttons[id];
+            if ($("#" + item.data.id + "_button").length == 1) {
+                $("#" + item.data.id + "_button")
+                    .prop("disabled", item.data.disabled);
+            } else {
+                if (this.check_button(item)) {
+                    button.create(item.data);
+                }
+            }
         }
     },
 
@@ -71,6 +138,7 @@ var shop = {
         }
 
         counters.update();
+        purchases.update();
         this.update();
     },
 
@@ -125,5 +193,17 @@ var shop = {
     remove_item(id) {
         main.remove(id);
         this.buttons[id].removed = true;
+    },
+
+    check_button(item) {
+        // check if the button is removed
+        if (item.removed == null || !item.removed) {
+            // check the item's display condition
+            if (item.condition == null || item.condition()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
