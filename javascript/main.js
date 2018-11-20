@@ -124,6 +124,8 @@ var main = {
             .fadeOut(400, (function() {
                 $("#" + id + "_button")
                     .remove();
+                $("#" + id + "_break")
+                    .remove();
             }));
     },
 

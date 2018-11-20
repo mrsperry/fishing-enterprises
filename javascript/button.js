@@ -5,17 +5,12 @@ var button = {
         // set the parent
         let parent = $("#" + options.parent);
 
-        // initialize the button and add the mandatory text
+        // initialize the button and add the mandatory id and text
         let element = $("<button>")
+            .attr("id", options.id + "_button")
             .text(options.text)
             .fadeIn()
             .appendTo(parent);
-
-        // set the element id
-        if (options.id != null) {
-            $(element)
-                .attr("id", options.id + "_button");
-        } 
 
         // set if the button is disabled
         if (options.disabled != null) {
@@ -41,6 +36,7 @@ var button = {
 
         for (let index = 0; index < options.breaks; index++) {
             $("<br>")
+                .attr("id", options.id + "_break")
                 .appendTo(parent);
         }
 
