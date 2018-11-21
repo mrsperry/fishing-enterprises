@@ -64,6 +64,12 @@ var counters = {
     create(id, item) {
         let counters = $("#" + id);
 
+        if (item.break != null && item.break) {
+            $("<div>")
+                .addClass("counter_break")
+                .appendTo(counters);
+        }
+
         // create counter
         let parent = $("<div>")
             .attr("id", item.internal)

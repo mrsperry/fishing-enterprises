@@ -79,6 +79,14 @@ button:disabled {
     padding: 0px 7px;
 }
 
+.counter_break {
+    border: solid #777777 0.5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 10%;
+    width: 80%;
+}
+
 #resource_counters {
     float: left;
 }

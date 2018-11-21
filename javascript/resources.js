@@ -20,6 +20,9 @@ var resources = {
             if this fish has been caught before
             caught: false,
 
+            if a horizontal break should be added
+            break: false,
+
             if the max number of this fish should be displayed on the resource counters
             show_max: false,
 
@@ -159,6 +162,7 @@ var resources = {
             display: "Salmon",
             internal: "salmon",
             message: "a large fish, looks to have been a fighter",
+            break: true,
             price: 10,
             max: 7,
             chance: 60,
