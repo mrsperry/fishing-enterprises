@@ -35,11 +35,18 @@ var counters = {
             .appendTo(parent);
 
         // create fish counter
-        $("<div>")
+        let fish = $("<div>")
             .attr("id", "fish_counters")
             .attr("display", "Fish")
             .hide()
             .appendTo(parent);
+        // create the location counters
+        for (let index = 1; index < main.areas.length; index++) {
+            $("<div>")
+                .attr("id", main.areas[index].internal + "_counter")
+                .hide()
+                .appendTo(fish);
+        }
     },
 
     update() {
@@ -63,6 +70,12 @@ var counters = {
 
     create(id, item) {
         let counters = $("#" + id);
+
+        if ($(counters)
+            .is(":hidden")) {
+                $(counters)
+                    .fadeIn();
+        }
 
         if (item.break != null && item.break) {
             $("<div>")

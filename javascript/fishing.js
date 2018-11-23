@@ -117,7 +117,7 @@ var fishing = {
     catch(fish, is_bait) {
         if (fish.caught == null) {
             // handle guppies seperately
-            counters.create((is_bait ? "bait" : "fish") + "_counters", fish);
+            counters.create((is_bait ? "bait_counters" : main.area.internal + "_counter"), fish);
             
             if (fish.internal == "bass") {
                 // show the fish counters if this is the first fish
