@@ -1,6 +1,5 @@
 var river = {
     internal: "river",
-    state: null,
 
     river_troll: true,
     queue_change: false,
@@ -21,20 +20,21 @@ var river = {
                     river.queue_change = true;
                     // todo: river troll text
 
-                    // unlock fly tackle
+                    shop.add_item(resources.bait.guppies, true);
+
+                    let tackle = resources.tackle.fly_tackle;
                     shop.buttons["fly_tackle"] = {
                         data: {
                             parent: "resource_buttons",
                             id: "fly_tackle",
-                            text: "Fly Tackle ($2)",
+                            text: "Fly Tackle ($" + tackle.price + ")",
                             on_click: function() {
-                                shop.purchase_item(resources.tackle.fly_tackle);
+                                shop.purchase_item(tackle, false);
                                 $(".tackle")
                                     .fadeIn();
                             },
                             disabled: function() {
-                                let tackle = resources.tackle.fly_tackle;
-                                return resources.money.count < 2 || tackle.count == tackle.max;
+                                return resources.money.count < tackle.price || tackle.count == tackle.max;
                             }
                         }
                     }
@@ -58,7 +58,7 @@ var river = {
         }
     },
 
-    purchase(river_button) {
+    purchase() {
         $("#river_button")
             .fadeIn();
 

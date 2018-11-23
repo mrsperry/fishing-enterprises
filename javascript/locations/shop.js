@@ -41,7 +41,7 @@ var shop = {
                 id: "pier_unlock",
                 text: "Unlock the Pier ($500)",
                 on_click: function() {
-                    
+                    pier.purchase();
                 },
                 disabled: function() {
                     return resources.money.count < 500;
@@ -58,7 +58,7 @@ var shop = {
                 id: "reef_unlock",
                 text: "Unlock the Reef ($850)",
                 on_click: function() {
-                    
+                    reef.purchase();
                 },
                 disabled: function() {
                     return resources.money.count < 850;
@@ -75,7 +75,7 @@ var shop = {
                 id: "spear_fishing_unlock",
                 text: "Unlock Spear Fishing ($1,500)",
                 on_click: function() {
-                    
+                    spear_fishing.purchase();
                 },
                 disabled: function() {
                     return resources.money.count < 1250;
@@ -92,7 +92,7 @@ var shop = {
                 id: "deep_sea_unlock",
                 text: "Unlock Deep Sea fishing ($2,000)",
                 on_click: function() {
-                    
+                    deep_sea.purchase();
                 },
                 disabled: function() {
                     return resources.money.count < 2000;
@@ -166,7 +166,7 @@ var shop = {
             .text("Sell fish ($0)");
     },
 
-    purchase_item(item) {
+    purchase_item(item, is_bait) {
         if (item.count == null) {
             item.count = 0;
             item.total = 0;
@@ -174,7 +174,7 @@ var shop = {
 
         if (item.count < item.max) {
             if ($("#" + item.internal).length == 0) {
-                counters.create("tackle_counters", item);
+                counters.create(is_bait ? "bait_counters" : "tackle_counters", item);
             }
 
             if (++item.count == item.max) {
@@ -186,6 +186,22 @@ var shop = {
             counters.update();
         } else {
             counters.show_max(item);
+        }
+    },
+
+    add_item(item, is_bait) {
+        shop.buttons[item.internal] = {
+            data: {
+                parent: "resource_buttons",
+                id: item.internal,
+                text: item.display + " ($" + item.price + ")",
+                on_click: function() {
+                    shop.purchase_item(item, is_bait);
+                },
+                disabled: function() {
+                    return resources.money.count < item.price || item.count == item.max;
+                }
+            }
         }
     },
 

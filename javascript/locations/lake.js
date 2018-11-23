@@ -1,6 +1,5 @@
 var lake = {
     internal: "lake",
-    state: null,
 
     initialize() {
         main.switch_area(this);
@@ -17,7 +16,7 @@ var lake = {
         });
 
         this.state = new fishing.state([
-            resources.bait.guppies,
+            resources.bait.minnows,
             resources.fish.bass,
             resources.fish.sturgeon,
             resources.fish.chub
