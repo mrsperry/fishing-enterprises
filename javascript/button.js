@@ -12,6 +12,14 @@ var button = {
             .fadeIn()
             .appendTo(parent);
 
+        // set classes 
+        if (options.classes != null) {
+            for (let clazz of options.classes) {
+                $(element)
+                    .addClass(clazz);
+            }
+        }
+
         // set if the button is disabled
         if (options.disabled != null) {
             $(element)
@@ -29,11 +37,13 @@ var button = {
             options.breaks = 1;
         }
 
+        // hide the button
         if (options.hide == true) {
             $(element)
                 .hide();
         }
 
+        // add a line break so buttons aren't next to each other
         for (let index = 0; index < options.breaks; index++) {
             $("<br>")
                 .attr("id", options.id + "_break")
