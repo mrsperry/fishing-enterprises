@@ -166,17 +166,16 @@ var shop = {
             .text("Sell fish ($0)");
     },
 
-    purchase_item(item, is_bait) {
+    purchase_item(item) {
         if (item.count == null) {
             item.count = 0;
             item.total = 0;
+
+            $("#" + item.internal)
+                .fadeIn();
         }
 
         if (item.count < item.max) {
-            if ($("#" + item.internal).length == 0) {
-                counters.create(is_bait ? "bait_counters" : "tackle_counters", item);
-            }
-
             if (++item.count == item.max) {
                 counters.show_max(item);
             }
@@ -189,14 +188,14 @@ var shop = {
         }
     },
 
-    add_item(item, is_bait) {
+    add_item(item) {
         shop.buttons[item.internal] = {
             data: {
                 parent: "resource_buttons",
                 id: item.internal,
                 text: item.display + " ($" + item.price + ")",
                 on_click: function() {
-                    shop.purchase_item(item, is_bait);
+                    shop.purchase_item(item);
                 },
                 disabled: function() {
                     return resources.money.count < item.price || item.count == item.max;

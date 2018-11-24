@@ -7,7 +7,7 @@ var fishing = {
 
         this.fish = fish;
 
-        let fishing_buttons = $("<div>")
+        $("<div>")
             .attr("id", "fishing_buttons")
             .appendTo($("#resource_buttons"));
         button.create({
@@ -116,8 +116,12 @@ var fishing = {
 
     catch(fish, is_bait) {
         if (fish.caught == null) {
-            // handle guppies seperately
-            counters.create((is_bait ? "bait_counters" : main.area.internal + "_counter"), fish);
+            if (!is_bait) {
+                counters.create_counter(fish, main.area.internal + "_counters");
+            }
+
+            $("#" + fish.internal)
+                .fadeIn();
             
             if (fish.internal == "bass") {
                 // show the fish counters if this is the first fish

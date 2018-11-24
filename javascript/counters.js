@@ -19,6 +19,10 @@ var counters = {
             .attr("display", "Bait")
             .hide()
             .appendTo(parent);
+        for (let index in resources.bait) {
+            $(this.create_counter(resources.bait[index], "bait_counters"))
+                .hide();
+        }
         $("<br>")
             .appendTo(parent);
 
@@ -29,6 +33,10 @@ var counters = {
             .addClass("tackle")
             .hide()
             .appendTo(parent);
+        for (let index in resources.tackle) {
+            $(this.create_counter(resources.tackle[index], "tackle_counters"))
+                .hide();
+        }
         $("<br>")
             .addClass("tackle")
             .hide()
@@ -43,8 +51,7 @@ var counters = {
         // create the location counters
         for (let index = 1; index < main.areas.length; index++) {
             $("<div>")
-                .attr("id", main.areas[index].internal + "_counter")
-                .hide()
+                .attr("id", main.areas[index].internal + "_counters")
                 .appendTo(fish);
         }
     },
@@ -68,31 +75,28 @@ var counters = {
             .text("/" + item.max);
     },
 
-    create(id, item) {
-        let counters = $("#" + id);
-
-        if ($(counters)
-            .is(":hidden")) {
-                $(counters)
-                    .fadeIn();
-        }
+    create_counter(item, id) {
+        let parent = $("#" + id);
 
         if (item.break != null && item.break) {
             $("<div>")
                 .addClass("counter_break")
-                .appendTo(counters);
+                .fadeIn()
+                .appendTo(parent);
         }
 
-        // create counter
-        let parent = $("<div>")
+        let element = $("<div>")
             .attr("id", item.internal)
             .addClass("value")
             .text(item.display + ": ")
-            .appendTo(counters);
+            .hide()
+            .appendTo(parent);
         $("<span>")
             .attr("id", item.internal + "_count")
             .text("0")
-            .appendTo(parent);
+            .fadeIn()
+            .appendTo(element);
+        return element;
     },
 
     show_max(item) {
