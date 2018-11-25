@@ -109,13 +109,13 @@ div.before:before {
 of the container of the body :^) */
 /* resource buttons & area selector */
 #resource_buttons {
-    margin-left: 15%;
-    position: fixed;
+    margin-left: 175px;
+    position: absolute;
 }
 
 #area_selector {
-    margin-left: 65%;
-    position: relative;
+    margin-left: 705px;
+    position: absolute;
 }
 
 #above_section {
@@ -140,7 +140,6 @@ of the container of the body :^) */
     position: absolute;
     margin-left: 179px;
 }
-
 
 /* about popup */
 #overlay {

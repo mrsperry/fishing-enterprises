@@ -110,13 +110,13 @@ div.before:before {
 
 /* resource buttons & area selector */
 #resource_buttons {
-    margin-left: 15%;
-    position: fixed;
+    margin-left: 175px;
+    position: absolute;
 }
 
 #area_selector {
-    margin-left: 65%;
-    position: relative;
+    margin-left: 705px;
+    position: absolute;
 }
 
 #above_section {
