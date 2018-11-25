@@ -1,6 +1,6 @@
 var spear_fishing = {
     internal: "spear_fishing",
-    
+
     initialize() {
         main.switch_area(this);
 
@@ -27,8 +27,8 @@ var spear_fishing = {
 
         shop.remove_item("spear_fishing_unlock");
         shop.update_money(-1250);
-        shop.add_item(resources.bait.crustaceans, true);
-        shop.add_item(resources.bait.squid, true);
-        shop.add_item(resources.tackle.harpoon, false);
+        shop.add_item(resources.bait.crustaceans, "bait");
+        shop.add_item(resources.bait.squid, "bait");
+        shop.add_item(resources.tackle.harpoon, "tackle");
     }
 }

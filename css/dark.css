@@ -91,7 +91,7 @@ button:disabled {
     float: left;
 }
 
-#bait_counters, #tackle_counters, #fish_counters {
+.before {
     display: block;
     padding: 3px;
     border: solid #666666 1px;
@@ -99,7 +99,7 @@ button:disabled {
     margin-bottom: 5px;
 }
 
-div#bait_counters:before, div#tackle_counters:before, div#fish_counters:before {
+div.before:before {
     position: absolute;
     content: attr(display);
     left: 5px;
@@ -117,6 +117,29 @@ div#bait_counters:before, div#tackle_counters:before, div#fish_counters:before {
 #area_selector {
     margin-left: 65%;
     position: relative;
+}
+
+#above_section {
+    margin: -5px;
+}
+
+.button {
+    margin: 5px;
+}
+
+.section {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.section-center {
+    position: absolute;
+    margin-left: 5px;
+}
+
+.section-right {
+    position: absolute;
+    margin-left: 179px;
 }
 
 /* about popup */

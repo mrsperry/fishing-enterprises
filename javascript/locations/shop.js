@@ -4,7 +4,7 @@ var shop = {
     buttons: {
         sell_fish: {
             data: {
-                parent: "resource_buttons",
+                parent: "above_section",
                 id: "sell_fish",
                 text: function() {
                     return "Sell fish ($" + shop.fish_value(false) + ")";
@@ -20,7 +20,7 @@ var shop = {
         // locations
         river_unlock: {
             data: {
-                parent: "resource_buttons",
+                parent: "misc_section",
                 id: "river_unlock",
                 text: "Unlock the River ($500)",
                 on_click: function() {
@@ -37,7 +37,7 @@ var shop = {
                     .is(":hidden");
             },
             data: {
-                parent: "resource_buttons",
+                parent: "misc_section",
                 id: "pier_unlock",
                 text: "Unlock the Pier ($500)",
                 on_click: function() {
@@ -54,7 +54,7 @@ var shop = {
                     .is(":hidden");
             },
             data: {
-                parent: "resource_buttons",
+                parent: "misc_section",
                 id: "reef_unlock",
                 text: "Unlock the Reef ($850)",
                 on_click: function() {
@@ -71,7 +71,7 @@ var shop = {
                     .is(":hidden");
             },
             data: {
-                parent: "resource_buttons",
+                parent: "misc_section",
                 id: "spear_fishing_unlock",
                 text: "Unlock Spear Fishing ($1,500)",
                 on_click: function() {
@@ -88,7 +88,7 @@ var shop = {
                     .is(":hidden");
             },
             data: {
-                parent: "resource_buttons",
+                parent: "misc_section",
                 id: "deep_sea_unlock",
                 text: "Unlock Deep Sea fishing ($2,000)",
                 on_click: function() {
@@ -104,9 +104,46 @@ var shop = {
     initialize() {
         main.switch_area(this);
 
+        let parent = $("#resource_buttons");
+        $("<div>")
+            .attr("id", "above_section")
+            //.hide()
+            .appendTo(parent);
+        $("<div>")
+            .attr("id", "bait_section")
+            .attr("display", "Bait")
+            .addClass("before")
+            .addClass("section")
+            .hide()
+            .appendTo(parent);
+        $("<div>")
+            .attr("id", "tackle_section")
+            .attr("display", "Tackle")
+            .addClass("before")
+            .addClass("section")
+            .addClass("section-center")
+            .hide()
+            .appendTo(parent);
+        $("<div>")
+            .attr("id", "misc_section")
+            .attr("display", "Misc")
+            .addClass("before")
+            .addClass("section")
+            .addClass("section-right")
+            .hide()
+            .appendTo(parent);
+
         for (let index in this.buttons) {
             let item = this.buttons[index];
             if (this.check_button(item)) {
+                let element = $("#" + item.data.parent);
+                if ($(element)
+                    .is(":hidden")) {
+                    $(element)
+                        .fadeIn();
+                }
+
+                item.data["classes"] = ["button"];
                 button.create(item.data);
             }
         }
@@ -120,6 +157,7 @@ var shop = {
                     .prop("disabled", item.data.disabled);
             } else {
                 if (this.check_button(item)) {
+                    item.data["classes"] = ["button"];
                     button.create(item.data);
                 }
             }
@@ -188,10 +226,10 @@ var shop = {
         }
     },
 
-    add_item(item) {
+    add_item(item, section) {
         shop.buttons[item.internal] = {
             data: {
-                parent: "resource_buttons",
+                parent: section + "_section",
                 id: item.internal,
                 text: item.display + " ($" + item.price + ")",
                 on_click: function() {

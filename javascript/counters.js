@@ -17,6 +17,7 @@ var counters = {
         $("<div>")
             .attr("id", "bait_counters")
             .attr("display", "Bait")
+            .addClass("before")
             .hide()
             .appendTo(parent);
         for (let index in resources.bait) {
@@ -30,6 +31,7 @@ var counters = {
         $("<div>") 
             .attr("id", "tackle_counters")
             .attr("display", "Tackle")
+            .addClass("before")
             .addClass("tackle")
             .hide()
             .appendTo(parent);
@@ -46,6 +48,7 @@ var counters = {
         let fish = $("<div>")
             .attr("id", "fish_counters")
             .attr("display", "Fish")
+            .addClass("before")
             .hide()
             .appendTo(parent);
         // create the location counters

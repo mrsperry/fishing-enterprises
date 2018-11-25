@@ -20,12 +20,12 @@ var river = {
                     river.queue_change = true;
                     // todo: river troll text
 
-                    shop.add_item(resources.bait.guppies, true);
+                    shop.add_item(resources.bait.guppies, "bait");
 
                     let tackle = resources.tackle.fly_tackle;
                     shop.buttons["fly_tackle"] = {
                         data: {
-                            parent: "resource_buttons",
+                            parent: "tackle_section",
                             id: "fly_tackle",
                             text: "Fly Tackle ($" + tackle.price + ")",
                             on_click: function() {

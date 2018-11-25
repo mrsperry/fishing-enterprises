@@ -28,7 +28,7 @@ var deep_sea = {
 
         shop.remove_item("deep_sea_unlock");
         shop.update_money(-2000);
-        shop.add_item(resources.bait.ground_fish, true);
-        shop.add_item(resources.tackle.spinnerbait, false);
+        shop.add_item(resources.bait.ground_fish, "bait");
+        shop.add_item(resources.tackle.spinnerbait, "tackle");
     }
 }

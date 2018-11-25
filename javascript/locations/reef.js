@@ -1,6 +1,6 @@
 var reef = {
     internal: "reef",
-    
+
     initialize() {
         main.switch_area(this);
 
@@ -27,7 +27,7 @@ var reef = {
 
         shop.remove_item("reef_unlock");
         shop.update_money(-850);
-        shop.add_item(resources.bait.mussels, true);
-        shop.add_item(resources.tackle.spoon_lure, false);
+        shop.add_item(resources.bait.mussels, "bait");
+        shop.add_item(resources.tackle.spoon_lure, "tackle");
     }
 }

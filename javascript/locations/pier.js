@@ -26,7 +26,7 @@ var pier = {
 
         shop.remove_item("pier_unlock");
         shop.update_money(-500);
-        shop.add_item(resources.bait.insects, true);
-        shop.add_item(resources.tackle.bobber, false);
+        shop.add_item(resources.bait.insects, "bait");
+        shop.add_item(resources.tackle.bobber, "tackle");
     }
 }
