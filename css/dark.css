@@ -142,6 +142,11 @@ div.before:before {
     margin-left: 179px;
 }
 
+.no_sale {
+    margin: 7px 12px;
+    white-space: nowrap;
+}
+
 /* about popup */
 #overlay {
     position: fixed;

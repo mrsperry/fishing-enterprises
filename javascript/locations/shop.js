@@ -114,23 +114,20 @@ var shop = {
             .attr("display", "Bait")
             .addClass("before")
             .addClass("section")
-            .hide()
             .appendTo(parent);
         $("<div>")
             .attr("id", "tackle_section")
             .attr("display", "Tackle")
             .addClass("before")
             .addClass("section")
-            .addClass("section-center")
-            .hide()
+            .addClass("section_center")
             .appendTo(parent);
         $("<div>")
             .attr("id", "misc_section")
             .attr("display", "Misc")
             .addClass("before")
             .addClass("section")
-            .addClass("section-right")
-            .hide()
+            .addClass("section_right")
             .appendTo(parent);
 
         for (let index in this.buttons) {
@@ -147,6 +144,8 @@ var shop = {
                 button.create(item.data);
             }
         }
+
+        this.check_empty();
     },
 
     update() {
@@ -162,6 +161,8 @@ var shop = {
                 }
             }
         }
+
+        this.check_empty();
     },
 
     unload() {
@@ -240,6 +241,9 @@ var shop = {
                 }
             }
         }
+
+        $("#no_sale_" + section)
+            .remove();
     },
 
     remove_item(id) {
@@ -257,5 +261,19 @@ var shop = {
         }
 
         return false;
+    },
+
+    check_empty() {
+        let ids = ["bait", "tackle", "misc"]
+        for (let id of ids) {
+            let parent = $("#" + id + "_section");
+            if ($(parent).children().length == 0) {
+                $("<p>")
+                    .attr("id", "no_sale_" + id)
+                    .addClass("no_sale")
+                    .text("Nothing for sale!")
+                    .appendTo(parent);
+            }
+        }
     }
 }

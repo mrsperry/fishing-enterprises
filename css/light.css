@@ -131,14 +131,19 @@ of the container of the body :^) */
     display: inline-block;
 }
 
-.section-center {
+.section_center {
     position: absolute;
     margin-left: 5px;
 }
 
-.section-right {
+.section_right {
     position: absolute;
     margin-left: 179px;
+}
+
+.no_sale {
+    margin: 7px 12px;
+    white-space: nowrap;
 }
 
 /* about popup */
