@@ -18,6 +18,7 @@ var counters = {
             .attr("id", "bait_counters")
             .attr("display", "Bait")
             .addClass("before")
+            .addClass("counter")
             .hide()
             .appendTo(parent);
         for (let index in resources.bait) {
@@ -33,6 +34,7 @@ var counters = {
             .attr("display", "Tackle")
             .addClass("before")
             .addClass("tackle")
+            .addClass("counter")
             .hide()
             .appendTo(parent);
         for (let index in resources.tackle) {
@@ -49,6 +51,7 @@ var counters = {
             .attr("id", "fish_counters")
             .attr("display", "Fish")
             .addClass("before")
+            .addClass("counter")
             .hide()
             .appendTo(parent);
         // create the location counters

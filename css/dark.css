@@ -75,6 +75,10 @@ button:disabled {
 }
 
 /* resource counters */
+#resource_counters {
+    float: left;
+}
+
 .value {
     padding: 0px 7px;
 }
@@ -85,10 +89,6 @@ button:disabled {
     margin-bottom: 4px;
     margin-left: 10%;
     width: 80%;
-}
-
-#resource_counters {
-    float: left;
 }
 
 .before {
@@ -107,6 +107,11 @@ div.before:before {
     background: #222222;
     padding: 0px 2px;
 }
+
+.counter {
+    width: 152px;
+}
+
 
 /* resource buttons & area selector */
 #resource_buttons {
@@ -132,12 +137,12 @@ div.before:before {
     display: inline-block;
 }
 
-.section-center {
+.section_center {
     position: absolute;
     margin-left: 5px;
 }
 
-.section-right {
+.section_right {
     position: absolute;
     margin-left: 179px;
 }

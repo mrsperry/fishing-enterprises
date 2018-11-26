@@ -72,6 +72,10 @@ button:disabled {
 }
 
 /* resource counters */
+#resource_counters {
+    float: left;
+}
+
 .value {
     padding: 0px 7px;
 }
@@ -82,10 +86,6 @@ button:disabled {
     margin-bottom: 4px;
     margin-left: 10%;
     width: 80%;
-}
-
-#resource_counters {
-    float: left;
 }
 
 .before {
@@ -103,6 +103,10 @@ div.before:before {
     top: -13px;
     background: white;
     padding: 0px 2px;
+}
+
+.counter {
+    width: 152px;
 }
 
 /* right side of the container of the left side 
