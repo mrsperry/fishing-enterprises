@@ -1,8 +1,5 @@
 /* body */
 body {
-    font-family: monospace;
-    font-size: 11pt;
-    margin-top: 5px;
     background-color: #222222;
     color: #dddddd;
 }
@@ -10,24 +7,16 @@ body {
 /* links */
 a {
     color: #0099ff;
-    text-decoration: none;
 }
 
 a:hover {
     color: #22aaff;
-    cursor: pointer;
 }
 
 /* buttons */
 button {
     background-color: #222222;
-    font-family: monospace;
-    font-size: 11pt;
-    text-align: center;
-    width: 150px;
-    height: 40px;
     border: 1px solid #666666;
-    margin-bottom: 10px;
     color: #dddddd;
 }
 
@@ -37,161 +26,33 @@ button:hover {
 
 button:disabled {
     background-color: #333333;
-    opacity: 0.4;
-}
-
-/* containers */
-.container {
-    width: 100%;
-    height: 100%;
-}
-
-.left {
-    width: 50%;
-    float: left;
-}
-
-.right {
-    margin-left: 50%;
-}
-
-.bottom {
-    position: fixed;
-    bottom: 0;
-    width: 95%;
-    text-align: center;
-    padding-bottom: 1%;
 }
 
 /* history panel */
-.history {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    white-space: pre;
-}
-
 #history_panel {
     border-bottom: 1px solid #666666;
 }
 
 /* resource counters */
-#resource_counters {
-    float: left;
-}
-
-#bait_counters, #tackle_counters {
-    margin-left: 154px;
-    display: block;
-    width: 160px;
-}
-
-#fish_counters {
-    left: 5px;
-    top: 159px;
-    position: absolute;
-    width: 135px;
-}
-
-#boat_counters {
-    margin-left: 1029px;
-    position: absolute;
-}
-
-.value {
-    padding: 0px 7px;
-}
-
 .counter_break {
     border: solid #666666 0.5px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-left: 10%;
-    width: 80%;
 }
 
 .before {
-    display: block;
-    padding: 3px;
     border: solid #666666 1px;
-    position: relative;
-    margin-bottom: 5px;
 }
 
 div.before:before {
-    position: absolute;
-    content: attr(display);
-    left: 5px;
-    top: -13px;
     background: #222222;
-    padding: 0px 2px;
-}
-
-.counter {
-    width: 152px;
-}
-
-/* resource buttons & area selector */
-#resource_buttons {
-    margin-left: 336px;
-    position: absolute;
-}
-
-#area_selector {
-    margin-left: 865px;
-    position: absolute;
-}
-
-#above_section {
-    margin: -5px;
-}
-
-.button {
-    margin: 5px;
-}
-
-.section {
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.section_center {
-    position: absolute;
-    margin-left: 5px;
-}
-
-.section_right {
-    position: absolute;
-    margin-left: 179px;
-}
-
-.no_sale {
-    margin: 7px 12px;
-    white-space: nowrap;
 }
 
 /* about popup */
 #overlay {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 1.0;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
 #about {
-    position: absolute;
-    top: 37%;
-    left: 37%;
-    width: 400px;
-    height: 235px;
     background-color: #222222;
     color: #dddddd;
-    padding: 0px 20px;
     border: solid #666666 1px;
-}
-
-#close_button {
-    margin-left: 30%;
 }
