@@ -1,5 +1,5 @@
 var deep_sea = {
-    internal: "deep_sea_fishing",
+    internal: "deep_sea",
 
     initialize() {
         main.switch_area(this);
