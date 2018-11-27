@@ -25,8 +25,6 @@ var reef = {
         $("#reef_button")
             .fadeIn();
 
-        shop.remove_item("reef_unlock");
-        shop.update_money(-850);
         shop.add_item(resources.bait.mussels, "bait");
         shop.add_item(resources.tackle.spoon_lure, "tackle");
     }

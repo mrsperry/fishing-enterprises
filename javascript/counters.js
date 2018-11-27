@@ -71,6 +71,7 @@ var counters = {
             }
         }
         this.update_counter(resources.money, "money");
+        this.update_counter(resources.fuel, "fuel_count");
     },
 
     update_counter(item, id) {

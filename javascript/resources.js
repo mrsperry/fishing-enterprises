@@ -5,6 +5,16 @@ var resources = {
         total: 0
     },
 
+    fuel: {
+        display: "Fuel",
+        internal: "fuel",
+        message: "",
+        price: 5,
+        count: 0,
+        total: 0,
+        max: 30
+    },
+
     /* 
         breakdown of the bait/tackle/fish objects
         guppies: {

@@ -48,20 +48,21 @@ var shop = {
                 }
             }
         },
-        reef_unlock: {
+        buy_fuel: {
             condition: function() {
                 return !$("#pier_button")
                     .is(":hidden");
             },
             data: {
                 parent: "misc_section",
-                id: "reef_unlock",
-                text: "Unlock the Reef ($850)",
+                id: "buy_fuel",
+                text: "Fuel ($5)",
                 on_click: function() {
-                    reef.purchase();
+                    shop.purchase_item(resources.fuel);
                 },
                 disabled: function() {
-                    return resources.money.count < 850;
+                    let fuel = resources.fuel;
+                    return resources.money.count < 5 || fuel.count == fuel.max;
                 }
             }
         },
@@ -107,7 +108,6 @@ var shop = {
         let parent = $("#resource_buttons");
         $("<div>")
             .attr("id", "above_section")
-            //.hide()
             .appendTo(parent);
         $("<div>")
             .attr("id", "bait_section")

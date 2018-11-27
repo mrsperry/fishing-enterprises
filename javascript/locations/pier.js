@@ -28,5 +28,7 @@ var pier = {
         shop.update_money(-500);
         shop.add_item(resources.bait.insects, "bait");
         shop.add_item(resources.tackle.bobber, "tackle");
+
+        boat.initialize();
     }
 }

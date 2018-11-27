@@ -76,6 +76,11 @@ button:disabled {
     float: left;
 }
 
+#boat_counters {
+    margin-left: 865px;
+    position: absolute;
+}
+
 .value {
     padding: 0px 7px;
 }
