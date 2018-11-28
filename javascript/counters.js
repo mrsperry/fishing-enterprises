@@ -76,7 +76,7 @@ var counters = {
 
     update_counter(item, id) {
         $("#" + id)
-            .text(item.count)
+            .text(main.stringify(item.count == null ? 0 : item.count))
             .css("opacity", (item.count == item.max ? 0.5 : 1.0));
         $("#" + id + "_max")
             .text("/" + item.max);

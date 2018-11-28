@@ -147,5 +147,10 @@ var main = {
         }
 
         return array;
+    },
+
+    // adds commas to a number where neccessary ex: 1000 -> 1,000
+    stringify(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }
