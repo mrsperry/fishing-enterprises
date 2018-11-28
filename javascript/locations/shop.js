@@ -241,9 +241,13 @@ var shop = {
                 }
             }
         }
-
-        $("#no_sale_" + section)
-            .remove();
+        
+        let element = $("#no_sale_" + section);
+        $(element)
+            .fadeOut(400, (function() { 
+                $(element)
+                    .remove();
+            }));
     },
 
     remove_item(id) {
