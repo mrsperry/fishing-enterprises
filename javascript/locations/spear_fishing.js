@@ -9,7 +9,7 @@ var spear_fishing = {
                 parent: "bait"
             },
             {
-                resource: resources.tackle.squid,
+                resource: resources.bait.squid,
                 parent: "bait"
             },
             {

@@ -34,5 +34,5 @@ var deep_sea = {
 
     unload() {
         fishing.unload(this.state);
-    },
+    }
 }

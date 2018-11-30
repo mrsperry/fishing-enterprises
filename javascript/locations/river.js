@@ -34,9 +34,7 @@ var river = {
                             id: "fly_tackle",
                             text: "Fly Tackle ($" + tackle.price + ")",
                             on_click: function() {
-                                shop.purchase_item(tackle, false);
-                                $(".tackle")
-                                    .fadeIn();
+                                shop.purchase_item(tackle, true);
                             },
                             disabled: function() {
                                 return resources.money.count < tackle.price || tackle.count == tackle.max;

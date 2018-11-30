@@ -27,7 +27,7 @@ var shop = {
                 id: "buy_fuel",
                 text: "Fuel ($5)",
                 on_click: function() {
-                    shop.purchase_item(resources.fuel);
+                    shop.purchase_item(resources.fuel, false);
                 },
                 disabled: function() {
                     let fuel = resources.fuel;
@@ -140,7 +140,12 @@ var shop = {
             .text("Sell fish ($0)");
     },
 
-    purchase_item(item) {
+    purchase_item(item, show_tackle) {
+        if (show_tackle) {
+            $(".tackle")
+                .fadeIn();
+        }
+
         if (item.count == null) {
             item.count = 0;
             item.total = 0;
@@ -187,7 +192,7 @@ var shop = {
                 id: item.internal,
                 text: item.display + " ($" + item.price + ")",
                 on_click: function() {
-                    shop.purchase_item(item);
+                    shop.purchase_item(item, section == "tackle");
                 },
                 disabled: function() {
                     return resources.money.count < item.price || item.count == item.max;
