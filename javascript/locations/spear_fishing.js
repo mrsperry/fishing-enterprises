@@ -1,5 +1,6 @@
 var spear_fishing = {
     internal: "spear_fishing",
+    ocean: true,
 
     purchased: {
         price: 1250,

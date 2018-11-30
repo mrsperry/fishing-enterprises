@@ -1,5 +1,6 @@
 var reef = {
     internal: "reef",
+    ocean: true,
 
     initialize() {
         main.switch_area(this);

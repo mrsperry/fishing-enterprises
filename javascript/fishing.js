@@ -59,8 +59,15 @@ var fishing = {
                         }
                     }
 
+                    let has_fuel = true;
+                    let use_fuel = false;
+                    if (main.area.ocean != null) {
+                        has_fuel = resources.fuel.count > 0;
+                        use_fuel = true;
+                    }
+
                     // go on to the next fish if theres no bait or tackle for this one
-                    if (!has_bait || !has_tackle) {
+                    if (!has_bait || !has_tackle || !has_fuel) {
                         continue;
                     }
 
@@ -79,6 +86,10 @@ var fishing = {
                                 for (let tackle of fish.tackle) {
                                     resources.tackle[tackle.type].count -= tackle.amount;
                                 }
+                            }
+                            // subtract the fuel
+                            if (use_fuel) {
+                                resources.fuel.count--;
                             }
                         }
 

@@ -1,5 +1,6 @@
 var deep_sea = {
     internal: "deep_sea",
+    ocean: true,
 
     purchased: {
         price: 2000,
