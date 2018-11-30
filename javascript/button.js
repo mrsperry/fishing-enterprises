@@ -9,7 +9,6 @@ var button = {
         let element = $("<button>")
             .attr("id", options.id + "_button")
             .text(options.text)
-            .fadeIn()
             .appendTo(parent);
 
         // set classes 

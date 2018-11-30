@@ -22,12 +22,12 @@ var shop = {
             data: {
                 parent: "misc_section",
                 id: "river_unlock",
-                text: "Unlock the River ($500)",
+                text: "Unlock the River ($300)",
                 on_click: function() {
                     river.purchase();
                 },
                 disabled: function() {
-                    return resources.money.count < 500;
+                    return resources.money.count < 300;
                 }
             }
         },

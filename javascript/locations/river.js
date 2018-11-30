@@ -63,7 +63,7 @@ var river = {
             .fadeIn();
 
         shop.remove_item("river_unlock");
-        shop.update_money(-500);
+        shop.update_money(-300);
     },
 
     create_state() {
