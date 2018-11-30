@@ -1,6 +1,11 @@
 var river = {
     internal: "river",
 
+    purchased: {
+        price: 300,
+        buttons: []
+    },
+
     river_troll: true,
     queue_change: false,
 
@@ -56,14 +61,6 @@ var river = {
         if (!this.river_troll) {
             fishing.unload(this.state);
         }
-    },
-
-    purchase() {
-        $("#river_button")
-            .fadeIn();
-
-        shop.remove_item("river_unlock");
-        shop.update_money(-300);
     },
 
     create_state() {

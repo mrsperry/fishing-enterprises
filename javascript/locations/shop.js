@@ -17,37 +17,6 @@ var shop = {
                 }, 
             }
         },
-        // locations
-        river_unlock: {
-            data: {
-                parent: "misc_section",
-                id: "river_unlock",
-                text: "Unlock the River ($300)",
-                on_click: function() {
-                    river.purchase();
-                },
-                disabled: function() {
-                    return resources.money.count < 300;
-                }
-            }
-        },
-        pier_unlock: {
-            condition: function() {
-                return !$("#river_button")
-                    .is(":hidden");
-            },
-            data: {
-                parent: "misc_section",
-                id: "pier_unlock",
-                text: "Unlock the Pier ($500)",
-                on_click: function() {
-                    pier.purchase();
-                },
-                disabled: function() {
-                    return resources.money.count < 500;
-                }
-            }
-        },
         buy_fuel: {
             condition: function() {
                 return !$("#pier_button")
@@ -66,40 +35,6 @@ var shop = {
                 }
             }
         },
-        spear_fishing_unlock: {
-            condition: function() {
-                return !$("#reef_button")
-                    .is(":hidden");
-            },
-            data: {
-                parent: "misc_section",
-                id: "spear_fishing_unlock",
-                text: "Unlock Spear Fishing ($1,500)",
-                on_click: function() {
-                    spear_fishing.purchase();
-                },
-                disabled: function() {
-                    return resources.money.count < 1250;
-                }
-            }
-        },
-        deep_sea_unlock: {
-            condition: function() {
-                return !$("#spear_fishing_button")
-                    .is(":hidden");
-            },
-            data: {
-                parent: "misc_section",
-                id: "deep_sea_unlock",
-                text: "Unlock Deep Sea fishing ($2,000)",
-                on_click: function() {
-                    deep_sea.purchase();
-                },
-                disabled: function() {
-                    return resources.money.count < 2000;
-                }
-            }
-        }
     },
 
     initialize() {
@@ -227,6 +162,24 @@ var shop = {
         }
     },
 
+    purchase_area(name) {
+        $("#" + name + "_button")
+            .fadeIn();
+
+        let area = window[name].purchased;
+
+        shop.remove_item(name + "_unlock");
+        shop.update_money(-area.price);
+
+        for (let item of area.buttons) {
+            shop.add_item(item.resource, item.parent);
+        }
+
+        if (name == "pier") {
+            boat.initialize();
+        }
+    },
+
     add_item(item, section) {
         shop.buttons[item.internal] = {
             data: {
@@ -253,6 +206,7 @@ var shop = {
     remove_item(id) {
         main.remove(id);
         this.buttons[id].removed = true;
+        this.buttons[id].data.disabled = true;
     },
 
     check_button(item) {

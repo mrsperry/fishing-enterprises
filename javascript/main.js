@@ -11,11 +11,15 @@ var main = {
         },
         {
             display: "River",
-            internal: "river"
+            internal: "river",
+            unlock: "lake",
+            license: "Fly Fishing permit"
         },
         {
             display: "Pier",
-            internal: "pier"
+            internal: "pier",
+            unlock: "river",
+            license: "Pier Fishing permit"
         },
         {
             display: "Reef",
@@ -23,11 +27,15 @@ var main = {
         },
         {
             display: "Spear Fishing",
-            internal: "spear_fishing"
+            internal: "spear_fishing",
+            unlock: "reef",
+            license: "Spear Fishing permit"
         },
         {
             display: "Deep Sea",
-            internal: "deep_sea"
+            internal: "deep_sea",
+            unlock: "spear_fishing",
+            license: "Deep Sea permit"
         }
     ],
 
@@ -70,6 +78,7 @@ var main = {
         for (let index = 0; index < this.areas.length; index++) {
             let item = this.areas[index];
 
+            let area = window[item.internal];
             button.create({
                 parent: "area_selector",
                 id: item.internal,
@@ -79,9 +88,29 @@ var main = {
                     $("#resource_buttons")
                         .empty();
 
-                    window[item.internal].initialize();
+                    area.initialize();
                 }
             });
+
+            if (index > 1 && item.internal != "reef") {
+                shop.buttons[item.internal + "_unlock"] = {
+                    condition: function() {
+                        return !$("#" + item.unlock + "_button")
+                            .is(":hidden");
+                    },
+                    data: {
+                        parent: "misc_section",
+                        id: item.internal + "_unlock",
+                        text: item.license + " ($" + area.purchased.price + ")",
+                        on_click: function() {
+                            shop.purchase_area(item.internal);
+                        },
+                        disabled: function() {
+                            return resources.money.count < area.purchased.price;
+                        }
+                    }
+                }
+            }
         }
     },
 

@@ -1,6 +1,20 @@
 var deep_sea = {
     internal: "deep_sea",
 
+    purchased: {
+        price: 2000,
+        buttons: [
+            {
+                resource: resources.bait.ground_fish,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.spinnerbait,
+                parent: "tackle"
+            }
+        ]
+    },
+
     initialize() {
         main.switch_area(this);
 
@@ -21,14 +35,4 @@ var deep_sea = {
     unload() {
         fishing.unload(this.state);
     },
-
-    purchase() {
-        $("#deep_sea_button")
-            .fadeIn();
-
-        shop.remove_item("deep_sea_unlock");
-        shop.update_money(-2000);
-        shop.add_item(resources.bait.ground_fish, "bait");
-        shop.add_item(resources.tackle.spinnerbait, "tackle");
-    }
 }

@@ -1,6 +1,20 @@
 var pier = {
     internal: "pier",
 
+    purchased: {
+        price: 500,
+        buttons: [
+            {
+                resource: resources.bait.insects,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.bobber,
+                parent: "tackle"
+            }
+        ]
+    },
+
     initialize() {
         main.switch_area(this);
 
@@ -20,15 +34,7 @@ var pier = {
         fishing.unload(this.state);
     },
 
-    purchase() {
-        $("#pier_button")
-            .fadeIn();
-
-        shop.remove_item("pier_unlock");
-        shop.update_money(-500);
-        shop.add_item(resources.bait.insects, "bait");
-        shop.add_item(resources.tackle.bobber, "tackle");
-
+    puchase() {
         boat.initialize();
     }
 }

@@ -1,6 +1,24 @@
 var spear_fishing = {
     internal: "spear_fishing",
 
+    purchased: {
+        price: 1250,
+        buttons: [
+            {
+                resource: resources.bait.crustaceans,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.squid,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.harpoon,
+                parent: "tackle"
+            }
+        ]
+    },
+
     initialize() {
         main.switch_area(this);
 
@@ -19,16 +37,5 @@ var spear_fishing = {
 
     unload() {
         fishing.unload(this.state);
-    },
-
-    purchase() {
-        $("#spear_fishing_button")
-            .fadeIn();
-
-        shop.remove_item("spear_fishing_unlock");
-        shop.update_money(-1250);
-        shop.add_item(resources.bait.crustaceans, "bait");
-        shop.add_item(resources.bait.squid, "bait");
-        shop.add_item(resources.tackle.harpoon, "tackle");
     }
 }
