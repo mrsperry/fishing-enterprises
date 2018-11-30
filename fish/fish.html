@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <title>Fishing Enterprises</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link id="page_style" rel="stylesheet" href="/css/light.css" type="text/css"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="container">
+                <div id="history_panel"></div>
+                <br>
+                <div id="resource_counters"></div>
+                <br>
+                <br>
+                <br>
+                <div id="resource_buttons"></div>
+                <div id="area_selector"></div>
+                <div id="boat_info"></div>
+            </div>
+        </div>
+    </div>
+    <script src="javascript/main.js"></script>
+    <script src="javascript/lights.js"></script>
+    <script src="javascript/messenger.js"></script>
+    <script src="javascript/resources.js"></script>
+    <script src="javascript/button.js"></script>
+    <script src="javascript/fishing.js"></script>
+    <script src="javascript/counters.js"></script>
+    <script src="javascript/purchases.js"></script>
+    <script src="javascript/locations/shop.js"></script>
+    <script src="javascript/locations/lake.js"></script>
+    <script src="javascript/locations/river.js"></script>
+    <script src="javascript/locations/pier.js"></script>
+    <script src="javascript/locations/reef.js"></script>
+    <script src="javascript/locations/spear_fishing.js"></script>
+    <script src="javascript/locations/deep_sea.js"></script>
+    <script src="javascript/locations/boat.js"></script>
+    <script>
+        $(document).ready(function() {
+            main.initialize(2500);
+        });
+    </script>
+</body>
+<footer>
+    <div class="bottom">
+        - <a id="lights" class="link" onclick="lights.toggle_lights()">lights off</a> |
+        <a class="link" onclick="main.show_about()">about</a> |
+        <a class="link" href="https://github.com/mrsperry/mrsperry.github.io" target="_blank">github</a> -
+    </div>
+</footer>
