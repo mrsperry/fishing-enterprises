@@ -82,7 +82,7 @@ var resources = {
         worms: {
             display: "Worms",
             internal: "worms",
-            message: "worms writhing in the mud would make good bait",
+            message: "writhing around in the mud, these would make good bait",
             max_caught: 3,
             max: 30
         },
@@ -104,42 +104,42 @@ var resources = {
         guppies: {
             display: "Guppies",
             internal: "guppies",
-            message: "worms writhing in the mud would make good bait",
+            message: "small fish to catch big fish",
             price: 2,
             max: 20
         },
         insects: {
             display: "Insects",
             internal: "insects",
-            message: "worms writhing in the mud would make good bait",
+            message: "the nastier the critty, the tastier it is",
             price: 3,
             max: 20
         },
         mussels: {
             display: "Mussels",
             internal: "mussels",
-            message: "worms writhing in the mud would make good bait",
+            message: "hard shells protect their squishy and edible interior",
             price: 4,
             max: 20
         },
         crustaceans: {
             display: "Crustaceans",
             internal: "crustaceans",
-            message: "worms writhing in the mud would make good bait",
+            message: "all manner of shrimp and krill fill the bucket",
             price: 5,
             max: 15
         },
         squid: {
             display: "Squid",
             internal: "squid",
-            message: "worms writhing in the mud would make good bait",
+            message: "tentacled, translucent, smelly and yet perfect bait",
             price: 6,
             max: 15
         },
         ground_fish: {
             display: "Ground Fish",
             internal: "ground_fish",
-            message: "worms writhing in the mud would make good bait",
+            message: "various fish guts and meat compiled for large hunters",
             price: 7,
             max: 5
         },
@@ -241,7 +241,7 @@ var resources = {
         salmon: {
             display: "Salmon",
             internal: "salmon",
-            message: "a large fish, looks to have been a fighter",
+            message: "jumping fish going upstream are easily caught",
             break: true,
             price: 10,
             max: 10,
@@ -262,7 +262,7 @@ var resources = {
         trout: {
             display: "Trout",
             internal: "trout",
-            message: "a large fish, looks to have been a fighter",
+            message: "calm and oily, these fish are rather uninteresting",
             price: 15,
             max: 5,
             chance: 40,
@@ -287,7 +287,7 @@ var resources = {
         pike: {
             display: "Pike",
             internal: "pike",
-            message: "a large fish, looks to have been a fighter",
+            message: "these night hunters are often caught in choppy water",
             price: 20,
             max: 3,
             chance: 30,
@@ -309,7 +309,7 @@ var resources = {
         redfish: {
             display: "Redfish",
             internal: "redfish",
-            message: "a large fish, looks to have been a fighter",
+            message: "a popular catch, often used in soup",
             break: true,
             price: 25,
             max: 10,
@@ -330,7 +330,7 @@ var resources = {
         mackerel: {
             display: "Mackerel",
             internal: "mackerel",
-            message: "a large fish, looks to have been a fighter",
+            message: "these come in large schools, and are a tasty treat to predators",
             price: 30,
             max: 5,
             chance: 40,
@@ -355,7 +355,7 @@ var resources = {
         black_drum: {
             display: "Black Drum",
             internal: "black_drum",
-            message: "a large fish, looks to have been a fighter",
+            message: "this bottomfeeder won't hesistate to fight the line",
             price: 35,
             max: 3,
             chance: 30,
@@ -380,7 +380,7 @@ var resources = {
         tarpon: {
             display: "Tarpon",
             internal: "tarpon",
-            message: "a large fish, looks to have been a fighter",
+            message: "shiny beasts, they often jump and thrash as they are reeled in",
             price: 45,
             max: 1,
             chance: 5,
@@ -402,7 +402,7 @@ var resources = {
         snapper: {
             display: "Snapper",
             internal: "snapper",
-            message: "a large fish, looks to have been a fighter",
+            message: "even though they are common, they have been known to be aggressive",
             break: true,
             price: 45,
             max: 10,
@@ -423,7 +423,7 @@ var resources = {
         hogfish: {
             display: "Hogfish",
             internal: "hogfish",
-            message: "a large fish, looks to have been a fighter",
+            message: "a beatufiul pig fish, if one can exist",
             price: 50,
             max: 7,
             chance: 40,
@@ -444,7 +444,7 @@ var resources = {
         moray_eel: {
             display: "Moray Eel",
             internal: "moray_eel",
-            message: "a large fish, looks to have been a fighter",
+            message: "when a fish bites your keel and it looks like an eel...",
             price: 55,
             max: 5,
             chance: 30,
@@ -463,7 +463,7 @@ var resources = {
         barracuda: {
             display: "Barracuda",
             internal: "barracuda",
-            message: "a large fish, looks to have been a fighter",
+            message: "long, thin, aggressive and eager to kill anything shiny",
             price: 70,
             max: 3,
             chance: 10,
@@ -478,7 +478,7 @@ var resources = {
         lemon_shark: {
             display: "Lemon Shark",
             internal: "lemon_shark",
-            message: "a large fish, looks to have been a fighter",
+            message: "a sand colored shark, its meat is a delicacy to some",
             price: 80,
             max: 1,
             chance: 5,
@@ -500,7 +500,7 @@ var resources = {
         lobster: {
             display: "Lobster",
             internal: "lobster",
-            message: "a large fish, looks to have been a fighter",
+            message: "two beady eyes flanked by two large claws",
             break: true,
             price: 60,
             max: 10,
@@ -521,7 +521,7 @@ var resources = {
         grouper: {
             display: "Grouper",
             internal: "grouper",
-            message: "a large fish, looks to have been a fighter",
+            message: "these large fish are often considered the bass of the sea",
             price: 65,
             max: 7,
             chance: 40,
@@ -542,7 +542,7 @@ var resources = {
         tuna: {
             display: "Tuna",
             internal: "tuna",
-            message: "a large fish, looks to have been a fighter",
+            message: "swift swimming fish that humans and cats seem to love",
             price: 70,
             max: 5,
             chance: 30,
@@ -567,7 +567,7 @@ var resources = {
         swordfish: {
             display: "Swordfish",
             internal: "swordfish",
-            message: "a large fish, looks to have been a fighter",
+            message: "extremely fast and elusive with a large \"sword\" on its head",
             price: 80,
             max: 3,
             chance: 10,
@@ -588,7 +588,7 @@ var resources = {
         tiger_shark: {
             display: "Tiger Shark",
             internal: "tiger_shark",
-            message: "a large fish, looks to have been a fighter",
+            message: "a nocturnal hunter that will eat almost anything, including you",
             price: 100,
             max: 1,
             chance: 5,
@@ -614,7 +614,7 @@ var resources = {
         whitefish: {
             display: "Whitefish",
             internal: "whitefish",
-            message: "a large fish, looks to have been a fighter",
+            message: "these fish typically stay near the sea floor",
             break: true,
             price: 70,
             max: 10,
@@ -639,7 +639,7 @@ var resources = {
         lingcod: {
             display: "Lingcod",
             internal: "lingcod",
-            message: "a large fish, looks to have been a fighter",
+            message: "voracious and ugly, they are surprisingly tasty",
             price: 75,
             max: 7,
             chance: 40,
@@ -657,10 +657,10 @@ var resources = {
                 }
             ]
         },
-        rockfish: {
-            display: "Rockfish",
-            internal: "rockfish",
-            message: "a large fish, looks to have been a fighter",
+        stonefish: {
+            display: "Stonefish",
+            internal: "stonefish",
+            message: "venomous fish that are commonly mistaken for rocks or coral",
             price: 80,
             max: 5,
             chance: 30,
@@ -681,11 +681,11 @@ var resources = {
         marlin: {
             display: "Marlin",
             internal: "marlin",
-            message: "a large fish, looks to have been a fighter",
+            message: "it's a swordfish if it had a better sword and a bigger body",
             price: 100,
             max: 3,
             chance: 15,
-            after: "rockfish",
+            after: "stonefish",
             bait: [
                 {
                     type: "squid",
@@ -706,7 +706,7 @@ var resources = {
         mako_shark: {
             display: "Mako Shark",
             internal: "mako_shark",
-            message: "a large fish, looks to have been a fighter",
+            message: "the fastest species of shark, it's known to rip prey apart",
             price: 125,
             max: 1,
             chance: 10,
@@ -727,7 +727,7 @@ var resources = {
         thresher_shark: {
             display: "Thresher Shark",
             internal: "thresher_shark",
-            message: "a large fish, looks to have been a fighter",
+            message: "these predators use their long tail to slap and stun their prey",
             price: 175,
             max: 1,
             chance: 5,

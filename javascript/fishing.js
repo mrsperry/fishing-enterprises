@@ -147,7 +147,7 @@ var fishing = {
                     .fadeIn();
             }
 
-            messenger.write_message(fish.message);
+            messenger.write_message(fish.display + ": " + fish.message);
 
             fish.caught = true;
         }
