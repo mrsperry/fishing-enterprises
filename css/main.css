@@ -64,7 +64,7 @@ button:disabled {
 }
 
 #bait_counters, #tackle_counters {
-    margin-left: 154px;
+    margin-left: 187px;
     display: block;
     width: 160px;
 }
@@ -73,12 +73,13 @@ button:disabled {
     left: 5px;
     top: 159px;
     position: absolute;
-    width: 135px;
+    width: 168px;
 }
 
 #boat_counters {
-    margin-left: 1029px;
+    margin-left: 1062px;
     position: absolute;
+    width: 104px;
 }
 
 .value {
@@ -111,12 +112,12 @@ div.before:before {
 of the container of the body :^) */
 /* resource buttons & area selector */
 #resource_buttons {
-    margin-left: 336px;
+    margin-left: 369px;
     position: absolute;
 }
 
 #area_selector {
-    margin-left: 865px;
+    margin-left: 898px;
     position: absolute;
 }
 
