@@ -106,7 +106,6 @@ var main = {
                             shop.purchase_area(item.internal);
                         },
                         disabled: function() {
-                            console.log(river.river_troll);
                             return resources.money.count <= area.purchased.price
                                 // disable the pier until the river troll has been talked to
                                 || (item.internal == "pier" ? !river.queue_change : false);
