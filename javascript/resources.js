@@ -91,7 +91,7 @@ var resources = {
             internal: "minnows",
             message: "these would make excellent bait for larger fish",
             max_caught: 2,
-            max: 10,
+            max: 20,
             chance: 60,
             after: "bass",
             bait: [
@@ -106,7 +106,7 @@ var resources = {
             internal: "guppies",
             message: "worms writhing in the mud would make good bait",
             price: 2,
-            max: 15
+            max: 20
         },
         insects: {
             display: "Insects",
@@ -120,7 +120,7 @@ var resources = {
             internal: "mussels",
             message: "worms writhing in the mud would make good bait",
             price: 4,
-            max: 10
+            max: 15
         },
         crustaceans: {
             display: "Crustaceans",
@@ -134,14 +134,14 @@ var resources = {
             internal: "squid",
             message: "worms writhing in the mud would make good bait",
             price: 6,
-            max: 5
+            max: 10
         },
         ground_fish: {
             display: "Ground Fish",
             internal: "ground_fish",
             message: "worms writhing in the mud would make good bait",
             price: 7,
-            max: 1
+            max: 5
         },
     },
 
@@ -269,7 +269,7 @@ var resources = {
             after: "salmon",
             bait: [
                 {
-                    type: "worms",
+                    type: "minnows",
                     amount: 1
                 },
                 {
@@ -317,7 +317,7 @@ var resources = {
             bait: [
                 {
                     type: "insects",
-                    amount: 2
+                    amount: 1
                 }
             ],
             tackle: [
@@ -337,7 +337,7 @@ var resources = {
             after: "redfish",
             bait: [
                 {
-                    type: "worms",
+                    type: "guppies",
                     amount: 1
                 },
                 {
@@ -362,7 +362,7 @@ var resources = {
             after: "mackerel",
             bait: [
                 {
-                    type: "worms",
+                    type: "guppies",
                     amount: 1
                 },
                 {
@@ -431,7 +431,7 @@ var resources = {
             bait: [
                 {
                     type: "mussels",
-                    amount: 2
+                    amount: 1
                 }
             ],
             tackle: [
@@ -471,7 +471,7 @@ var resources = {
             tackle: [
                 {
                     type: "spoon_lure",
-                    amount: 1
+                    amount: 2
                 }
             ]
         },
@@ -529,7 +529,7 @@ var resources = {
             bait: [
                 {
                     type: "crustaceans",
-                    amount: 3
+                    amount: 2
                 }
             ],
             tackle: [
@@ -622,7 +622,7 @@ var resources = {
             bait: [
                 {
                     type: "insects",
-                    amount: 5
+                    amount: 3
                 },
                 {
                     type: "crustaceans",
@@ -668,7 +668,7 @@ var resources = {
             bait: [
                 {
                     type: "crustaceans",
-                    amount: 5
+                    amount: 3
                 }
             ],
             tackle: [

@@ -97,7 +97,7 @@ var fishing = {
 
     toggle_state(state) {
         $("#cast_out_line_button")
-            .prop("disabled", !state.is_fishing || !(resources.bait.worms.count > 0));
+            .prop("disabled", !state.is_fishing);
         $("#reel_in_line_button")
             .prop("disabled", state.is_fishing);
         $("#forage_for_worms_button")
