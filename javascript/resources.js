@@ -113,28 +113,28 @@ var resources = {
             internal: "insects",
             message: "worms writhing in the mud would make good bait",
             price: 3,
-            max: 15
+            max: 20
         },
         mussels: {
             display: "Mussels",
             internal: "mussels",
             message: "worms writhing in the mud would make good bait",
             price: 4,
-            max: 15
+            max: 20
         },
         crustaceans: {
             display: "Crustaceans",
             internal: "crustaceans",
             message: "worms writhing in the mud would make good bait",
             price: 5,
-            max: 10
+            max: 15
         },
         squid: {
             display: "Squid",
             internal: "squid",
             message: "worms writhing in the mud would make good bait",
             price: 6,
-            max: 10
+            max: 15
         },
         ground_fish: {
             display: "Ground Fish",
