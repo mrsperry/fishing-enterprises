@@ -22,7 +22,7 @@ var deep_sea = {
         this.state = new fishing.state([
             resources.fish.whitefish,
             resources.fish.lingcod,
-            resources.fish.rockfish,
+            resources.fish.stonefish,
             resources.fish.marlin,
             resources.fish.mako_shark,
             resources.fish.thresher_shark
