@@ -44,26 +44,20 @@ var shop = {
         $("<div>")
             .attr("id", "above_section")
             .appendTo(parent);
-        $("<div>")
-            .attr("id", "bait_section")
-            .attr("display", "Bait")
-            .addClass("before")
-            .addClass("section")
-            .appendTo(parent);
-        $("<div>")
-            .attr("id", "tackle_section")
-            .attr("display", "Tackle")
-            .addClass("before")
-            .addClass("section")
+
+        let names = ["Bait", "Tackle", "Misc"];
+        for (let name of names) {
+            $("<div>")
+                .attr("id", name.toLowerCase() + "_section")
+                .attr("display", name)
+                .addClass("before")
+                .addClass("section")
+                .appendTo(parent);
+        }
+        $("#tackle_section")
             .addClass("section_center")
-            .appendTo(parent);
-        $("<div>")
-            .attr("id", "misc_section")
-            .attr("display", "Misc")
-            .addClass("before")
-            .addClass("section")
+        $("#misc_section")
             .addClass("section_right")
-            .appendTo(parent);
 
         for (let index in this.buttons) {
             let item = this.buttons[index];
