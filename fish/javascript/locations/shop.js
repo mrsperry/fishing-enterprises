@@ -19,7 +19,7 @@ var shop = {
         },
         buy_fuel: {
             condition: function() {
-                return !$("#pier_button")
+                return !$("#reef_button")
                     .is(":hidden");
             },
             data: {
@@ -34,7 +34,7 @@ var shop = {
                     return resources.money.count < 5 || fuel.count == fuel.max;
                 }
             }
-        },
+        }
     },
 
     initialize() {
