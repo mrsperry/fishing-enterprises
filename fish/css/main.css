@@ -52,6 +52,10 @@ button:disabled {
 }
 
 /* history panel */
+#history_panel {
+    margin-bottom: 15px;
+}
+
 .history {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -67,11 +71,12 @@ button:disabled {
     margin-left: 187px;
     display: block;
     width: 160px;
+    top: 3px;
 }
 
 #fish_counters {
     left: 5px;
-    top: 159px;
+    top: 160px;
     position: absolute;
     width: 168px;
 }
@@ -80,6 +85,7 @@ button:disabled {
     margin-left: 1062px;
     position: absolute;
     width: 104px;
+    top: 160px;
 }
 
 .value {
@@ -114,11 +120,13 @@ of the container of the body :^) */
 #resource_buttons {
     margin-left: 369px;
     position: absolute;
+    top: 160px;
 }
 
 #area_selector {
     margin-left: 898px;
     position: absolute;
+    top: 160px;
 }
 
 #above_section {
