@@ -19,14 +19,13 @@ var boat = {
     },
 
     initialize() {
-        let parent = $("#resource_counters");
         $("<div>")
             .attr("id", "boat_counters")
             .attr("display", "Boat")
             .addClass("before")
             .addClass("counter")
             .fadeIn()
-            .appendTo(parent);
+            .appendTo($("#resource_counters"));
         $(counters.create_counter(resources.fuel, "boat_counters"))
             .fadeIn();
 
