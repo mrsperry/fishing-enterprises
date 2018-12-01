@@ -67,7 +67,7 @@ button:disabled {
     float: left;
 }
 
-#bait_counters, #tackle_counters {
+#bait_counters, #tackle_counters, #boat_counters {
     margin-left: 187px;
     display: block;
     width: 160px;
@@ -79,13 +79,6 @@ button:disabled {
     top: 160px;
     position: absolute;
     width: 168px;
-}
-
-#boat_counters {
-    margin-left: 1062px;
-    position: absolute;
-    width: 104px;
-    top: 160px;
 }
 
 .value {
