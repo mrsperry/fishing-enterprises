@@ -84,6 +84,7 @@ var resources = {
             internal: "worms",
             message: "writhing around in the mud, these would make good bait",
             max_caught: 3,
+            price: 1,
             max: 30
         },
         minnows: {
@@ -92,6 +93,7 @@ var resources = {
             message: "these would make excellent bait for larger fish",
             max_caught: 2,
             max: 20,
+            price: 1,
             chance: 60,
             after: "bass",
             bait: [
@@ -111,7 +113,7 @@ var resources = {
         insects: {
             display: "Insects",
             internal: "insects",
-            message: "the nastier the critty, the tastier it is",
+            message: "the nastier the critter, the tastier it is",
             price: 3,
             max: 20
         },
@@ -174,9 +176,9 @@ var resources = {
             price: 8,
             max: 10
         },
-        spinnerbait: {
-            display: "Spinnerbait",
-            internal: "spinnerbait",
+        spinner_lure: {
+            display: "Spinner Lure",
+            internal: "spinner_lure",
             message: "",
             price: 10,
             max: 5

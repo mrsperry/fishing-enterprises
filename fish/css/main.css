@@ -17,7 +17,7 @@ a:hover {
 /* buttons */
 button {
     font-family: monospace;
-    font-size: 11pt;
+    font-size: 10.3pt;
     text-align: center;
     width: 150px;
     height: 40px;
@@ -70,7 +70,7 @@ button:disabled {
 #bait_counters, #tackle_counters, #boat_counters {
     margin-left: 187px;
     display: block;
-    width: 160px;
+    width: 168px;
     top: 3px;
 }
 
@@ -83,6 +83,10 @@ button:disabled {
 
 .value {
     padding: 0px 7px;
+}
+
+.auto_buy {
+    opacity: 0.4;
 }
 
 .counter_break {
@@ -111,13 +115,13 @@ div.before:before {
 of the container of the body :^) */
 /* resource buttons & area selector */
 #resource_buttons {
-    margin-left: 369px;
+    margin-left: 378px;
     position: absolute;
     top: 160px;
 }
 
 #area_selector {
-    margin-left: 898px;
+    margin-left: 906px;
     position: absolute;
     top: 160px;
 }

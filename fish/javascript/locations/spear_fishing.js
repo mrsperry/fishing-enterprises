@@ -38,5 +38,10 @@ var spear_fishing = {
 
     unload() {
         fishing.unload(this.state);
+    },
+
+    purchase() {
+        shop.add_auto_buy(resources.bait.mussels, 400);
+        shop.add_auto_buy(resources.tackle.spoon_lure, 600);
     }
 }

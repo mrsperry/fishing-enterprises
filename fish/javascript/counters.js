@@ -78,8 +78,6 @@ var counters = {
         $("#" + id)
             .text(main.stringify(item.count == null ? 0 : item.count))
             .css("opacity", (item.count == item.max ? 0.5 : 1.0));
-        $("#" + id + "_max")
-            .text("/" + item.max);
     },
 
     create_counter(item, id) {
@@ -119,5 +117,14 @@ var counters = {
 
             item.show_max = true;
         }
+    },
+
+    set_auto_buy(item) {
+        $("<span>")
+            .addClass("auto_buy")
+            .text("+")
+            .prependTo($("#" + item.internal));
+        
+        item.auto_buy = true;
     }
 }

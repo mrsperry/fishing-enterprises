@@ -53,7 +53,23 @@ var main = {
 
     update() {
         this.area.update();
+
+        for (let type of ["bait", "tackle"]) {
+            for (let index in resources[type]) {
+                this.auto_buy(resources[type][index]);
+            }
+        }
+        this.auto_buy(resources.fuel);
+        
         counters.update();
+    },
+
+    auto_buy(item) {
+        if (item.auto_buy != null) {
+            if (resources.money.count >= item.price) {
+                shop.purchase_item(item, false);
+            }
+        }
     },
 
     switch_area(area) {

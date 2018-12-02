@@ -34,7 +34,10 @@ var pier = {
         fishing.unload(this.state);
     },
 
-    puchase() {
+    purchase() {
         boat.initialize();
+
+        shop.add_auto_buy(resources.bait.guppies, 200);
+        shop.add_auto_buy(resources.tackle.fly_tackle, 200);
     }
 }

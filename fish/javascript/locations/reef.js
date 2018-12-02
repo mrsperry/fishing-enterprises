@@ -28,5 +28,9 @@ var reef = {
 
         shop.add_item(resources.bait.mussels, "bait");
         shop.add_item(resources.tackle.spoon_lure, "tackle");
+
+        shop.add_auto_buy(resources.fuel, 500);
+        shop.add_auto_buy(resources.bait.insects, 300);
+        shop.add_auto_buy(resources.tackle.bobber, 400);
     }
 }

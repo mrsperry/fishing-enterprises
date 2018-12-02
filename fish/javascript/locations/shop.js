@@ -27,7 +27,7 @@ var shop = {
                 id: "buy_fuel",
                 text: "Fuel ($5)",
                 on_click: function() {
-                    shop.purchase_item(resources.fuel, false);
+                    shop.purchase_item(resources.fuel, true);
                 },
                 disabled: function() {
                     let fuel = resources.fuel;
@@ -134,8 +134,12 @@ var shop = {
             .text("Sell fish ($0)");
     },
 
-    purchase_item(item, show_tackle) {
-        if (show_tackle) {
+    purchase_item(item) {
+        let element = $("#" + item.internal);
+        let parent = $(element)
+            .parent();
+        if ($(parent)
+                .attr("id") == "tackle_counters") {
             $(".tackle")
                 .fadeIn();
         }
@@ -144,7 +148,7 @@ var shop = {
             item.count = 0;
             item.total = 0;
 
-            $("#" + item.internal)
+            $(element)
                 .fadeIn();
         }
 
@@ -165,18 +169,17 @@ var shop = {
         $("#" + name + "_button")
             .fadeIn();
 
-        let area = window[name].purchased;
+        let area = window[name];
+        let data = area.purchased;
 
         shop.remove_item(name + "_unlock");
-        shop.update_money(-area.price);
+        shop.update_money(-data.price);
 
-        for (let item of area.buttons) {
+        for (let item of data.buttons) {
             shop.add_item(item.resource, item.parent);
         }
 
-        if (name == "pier") {
-            boat.initialize();
-        }
+        area.purchase();
     },
 
     add_item(item, section) {
@@ -186,7 +189,7 @@ var shop = {
                 id: item.internal,
                 text: item.display + " ($" + item.price + ")",
                 on_click: function() {
-                    shop.purchase_item(item, section == "tackle");
+                    shop.purchase_item(item);
                 },
                 disabled: function() {
                     return resources.money.count < item.price || item.count == item.max;
@@ -200,6 +203,25 @@ var shop = {
                 $(element)
                     .remove();
             }));
+    },
+
+    add_auto_buy(item, price) {
+        let id = item.internal + "_auto_buy"
+        this.buttons[id] = {
+            data: {
+                parent: "misc_section",
+                id: id,
+                text: "Auto buy " + item.display + " ($" + main.stringify(price) + ")",
+                on_click: function() {
+                    counters.set_auto_buy(item);
+                    shop.remove_item(id);
+                    resources.money.count -= price;
+                },
+                disabled: function() {
+                    return resources.money.count < price;
+                }
+            }
+        }
     },
 
     remove_item(id) {

@@ -10,7 +10,7 @@ var deep_sea = {
                 parent: "bait"
             },
             {
-                resource: resources.tackle.spinnerbait,
+                resource: resources.tackle.spinner_lure,
                 parent: "tackle"
             }
         ]
@@ -35,5 +35,13 @@ var deep_sea = {
 
     unload() {
         fishing.unload(this.state);
+    },
+
+    purchase() {
+        shop.add_auto_buy(resources.bait.crustaceans, 500);
+        shop.add_auto_buy(resources.bait.squid, 600);
+        shop.add_auto_buy(resources.bait.ground_fish, 700);
+        shop.add_auto_buy(resources.tackle.harpoon, 800);
+        shop.add_auto_buy(resources.tackle.spinner_lure, 1000);
     }
 }
