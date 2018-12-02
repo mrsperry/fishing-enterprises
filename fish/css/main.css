@@ -154,7 +154,7 @@ of the container of the body :^) */
     white-space: nowrap;
 }
 
-/* about popup */
+/* about/settings popup */
 #overlay {
     position: fixed;
     left: 0;
@@ -164,15 +164,21 @@ of the container of the body :^) */
     opacity: 1.0;
 }
 
-#about {
+#popup {
     position: absolute;
     top: 37%;
     left: 37%;
     width: 400px;
-    height: 235px;
+    height: 270px;
     padding: 0px 20px;
 }
 
+#header {
+    text-align: center;
+}
+
 #close_button {
+    margin-top: 10px;
     margin-left: 30%;
+    bottom: 5px;
 }

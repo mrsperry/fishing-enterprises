@@ -46,13 +46,17 @@ div.before:before {
     background: #222222;
 }
 
-/* about popup */
+/* about/settings popup */
 #overlay {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-#about {
+#popup {
     background-color: #222222;
     color: #dddddd;
     border: solid #666666 1px;
+}
+
+.divider {
+    border: solid #666666 0.5px;
 }

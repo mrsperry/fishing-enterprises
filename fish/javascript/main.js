@@ -24,13 +24,21 @@ var main = {
         counters.update();
     },
 
+    show_settings() {
+        let text = $.parseHTML("Color theme: "
+            + "<a class='link' onclick='lights.on()'>light</a> | "
+            + "<a class='link' onclick='lights.off()'>dark</a><br><br>"
+            + "Saves: "
+            + "<a onclick=''>download file</a> | "
+            + "<a onclick=''>delete file</a><br><br>"
+            + "Dev tools: "
+            + "<a onclick=''>enable</a> | "
+            + "<a onclick=''>disable</a>"
+            + "<br><br><br><br><br>");
+        this.create_popup("Settings", text);
+    },
+
     show_about() {
-        let overlay = $("<div>")
-            .attr("id", "overlay")
-            .appendTo($("body"));
-        let popup = $("<div>")
-            .attr("id", "about")
-            .appendTo(overlay);
         let text = $.parseHTML("Fishing Enterprises was developed solely by me, Josh Sperry, in my "
             + "free time to scratch the itch of an expansive idle game. It is heavily inspired by "
             + "<a class='link' target='_blank' href='https://candybox2.github.io/candybox/'>Candybox 1</a>, "
@@ -42,12 +50,33 @@ var main = {
             + "<a class='link' target='_blank' href='https://jquery.com/'>jQuery</a> "
             + "and is freely avaliable to view on "
             + "<a class='link' target='_blank' href='https://github.com/mrsperry/mrsperry.github.io'>my Github</a>.");
+        this.create_popup("About", text);
+    },
+    
+    create_popup(header, text) {
+        let overlay =  $("<div>")
+            .attr("id", "overlay")
+            .appendTo($("body"));
+        let popup = $("<div>")
+            .attr("id", "popup")
+            .appendTo(overlay);
+
+        let head = $("<h3>")
+            .attr("id", "header")
+            .text(header)
+            .appendTo(popup);
+        $("<div>")
+            .addClass("divider")
+            .appendTo(head);
+
         let content = $("<p>")
+            .attr("id", "content")
             .appendTo(popup);
         $(text)
             .appendTo(content);
+
         buttons.create({
-            parent: "about",
+            parent: "content",
             id: "close",
             text: "Close",
             breaks: 0,
@@ -56,6 +85,7 @@ var main = {
                     .remove();
             }
         });
+        return popup;
     },
 
     random(min, max) {
