@@ -38,7 +38,7 @@ var shop = {
     },
 
     initialize() {
-        locations.switch_area(this);
+        areas.switch_area(this);
 
         let parent = $("#resource_buttons");
         $("<div>")

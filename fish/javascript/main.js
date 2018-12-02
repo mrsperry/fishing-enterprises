@@ -1,7 +1,7 @@
 var main = {
     initialize(interval) {
         counters.initialize();
-        locations.initialize();
+        areas.initialize();
 
         messenger.initialize();
         lake.initialize();
@@ -12,7 +12,7 @@ var main = {
     },
 
     update() {
-        locations.current_area.update();
+        areas.current_area.update();
 
         for (let type of ["bait", "tackle"]) {
             for (let index in resources[type]) {

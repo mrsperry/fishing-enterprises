@@ -2,7 +2,7 @@ var lake = {
     internal: "lake",
 
     initialize() {
-        locations.switch_area(this);
+        areas.switch_area(this);
 
         buttons.create({
             parent: "resource_buttons",

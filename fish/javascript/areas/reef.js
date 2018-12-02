@@ -3,7 +3,7 @@ var reef = {
     ocean: true,
 
     initialize() {
-        locations.switch_area(this);
+        areas.switch_area(this);
 
         this.state = new fishing.state([
             resources.fish.snapper,

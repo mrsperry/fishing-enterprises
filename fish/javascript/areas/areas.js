@@ -1,7 +1,7 @@
-var locations = {
+var areas = {
     current_area: null,
     
-    areas: [
+    list: [
         {
             display: "Shop",
             internal: "shop"
@@ -41,8 +41,8 @@ var locations = {
     ],
 
     initialize() {
-        for (let index = 0; index < this.areas.length; index++) {
-            let item = this.areas[index];
+        for (let index = 0; index < this.list.length; index++) {
+            let item = this.list[index];
 
             let area = window[item.internal];
             buttons.create({

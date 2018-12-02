@@ -54,10 +54,10 @@ var counters = {
             .addClass("counter")
             .hide()
             .appendTo(parent);
-        // create the location counters
-        for (let index = 1; index < locations.areas.length; index++) {
+        // create the area counters
+        for (let index = 1; index < areas.list.length; index++) {
             $("<div>")
-                .attr("id", locations.areas[index].internal + "_counters")
+                .attr("id", areas.list[index].internal + "_counters")
                 .appendTo(fish);
         }
     },

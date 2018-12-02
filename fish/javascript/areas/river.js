@@ -10,7 +10,7 @@ var river = {
     queue_change: false,
 
     initialize() {
-        locations.switch_area(this);
+        areas.switch_area(this);
 
         if (this.queue_change) {
             this.river_troll = false;
