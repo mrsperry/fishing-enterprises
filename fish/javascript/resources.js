@@ -493,7 +493,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
@@ -654,7 +654,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
@@ -675,7 +675,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
@@ -700,7 +700,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
@@ -721,7 +721,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
@@ -746,7 +746,7 @@ var resources = {
             ],
             tackle: [
                 {
-                    type: "spinnerbait",
+                    type: "spinner_lure",
                     amount: 1
                 }
             ]
