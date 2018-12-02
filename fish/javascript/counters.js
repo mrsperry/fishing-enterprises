@@ -75,9 +75,14 @@ var counters = {
     },
 
     update_counter(item, id) {
+        let max = item.count == item.max;
         $("#" + id)
             .text(main.stringify(item.count == null ? 0 : item.count))
-            .css("opacity", (item.count == item.max ? 0.5 : 1.0));
+            .css("opacity", max ? 0.5 : 1.0);
+            
+        if (max) {
+            this.show_max(item);
+        }
     },
 
     create_counter(item, id) {

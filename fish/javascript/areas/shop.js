@@ -153,16 +153,13 @@ var shop = {
         }
 
         if (item.count < item.max) {
-            if (++item.count == item.max) {
-                counters.show_max(item);
-            }
+            item.count++;
             item.total++;
 
             this.update_money(-item.price);
-            counters.update();
-        } else {
-            counters.show_max(item);
         }
+
+        counters.update();
     },
 
     purchase_area(name) {

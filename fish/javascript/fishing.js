@@ -176,8 +176,6 @@ var fishing = {
                     $("#lake_button")
                         .fadeIn();
                 }
-
-                counters.show_max(fish);
             }
             
             counters.update();

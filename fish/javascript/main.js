@@ -6,9 +6,7 @@ var main = {
         messenger.initialize();
         lake.initialize();
 
-        window.setInterval(function() {
-            main.update();
-        }, interval);
+        this.interval = window.setInterval(this.update, interval);
     },
 
     update() {
@@ -32,8 +30,8 @@ var main = {
             + "<a onclick=''>download file</a> | "
             + "<a onclick=''>delete file</a><br><br>"
             + "Dev tools: "
-            + "<a onclick=''>enable</a> | "
-            + "<a onclick=''>disable</a>"
+            + "<a onclick='settings.toggle_dev_tools(true)'>enable</a> | "
+            + "<a onclick='settings.toggle_dev_tools(false)'>disable</a>"
             + "<br><br><br><br><br>");
         this.create_popup("Settings", text);
     },
