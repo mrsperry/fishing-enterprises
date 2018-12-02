@@ -17,7 +17,7 @@ var deep_sea = {
     },
 
     initialize() {
-        main.switch_area(this);
+        locations.switch_area(this);
 
         this.state = new fishing.state([
             resources.fish.whitefish,

@@ -21,7 +21,7 @@ var spear_fishing = {
     },
 
     initialize() {
-        main.switch_area(this);
+        locations.switch_area(this);
 
         this.state = new fishing.state([
             resources.fish.lobster,

@@ -38,7 +38,7 @@ var shop = {
     },
 
     initialize() {
-        main.switch_area(this);
+        locations.switch_area(this);
 
         let parent = $("#resource_buttons");
         $("<div>")
@@ -70,7 +70,7 @@ var shop = {
                 }
 
                 item.data["classes"] = ["button"];
-                button.create(item.data);
+                buttons.create(item.data);
             }
         }
 
@@ -86,7 +86,7 @@ var shop = {
             } else {
                 if (this.check_button(item)) {
                     item.data["classes"] = ["button"];
-                    button.create(item.data);
+                    buttons.create(item.data);
                 }
             }
         }
@@ -225,7 +225,7 @@ var shop = {
     },
 
     remove_item(id) {
-        main.remove(id);
+        buttons.remove(id);
         this.buttons[id].removed = true;
         this.buttons[id].data.disabled = true;
     },

@@ -1,4 +1,4 @@
-var button = {
+var buttons = {
     create: function(options) {
         this.options = options;
 
@@ -50,5 +50,15 @@ var button = {
         }
 
         return this;
-    }
+    },
+
+    remove(id) {
+        $("#" + id + "_button")
+            .fadeOut(400, (function() {
+                $("#" + id + "_button")
+                    .remove();
+                $("#" + id + "_break")
+                    .remove();
+            }));
+    },
 }

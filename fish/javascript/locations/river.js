@@ -10,14 +10,14 @@ var river = {
     queue_change: false,
 
     initialize() {
-        main.switch_area(this);
+        locations.switch_area(this);
 
         if (this.queue_change) {
             this.river_troll = false;
         }
 
         if (this.river_troll) {
-            button.create({
+            buttons.create({
                 parent: "resource_buttons",
                 id: "river_troll",
                 text: "Talk to the River Troll",
@@ -43,7 +43,7 @@ var river = {
                             }
                         }
                     }
-                    main.remove("river_troll");
+                    buttons.remove("river_troll");
                 }
             });
         } else {

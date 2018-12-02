@@ -2,9 +2,9 @@ var lake = {
     internal: "lake",
 
     initialize() {
-        main.switch_area(this);
+        locations.switch_area(this);
 
-        button.create({
+        buttons.create({
             parent: "resource_buttons",
             id: "forage_for_worms",
             text: "Forage for worms",

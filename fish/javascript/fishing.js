@@ -10,21 +10,21 @@ var fishing = {
         $("<div>")
             .attr("id", "fishing_buttons")
             .appendTo($("#resource_buttons"));
-        button.create({
+        buttons.create({
             parent: "fishing_buttons",
             id: "cast_out_line",
             text: "Cast out line",
             on_click: function() {
-                fishing.toggle_state(main.area.state);
+                fishing.toggle_state(locations.current_area.state);
             }
         });
-        button.create({
+        buttons.create({
             parent: "fishing_buttons",
             id: "reel_in_line",
             text: "Reel in line",
             disabled: true,
             on_click: function() {
-                fishing.toggle_state(main.area.state);
+                fishing.toggle_state(locations.current_area.state);
             }
         });
     },
@@ -50,7 +50,9 @@ var fishing = {
                     // make sure there is tackle
                     let has_tackle = true;
                     if (fish.tackle != null) {
+                        console.log(fish.tackle);
                         for (let tackle of fish.tackle) {
+                            console.log(tackle);
                             let count = resources.tackle[tackle.type].count;
                             if (tackle.amount > (count == null ? 0 : count)) {
                                 has_tackle = false;
@@ -61,7 +63,7 @@ var fishing = {
 
                     let has_fuel = true;
                     let use_fuel = false;
-                    if (main.area.ocean != null) {
+                    if (locations.current_area.ocean != null) {
                         has_fuel = resources.fuel.count > 0;
                         use_fuel = true;
                     }
@@ -128,7 +130,7 @@ var fishing = {
     catch(fish, is_bait) {
         if (fish.caught == null) {
             if (!is_bait) {
-                counters.create_counter(fish, main.area.internal + "_counters");
+                counters.create_counter(fish, locations.current_area.internal + "_counters");
             }
 
             $("#" + fish.internal)

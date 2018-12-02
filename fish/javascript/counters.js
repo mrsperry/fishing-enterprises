@@ -55,9 +55,9 @@ var counters = {
             .hide()
             .appendTo(parent);
         // create the location counters
-        for (let index = 1; index < main.areas.length; index++) {
+        for (let index = 1; index < locations.areas.length; index++) {
             $("<div>")
-                .attr("id", main.areas[index].internal + "_counters")
+                .attr("id", locations.areas[index].internal + "_counters")
                 .appendTo(fish);
         }
     },
@@ -116,6 +116,14 @@ var counters = {
                 .appendTo($("#" + item.internal));
 
             item.show_max = true;
+        }
+    },
+    
+    auto_buy(item) {
+        if (item.auto_buy != null) {
+            if (resources.money.count >= item.price) {
+                shop.purchase_item(item, false);
+            }
         }
     },
 
