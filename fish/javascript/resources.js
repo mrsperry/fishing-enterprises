@@ -446,7 +446,7 @@ var resources = {
         moray_eel: {
             display: "Moray Eel",
             internal: "moray_eel",
-            message: "when a fish bites your keel and it looks like an eel...",
+            message: "when a fish bites your heel and it looks like an eel...",
             price: 55,
             max: 5,
             chance: 30,
@@ -465,7 +465,7 @@ var resources = {
         barracuda: {
             display: "Barracuda",
             internal: "barracuda",
-            message: "long, thin, aggressive and eager to kill anything shiny",
+            message: "long, thin, aggressive and eager to bite anything shiny",
             price: 70,
             max: 3,
             chance: 10,
@@ -683,7 +683,7 @@ var resources = {
         marlin: {
             display: "Marlin",
             internal: "marlin",
-            message: "it's a swordfish if it had a better sword and a bigger body",
+            message: "it's a swordfish, if the swordfish had a better sword and a bigger body",
             price: 100,
             max: 3,
             chance: 15,
