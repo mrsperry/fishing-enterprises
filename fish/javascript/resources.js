@@ -425,7 +425,7 @@ var resources = {
         hogfish: {
             display: "Hogfish",
             internal: "hogfish",
-            message: "a beatufiul pig fish, if one can exist",
+            message: "a beautiful pig fish, if one can exist",
             price: 50,
             max: 7,
             chance: 40,
