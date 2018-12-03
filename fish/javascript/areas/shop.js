@@ -27,7 +27,7 @@ var shop = {
                 id: "buy_fuel",
                 text: "Fuel ($5)",
                 on_click: function() {
-                    shop.purchase_item(resources.fuel, true);
+                    shop.purchase_item(resources.fuel);
                 },
                 disabled: function() {
                     let fuel = resources.fuel;
