@@ -128,11 +128,13 @@ var counters = {
     },
 
     set_auto_buy(item) {
-        $("<span>")
-            .addClass("auto_buy")
-            .text("+")
-            .prependTo($("#" + item.internal));
-        
-        item.auto_buy = true;
+        if(item.auto_buy == null) {
+            $("<span>")
+                .addClass("auto_buy")
+                .text("+")
+                .prependTo($("#" + item.internal));
+
+            item.auto_buy = true;
+        }
     }
 }
