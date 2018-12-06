@@ -5,11 +5,11 @@ body {
 }
 
 /* links */
-a {
+.link {
     color: #0099ff;
 }
 
-a:hover {
+.link:hover {
     color: #22aaff;
 }
 

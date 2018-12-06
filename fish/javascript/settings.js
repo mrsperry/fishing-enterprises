@@ -2,12 +2,20 @@ var settings = {
     keys: ["count", "total", "caught", "purchased", "show_max", "auto_buy", "area"],
 
     toggle_dev_tools(set) {
+        $("#dev_" + (!set ? "enable" : "disable"))
+            .addClass("link")
+            .click(function() {
+                settings.toggle_dev_tools(set);
+            });
+        $("#dev_" + (set ? "enable" : "disable"))
+            .removeClass("link")
+            .off("click");
+        
         if (set) {
             this.dev = true;
 
             $("#right")
-                .hide()
-                .fadeIn();
+                .empty();
             
             buttons.create({
                 parent: "right",
@@ -331,5 +339,13 @@ var settings = {
     
     delete_save() {
         localStorage.removeItem("save");
+
+        $("#delete_save")
+            .removeClass("link")
+            .off("click");
+    },
+
+    has_save() {
+        return localStorage.getItem("save") != null;
     }
 }

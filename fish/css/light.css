@@ -1,9 +1,9 @@
 /* links */
-a {
+.link {
     color: #0066ff;
 }
 
-a:hover {
+.link:hover {
     color: #0099ff;
 }
 

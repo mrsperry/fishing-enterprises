@@ -83,16 +83,31 @@ var main = {
 
     show_settings() {
         let text = $.parseHTML("Color theme: "
-            + "<a class='link' onclick='lights.on()'>light</a> | "
-            + "<a class='link' onclick='lights.off()'>dark</a><br><br>"
+            + "<span id='lights_on' class='link' onclick='lights.on()'>light</span> | "
+            + "<span id='lights_off' class='link' onclick='lights.off()'>dark</span><br><br>"
             + "Saves: "
-            + "<a onclick='settings.save_game()'>download file</a> | "
-            + "<a onclick=''>delete file</a><br><br>"
+            + "<span class='link' onclick='settings.save_game()'>download save</span> | "
+            + "<span class='link' onclick='settings.load_game()'>load save</span> | "
+            + "<span id='delete_save'>delete save</span><br><br>"
             + "Dev tools: "
-            + "<a onclick='settings.toggle_dev_tools(true)'>enable</a> | "
-            + "<a onclick='settings.toggle_dev_tools(false)'>disable</a>"
+            + "<span id='dev_enable' class='link' onclick='settings.toggle_dev_tools(true)'>enable</span> | "
+            + "<span id='dev_disable' class='link' onclick='settings.toggle_dev_tools(false)'>disable</span>"
             + "<br><br><br><br><br>");
         this.create_popup("Settings", text);
+
+        lights.toggle(lights.lights);
+        settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
+        if (settings.has_save()) {
+            $("#delete_save")
+                .addClass("link")
+                .click(function() {
+                    settings.delete_save();
+                });
+        } else {
+            $("#delete_save")
+                .removeClass("link")
+                .off("click");
+        }
     },
 
     show_about() {
