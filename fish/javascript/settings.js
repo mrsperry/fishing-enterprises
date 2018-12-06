@@ -207,7 +207,13 @@ var settings = {
         clear(save);
 
         localStorage.removeItem("save");
-        localStorage.setItem("save", JSON.stringify($.extend({}, save)));
+        localStorage.setItem("save", JSON.stringify($.extend({}, save), null, 4));
+
+        $("#delete_save")
+            .addClass("link")
+            .click(function() {
+                settings.delete_save();
+            });
     },
 
     load_save() {
@@ -335,6 +341,23 @@ var settings = {
         }
         shop.update();
         main.update_interval(2500);
+    },
+
+    download_save() {
+        this.save_game();
+        let save = localStorage.getItem("save");
+
+        let element = $("<a>")
+            .attr("download", "save.txt")
+            .attr("href", "data:text/plain;charset=utf8," + encodeURIComponent(save))
+            .hide()
+            .appendTo("#right");
+
+        $(element)[0]
+            .click()
+        
+        $(element)
+            .remove();
     },
     
     delete_save() {

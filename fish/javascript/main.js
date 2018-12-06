@@ -86,7 +86,7 @@ var main = {
             + "<span id='lights_on' class='link' onclick='lights.on()'>light</span> | "
             + "<span id='lights_off' class='link' onclick='lights.off()'>dark</span><br><br>"
             + "Saves: "
-            + "<span class='link' onclick='settings.save_game()'>download save</span> | "
+            + "<span id='download_save' class='link' onclick='settings.download_save()'>download save</span> | "
             + "<span class='link' onclick='settings.load_game()'>load save</span> | "
             + "<span id='delete_save'>delete save</span><br><br>"
             + "Dev tools: "
@@ -95,8 +95,10 @@ var main = {
             + "<br><br><br><br><br>");
         this.create_popup("Settings", text);
 
-        lights.toggle(lights.lights);
         settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
+        $("#lights_" + (lights.lights ? "on" : "off"))
+            .removeClass("link")
+            .off("click");
         if (settings.has_save()) {
             $("#delete_save")
                 .addClass("link")

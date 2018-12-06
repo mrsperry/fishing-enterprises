@@ -6,7 +6,7 @@ var lights = {
         let name = "dark";
         if (set != null && set) {
             on = true;
-            name = "light"
+            name = "light";
         } else {
             name = this.lights ? "dark" : "light";
             on = !this.lights;
