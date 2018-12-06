@@ -336,9 +336,6 @@ var settings = {
 
         counters.load(save);
         messenger.reset();
-        if (!lights.lights) {
-            lights.on();
-        }
         shop.update();
         main.update_interval(2500);
     },
@@ -358,6 +355,18 @@ var settings = {
         
         $(element)
             .remove();
+    },
+
+    upload_save(event) {
+        let onLoad = (event) => {
+            settings.delete_save();
+            localStorage.setItem("save", event.target.result);
+            settings.load_save();
+        }
+
+        let reader = new FileReader();
+        reader.onload = onLoad;
+        reader.readAsText(event.target.files[0]);
     },
     
     delete_save() {

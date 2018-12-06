@@ -79,6 +79,7 @@ var main = {
         river.river_troll = true;
 
         counters.reset(save);
+        lights.on();
     },
 
     show_settings() {
@@ -87,7 +88,7 @@ var main = {
             + "<span id='lights_off' class='link' onclick='lights.off()'>dark</span><br><br>"
             + "Saves: "
             + "<span id='download_save' class='link' onclick='settings.download_save()'>download save</span> | "
-            + "<span class='link' onclick='settings.load_game()'>load save</span> | "
+            + "<label class='link'><input id='upload_save' type='file'/>upload save</label> | "
             + "<span id='delete_save'>delete save</span><br><br>"
             + "Dev tools: "
             + "<span id='dev_enable' class='link' onclick='settings.toggle_dev_tools(true)'>enable</span> | "
@@ -96,6 +97,11 @@ var main = {
         this.create_popup("Settings", text);
 
         settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
+        $("#upload_save")
+            .hide()
+            .on("change", (function(event) { 
+                settings.upload_save(event); 
+            }));
         $("#lights_" + (lights.lights ? "on" : "off"))
             .removeClass("link")
             .off("click");
