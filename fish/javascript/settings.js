@@ -5,52 +5,58 @@ var settings = {
         if (set) {
             this.dev = true;
 
-            let parent = $("#right")
+            $("#right")
                 .hide()
                 .fadeIn();
             
-            $("<button>")
-                .text("Money +5,000")
-                .click(function() {
+            buttons.create({
+                parent: "right",
+                text: "Money +5000",
+                on_click: function() {
                     resources.money.count += 5000;
                     counters.update();
-                })
-                .appendTo(parent);
-            $("<button>")
-                .text("Max bait")
-                .click(function() {
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Max bait",
+                on_click: function() {
                     $("#bait_counters")
                         .fadeIn();
                     settings.max(resources.bait);
-                })
-                .appendTo(parent);
-            $("<button>")
-                .text("Max tackle")
-                .click(function() {
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Max tackle",
+                on_click: function() {
                     $(".tackle")
                         .fadeIn();
                     settings.max(resources.tackle);
-                })
-                .appendTo(parent);
-            $("<button>")
-                .text("Max fuel")
-                .click(function() {
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Max fuel",
+                on_click: function() {
                     resources.fuel.count = 30;
                     counters.update();
-                })
-                .appendTo(parent);
-            $("<button>")
-                .text("Fast ticks")
-                .click(function() {
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Fast ticks",
+                on_click: function() {
                     main.update_interval(150);
-                })
-                .appendTo(parent);
-            $("<button>")
-                .text("Regular ticks")
-                .click(function() {
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Regular ticks",
+                on_click: function() {
                     main.update_interval(2500);
-                })
-                .appendTo(parent);
+                }
+            });
         } else {
             this.dev = false;
             $("#right")
