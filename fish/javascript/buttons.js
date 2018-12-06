@@ -60,5 +60,5 @@ var buttons = {
                 $("#" + id + "_break")
                     .remove();
             }));
-    },
+    }
 }

@@ -2,27 +2,7 @@ var spear_fishing = {
     internal: "spear_fishing",
     ocean: true,
 
-    purchased: {
-        price: 1250,
-        buttons: [
-            {
-                resource: resources.bait.crustaceans,
-                parent: "bait"
-            },
-            {
-                resource: resources.bait.squid,
-                parent: "bait"
-            },
-            {
-                resource: resources.tackle.harpoon,
-                parent: "tackle"
-            }
-        ]
-    },
-
     initialize() {
-        areas.switch_area(this);
-
         this.state = new fishing.state([
             resources.fish.lobster,
             resources.fish.grouper,
@@ -40,8 +20,19 @@ var spear_fishing = {
         fishing.unload(this.state);
     },
 
-    purchase() {
-        shop.add_auto_buy(resources.bait.mussels, 400);
-        shop.add_auto_buy(resources.tackle.spoon_lure, 600);
+    get_auto_buys() {
+        return {
+            internal: spear_fishing.internal,
+            auto_buys: [
+                {
+                    resource: resources.bait.mussels,
+                    price: 400
+                },
+                {
+                    resource: resources.tackle.spoon_lure,
+                    price: 600
+                }
+            ]
+        };
     }
 }

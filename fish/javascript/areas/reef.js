@@ -3,8 +3,6 @@ var reef = {
     ocean: true,
 
     initialize() {
-        areas.switch_area(this);
-
         this.state = new fishing.state([
             resources.fish.snapper,
             resources.fish.hogfish,
@@ -25,12 +23,26 @@ var reef = {
     purchase() {
         $("#reef_button")
             .fadeIn();
+        areas.list.reef.unlocked = true;
+    },
 
-        shop.add_item(resources.bait.mussels, "bait");
-        shop.add_item(resources.tackle.spoon_lure, "tackle");
-
-        shop.add_auto_buy(resources.fuel, 500);
-        shop.add_auto_buy(resources.bait.insects, 300);
-        shop.add_auto_buy(resources.tackle.bobber, 400);
+    get_auto_buys() {
+        return {
+            internal: reef.internal,
+            auto_buys: [
+                {
+                    resource: resources.fuel,
+                    price: 500
+                },
+                {
+                    resource: resources.bait.insects,
+                    price: 300
+                },
+                {
+                    resource: resources.tackle.bobber,
+                    price: 400
+                }
+            ]
+        };
     }
 }

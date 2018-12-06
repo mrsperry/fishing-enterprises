@@ -115,10 +115,10 @@ var fishing = {
             .prop("disabled", !state.is_fishing);
 
         if (state.is_fishing && !state.reel_in_message) {
-            messenger.write_message("reeling in your line is always full of tedium");
+            messenger.write_message("reeling in your line is always full of tedium", true);
             state.reel_in_message = true;
         } else if (!state.cast_out_message) {
-            messenger.write_message("you cast out your line as far as your arm permits");
+            messenger.write_message("you cast out your line as far as your arm permits", true);
             state.cast_out_message = true;
         }
 
@@ -126,36 +126,47 @@ var fishing = {
     },
 
     catch(fish, is_bait) {
-        if (fish.caught == null) {
+        if (is_bait) {
+            // show fishing buttons
+            let fishing = $("#fishing_buttons");
+            if ($(fishing)
+                .is(":hidden"))
+                $(fishing)
+                    .fadeIn();
+            // show the bait counters
+            let bait = $("#bait_counters");
+            if ($(bait)
+                .is(":hidden"))
+                $(bait)
+                    .fadeIn();
+        } else {
+            // show the fish counters if this is the first fish
+            let fish = $("#fish_counters");
+            if ($(fish)
+                .is(":hidden"))
+                $(fish)
+                    .fadeIn();
+        }
+
+        if (fish.caught == null || !fish.caught) {
             if (!is_bait) {
-                counters.create_counter(fish, areas.current_area.internal + "_counters");
+                let area = areas.current_area.internal;
+                counters.create_counter(fish, area + "_counters");
+                fish.area = area;
             }
 
-            $("#" + fish.internal)
-                .fadeIn();
-            
-            if (fish.internal == "bass") {
-                // show the fish counters if this is the first fish
-                $("#fish_counters")
-                    .fadeIn();
-            } else if (fish.internal == "worms") {
-                // show fishing buttons
-                $("#fishing_buttons")
-                    .fadeIn();
-                // show the bait counters
-                $("#bait_counters")
-                    .fadeIn();
-            }
+            messenger.write_message(fish.display + ": " + fish.message, true);
 
-            messenger.write_message(fish.display + ": " + fish.message);
-
-            fish.caught = true;
+            fish.caught = true; 
         }
 
         if (fish.count == null) {
             fish.count = 0;
             fish.total = 0;
-            fish.max_caught = fish.max_caught == null ? 1 : fish.max_caught;
+        }
+
+        if (fish.max_caught == null) {
+            fish.max_caught = 1;
         }
 
         if (fish.count != fish.max) {
@@ -175,6 +186,8 @@ var fishing = {
                         .fadeIn();
                     $("#lake_button")
                         .fadeIn();
+                    areas.list.shop.unlocked = true;
+                    areas.list.lake.unlocked = true;
                 }
             }
             

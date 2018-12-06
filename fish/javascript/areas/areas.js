@@ -1,88 +1,157 @@
 var areas = {
-    current_area: null,
-    
-    list: [
-        {
+    list: {
+        shop: {
             display: "Shop",
-            internal: "shop"
         },
-        {
+        lake: {
             display: "Lake",
-            internal: "lake"
         },
-        {
+        river: {
             display: "River",
-            internal: "river",
             unlock: "lake",
-            license: "Fly Fishing permit"
+            license: "Fly Fishing permit",
+            purchased: {
+                price: 300,
+                buttons: [
+                    {
+                        resource: resources.bait.guppies,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.tackle.fly_tackle,
+                        parent: "tackle"
+                    }
+                ]
+            }
         },
-        {
+        pier: {
             display: "Pier",
-            internal: "pier",
             unlock: "river",
-            license: "Pier Fishing permit"
+            license: "Pier Fishing permit",
+            purchased: {
+                price: 500,
+                buttons: [
+                    {
+                        resource: resources.bait.insects,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.tackle.bobber,
+                        parent: "tackle"
+                    }
+                ]
+            }
         },
-        {
+        reef: {
             display: "Reef",
-            internal: "reef"
+            internal: "reef",
+            purchased: {
+                price: 0,
+                buttons: [
+                    {
+                        resource: resources.bait.mussels,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.tackle.spoon_lure,
+                        parent: "tackle"
+                    }
+                ]
+            }
         },
-        {
+        spear_fishing: {
             display: "Spear Fishing",
-            internal: "spear_fishing",
             unlock: "reef",
-            license: "Spear Fishing permit"
+            license: "Spear Fishing permit",
+            purchased: {
+                price: 1250,
+                buttons: [
+                    {
+                        resource: resources.bait.crustaceans,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.bait.squid,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.tackle.harpoon,
+                        parent: "tackle"
+                    }
+                ]
+            }
         },
-        {
+        deep_sea: {
             display: "Deep Sea",
-            internal: "deep_sea",
             unlock: "spear_fishing",
-            license: "Deep Sea permit"
+            license: "Deep Sea permit",
+            purchased: {
+                price: 2000,
+                buttons: [
+                    {
+                        resource: resources.bait.ground_fish,
+                        parent: "bait"
+                    },
+                    {
+                        resource: resources.tackle.spinner_lure,
+                        parent: "tackle"
+                    }
+                ]
+            }
         }
-    ],
+    },
 
     initialize() {
-        for (let index = 0; index < this.list.length; index++) {
+        for (let index in this.list) {
             let item = this.list[index];
 
-            let area = window[item.internal];
+            let area = window[index];
             buttons.create({
                 parent: "area_selector",
-                id: item.internal,
+                id: index,
                 text: item.display,
                 hide: true,
                 on_click: function() {
-                    $("#resource_buttons")
-                        .empty();
-
-                    area.initialize();
+                    areas.switch_area(area);
                 }
             });
 
-            if (index > 1 && item.internal != "reef") {
-                shop.buttons[item.internal + "_unlock"] = {
+            if (index != "shop" && index != "lake" && index != "reef") {
+                shop.buttons[index + "_unlock"] = {
                     condition: function() {
                         return !$("#" + item.unlock + "_button")
                             .is(":hidden");
                     },
                     data: {
                         parent: "misc_section",
-                        id: item.internal + "_unlock",
-                        text: item.license + " ($" + area.purchased.price + ")",
+                        id: index + "_unlock",
+                        text: item.license + " ($" + this.list[index].purchased.price + ")",
                         on_click: function() {
-                            shop.purchase_area(item.internal);
+                            shop.purchase_area(index);
                         },
                         disabled: function() {
-                            return resources.money.count <= area.purchased.price
+                            return resources.money.count <= areas.list[index].purchased.price
                                 // disable the pier until the river troll has been talked to
-                                || (item.internal == "pier" ? !river.queue_change : false);
+                                || (index == "pier" ? !river.queue_change : false)
+                                && !shop.is_removed(item.internal);
                         }
                     }
+                }
+            }
+
+            if (index != "shop" && index != "lake") {
+                shop.add_auto_buy_items(area.get_auto_buys());
+                for (let button of this.list[index].purchased.buttons) {
+                    shop.add_item(index, button.resource, button.parent);
                 }
             }
         }
     },
 
     switch_area(area) {
+        $("#resource_buttons")
+            .empty();
+    
         let children = $("#area_selector")
             .children();
         for (let index = 0; index < children.length; index++) {
@@ -97,6 +166,14 @@ var areas = {
             this.current_area.unload();
         }
 
+        area.initialize();
         this.current_area = area;
+    },
+
+    set_unlocked(area) {
+        this.list[area].unlocked = true;
+
+        $("#" + area + "_button")
+            .fadeIn();
     }
 }

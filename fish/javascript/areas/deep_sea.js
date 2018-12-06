@@ -2,23 +2,7 @@ var deep_sea = {
     internal: "deep_sea",
     ocean: true,
 
-    purchased: {
-        price: 2000,
-        buttons: [
-            {
-                resource: resources.bait.ground_fish,
-                parent: "bait"
-            },
-            {
-                resource: resources.tackle.spinner_lure,
-                parent: "tackle"
-            }
-        ]
-    },
-
     initialize() {
-        areas.switch_area(this);
-
         this.state = new fishing.state([
             resources.fish.whitefish,
             resources.fish.lingcod,
@@ -37,11 +21,31 @@ var deep_sea = {
         fishing.unload(this.state);
     },
 
-    purchase() {
-        shop.add_auto_buy(resources.bait.crustaceans, 500);
-        shop.add_auto_buy(resources.bait.squid, 600);
-        shop.add_auto_buy(resources.bait.ground_fish, 700);
-        shop.add_auto_buy(resources.tackle.harpoon, 800);
-        shop.add_auto_buy(resources.tackle.spinner_lure, 1000);
+    get_auto_buys() {
+        return {
+            internal: deep_sea.internal,
+            auto_buys: [
+                {
+                    resource: resources.bait.crustaceans,
+                    price: 500
+                },
+                {
+                    resource: resources.bait.squid,
+                    price: 600
+                },
+                {
+                    resource: resources.bait.ground_fish,
+                    price: 700
+                },
+                {
+                    resource: resources.tackle.harpoon,
+                    price: 800
+                },
+                {
+                    resource: resources.tackle.spinner_lure,
+                    price: 1000
+                },
+            ]
+        };
     }
 }

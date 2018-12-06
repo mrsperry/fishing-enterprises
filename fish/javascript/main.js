@@ -2,11 +2,12 @@ var main = {
     initialize(interval) {
         counters.initialize();
         areas.initialize();
+        boat.add_parts();
 
         messenger.initialize();
-        lake.initialize();
+        areas.switch_area(lake);
 
-        this.interval = window.setInterval(this.update, interval);
+        this.update_interval(interval);
     },
 
     update() {
@@ -22,12 +23,70 @@ var main = {
         counters.update();
     },
 
+    update_interval(millis) {
+        window.clearInterval(this.interval);
+        this.interval = window.setInterval(this.update, millis);
+    },
+
+    reset(save) {
+        for (let type in resources) {
+            for (let index in resources[type]) {
+                let item = resources[type][index];
+                
+                delete item.count;
+                delete item.total;
+
+                if (type == "fish") {
+                    delete item.caught;
+                }
+                if (type == "bait" || type == "tackle" || type == "fuel") {
+                    delete item.purchased;
+
+                    if (type == "fuel") {
+                        delete resources.fuel.purchsed;
+                    }
+                }
+                if (type != "money") {
+                    delete item.show_max;
+                    delete item.auto_buy;
+
+                    if (type == "fuel") {
+                        delete resources.fuel.show_max;
+                        delete resources.fuel.auto_buy;
+                    }
+                }
+                if (type == "money" || type == "fuel") {
+                    resources[type].count = 0;
+                    resources[type].total = 0;
+                }
+            }
+        }
+        for (let index in boat.parts) {
+            delete boat.parts[index].purchased;
+        }
+        for (let index in areas.list) {
+            delete areas.list[index].unlocked;
+            $("#" + index + "_button")
+                .hide();
+        }
+        for (let index in shop.buttons) {
+            let item = shop.buttons[index];
+            delete item.removed;
+            delete item.purchased;
+        }
+        delete lake.show_buttons;
+        river.queue_change = false;
+        river.river_troll = true;
+
+        counters.reset(save);
+    },
+
     show_settings() {
         let text = $.parseHTML("Color theme: "
             + "<a class='link' onclick='lights.on()'>light</a> | "
             + "<a class='link' onclick='lights.off()'>dark</a><br><br>"
             + "Saves: "
-            + "<a onclick=''>download file</a> | "
+            + "<a onclick='settings.save_game()'>download file</a> | "
             + "<a onclick=''>delete file</a><br><br>"
             + "Dev tools: "
             + "<a onclick='settings.toggle_dev_tools(true)'>enable</a> | "

@@ -21,10 +21,14 @@ var lights = {
     },
 
     on() {
-        this.toggle(true);
+        if (!this.lights) {
+            this.toggle(true);
+        }
     },
 
     off() {
-        this.toggle(false);
+        if (this.lights) {
+            this.toggle(false);
+        }
     }
 }

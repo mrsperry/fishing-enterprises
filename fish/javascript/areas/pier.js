@@ -1,23 +1,7 @@
 var pier = {
     internal: "pier",
 
-    purchased: {
-        price: 500,
-        buttons: [
-            {
-                resource: resources.bait.insects,
-                parent: "bait"
-            },
-            {
-                resource: resources.tackle.bobber,
-                parent: "tackle"
-            }
-        ]
-    },
-
     initialize() {
-        areas.switch_area(this);
-
         this.state = new fishing.state([
             resources.fish.redfish,
             resources.fish.mackerel,
@@ -36,8 +20,21 @@ var pier = {
 
     purchase() {
         boat.initialize();
+    },
 
-        shop.add_auto_buy(resources.bait.guppies, 200);
-        shop.add_auto_buy(resources.tackle.fly_tackle, 200);
+    get_auto_buys() {
+        return {
+            internal: pier.internal,
+            auto_buys: [
+                {
+                    resource: resources.bait.guppies,
+                    price: 200
+                },
+                {
+                    resource: resources.tackle.fly_tackle,
+                    price: 200
+                }
+            ]
+        };
     }
 }

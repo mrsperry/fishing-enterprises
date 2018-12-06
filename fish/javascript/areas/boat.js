@@ -19,6 +19,8 @@ var boat = {
     },
 
     initialize() {
+        this.displayed = true;
+
         $("<div>")
             .attr("id", "boat_counters")
             .attr("display", "Boat")
@@ -28,12 +30,19 @@ var boat = {
             .appendTo($("#resource_counters"));
         $(counters.create_counter(resources.fuel, "boat_counters"))
             .fadeIn();
+        
+    },
 
+    add_parts() {
         for (let name in this.parts) {
             let item = this.parts[name];
             let id = "boat_" + name;
 
             shop.buttons[id] = {
+                condition: function() {
+                    return !$("#pier_button")
+                        .is(":hidden");
+                },
                 data: {
                     parent: "misc_section",
                     id: id,
@@ -43,7 +52,8 @@ var boat = {
                         shop.remove_item(id);
                     },
                     disabled: function() {
-                        return resources.money.count < item.price;
+                        return resources.money.count < item.price
+                            && !shop.is_removed(item.internal);
                     }
                 }
             }
@@ -51,8 +61,12 @@ var boat = {
     },
 
     purchase_part(item) {
-        item.purchased = true;
         shop.update_money(-item.price);
+        this.add_part(item);
+    },
+
+    add_part(item) {
+        item.purchased = true;
 
         let parent = $("#boat_counters");
         if ($(parent)

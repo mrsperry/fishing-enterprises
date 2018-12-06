@@ -55,10 +55,12 @@ var counters = {
             .hide()
             .appendTo(parent);
         // create the area counters
-        for (let index = 1; index < areas.list.length; index++) {
-            $("<div>")
-                .attr("id", areas.list[index].internal + "_counters")
-                .appendTo(fish);
+        for (let index in areas.list) {
+            if (index != "shop") {
+                $("<div>")
+                    .attr("id", index + "_counters")
+                    .appendTo(fish);
+            }
         }
     },
 
@@ -75,14 +77,108 @@ var counters = {
     },
 
     update_counter(item, id) {
+        if (item.count > 0) {
+            let element = $("#" + item.internal)
+            $(element)
+                .fadeIn();
+            if ($(element)
+                .parent()
+                    .attr("id") == "tackle_counters") {
+                $(".tackle")
+                    .fadeIn();
+            }
+        }
+
         let max = item.count == item.max;
         $("#" + id)
             .text(main.stringify(item.count == null ? 0 : item.count))
             .css("opacity", max ? 0.5 : 1.0);
             
-        if (max) {
+        if (max && (item.show_max == null || !item.show_max)) {
             this.show_max(item);
         }
+    },
+
+    reset() {
+        let keys = ["bait", "tackle", "fish"];
+        for (let type of keys) {
+            for (let index in resources[type]) {
+                let item = resources[type][index];
+
+                let element = $("#" + item.internal);
+                let parent = $(element)
+                    .parent();
+                if (type == "fish") {
+                    $(element)
+                        .remove();
+                    $(parent)
+                        .parent()
+                            .hide();
+                } else {
+                    $(element)
+                        .hide();
+                    $(parent)
+                        .hide();
+                }
+
+                $("#" + item.internal + "_count")
+                    .text("0");
+                $("#" + item.internal + "_max")
+                    .remove();
+                $("#" + item.internal + "_auto_buy")
+                    .remove();
+            }
+        }
+
+        $("#boat_counters")
+            .remove();
+
+        for (let area in areas.list) {
+            $("#" + area + "_counters")
+                .empty();
+        }
+    },
+
+    load(save) {
+        let keys = ["bait", "tackle", "fish"];
+        for (let type of keys) {
+            if (save.resources != null) {
+                for (let index in save.resources[type]) {
+                    let item = save.resources[type][index];
+                    if (type == "fish") {
+                        $("#fish_counters")
+                            .fadeIn();
+                        this.create_counter(resources.fish[index], item.area + "_counters");
+                    } else {
+                        $("#" + index)
+                            .fadeIn();
+                        let parent = $("#" + index)
+                            .parent();
+                        if ($(parent)
+                            .is(":hidden")) {
+                            $(parent)
+                                .fadeIn();
+                        }
+                    }
+
+                    if (item.show_max) {
+                        this.show_max(resources[type][index]);
+                    }
+                    if (item.auto_buy) {
+                        this.add_auto_buy(resources[type][index]);
+                    }
+                }
+            }
+        }
+
+        if (save.resources.fuel != null) {
+            let auto = save.resources.fuel.auto_buy;
+            if (auto != null && auto) {
+                this.add_auto_buy(resources.fuel);
+            }
+        }
+
+        this.update();
     },
 
     create_counter(item, id) {
@@ -110,34 +206,33 @@ var counters = {
     },
 
     show_max(item) {
-        if (item.show_max == null) {
-            $("#" + item.internal + "_count")
-                .css("opacity", 0.5);
+        $("#" + item.internal + "_count")
+            .css("opacity", 0.5);
 
-            $("<span>")
-                .attr("id", item.internal + "_max")
-                .text("/" + item.max)
-                .css("opacity", 0.5)
-                .appendTo($("#" + item.internal));
-
-            item.show_max = true;
-        }
-    },
-    
-    auto_buy(item) {
-        if (item.auto_buy != null) {
-            if (resources.money.count >= item.price) {
-                shop.purchase_item(item, false);
-            }
-        }
-    },
-
-    set_auto_buy(item) {
         $("<span>")
+            .attr("id", item.internal + "_max")
+            .text("/" + item.max)
+            .css("opacity", 0.5)
+            .appendTo($("#" + item.internal));
+
+        item.show_max = true;
+    },
+
+    add_auto_buy(item) {
+        $("<span>")
+            .attr("id", item.internal + "_auto_buy")
             .addClass("auto_buy")
             .text("+")
             .prependTo($("#" + item.internal));
-        
+
         item.auto_buy = true;
+    },
+
+    auto_buy(item) {
+        if (item.auto_buy != null && item.auto_buy) {
+            if (resources.money.count >= item.price) {
+                shop.purchase_item(item);
+            }
+        }
     }
 }

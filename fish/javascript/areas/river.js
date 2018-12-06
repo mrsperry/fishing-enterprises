@@ -1,17 +1,10 @@
 var river = {
     internal: "river",
 
-    purchased: {
-        price: 300,
-        buttons: []
-    },
-
     river_troll: true,
     queue_change: false,
 
     initialize() {
-        areas.switch_area(this);
-
         if (this.queue_change) {
             this.river_troll = false;
         }
@@ -25,24 +18,6 @@ var river = {
                     river.queue_change = true;
                     // todo: river troll text
 
-                    shop.add_item(resources.bait.guppies, "bait");
-
-                    let tackle = resources.tackle.fly_tackle;
-                    shop.buttons["fly_tackle"] = {
-                        data: {
-                            parent: "tackle_section",
-                            id: "fly_tackle",
-                            text: "Fly Tackle ($" + tackle.price + ")",
-                            on_click: function() {
-                                shop.purchase_item(tackle, true);
-                                $(".tackle")
-                                    .fadeIn();
-                            },
-                            disabled: function() {
-                                return resources.money.count < tackle.price || tackle.count == tackle.max;
-                            }
-                        }
-                    }
                     buttons.remove("river_troll");
                 }
             });
@@ -70,9 +45,20 @@ var river = {
             resources.fish.pike
         ]);
     },
-
-    purchase() {
-        shop.add_auto_buy(resources.bait.worms, 100);
-        shop.add_auto_buy(resources.bait.minnows, 100);
+    
+    get_auto_buys() {
+        return {
+            internal: river.internal,
+            auto_buys: [
+                {
+                    resource: resources.bait.worms,
+                    price: 100
+                },
+                {
+                    resource: resources.bait.minnows,
+                    price: 100
+                }
+            ]
+        };
     }
 }

@@ -38,8 +38,6 @@ var shop = {
     },
 
     initialize() {
-        areas.switch_area(this);
-
         let parent = $("#resource_buttons");
         $("<div>")
             .attr("id", "above_section")
@@ -91,6 +89,15 @@ var shop = {
             }
         }
 
+        for (let section of ["bait", "tackle", "misc"]) {
+            let element = $("#no_sale_" + section);
+            if (element
+                .parent()
+                    .children().length > 1) {
+                $(element)
+                    .remove();
+            }
+        }
         this.check_empty();
     },
 
@@ -135,6 +142,8 @@ var shop = {
     },
 
     purchase_item(item) {
+        item.purchased = true;
+
         let element = $("#" + item.internal);
         let parent = $(element)
             .parent();
@@ -163,24 +172,30 @@ var shop = {
     },
 
     purchase_area(name) {
+        areas.list[name].unlocked = true;
         $("#" + name + "_button")
             .fadeIn();
 
-        let area = window[name];
-        let data = area.purchased;
+        let data = areas.list[name].purchased;
 
         shop.remove_item(name + "_unlock");
         shop.update_money(-data.price);
 
         for (let item of data.buttons) {
-            shop.add_item(item.resource, item.parent);
+            shop.add_item(name, item.resource, item.parent);
         }
 
-        area.purchase();
+        if (name == "pier") {
+            boat.initialize();
+        }
     },
 
-    add_item(item, section) {
+    add_item(name, item, section) {
         shop.buttons[item.internal] = {
+            condition: function() {
+                return !$("#" + name + "_button")
+                    .is(":hidden");
+            },
             data: {
                 parent: section + "_section",
                 id: item.internal,
@@ -189,42 +204,51 @@ var shop = {
                     shop.purchase_item(item);
                 },
                 disabled: function() {
-                    return resources.money.count < item.price || item.count == item.max;
+                    return resources.money.count < item.price || item.count == item.max
+                        && !shop.is_removed(item.internal);
                 }
             }
         }
-        
-        let element = $("#no_sale_" + section);
-        $(element)
-            .fadeOut(400, (function() { 
-                $(element)
-                    .remove();
-            }));
     },
 
-    add_auto_buy(item, price) {
-        let id = item.internal + "_auto_buy"
-        this.buttons[id] = {
-            data: {
-                parent: "misc_section",
-                id: id,
-                text: "Auto buy " + item.display + " ($" + main.stringify(price) + ")",
-                on_click: function() {
-                    counters.set_auto_buy(item);
-                    shop.remove_item(id);
-                    resources.money.count -= price;
+    add_auto_buy_items(items) {
+        for (let item of items.auto_buys) {
+            let resource = item.resource;
+            shop.buttons[resource.internal + "_auto_buy"] = {
+                condition: function() {
+                    return !$("#" + items.internal + "_button")
+                        .is(":hidden");
                 },
-                disabled: function() {
-                    return resources.money.count < price;
+                data: {
+                    parent: "misc_section",
+                    id: resource.internal + "_auto_buy",
+                    text: "Auto buy " + resource.display + " ($" + item.price + ")",
+                    on_click: function() {
+                        counters.add_auto_buy(resource);
+                        shop.remove_item(resource.internal + "_auto_buy");
+                        shop.update_money(-item.price);
+                    },
+                    disabled: function() {
+                        return resources.money.count < item.price
+                            && !shop.is_removed(resource.internal + "_auto_buy");
+                    }
                 }
             }
         }
     },
 
     remove_item(id) {
-        buttons.remove(id);
         this.buttons[id].removed = true;
-        this.buttons[id].data.disabled = true;
+        $("#" + id + "_button")
+            .fadeOut();
+        $("#" + id + "_break")
+            .remove();
+    },
+
+    is_removed(id) {
+        let removed = $("#" + id + "_button")
+            .attr("removed");
+        return removed == null ? false : removed;
     },
 
     check_button(item) {
