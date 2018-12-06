@@ -5,11 +5,21 @@ var buttons = {
         // set the parent
         let parent = $("#" + options.parent);
 
-        // initialize the button and add the mandatory id and text
+        // initialize the button
         let element = $("<button>")
-            .attr("id", options.id + "_button")
-            .text(options.text)
             .appendTo(parent);
+
+        // set id
+        if (options.id != null) {
+            $(element)
+                .attr("id", options.id + "_button");
+        }
+
+        // set text
+        if (options.text != null) {
+            $(element)
+                .text(options.text);
+        }
 
         // set classes 
         if (options.classes != null) {
