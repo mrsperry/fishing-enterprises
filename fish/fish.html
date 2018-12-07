@@ -35,9 +35,14 @@
     <script src="javascript/areas/deep_sea.js"></script>
     <script src="javascript/areas/boat.js"></script>
     <script>
-        $(document).ready(function() {
-            main.initialize(2500);
-        });
+        $(document)
+            .ready(function() {
+                main.initialize(2500);
+            });
+        $(window)
+            .on("unload", function() {
+                settings.save_game();
+            });
     </script>
 </body>
 <footer>

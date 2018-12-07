@@ -9,6 +9,10 @@ var main = {
 
         this.update_interval(interval);
         this.update_save_interval(10);
+
+        if (settings.has_save()) {
+            settings.load_save();
+        }
     },
 
     update() {
