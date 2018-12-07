@@ -8,6 +8,7 @@ var main = {
         areas.switch_area(lake);
 
         this.update_interval(interval);
+        this.update_save_interval(10);
     },
 
     update() {
@@ -26,6 +27,13 @@ var main = {
     update_interval(millis) {
         window.clearInterval(this.interval);
         this.interval = window.setInterval(this.update, millis);
+    },
+
+    update_save_interval(minutes) {
+        window.clearInterval(this.save_interval);
+        this.save_interval = window.setInterval(settings.save_game, (minutes * 60000));
+        this.save_interval_number = minutes;
+        settings.toggle_auto_save();
     },
 
     reset(save) {
@@ -89,22 +97,28 @@ var main = {
             + "Saves: "
             + "<span id='download_save' class='link' onclick='settings.download_save()'>download save</span> | "
             + "<label class='link'><input id='upload_save' type='file'/>upload save</label> | "
-            + "<span id='delete_save'>delete save</span><br><br>"
+            + "<span id='delete_save'>delete save</span><br>"
+            + "Auto save every:<br>"
+            + "<p id='save_intervals'>"
+            + "<span id='3_minutes'>three minutes</span> | "
+            + "<span id='5_minutes'>five minutes</span> | "
+            + "<span id='10_minutes'>ten minutes</span></p><br>"
             + "Dev tools: "
             + "<span id='dev_enable' class='link' onclick='settings.toggle_dev_tools(true)'>enable</span> | "
             + "<span id='dev_disable' class='link' onclick='settings.toggle_dev_tools(false)'>disable</span>"
-            + "<br><br><br><br><br>");
+            + "<br><br><br>");
         this.create_popup("Settings", text);
 
-        settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
+        $("#lights_" + (lights.lights ? "on" : "off"))
+            .removeClass("link")
+            .off("click");
+        
         $("#upload_save")
             .hide()
             .on("change", (function(event) { 
                 settings.upload_save(event); 
             }));
-        $("#lights_" + (lights.lights ? "on" : "off"))
-            .removeClass("link")
-            .off("click");
+        
         if (settings.has_save()) {
             $("#delete_save")
                 .addClass("link")
@@ -116,6 +130,10 @@ var main = {
                 .removeClass("link")
                 .off("click");
         }
+
+        settings.toggle_auto_save();
+
+        settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
     },
 
     show_about() {

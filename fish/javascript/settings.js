@@ -100,7 +100,7 @@ var settings = {
                 }
 
                 if (section == "fuel") {
-                    for (let key of this.keys) {
+                    for (let key of settings.keys) {
                         let value = parent[key];
                         if (value != null) {
                             results[key] = value;
@@ -112,7 +112,7 @@ var settings = {
             if (section == "bait" || section == "tackle" || section == "fish") {
                 for (let id in parent) {
                     let values = {};
-                    for (let key of this.keys) {
+                    for (let key of settings.keys) {
                         let value = parent[id][key];
                         if (value != null) {
                             values[key] = value;
@@ -236,7 +236,7 @@ var settings = {
                         }
 
                         if (child == "fuel") {
-                            for (let key of this.keys) {
+                            for (let key of settings.keys) {
                                 if (value[key] != null) {
                                     resources.fuel[key] = value[key];
                                 }
@@ -246,7 +246,7 @@ var settings = {
 
                     if (child == "bait" || child == "tackle" || child == "fish") {
                         for (let item in value) {
-                            for (let key of this.keys) {
+                            for (let key of settings.keys) {
                                 let final = value[item][key];
                                 if (final != null) {
                                     resources[child][item][key] = value[item][key];
@@ -379,5 +379,23 @@ var settings = {
 
     has_save() {
         return localStorage.getItem("save") != null;
+    },
+
+    toggle_auto_save() {
+        for (let number of [3, 5, 10]) {
+            let element = $("#" + number + "_minutes");
+            if (main.save_interval_number == number) {
+                $(element)
+                    .removeClass("link")
+                    .off("click");
+            } else {
+                $(element)
+                    .addClass("link")
+                    .off("click")
+                    .click(function() {
+                        main.update_save_interval(number);
+                    });
+            }
+        }
     }
 }

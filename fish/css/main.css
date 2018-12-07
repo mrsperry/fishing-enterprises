@@ -183,3 +183,8 @@ of the container of the body :^) */
     margin-left: 30%;
     bottom: 5px;
 }
+
+p#save_intervals {
+    margin: 0px;
+    text-align: center;
+}
