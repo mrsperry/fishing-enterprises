@@ -41,7 +41,9 @@
             });
         $(window)
             .on("unload", function() {
-                settings.save_game();
+                if (settings.deleted == null) {
+                    settings.save_game();
+                }
             });
     </script>
 </body>

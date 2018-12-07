@@ -209,10 +209,10 @@ var settings = {
         localStorage.removeItem("save");
         localStorage.setItem("save", JSON.stringify($.extend({}, save), null, 4));
 
-        $("#delete_save")
+        $("#restart_game")
             .addClass("link")
             .click(function() {
-                settings.delete_save();
+                settings.restart_game();
             });
     },
 
@@ -359,7 +359,7 @@ var settings = {
 
     upload_save(event) {
         let onLoad = (event) => {
-            settings.delete_save();
+            settings.restart_game();
             localStorage.setItem("save", event.target.result);
             settings.load_save();
         }
@@ -369,12 +369,15 @@ var settings = {
         reader.readAsText(event.target.files[0]);
     },
     
-    delete_save() {
+    restart_game() {
         localStorage.removeItem("save");
 
-        $("#delete_save")
+        $("#restart_game")
             .removeClass("link")
             .off("click");
+
+        this.deleted = true;
+        location.reload();
     },
 
     has_save() {

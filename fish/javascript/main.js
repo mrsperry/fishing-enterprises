@@ -101,7 +101,7 @@ var main = {
             + "Saves: "
             + "<span id='download_save' class='link' onclick='settings.download_save()'>download save</span> | "
             + "<label class='link'><input id='upload_save' type='file'/>upload save</label> | "
-            + "<span id='delete_save'>delete save</span><br>"
+            + "<span id='restart_game'>restart game</span><br>"
             + "Auto save every:<br>"
             + "<p id='save_intervals'>"
             + "<span id='3_minutes'>three minutes</span> | "
@@ -124,13 +124,13 @@ var main = {
             }));
         
         if (settings.has_save()) {
-            $("#delete_save")
+            $("#restart_game")
                 .addClass("link")
                 .click(function() {
-                    settings.delete_save();
+                    settings.restart_game();
                 });
         } else {
-            $("#delete_save")
+            $("#restart_game")
                 .removeClass("link")
                 .off("click");
         }
