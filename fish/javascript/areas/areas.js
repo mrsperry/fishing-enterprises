@@ -145,6 +145,10 @@ var areas = {
                     shop.add_item(index, button.resource, button.parent);
                 }
             }
+
+            if (index != "shop") {
+                area.initialize();
+            }
         }
     },
 
@@ -166,7 +170,15 @@ var areas = {
             this.current_area.unload();
         }
 
-        area.initialize();
+        if (area.internal == "river" || area.internal == "lake") {
+            area.create_buttons();
+        } else {
+            if (area.internal == "shop") {
+                area.initialize();
+            } else {
+                fishing.create_buttons();
+            }
+        }
         this.current_area = area;
     },
 
@@ -175,5 +187,36 @@ var areas = {
 
         $("#" + area + "_button")
             .fadeIn();
+    },
+
+    get_header(area) {
+        let item = window[area];
+
+        let count = 0;
+        if (item.state != null) {
+            for (let fish of item.state.fish) {
+                if (fish.internal != "minnows") {
+                    if (fish.caught != null && fish.caught) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        let max = 0;
+        if (item.state != null) {
+            max = item.state.fish.length;
+
+            if (area == "lake") {
+                max--;
+            }
+        }
+
+        if (count == max) {
+            $("#" + area + "_header_count")
+                .css("opacity", 0.4);
+        }
+
+        return " (" + count + "/" + max + ")";
     }
 }

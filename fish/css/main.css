@@ -112,6 +112,11 @@ div.before:before {
     padding: 0px 2px;
 }
 
+.counter_header {
+    font-size: 10pt;
+    text-align: center;
+}
+
 /* right side of the container of the left side 
 of the container of the body :^) */
 /* resource buttons & area selector */

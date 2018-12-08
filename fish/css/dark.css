@@ -46,6 +46,10 @@ div.before:before {
     background: #222222;
 }
 
+.counter_header {
+    border: none;
+}
+
 /* about/settings popup */
 #overlay {
     background-color: rgba(0, 0, 0, 0.7);

@@ -2,6 +2,15 @@ var lake = {
     internal: "lake",
 
     initialize() {
+        this.state = new fishing.state([
+            resources.bait.minnows,
+            resources.fish.bass,
+            resources.fish.sturgeon,
+            resources.fish.chub
+        ]);
+    },
+
+    create_buttons() {
         buttons.create({
             parent: "resource_buttons",
             id: "forage_for_worms",
@@ -14,19 +23,14 @@ var lake = {
             }
         });
 
-        this.state = new fishing.state([
-            resources.bait.minnows,
-            resources.fish.bass,
-            resources.fish.sturgeon,
-            resources.fish.chub
-        ]);
+        fishing.create_buttons();
 
         // only display fishing options if worms have been caught
-        if (this.show_buttons) {
-            $(fishing_buttons)
+        if (this.show_buttons != null && this.show_buttons) {
+            $("#fishing_buttons")
                 .fadeIn();
         } else {
-            $(fishing_buttons)
+            $("#fishing_buttons")
                 .hide();
         }
     },

@@ -6,7 +6,9 @@ var fishing = {
         this.reel_in_message = false;
 
         this.fish = fish;
+    },
 
+    create_buttons() {
         $("<div>")
             .attr("id", "fishing_buttons")
             .appendTo($("#resource_buttons"));
@@ -149,15 +151,15 @@ var fishing = {
         }
 
         if (fish.caught == null || !fish.caught) {
+            fish.caught = true;
+
             if (!is_bait) {
                 let area = areas.current_area.internal;
-                counters.create_counter(fish, area + "_counters");
                 fish.area = area;
+                counters.create_counter(fish, area + "_counters");
             }
 
             messenger.write_message(fish.display + ": " + fish.message, true);
-
-            fish.caught = true; 
         }
 
         if (fish.count == null) {

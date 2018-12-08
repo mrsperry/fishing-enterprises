@@ -184,11 +184,37 @@ var counters = {
     create_counter(item, id) {
         let parent = $("#" + id);
 
-        if (item.break != null && item.break) {
-            $("<div>")
-                .addClass("counter_break")
+        if ($(parent)
+                .is(":hidden")) {
+            $(parent)
+                .fadeIn();
+        }
+
+        if (item.header != null && item.header) {
+            if (item.area != "lake") {
+                $("<div>")
+                    .addClass("counter_break")
+                    .fadeIn()
+                    .appendTo(parent);
+            }
+            let header = $("<div>")
+                .text(areas.list[item.area].display)
+                .addClass("counter_header")
                 .fadeIn()
                 .appendTo(parent);
+            $("<span>")
+                .attr("id", item.area + "_header_count")
+                .addClass("counter_header")
+                .fadeIn()
+                .appendTo(header);
+            
+            $("<div>")
+                .addClass("counter_break")
+                .appendTo(parent);
+        }
+        if (item.area != null) {
+            $("#" + item.area + "_header_count")
+                .text(areas.get_header(item.area));
         }
 
         let element = $("<div>")

@@ -5,6 +5,26 @@ var river = {
     queue_change: false,
 
     initialize() {
+        this.state = new fishing.state([
+            resources.fish.salmon,
+            resources.fish.trout,
+            resources.fish.pike
+        ]);
+    },
+
+    update() {
+        if (!this.river_troll) {
+            fishing.update(this.state);
+        }
+    },
+
+    unload() {
+        if (!this.river_troll) {
+            fishing.unload(this.state);
+        }
+    },
+
+    create_buttons() {
         if (this.queue_change) {
             this.river_troll = false;
         }
@@ -22,30 +42,10 @@ var river = {
                 }
             });
         } else {
-            this.create_state();
+            fishing.create_buttons();
         }
     },
 
-    update() {
-        if (!this.river_troll) {
-            fishing.update(this.state);
-        }
-    },
-
-    unload() {
-        if (!this.river_troll) {
-            fishing.unload(this.state);
-        }
-    },
-
-    create_state() {
-        this.state = new fishing.state([
-            resources.fish.salmon,
-            resources.fish.trout,
-            resources.fish.pike
-        ]);
-    },
-    
     get_auto_buys() {
         return {
             internal: river.internal,
