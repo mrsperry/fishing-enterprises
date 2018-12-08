@@ -52,8 +52,7 @@ var boat = {
                         shop.remove_item(id);
                     },
                     disabled: function() {
-                        return resources.money.count < item.price
-                            && !shop.is_removed(item.internal);
+                        return resources.money.count < item.price;
                     }
                 }
             }

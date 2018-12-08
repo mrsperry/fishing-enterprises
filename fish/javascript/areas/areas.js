@@ -132,8 +132,7 @@ var areas = {
                         disabled: function() {
                             return resources.money.count <= areas.list[index].purchased.price
                                 // disable the pier until the river troll has been talked to
-                                || (index == "pier" ? !river.queue_change : false)
-                                && !shop.is_removed(item.internal);
+                                || (index == "pier" ? !river.queue_change : false);
                         }
                     }
                 }

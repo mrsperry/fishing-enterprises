@@ -79,8 +79,9 @@ var shop = {
         for (let id in this.buttons) {
             let item = this.buttons[id];
             if ($("#" + item.data.id + "_button").length == 1) {
+                let disabled = (item.removed != null ? item.removed : item.data.disabled);
                 $("#" + item.data.id + "_button")
-                    .prop("disabled", item.data.disabled);
+                    .prop("disabled", disabled);
             } else {
                 if (this.check_button(item)) {
                     item.data["classes"] = ["button"];
@@ -216,8 +217,7 @@ var shop = {
                     shop.purchase_item(item);
                 },
                 disabled: function() {
-                    return resources.money.count < item.price || item.count == item.max
-                        && !shop.is_removed(item.internal);
+                    return resources.money.count < item.price || item.count == item.max;
                 }
             }
         }
@@ -241,8 +241,7 @@ var shop = {
                         shop.update_money(-item.price);
                     },
                     disabled: function() {
-                        return resources.money.count < item.price
-                            && !shop.is_removed(resource.internal + "_auto_buy");
+                        return resources.money.count < item.price;
                     }
                 }
             }
@@ -252,15 +251,10 @@ var shop = {
     remove_item(id) {
         this.buttons[id].removed = true;
         $("#" + id + "_button")
+            .prop("disabled", true)
             .fadeOut();
         $("#" + id + "_break")
             .remove();
-    },
-
-    is_removed(id) {
-        let removed = $("#" + id + "_button")
-            .attr("removed");
-        return removed == null ? false : removed;
     },
 
     check_button(item) {
