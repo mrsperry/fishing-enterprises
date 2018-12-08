@@ -226,7 +226,7 @@ var counters = {
             .attr("id", item.internal)
             .addClass("value")
             .text(item.display + ": ")
-            .hide()
+            .fadeIn()
             .appendTo(parent);
         $("<span>")
             .attr("id", item.internal + "_count")
