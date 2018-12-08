@@ -14,6 +14,11 @@ var main = {
 
         if (settings.has_save()) {
             settings.load_save();
+        } else {
+            $("#bait_counters")
+                .hide();
+            $("#tackle_counters")
+                .hide();
         }
     },
 
