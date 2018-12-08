@@ -1,4 +1,6 @@
 var main = {
+    version: 0.1,
+
     initialize(interval) {
         counters.initialize();
         areas.initialize();
@@ -109,8 +111,9 @@ var main = {
             + "<span id='10_minutes'>ten minutes</span></p><br>"
             + "Dev tools: "
             + "<span id='dev_enable' class='link' onclick='settings.toggle_dev_tools(true)'>enable</span> | "
-            + "<span id='dev_disable' class='link' onclick='settings.toggle_dev_tools(false)'>disable</span>"
-            + "<br><br><br>");
+            + "<span id='dev_disable' class='link' onclick='settings.toggle_dev_tools(false)'>disable</span><br><br>"
+            + "<span id='version'></span>"
+            + "<br>");
         this.create_popup("Settings", text);
 
         $("#lights_" + (lights.lights ? "on" : "off"))
@@ -138,6 +141,9 @@ var main = {
         settings.toggle_auto_save();
 
         settings.toggle_dev_tools((settings.dev == null ? false : settings.dev));
+
+        $("#version")
+            .text("Current version: " + this.version);
     },
 
     show_about() {
