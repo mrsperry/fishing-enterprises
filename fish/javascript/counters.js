@@ -10,6 +10,9 @@ var counters = {
             .attr("id", "money")
             .text("0")
             .appendTo(money);
+        $("<span>")
+            .attr("id", "money_difference")
+            .appendTo(money);
         $("<br><br>")
             .appendTo(parent);
 
@@ -62,6 +65,8 @@ var counters = {
                     .appendTo(fish);
             }
         }
+
+        shop.money_difference = 0;
     },
 
     update() {

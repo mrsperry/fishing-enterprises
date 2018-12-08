@@ -107,6 +107,7 @@ var shop = {
 
     update_money(value) {
         resources.money.count += value;
+        this.money_difference += value;
 
         if (value > 0) {
             resources.money.total += value;
@@ -114,6 +115,17 @@ var shop = {
 
         counters.update();
         this.update();
+
+        let amount = this.money_difference;
+        if (amount != 0) {
+            $("#money_difference")
+                .text(" (" + (amount > 0 ? "+" : "-") + Math.abs(amount) + ")")
+                .stop()
+                .show()
+                .css("opacity", 1.0)
+                .fadeOut(1200);
+            this.money_difference = 0;
+        }
     },
 
     fish_value(reset) {
