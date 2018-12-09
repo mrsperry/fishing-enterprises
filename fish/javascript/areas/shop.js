@@ -182,6 +182,7 @@ var shop = {
         }
 
         counters.update();
+        shop.update();
     },
 
     purchase_area(name) {
@@ -201,6 +202,8 @@ var shop = {
         if (name == "pier") {
             boat.initialize();
         }
+
+        shop.update();
     },
 
     add_item(name, item, section) {
