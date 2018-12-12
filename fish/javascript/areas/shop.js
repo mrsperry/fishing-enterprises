@@ -1,5 +1,6 @@
 var shop = {
     internal: "shop",
+    display: "Shop",
 
     buttons: {
         sell_fish: {
@@ -186,11 +187,12 @@ var shop = {
     },
 
     purchase_area(name) {
-        areas.list[name].unlocked = true;
+        let area = window[name];
+        area.unlocked = true;
         $("#" + name + "_button")
             .fadeIn();
 
-        let data = areas.list[name].purchased;
+        let data = area.purchased;
 
         shop.remove_item(name + "_unlock");
         shop.update_money(-data.price);

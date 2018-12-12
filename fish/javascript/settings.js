@@ -127,10 +127,10 @@ var settings = {
         save["resources"] = save_resources;
 
         let save_areas = {};
-        for (let area in areas.list) {
+        for (let area of areas.list) {
             let results = {};
 
-            let item = areas.list[area];
+            let item = window[area];
 
             if (area == "lake") {
                 if (lake.show_buttons != null && lake.show_buttons) {
@@ -146,7 +146,7 @@ var settings = {
             if (item.unlocked != null && item.unlocked) {
                 results.unlocked = true;
             }
-            if (areas.current_area != null && areas.current_area.internal == area) {
+            if (areas.current_area != null && areas.current_area.name == area) {
                 results.current = true;
             }
 

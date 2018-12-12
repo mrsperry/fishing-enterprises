@@ -1,5 +1,21 @@
 var river = {
     internal: "river",
+    display: "River",
+    unlock: "lake",
+    license: "Fly Fishing permit",
+    purchased: {
+        price: 300,
+        buttons: [
+            {
+                resource: resources.bait.guppies,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.fly_tackle,
+                parent: "tackle"
+            }
+        ]
+    },
 
     river_troll: true,
     queue_change: false,

@@ -1,109 +1,17 @@
 var areas = {
-    list: {
-        shop: {
-            display: "Shop",
-        },
-        lake: {
-            display: "Lake",
-        },
-        river: {
-            display: "River",
-            unlock: "lake",
-            license: "Fly Fishing permit",
-            purchased: {
-                price: 300,
-                buttons: [
-                    {
-                        resource: resources.bait.guppies,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.tackle.fly_tackle,
-                        parent: "tackle"
-                    }
-                ]
-            }
-        },
-        pier: {
-            display: "Pier",
-            unlock: "river",
-            license: "Pier Fishing permit",
-            purchased: {
-                price: 500,
-                buttons: [
-                    {
-                        resource: resources.bait.insects,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.tackle.bobber,
-                        parent: "tackle"
-                    }
-                ]
-            }
-        },
-        reef: {
-            display: "Reef",
-            internal: "reef",
-            purchased: {
-                price: 0,
-                buttons: [
-                    {
-                        resource: resources.bait.mussels,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.tackle.spoon_lure,
-                        parent: "tackle"
-                    }
-                ]
-            }
-        },
-        spear_fishing: {
-            display: "Spear Fishing",
-            unlock: "reef",
-            license: "Spear Fishing permit",
-            purchased: {
-                price: 1250,
-                buttons: [
-                    {
-                        resource: resources.bait.crustaceans,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.bait.squid,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.tackle.harpoon,
-                        parent: "tackle"
-                    }
-                ]
-            }
-        },
-        deep_sea: {
-            display: "Deep Sea",
-            unlock: "spear_fishing",
-            license: "Deep Sea permit",
-            purchased: {
-                price: 2000,
-                buttons: [
-                    {
-                        resource: resources.bait.ground_fish,
-                        parent: "bait"
-                    },
-                    {
-                        resource: resources.tackle.spinner_lure,
-                        parent: "tackle"
-                    }
-                ]
-            }
-        }
-    },
+    list: [
+        "shop",
+        "lake",
+        "river",
+        "pier",
+        "reef",
+        "spear_fishing",
+        "deep_sea"
+    ],
 
     initialize() {
-        for (let index in this.list) {
-            let item = this.list[index];
+        for (let index of this.list) {
+            let item = window[index];
 
             let area = window[index];
             buttons.create({
@@ -125,12 +33,12 @@ var areas = {
                     data: {
                         parent: "misc_section",
                         id: index + "_unlock",
-                        text: item.license + " ($" + this.list[index].purchased.price + ")",
+                        text: item.license + " ($" + area.purchased.price + ")",
                         on_click: function() {
                             shop.purchase_area(index);
                         },
                         disabled: function() {
-                            return resources.money.count <= areas.list[index].purchased.price
+                            return resources.money.count <= window[index].purchased.price
                                 // disable the pier until the river troll has been talked to
                                 || (index == "pier" ? !river.queue_change : false);
                         }
@@ -140,7 +48,7 @@ var areas = {
 
             if (index != "shop" && index != "lake") {
                 shop.add_auto_buy_items(area.get_auto_buys());
-                for (let button of this.list[index].purchased.buttons) {
+                for (let button of area.purchased.buttons) {
                     shop.add_item(index, button.resource, button.parent);
                 }
             }
@@ -182,7 +90,7 @@ var areas = {
     },
 
     set_unlocked(area) {
-        this.list[area].unlocked = true;
+        window[area].unlocked = true;
 
         $("#" + area + "_button")
             .fadeIn();

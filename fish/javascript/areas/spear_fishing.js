@@ -1,6 +1,26 @@
 var spear_fishing = {
     internal: "spear_fishing",
+    display: "Spear Fishing",
+    unlock: "reef",
+    license: "Spear Fishing permit",
     ocean: true,
+    purchased: {
+        price: 1250,
+        buttons: [
+            {
+                resource: resources.bait.crustaceans,
+                parent: "bait"
+            },
+            {
+                resource: resources.bait.squid,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.harpoon,
+                parent: "tackle"
+            }
+        ]
+    },
 
     initialize() {
         this.state = new fishing.state([

@@ -1,5 +1,6 @@
 var lake = {
     internal: "lake",
+    display: "Lake",
 
     initialize() {
         this.state = new fishing.state([

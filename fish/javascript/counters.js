@@ -58,7 +58,7 @@ var counters = {
             .hide()
             .appendTo(parent);
         // create the area counters
-        for (let index in areas.list) {
+        for (let index of areas.list) {
             if (index != "shop") {
                 $("<div>")
                     .attr("id", index + "_counters")
@@ -138,7 +138,7 @@ var counters = {
         $("#boat_counters")
             .remove();
 
-        for (let area in areas.list) {
+        for (let area of areas.list) {
             $("#" + area + "_counters")
                 .empty();
         }
@@ -153,7 +153,8 @@ var counters = {
                     if (type == "fish") {
                         $("#fish_counters")
                             .fadeIn();
-                        this.create_counter(resources.fish[index], item.area + "_counters");
+                        console.log(item);
+                        this.create_counter(item, item.area + "_counters");
                     } else {
                         $("#" + index)
                             .fadeIn();
@@ -203,7 +204,7 @@ var counters = {
                     .appendTo(parent);
             }
             let header = $("<div>")
-                .text(areas.list[item.area].display)
+                .text(window[item.area].display)
                 .addClass("counter_header")
                 .fadeIn()
                 .appendTo(parent);

@@ -1,5 +1,21 @@
 var pier = {
     internal: "pier",
+    display: "Pier",
+    unlock: "river",
+    license: "Pier Fishing permit",
+    purchased: {
+        price: 500,
+        buttons: [
+            {
+                resource: resources.bait.insects,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.bobber,
+                parent: "tackle"
+            }
+        ]
+    },
 
     initialize() {
         this.state = new fishing.state([

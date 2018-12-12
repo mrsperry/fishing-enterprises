@@ -1,6 +1,20 @@
 var reef = {
     internal: "reef",
+    display: "Reef",
     ocean: true,
+    purchased: {
+        price: 0,
+        buttons: [
+            {
+                resource: resources.bait.mussels,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.spoon_lure,
+                parent: "tackle"
+            }
+        ]
+    },
 
     initialize() {
         this.state = new fishing.state([
@@ -23,7 +37,7 @@ var reef = {
     purchase() {
         $("#reef_button")
             .fadeIn();
-        areas.list.reef.unlocked = true;
+        this.unlocked = true;
     },
 
     get_auto_buys() {

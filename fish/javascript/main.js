@@ -83,8 +83,8 @@ var main = {
         for (let index in boat.parts) {
             delete boat.parts[index].purchased;
         }
-        for (let index in areas.list) {
-            delete areas.list[index].unlocked;
+        for (let index of areas.list) {
+            delete window[index].unlocked;
             $("#" + index + "_button")
                 .hide();
         }

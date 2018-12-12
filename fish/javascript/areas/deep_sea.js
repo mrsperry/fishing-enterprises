@@ -1,6 +1,22 @@
 var deep_sea = {
     internal: "deep_sea",
+    display: "Deep Sea",
+    unlock: "spear_fishing",
+    license: "Deep Sea permit",
     ocean: true,
+    purchased: {
+        price: 2000,
+        buttons: [
+            {
+                resource: resources.bait.ground_fish,
+                parent: "bait"
+            },
+            {
+                resource: resources.tackle.spinner_lure,
+                parent: "tackle"
+            }
+        ]
+    },
 
     initialize() {
         this.state = new fishing.state([

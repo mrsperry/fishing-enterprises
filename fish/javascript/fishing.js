@@ -188,8 +188,8 @@ var fishing = {
                         .fadeIn();
                     $("#lake_button")
                         .fadeIn();
-                    areas.list.shop.unlocked = true;
-                    areas.list.lake.unlocked = true;
+                    shop.unlocked = true;
+                    lake.unlocked = true;
                 }
             }
             
