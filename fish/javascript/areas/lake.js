@@ -24,6 +24,10 @@ var lake = {
         }
     },
 
+    load() {
+        this.create_buttons();
+    },
+
     unload() {
         fishing.unload(this.state);
     },

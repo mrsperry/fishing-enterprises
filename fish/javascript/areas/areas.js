@@ -77,15 +77,7 @@ var areas = {
             this.current_area.unload();
         }
 
-        if (area.internal == "river" || area.internal == "lake") {
-            area.create_buttons();
-        } else {
-            if (area.internal == "shop") {
-                area.initialize();
-            } else {
-                fishing.create_buttons();
-            }
-        }
+        area.load();
         this.current_area = area;
     },
 

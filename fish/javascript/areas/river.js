@@ -34,6 +34,10 @@ var river = {
         }
     },
 
+    load() {
+        this.create_buttons();
+    },
+
     unload() {
         if (!this.river_troll) {
             fishing.unload(this.state);

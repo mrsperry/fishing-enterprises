@@ -136,6 +136,12 @@ of the container of the body :^) */
     margin: -5px;
 }
 
+#art {
+    position: absolute;
+    margin-left: 170px;
+    white-space: pre;
+}
+
 .button {
     margin: 5px;
 }

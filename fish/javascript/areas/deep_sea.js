@@ -33,6 +33,10 @@ var deep_sea = {
         fishing.update(this.state);
     },
 
+    load() {
+        fishing.create_buttons();
+    },
+
     unload() {
         fishing.unload(this.state);
     },

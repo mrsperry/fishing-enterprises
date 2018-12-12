@@ -36,6 +36,10 @@ var spear_fishing = {
         fishing.update(this.state);
     },
 
+    load() {
+        fishing.create_buttons();
+    },
+
     unload() {
         fishing.unload(this.state);
     },
