@@ -153,8 +153,7 @@ var counters = {
                     if (type == "fish") {
                         $("#fish_counters")
                             .fadeIn();
-                        console.log(item);
-                        this.create_counter(item, item.area + "_counters");
+                        this.create_counter(resources.fish[index], item.area + "_counters");
                     } else {
                         $("#" + index)
                             .fadeIn();
