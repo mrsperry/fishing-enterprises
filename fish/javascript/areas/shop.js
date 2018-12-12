@@ -180,6 +180,11 @@ var shop = {
             item.total++;
 
             this.update_money(-item.price);
+
+            if (item.internal == "worms") {
+                $("#forage_for_worms_button")
+                    .prop("disabled", true);
+            }
         }
 
         counters.update();
