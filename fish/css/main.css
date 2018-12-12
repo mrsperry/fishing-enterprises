@@ -1,6 +1,6 @@
 /* body */
 body {
-    font-family: monospace;
+    font-family: "Consolas", "Times New Roman", serif;
     font-size: 11pt;
     margin-top: 5px;
 }
@@ -16,8 +16,8 @@ body {
 
 /* buttons */
 button {
-    font-family: monospace;
-    font-size: 10.3pt;
+    font-family: "Consolas", "Times New Roman", serif;
+    font-size: 10pt;
     text-align: center;
     width: 150px;
     height: 40px;
