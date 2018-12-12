@@ -21,6 +21,7 @@ var pier = {
         this.state = new fishing.state([
             resources.fish.redfish,
             resources.fish.mackerel,
+            resources.fish.crabs,
             resources.fish.black_drum,
             resources.fish.tarpon
         ]);
@@ -53,6 +54,10 @@ var pier = {
                 {
                     resource: resources.tackle.fly_tackle,
                     price: 200
+                },
+                {
+                    resource: resources.tackle.cages,
+                    price: 400
                 }
             ]
         };

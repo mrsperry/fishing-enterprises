@@ -13,6 +13,10 @@ var river = {
             {
                 resource: resources.tackle.fly_tackle,
                 parent: "tackle"
+            },
+            {
+                resource: resources.tackle.cages,
+                parent: "tackle"
             }
         ]
     },
@@ -24,6 +28,7 @@ var river = {
         this.state = new fishing.state([
             resources.fish.salmon,
             resources.fish.trout,
+            resources.fish.crawdads,
             resources.fish.pike
         ]);
     },

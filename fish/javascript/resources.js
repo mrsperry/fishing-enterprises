@@ -155,32 +155,39 @@ var resources = {
             price: 2,
             max: 20
         },
+        cages: {
+            display: "Cages",
+            internal: "cages",
+            message: "",
+            price: 4,
+            max: 20
+        },
         bobber: {
             display: "Bobber",
             internal: "bobber",
             message: "",
-            price: 4,
+            price: 6,
             max: 15
         },
         spoon_lure: {
             display: "Spoon Lure",
             internal: "spoon_lure",
             message: "",
-            price: 6,
+            price: 8,
             max: 15
         },
         harpoon: {
             display: "Harpoon",
             internal: "harpoon",
             message: "",
-            price: 8,
+            price: 10,
             max: 10
         },
         spinner_lure: {
             display: "Spinner Lure",
             internal: "spinner_lure",
             message: "",
-            price: 10,
+            price: 12,
             max: 5
         },
     },
@@ -287,6 +294,21 @@ var resources = {
                 }
             ]
         },
+        crawdads: {
+            display: "Crawdads",
+            internal: "crawdads",
+            message: "also known as crayfish, these small crustacean omnivores go well with corn",
+            price: 15,
+            max: 5,
+            chance: 40,
+            after: "trout",
+            tackle: [
+                {
+                    type: "cages",
+                    amount: 1
+                }
+            ]
+        },
         pike: {
             display: "Pike",
             internal: "pike",
@@ -294,7 +316,7 @@ var resources = {
             price: 20,
             max: 3,
             chance: 30,
-            after: "trout",
+            after: "crawdads",
             bait: [
                 {
                     type: "guppies",
@@ -355,6 +377,21 @@ var resources = {
                 }
             ]
         },
+        crabs: {
+            display: "Crabs",
+            internal: "crabs",
+            message: "they may walk sideways but they will walk sideways into your cages",
+            price: 30,
+            max: 5,
+            chance: 40,
+            after: "mackerel",
+            tackle: [
+                {
+                    type: "cages",
+                    amount: 1
+                }
+            ]
+        },
         black_drum: {
             display: "Black Drum",
             internal: "black_drum",
@@ -362,7 +399,7 @@ var resources = {
             price: 35,
             max: 3,
             chance: 30,
-            after: "mackerel",
+            after: "crabs",
             bait: [
                 {
                     type: "guppies",
@@ -508,15 +545,9 @@ var resources = {
             price: 60,
             max: 10,
             chance: 60,
-            bait: [
-                {
-                    type: "mussels",
-                    amount: 2
-                }
-            ],
             tackle: [
                 {
-                    type: "harpoon",
+                    type: "cages",
                     amount: 1
                 }
             ]
