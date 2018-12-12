@@ -146,7 +146,8 @@ var settings = {
             if (item.unlocked != null && item.unlocked) {
                 results.unlocked = true;
             }
-            if (areas.current_area != null && areas.current_area.name == area) {
+
+            if (areas.current_area != null && areas.current_area.internal == area) {
                 results.current = true;
             }
 
