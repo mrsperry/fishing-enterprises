@@ -11,31 +11,6 @@ var lake = {
         ]);
     },
 
-    create_buttons() {
-        buttons.create({
-            parent: "resource_buttons",
-            id: "forage_for_worms",
-            text: "Forage for worms",
-            on_click: function() {
-                fishing.catch(resources.bait.worms, true);
-                $("#cast_out_line_button")
-                    .prop("disabled", false);
-                lake.show_buttons = true;
-            }
-        });
-
-        fishing.create_buttons();
-
-        // only display fishing options if worms have been caught
-        if (this.show_buttons != null && this.show_buttons) {
-            $("#fishing_buttons")
-                .fadeIn();
-        } else {
-            $("#fishing_buttons")
-                .hide();
-        }
-    },
-
     update() {
         if (resources.bait.worms.caught) {
             fishing.update(this.state);
@@ -51,5 +26,33 @@ var lake = {
 
     unload() {
         fishing.unload(this.state);
+    },
+
+    create_buttons() {
+        buttons.create({
+            parent: "resource_buttons",
+            id: "forage_for_worms",
+            text: "Forage for worms",
+            on_click: function() {
+                fishing.catch(resources.bait.worms, true);
+                $("#cast_out_line_button")
+                    .prop("disabled", false);
+                lake.show_buttons = true;
+            },
+            disabled: function() {
+                return resources.bait.worms.count == resources.bait.worms.max;
+            }
+        });
+
+        fishing.create_buttons();
+
+        // only display fishing options if worms have been caught
+        if (this.show_buttons != null && this.show_buttons) {
+            $("#fishing_buttons")
+                .fadeIn();
+        } else {
+            $("#fishing_buttons")
+                .hide();
+        }
     }
 }

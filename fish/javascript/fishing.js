@@ -113,8 +113,9 @@ var fishing = {
             .prop("disabled", !state.is_fishing);
         $("#reel_in_line_button")
             .prop("disabled", state.is_fishing);
+        let worms = resources.bait.worms;
         $("#forage_for_worms_button")
-            .prop("disabled", !state.is_fishing);
+            .prop("disabled", !state.is_fishing || (worms.count == worms.max));
 
         if (state.is_fishing && !state.reel_in_message) {
             messenger.write_message("reeling in your line is always full of tedium", true);
@@ -190,6 +191,13 @@ var fishing = {
                         .fadeIn();
                     shop.unlocked = true;
                     lake.unlocked = true;
+                }
+            }
+
+            if (fish.internal == "worms") {
+                if (areas.current_area.internal == "lake") {
+                    $("#forage_for_worms_button")
+                        .prop("disabled", (fish.count == fish.max));
                 }
             }
             
