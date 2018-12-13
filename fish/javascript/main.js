@@ -15,6 +15,7 @@ var main = {
         if (settings.has_save()) {
             settings.load_save();
         } else {
+            settings.save_game();
             $("#bait_counters")
                 .hide();
             $("#tackle_counters")
