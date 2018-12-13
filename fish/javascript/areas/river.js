@@ -54,6 +54,11 @@ var river = {
             this.river_troll = false;
         }
 
+        let section = $("<div>")
+            .attr("id", "art")
+            .appendTo($("#resource_buttons"));
+        let art;
+
         if (this.river_troll) {
             buttons.create({
                 parent: "resource_buttons",
@@ -61,14 +66,58 @@ var river = {
                 text: "Talk to the River Troll",
                 on_click: function() {
                     river.queue_change = true;
-                    // todo: river troll text
+                    $("<div>")
+                        .attr("id", "river_troll_text")
+                        .text("You are going to need "
+                            + "new bait and tackle "
+                            + "to fish here, why "
+                            + "don't you head to the "
+                            + "shop?")
+                        .appendTo(section);
+                    $("<div>")
+                        .attr("id", "river_troll_outline")
+                        .text("     +--------------------+\n"
+                            + "     |                    |\n"
+                            + "     |                    |\n"
+                            + "    /|                    |\n"
+                            + "   //|                    |\n"
+                            + "===/ +--------------------+")
+                        .appendTo(section);
 
                     buttons.remove("river_troll");
                 }
             });
+
+            art = $.parseHTML(
+                  "        ____\n"
+                + "   ____/____\\____\n"
+                + "  /__/__/__/__/__\\\n"
+                + "     /. o  O  \\\n"
+                + "     | ; <  * |\n"
+                + "  ____\\ v==v /____\n"
+                + " /   @ \\____/+/   \\\n"
+                + "/ @      @ / /  @  \\\n"
+                + "|   /|    /+/ |\\ @ |\n"
+                + "| w ||@  / /  ||www|\n"
+                + "|w.w||  /+/   ||.  |\n"
+                + "|  ;|| / /  @ ||  ;|\n"
+                + "|*  ||========||  *|\n"
+                + "|  .|| s /\\s  ||*  |\n"
+                + "(uwu)|   ||  s|(uuw)\n"
+                + "     |ww || w |\n"
+                + "     |. w||w w|\n"
+                + "     | * ||; *|\n"
+                + "     |___||___|\n"
+                + "   _/db _/db  |\n"
+                + "  (____(______]\n"
+            );
         } else {
             fishing.create_buttons();
+
+            art = $.parseHTML("");
         }
+        $(art)
+            .appendTo(section);
     },
 
     get_auto_buys() {

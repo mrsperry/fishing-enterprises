@@ -142,6 +142,22 @@ of the container of the body :^) */
     white-space: pre;
 }
 
+#river_troll_text {
+    position: relative;
+    font-size: 10pt;
+    white-space: normal;
+    top: -350px;
+    left: 175px;
+    width: 160px;
+    background: white;
+}
+
+#river_troll_outline {
+    position: relative;
+    top: -439px;
+    left: 123px;
+}
+
 .button {
     margin: 5px;
 }
