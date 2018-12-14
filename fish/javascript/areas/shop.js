@@ -125,8 +125,9 @@ var shop = {
                 .stop()
                 .show()
                 .css("opacity", 1.0)
-                .fadeOut(1200);
-            this.money_difference = 0;
+                .fadeOut(1200, function() {
+                    shop.money_difference = 0;
+                });
         }
     },
 
