@@ -122,9 +122,12 @@ var business = {
 
     change_workers(parent, amount) {
         let total = resources.workers.count;
+        let workers = resources.workers.areas[parent].workers;
         
         if (total < amount) {
-            amount = (amount - (amount % total));
+            amount = total;
+        } else if (amount < 0 && (-workers > amount)) {
+            amount = -workers;
         }
 
         resources.workers.areas[parent].workers += amount;
