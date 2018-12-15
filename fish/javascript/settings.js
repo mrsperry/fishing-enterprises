@@ -65,6 +65,14 @@ var settings = {
                     main.update_interval(2500);
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Unlock business",
+                on_click: function() {
+                    areas.switch_area(window["shop"]);
+                    business.purchase();
+                }
+            });
         } else {
             this.dev = false;
             $("#right")

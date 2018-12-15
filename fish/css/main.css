@@ -28,6 +28,31 @@ button:disabled {
     opacity: 0.4;
 }
 
+.worker_count {
+    text-align: center;
+    position: relative;
+    top: 10px;
+}
+
+.worker_button {
+    width: auto;
+    height: auto;
+    padding: 2px 5px;
+    margin: 2px;
+    cursor: pointer;
+    position: relative;
+    top: -8px;
+    margin-bottom: 0px;
+}
+
+.worker_buttons_left {
+    margin-right: 10px;
+}
+
+.worker_buttons_right {
+    margin-left: 10px;
+}
+
 /* containers */
 #right {
     margin-left: 1100px;
@@ -156,6 +181,10 @@ of the container of the body :^) */
     position: relative;
     top: -439px;
     left: 123px;
+}
+
+#management_section {
+    width: 150px;
 }
 
 .button {

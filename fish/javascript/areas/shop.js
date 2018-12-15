@@ -39,30 +39,32 @@ var shop = {
     },
 
     update() {
-        for (let id in this.buttons) {
-            let item = this.buttons[id];
-            if ($("#" + item.data.id + "_button").length == 1) {
-                let disabled = (item.removed != null ? item.removed : item.data.disabled);
-                $("#" + item.data.id + "_button")
-                    .prop("disabled", disabled);
-            } else {
-                if (this.check_button(item)) {
-                    item.data["classes"] = ["button"];
-                    buttons.create(item.data);
+        if (business.purchased.unlocked != null) {
+            for (let id in this.buttons) {
+                let item = this.buttons[id];
+                if ($("#" + item.data.id + "_button").length == 1) {
+                    let disabled = (item.removed != null ? item.removed : item.data.disabled);
+                    $("#" + item.data.id + "_button")
+                        .prop("disabled", disabled);
+                } else {
+                    if (this.check_button(item)) {
+                        item.data["classes"] = ["button"];
+                        buttons.create(item.data);
+                    }
                 }
             }
-        }
 
-        for (let section of ["bait", "tackle", "misc"]) {
-            let element = $("#no_sale_" + section);
-            if (element
-                .parent()
-                    .children().length > 1) {
-                $(element)
-                    .remove();
+            for (let section of ["bait", "tackle", "misc"]) {
+                let element = $("#no_sale_" + section);
+                if (element
+                    .parent()
+                        .children().length > 1) {
+                    $(element)
+                        .remove();
+                }
             }
+            this.check_empty();
         }
-        this.check_empty();
     },
 
     load() {
@@ -203,12 +205,14 @@ var shop = {
         shop.remove_item(name + "_unlock");
         shop.update_money(-data.price);
 
-        for (let item of data.buttons) {
-            shop.add_item(name, item.resource, item.parent);
+        if (data.buttons != null) {
+            for (let item of data.buttons) {
+                shop.add_item(name, item.resource, item.parent);
+            }
         }
 
-        if (name == "pier") {
-            boat.initialize();
+        if (typeof area.purchase == "function") {
+            area.purchase();
         }
 
         shop.update();

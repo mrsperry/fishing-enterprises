@@ -1,6 +1,7 @@
 var areas = {
     list: [
         "shop",
+        "business",
         "lake",
         "river",
         "pier",
@@ -10,35 +11,37 @@ var areas = {
     ],
 
     initialize() {
-        for (let index of this.list) {
-            let item = window[index];
+        resources.workers.areas = {};
 
+        for (let index of this.list) {
             let area = window[index];
-            buttons.create({
-                parent: "area_selector",
-                id: index,
-                text: item.display,
-                hide: true,
-                on_click: function() {
-                    areas.switch_area(area);
-                }
-            });
+            if (index != "business") {
+                buttons.create({
+                    parent: "area_selector",
+                    id: index,
+                    text: area.display,
+                    hide: true,
+                    on_click: function() {
+                        areas.switch_area(area);
+                    }
+                });
+            }
 
             if (index != "shop" && index != "lake" && index != "reef") {
                 shop.buttons[index + "_unlock"] = {
                     condition: function() {
-                        return !$("#" + item.unlock + "_button")
+                        return !$("#" + area.unlock + "_button")
                             .is(":hidden");
                     },
                     data: {
                         parent: "misc_section",
                         id: index + "_unlock",
-                        text: item.license + " ($" + area.purchased.price + ")",
+                        text: area.license + " ($" + area.purchased.price + ")",
                         on_click: function() {
                             shop.purchase_area(index);
                         },
                         disabled: function() {
-                            return resources.money.count <= window[index].purchased.price
+                            return resources.money.count <= area.purchased.price
                                 // disable the pier until the river troll has been talked to
                                 || (index == "pier" ? !river.queue_change : false);
                         }
@@ -46,15 +49,26 @@ var areas = {
                 }
             }
 
-            if (index != "shop" && index != "lake") {
+            if (index != "shop" && index != "business" && index != "lake") {
                 shop.add_auto_buy_items(area.get_auto_buys());
                 for (let button of area.purchased.buttons) {
                     shop.add_item(index, button.resource, button.parent);
                 }
             }
 
-            if (index != "shop") {
+            if (index != "shop" && index != "business") {
                 area.initialize();
+
+                let work_area = {};
+                work_area.workers = 0;
+                work_area.unlocked = true;
+
+                if (index == "lake") {
+                    work_area.unlocked = true;
+                    work_area.break = true;
+                }
+                
+                resources.workers.areas[index] = work_area;
             }
         }
     },

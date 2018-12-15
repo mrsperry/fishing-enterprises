@@ -15,6 +15,16 @@ var resources = {
         max: 30
     },
 
+    workers: {
+        display: "Workers",
+        internal: "workers",
+        message: "",
+        price: 1000,
+        count: 10,
+        total: 1,
+        max: 10
+    },
+
     /* 
         breakdown of the bait/tackle/fish objects
         guppies: {
