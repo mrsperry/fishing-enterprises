@@ -100,13 +100,12 @@ var main = {
 
         counters.reset(save);
         messenger.reset();
-        lights.on();
     },
 
     show_settings() {
         let text = $.parseHTML("Color theme: "
-            + "<span id='lights_on' class='link' onclick='lights.on()'>light</span> | "
-            + "<span id='lights_off' class='link' onclick='lights.off()'>dark</span><br><br>"
+            + "<span id='lights_on' class='link' onclick='lights.toggle(true)'>light</span> | "
+            + "<span id='lights_off' class='link' onclick='lights.toggle(false)'>dark</span><br><br>"
             + "Saves: "
             + "<span id='download_save' class='link' onclick='settings.download_save()'>download save</span> | "
             + "<label class='link'><input id='upload_save' type='file'/>upload save</label> | "
