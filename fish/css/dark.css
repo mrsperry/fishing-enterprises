@@ -50,6 +50,11 @@ div.before:before {
     border: none;
 }
 
+/* resource buttons */
+#river_troll_text {
+    background: #222222;
+}
+
 /* about/settings popup */
 #overlay {
     background-color: rgba(0, 0, 0, 0.7);
