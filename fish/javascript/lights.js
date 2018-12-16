@@ -27,6 +27,8 @@ var lights = {
             .text("lights " + (this.lights ? "on" : "off"));
             
         this.lights = on;
+
+        settings.save_settings();
     },
 
     on() {

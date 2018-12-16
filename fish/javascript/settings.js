@@ -191,15 +191,6 @@ var settings = {
 
         let save_misc = {};
         save_misc["messages"] = messenger.lines;
-        
-        if (!lights.lights) {
-            save_misc["theme"] = true;
-        }
-
-        if (this.dev) {
-            save_misc["dev_tools"] = true;
-        }
-        save["misc"] = save_misc;
 
         let clear = (parent) => {
             for (let child in parent) {
@@ -217,6 +208,7 @@ var settings = {
 
         localStorage.removeItem("save");
         localStorage.setItem("save", JSON.stringify($.extend({}, save), null, 4));
+        this.save_settings();
 
         $("#restart_game")
             .addClass("link")
@@ -313,40 +305,29 @@ var settings = {
                     }
                 }
             }
-
-            if (index == "misc") {
-                for (let child in parent) {
-                    let item = parent[child];
-
-                    if (child == "messages") {
-                        if (item != null) {
-                            for (let message of item.reverse()) {
-                                messenger.write_message(message, false);
-                            }
-                        }
-                    }
-
-                    if (child == "theme") {
-                        if (item != null && item) {
-                            lights.off();
-                        }
-                    }
-
-                    if (child == "dev_tools") {
-                        if (item != null && item) {
-                            $("#right")
-                                .empty();
-                            this.toggle_dev_tools(true);
-                        }
-                    }
-                }
-            }
         }
 
         counters.load(save);
         messenger.reset();
         shop.update();
-        main.update_interval(2500);
+        this.load_settings();
+    },
+
+    save_settings() {
+        let settings = {
+            lights: lights.lights,
+            dev_tools: this.dev == null ? false : this.dev
+        }
+
+        localStorage.removeItem("settings");
+        localStorage.setItem("settings", JSON.stringify(settings));
+    },
+
+    load_settings() {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        
+        lights.toggle(settings.lights);
+        this.toggle_dev_tools(settings.dev_tools);
     },
 
     download_save() {
