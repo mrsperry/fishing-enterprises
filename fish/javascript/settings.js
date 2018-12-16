@@ -23,6 +23,7 @@ var settings = {
                 on_click: function() {
                     resources.money.count += 5000;
                     counters.update();
+                    shop.update();
                 }
             });
             buttons.create({
@@ -32,6 +33,14 @@ var settings = {
                     $("#bait_counters")
                         .fadeIn();
                     settings.max(resources.bait);
+
+                    lake.show_buttons = true;
+                    if (areas.current_area.internal == "lake") {
+                        resources.bait.worms.caught = true;
+                        $("#fishing_buttons")
+                            .fadeIn();
+                        lake.update();
+                    }
                 }
             });
             buttons.create({
