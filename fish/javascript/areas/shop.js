@@ -39,7 +39,7 @@ var shop = {
     },
 
     update() {
-        if (business.purchased.unlocked != null) {
+        if (business.unlocked == null) {
             for (let id in this.buttons) {
                 let item = this.buttons[id];
                 if ($("#" + item.data.id + "_button").length == 1) {
