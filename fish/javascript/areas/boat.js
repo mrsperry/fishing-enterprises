@@ -46,7 +46,7 @@ var boat = {
                 data: {
                     parent: "misc_section",
                     id: id,
-                    text: item.display + " ($" + item.price + ")",
+                    text: item.display + " ($" + main.stringify(item.price) + ")",
                     on_click: function() {
                         boat.purchase_part(item);
                         shop.remove_item(id);

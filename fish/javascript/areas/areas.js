@@ -36,7 +36,7 @@ var areas = {
                     data: {
                         parent: "misc_section",
                         id: index + "_unlock",
-                        text: area.license + " ($" + area.purchased.price + ")",
+                        text: area.license + " ($" + main.stringify(area.purchased.price) + ")",
                         on_click: function() {
                             shop.purchase_area(index);
                         },

@@ -8,7 +8,7 @@ var shop = {
                 parent: "above_section",
                 id: "sell_fish",
                 text: function() {
-                    return "Sell fish ($" + shop.fish_value(false) + ")";
+                    return "Sell fish ($" + main.stringify(shop.fish_value(false)) + ")";
                 },
                 on_click: function() {
                     shop.sell_fish();
@@ -123,7 +123,7 @@ var shop = {
         let amount = this.money_difference;
         if (amount != 0) {
             $("#money_difference")
-                .text(" (" + (amount > 0 ? "+" : "-") + Math.abs(amount) + ")")
+                .text(" (" + (amount > 0 ? "+" : "-") + main.stringify(Math.abs(amount)) + ")")
                 .stop()
                 .show()
                 .css("opacity", 1.0)
@@ -227,7 +227,7 @@ var shop = {
             data: {
                 parent: section + "_section",
                 id: item.internal,
-                text: item.display + " ($" + item.price + ")",
+                text: item.display + " ($" + main.stringify(item.price) + ")",
                 on_click: function() {
                     shop.purchase_item(item);
                 },
@@ -249,7 +249,7 @@ var shop = {
                 data: {
                     parent: "misc_section",
                     id: resource.internal + "_auto_buy",
-                    text: "Auto buy " + resource.display + " ($" + item.price + ")",
+                    text: "Auto buy " + resource.display + " ($" + main.stringify(item.price) + ")",
                     on_click: function() {
                         counters.add_auto_buy(resource);
                         shop.remove_item(resource.internal + "_auto_buy");
