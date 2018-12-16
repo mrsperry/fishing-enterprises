@@ -16,14 +16,6 @@ var business = {
     },
 
     load() {
-
-    },
-
-    unload() {
-
-    },
-
-    purchase() {
         let list = ["bait", "tackle", "misc"];
         for (let index of list) {
             $("#" + index + "_section")
@@ -120,6 +112,20 @@ var business = {
         this.update_workers();
     },
 
+    unload() {
+
+    },
+
+    purchase() {
+        $("#shop_button")
+            .off("click")
+            .click(function() {
+                areas.switch_area(business);
+            });
+            
+        this.load();
+    },
+
     change_workers(parent, amount) {
         let total = resources.workers.count;
         let workers = resources.workers.areas[parent].workers;
@@ -145,6 +151,8 @@ var business = {
             .text("Workers: " + workers);
 
         for (let index in resources.workers.areas) {
+            $("#" + index + "_worker_count")
+                .text(resources.workers.areas[index].workers);
             $("#" + index + "_worker_buttons_left")
                 .children()
                     .prop("disabled", resources.workers.areas[index].workers == 0)
