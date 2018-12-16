@@ -99,6 +99,7 @@ var main = {
         river.river_troll = true;
 
         counters.reset(save);
+        messenger.reset();
         lights.on();
     },
 

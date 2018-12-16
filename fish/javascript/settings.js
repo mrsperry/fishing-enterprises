@@ -190,7 +190,14 @@ var settings = {
         save["boat"] = save_boat;
 
         let save_misc = {};
-        save_misc["messages"] = messenger.lines;
+        let messages = [];
+        for (let message of messenger.lines) {
+            if (message != "") {
+                messages.push(message);
+            }
+        }
+        save_misc["messages"] = messages;
+        save["misc"] = save_misc;
 
         let clear = (parent) => {
             for (let child in parent) {
@@ -305,10 +312,18 @@ var settings = {
                     }
                 }
             }
+
+            if (index == "misc") {
+                let messages = parent["messages"];
+                if (messages != null && Array.isArray(messages)) {
+                    for (let message of messages.reverse()) {
+                        messenger.write_message(message, false);
+                    }
+                }
+            }
         }
 
         counters.load(save);
-        messenger.reset();
         shop.update();
         this.load_settings();
     },
