@@ -78,6 +78,8 @@ var settings = {
             $("#right")
                 .empty();
         }
+
+        this.save_settings();
     },
 
     max(resource) {
@@ -215,7 +217,6 @@ var settings = {
 
         localStorage.removeItem("save");
         localStorage.setItem("save", JSON.stringify($.extend({}, save), null, 4));
-        this.save_settings();
 
         $("#restart_game")
             .addClass("link")
@@ -325,7 +326,6 @@ var settings = {
 
         counters.load(save);
         shop.update();
-        this.load_settings();
     },
 
     save_settings() {
@@ -382,6 +382,7 @@ var settings = {
             .off("click");
 
         this.deleted = true;
+        this.save_settings();
         location.reload();
     },
 

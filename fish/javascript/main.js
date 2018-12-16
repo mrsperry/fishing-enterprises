@@ -21,6 +21,8 @@ var main = {
             $("#tackle_counters")
                 .hide();
         }
+
+        settings.load_settings();
     },
 
     update() {
