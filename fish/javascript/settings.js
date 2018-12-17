@@ -24,6 +24,7 @@ var settings = {
                     resources.money.count += 5000;
                     counters.update();
                     shop.update();
+                    business.update();
                 }
             });
             buttons.create({

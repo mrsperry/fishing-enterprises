@@ -12,7 +12,38 @@ var business = {
     },
 
     update() {
-        
+        let workers = resources.workers.count;
+        $("#workers")
+            .text("Workers: " + workers);
+
+        for (let index in resources.workers.areas) {
+            $("#" + index + "_worker_count")
+                .text(resources.workers.areas[index].workers);
+            $("#" + index + "_worker_buttons_left")
+                .children()
+                    .prop("disabled", resources.workers.areas[index].workers == 0)
+            $("#" + index + "_worker_buttons_right")
+                .children()
+                    .prop("disabled", workers == 0);
+        }
+
+        let worker_button = $("#hire_worker_button");
+        $(worker_button)
+            .text("Hire worker ($" + main.stringify(this.get_worker_cost()) + ")")
+            .prop("disabled", (business.get_worker_cost() > resources.money.count));
+        if (resources.workers.total == 80) {
+            buttons.remove("hire_worker", this.check_empty);
+        }
+
+        let element = $("#no_investments");
+        if (element
+            .parent()
+                .children().length > 1) {
+            $(element)
+                .remove();
+        }
+
+        this.check_empty();
     },
 
     load() {
@@ -30,6 +61,30 @@ var business = {
             .addClass("before")
             .addClass("section")
             .appendTo(sections);
+
+        $("<div>")
+            .attr("id", "investments_section")
+            .attr("display", "Investments")
+            .addClass("before")
+            .addClass("section")
+            .addClass("section_center")
+            .appendTo(sections);
+
+        if (resources.workers.count != 80) {
+            buttons.create({
+                parent: "investments_section",
+                id: "hire_worker",
+                classes: ["button"],
+                text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
+                on_click: function() {
+                    shop.update_money(-business.get_worker_cost());
+
+                    resources.workers.count += 1;
+                    resources.workers.total += 1;
+                    business.update();
+                }
+            });
+        }
 
         let workers = resources.workers;
         counters.create_counter(workers, "management_section");
@@ -109,7 +164,7 @@ var business = {
             }
         }
 
-        this.update_workers();
+        this.update();
     },
 
     unload() {
@@ -142,23 +197,22 @@ var business = {
         $("#" + parent + "_worker_count")
             .text(resources.workers.areas[parent].workers);
 
-        this.update_workers();
+        this.update();
     },
 
-    update_workers() {
-        let workers = resources.workers.count;
-        $("#workers")
-            .text("Workers: " + workers);
-
-        for (let index in resources.workers.areas) {
-            $("#" + index + "_worker_count")
-                .text(resources.workers.areas[index].workers);
-            $("#" + index + "_worker_buttons_left")
-                .children()
-                    .prop("disabled", resources.workers.areas[index].workers == 0)
-            $("#" + index + "_worker_buttons_right")
-                .children()
-                    .prop("disabled", workers == 0);
+    get_worker_cost() {
+        return resources.workers.total * 100;
+    },
+    
+    check_empty() {
+        let parent = $("#investments_section");
+        if ($(parent)
+                .children().length == 0) {
+            $("<p>")
+                .attr("id", "no_investments")
+                .addClass("no_sale")
+                .text("No investments available!")
+                .appendTo(parent);
         }
     }
 }

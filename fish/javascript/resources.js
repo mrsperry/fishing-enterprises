@@ -20,7 +20,7 @@ var resources = {
         internal: "workers",
         message: "",
         price: 1000,
-        count: 10,
+        count: 1,
         total: 1,
         max: 10
     },
