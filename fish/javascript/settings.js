@@ -83,6 +83,18 @@ var settings = {
                     business.purchase();
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Max workers",
+                on_click: function() {
+                    for (let area in resources.workers.areas) {
+                        business.change_workers(area, -80);
+                    }
+                    resources.workers.count = 80;
+                    resources.workers.total = 80;
+                    business.update();
+                }
+            })
         } else {
             this.dev = false;
             $("#right")
