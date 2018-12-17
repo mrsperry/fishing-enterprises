@@ -62,13 +62,17 @@ var buttons = {
         return this;
     },
 
-    remove(id) {
+    remove(id, callback) {
         $("#" + id + "_button")
             .fadeOut(400, (function() {
                 $("#" + id + "_button")
                     .remove();
                 $("#" + id + "_break")
                     .remove();
+
+                if (typeof callback == "function") {
+                    callback();
+                }
             }));
     }
 }

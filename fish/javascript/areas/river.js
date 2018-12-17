@@ -84,7 +84,7 @@ var river = {
                             + "===/ +--------------------+")
                         .appendTo(section);
 
-                    buttons.remove("river_troll");
+                    buttons.remove("river_troll", null);
                 }
             });
 
