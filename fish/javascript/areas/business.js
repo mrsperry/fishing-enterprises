@@ -70,7 +70,17 @@ var business = {
             .addClass("section_center")
             .appendTo(sections);
 
-        if (resources.workers.count != 80) {
+        buttons.create({
+            parent: "resource_buttons",
+            id: "advisor",
+            classes: ["section"],
+            text: "Financial Advisor",
+            on_click: function() {
+
+            }
+        });
+
+        if (resources.workers.total != 80) {
             buttons.create({
                 parent: "investments_section",
                 id: "hire_worker",
@@ -210,7 +220,6 @@ var business = {
                 .children().length == 0) {
             $("<p>")
                 .attr("id", "no_investments")
-                .addClass("no_sale")
                 .text("No investments available!")
                 .appendTo(parent);
         }

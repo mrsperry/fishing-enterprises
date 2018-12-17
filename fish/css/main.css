@@ -187,6 +187,18 @@ of the container of the body :^) */
     width: 150px;
 }
 
+#advisor_button {
+    position: absolute;
+    top: -20px;
+    margin-left: 215px;
+}
+
+#no_investments {
+    margin: 7px 7px;
+    white-space: nowrap;
+    font-size: 10pt;
+}
+
 .button {
     margin: 5px;
 }
