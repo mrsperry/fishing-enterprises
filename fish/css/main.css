@@ -30,6 +30,23 @@ button:disabled {
     cursor: default;
 }
 
+.button {
+    margin: 5px;
+}
+
+.button_header {
+    font-size: 11pt;
+}
+
+.button_header_title {
+    font-weight: bold;
+}
+
+.horizontal_button {
+    width: 333px;
+    height: 80px;
+}
+
 .worker_count {
     text-align: center;
     position: relative;
@@ -106,6 +123,10 @@ button:disabled {
     top: 160px;
     position: absolute;
     width: 168px;
+}
+
+#workers_counter {
+    margin: 4px 0px 7px 0px;
 }
 
 .value {
@@ -199,10 +220,6 @@ of the container of the body :^) */
     font-size: 10pt;
 }
 
-.button {
-    margin: 5px;
-}
-
 .section {
     margin-top: 20px;
     display: inline-block;
@@ -216,6 +233,14 @@ of the container of the body :^) */
 .section_right {
     position: absolute;
     margin-left: 179px;
+}
+
+.section_top {
+    width: 343px;
+}
+
+.section_bottom {
+    width: 200px;
 }
 
 .no_sale {

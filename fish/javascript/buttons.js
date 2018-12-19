@@ -15,10 +15,26 @@ var buttons = {
                 .attr("id", options.id + "_button");
         }
 
+        // set header
+        let header = options.header;
+        if (header != null) {
+            let bold = (header.bold == null ? "" : header.bold);
+            let regular = (header.regular == null ? "" : header.regular);
+            $(element)
+                .html("<div class='button_header'>"
+                    + "<span class='button_header_title'>" + bold + "</span> " 
+                    + regular + "</div>");
+        }
+
         // set text
         if (options.text != null) {
-            $(element)
-                .text(options.text);
+            if (header != null) {
+                $(element)
+                    .html($(element).html() + options.text);
+            } else {
+                $(element)
+                    .text(options.text);
+            }
         }
 
         // set classes 
