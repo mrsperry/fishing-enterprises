@@ -8,10 +8,12 @@ var business = {
     },
 
     initialize() {
-
+        this.vendor = vendor.create(5);
     },
 
     update() {
+        vendor.update(this.vendor);
+
         let workers = resources.workers.count;
         $("#workers")
             .text("Workers: " + workers);
@@ -32,7 +34,7 @@ var business = {
             .text("Hire worker ($" + main.stringify(this.get_worker_cost()) + ")")
             .prop("disabled", (business.get_worker_cost() > resources.money.count));
         if (resources.workers.total == 80) {
-            buttons.remove("hire_worker", this.check_empty);
+            vendor.remove_item(this.vendor, "hire_worker");
         }
 
         let element = $("#no_investments");
@@ -68,6 +70,7 @@ var business = {
             .addClass("before")
             .addClass("section")
             .addClass("section_center")
+            .addClass("section_top")
             .appendTo(sections);
 
         buttons.create({
@@ -81,23 +84,28 @@ var business = {
         });
 
         if (resources.workers.total != 80) {
-            buttons.create({
-                parent: "investments_section",
-                id: "hire_worker",
-                classes: ["button"],
-                text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
-                on_click: function() {
-                    shop.update_money(-business.get_worker_cost());
+            vendor.add_item(this.vendor,
+                {
+                    parent: "investments_section",
+                    id: "hire_worker",
+                    classes: ["button", "horizontal_button"],
+                    text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
+                    on_click: function() {
+                        shop.update_money(-business.get_worker_cost());
 
-                    resources.workers.count += 1;
-                    resources.workers.total += 1;
-                    business.update();
+                        resources.workers.count += 1;
+                        resources.workers.total += 1;
+                        business.update();
+                    }
                 }
-            });
+            );
         }
 
         let workers = resources.workers;
-        counters.create_counter(workers, "management_section");
+        $("<div>")
+            .attr("id", "workers_counter")
+            .appendTo(management);
+        counters.create_counter(workers, "workers_counter");
         $("<div>")
             .addClass("counter_break")
             .appendTo(management);
@@ -221,6 +229,7 @@ var business = {
             $("<p>")
                 .attr("id", "no_investments")
                 .text("No investments available!")
+                .addClass("no_investments")
                 .appendTo(parent);
         }
     }

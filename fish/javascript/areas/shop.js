@@ -3,21 +3,6 @@ var shop = {
     display: "Shop",
 
     buttons: {
-        sell_fish: {
-            data: {
-                parent: "above_section",
-                id: "sell_fish",
-                text: function() {
-                    return "Sell fish ($" + main.stringify(shop.fish_value(false)) + ")";
-                },
-                on_click: function() {
-                    shop.sell_fish();
-                },
-                disabled: function() { 
-                    return shop.fish_value(false) == 0; 
-                }, 
-            }
-        },
         buy_fuel: {
             condition: function() {
                 return !$("#reef_button")
@@ -38,8 +23,29 @@ var shop = {
         }
     },
 
+    initialize() {
+        this.vendor = vendor.create(6,
+            [
+                {
+                    parent: "above_section",
+                    id: "sell_fish",
+                    text: function() {
+                        return "Sell fish ($" + main.stringify(shop.fish_value(false)) + ")";
+                    },
+                    on_click: function() {
+                        shop.sell_fish();
+                    },
+                    disabled: function() { 
+                        return shop.fish_value(false) == 0; 
+                    }, 
+                }
+            ]
+        )
+    },
+
     update() {
         if (business.unlocked == null) {
+            vendor.update(this.vendor);
             for (let id in this.buttons) {
                 let item = this.buttons[id];
                 if ($("#" + item.data.id + "_button").length == 1) {
@@ -64,6 +70,8 @@ var shop = {
                 }
             }
             this.check_empty();
+        } else {
+            business.update();
         }
     },
 

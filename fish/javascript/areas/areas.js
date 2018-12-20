@@ -57,8 +57,6 @@ var areas = {
             }
 
             if (index != "shop" && index != "business") {
-                area.initialize();
-
                 let work_area = {};
                 work_area.workers = 0;
                 work_area.unlocked = true;
@@ -70,6 +68,8 @@ var areas = {
                 
                 resources.workers.areas[index] = work_area;
             }
+
+            area.initialize();
         }
     },
 
