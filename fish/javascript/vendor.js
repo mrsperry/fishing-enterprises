@@ -90,5 +90,22 @@ let vendor = {
         }
 
         return false;
+    },
+
+    registered_item(vendor, id) {
+        let check = (array) => {
+            // loop through array contents
+            for (let index of array) {
+                // if an item has the same ID then it is registered 
+                if (index.id == id) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // check the contents of the shown buttons and those in queue
+        return check(vendor.shown) || check(vendor.queue);
     }
 }
