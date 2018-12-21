@@ -74,31 +74,49 @@ var business = {
             .appendTo(sections);
 
         buttons.create({
-            parent: "resource_buttons",
+            parent: "above_section",
             id: "advisor",
-            classes: ["section"],
             text: "Financial Advisor",
             on_click: function() {
+                buttons.remove("advisor");
 
+                $("#management_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                    });
+                $("#investments_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+
+                        business.load_advisor();
+                    });
             }
         });
 
-        if (resources.workers.total != 80) {
-            vendor.add_item(this.vendor,
-                {
-                    parent: "investments_section",
-                    id: "hire_worker",
-                    classes: ["button", "horizontal_button"],
-                    text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
-                    on_click: function() {
-                        shop.update_money(-business.get_worker_cost());
+        for (let index of this.vendor.shown) {
+            buttons.create(index);
+        }
 
-                        resources.workers.count += 1;
-                        resources.workers.total += 1;
-                        business.update();
+        if (resources.workers.total != 80) {
+            if (!vendor.registered_item(this.vendor, "hire_worker")) {
+                vendor.add_item(this.vendor,
+                    {
+                        parent: "investments_section",
+                        id: "hire_worker",
+                        classes: ["button", "horizontal_button"],
+                        text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
+                        on_click: function() {
+                            shop.update_money(-business.get_worker_cost());
+
+                            resources.workers.count += 1;
+                            resources.workers.total += 1;
+                            business.update();
+                        }
                     }
-                }
-            );
+                );
+            }
         }
 
         let workers = resources.workers;
@@ -232,5 +250,43 @@ var business = {
                 .addClass("no_investments")
                 .appendTo(parent);
         }
+    },
+
+    load_advisor() {
+        buttons.create({
+            parent: "above_section",
+            id: "advisor",
+            text: "Management and Investments",
+            on_click: function() {
+                buttons.remove("advisor");
+
+                $("#newspaper_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                    });
+                $("#stocks_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+
+                        business.load();
+                    });
+            }
+        });
+
+        let parent = $("#resource_buttons");
+        $("<div>")
+            .attr("id", "newspaper_section")
+            .addClass("section")
+            .text("Extra extra read all about it!")
+            .appendTo(parent);
+        $("<div>")
+            .attr("id", "stocks_section")
+            .attr("display", "Stocks")
+            .addClass("section")
+            .addClass("section_middle")
+            .addClass("before")
+            .appendTo(parent);
     }
 }
