@@ -27,32 +27,48 @@ let vendor = {
             let item = vendor.shown[index];
 
             // check if the button should be removed
-            if (item.removed != null && item.removed) {
+            if (item.data.removed != null && item.data.removed) {
                 // remove the button
-                buttons.remove(item.id, function() {
+                buttons.remove(item.data.id, function() {
                     vendor.remove_index(vendor, index);
                 });
             }
 
             // check if the button should be disabled
-            $("#" + item.id)
-                .prop("disabled", (item.disabled != null ? false : item.disabled));
+            $("#" + item.data.id)
+                .prop("disabled", (item.data.disabled == null ? false : item.data.disabled));
         }
     },
 
     update_queue(vendor) {
+        // list of indices to remove after iteration is done
+        let indices = [];
+
         // display buttons until the max has been reached
-        while (vendor.shown.length != this.max) {
-            let item = vendor.queue.shift();
-            if (item == null) {
-                return;
+        for (let index = 0; index < vendor.queue.length; index++) {
+            let item = vendor.queue[index];
+
+            // check if there is room in the shown list
+            if (vendor.shown.length == vendor.max || item == null) {
+                continue;
             }
 
-            // add the button to the displayed buttons list
-            vendor.shown.push(item);
+            // check if the item's display condition has been met
+            if (item.condition == null || item.condition) {
+                // mark the index for removal
+                indices.push(index);
 
-            // create the button
-            buttons.create(item);
+                // add the button to the displayed buttons list
+                vendor.shown.push(item);
+
+                // create the button
+                buttons.create(item.data);
+            }
+        }
+        
+        // remove all indices that were used
+        for (let index of indices.reverse()) {
+            vendor.queue.splice(index, 1);
         }
     },
 
@@ -61,7 +77,7 @@ let vendor = {
         vendor.shown.splice(index, 1);
 
         // fill in the empty spot
-        vendor.update_queue(vendor);
+        this.update_queue(vendor);
     },
 
     add_item(vendor, item) {
@@ -75,15 +91,12 @@ let vendor = {
             let item = vendor.shown[index];
 
             // check if the IDs match
-            if (item.id != null && item.id == id) {
+            if (item.data.id == id) {
                 // mark the button for removal
-                item.removed = true;
-
-                // set the item
-                vendor.shown[index] = item;
+                item.data.removed = true;
 
                 // update the lists
-                this.update(vendor);
+                this.update_shown(vendor);
 
                 return true;
             }
@@ -97,7 +110,7 @@ let vendor = {
             // loop through array contents
             for (let index of array) {
                 // if an item has the same ID then it is registered 
-                if (index.id == id) {
+                if (index.data.id == id) {
                     return true;
                 }
             }
