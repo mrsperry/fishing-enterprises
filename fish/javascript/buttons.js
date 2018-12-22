@@ -28,12 +28,13 @@ var buttons = {
 
         // set text
         if (options.text != null) {
+            let text = (typeof options.text == "string" ? options.text : options.text());
             if (header != null) {
                 $(element)
-                    .html($(element).html() + "<span class='button_text'" + options.text + "</span>");
+                    .html($(element).html() + "<span class='button_text'>" + text + "</span>");
             } else {
                 $(element)
-                    .html("<span class='button_text'>" + options.text + "</span>");
+                    .html("<span class='button_text'>" + text + "</span>");
             }
         }
 
