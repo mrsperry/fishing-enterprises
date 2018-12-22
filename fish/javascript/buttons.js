@@ -23,17 +23,17 @@ var buttons = {
             $(element)
                 .html("<div class='button_header'>"
                     + "<span class='button_header_title'>" + bold + "</span> " 
-                    + regular + "</div>");
+                    + "<span class='button_header_extra'>" + regular + "</span></div>");
         }
 
         // set text
         if (options.text != null) {
             if (header != null) {
                 $(element)
-                    .html($(element).html() + options.text);
+                    .html($(element).html() + "<span class='button_text'" + options.text + "</span>");
             } else {
                 $(element)
-                    .text(options.text);
+                    .html("<span class='button_text'>" + options.text + "</span>");
             }
         }
 
