@@ -50,7 +50,8 @@ var areas = {
                         disabled: function() {
                             return resources.money.count <= area.purchased.price
                                 // disable the pier until the river troll has been talked to
-                                || (index == "pier" ? !river.queue_change : false);
+                                || (index == "pier" ? !river.queue_change : false)
+                                || (index == "business" ? !($("#misc_section").children().length == 2) : false);
                         }
                     }
                 }
