@@ -31,6 +31,10 @@ let vendor = {
                 // remove the button
                 buttons.remove(item.data.id, function() {
                     vendor.remove_index(vendor, index);
+                    
+                    if (item.data.callback != null) {
+                        item.data.callback();
+                    }
                 });
             }
 
@@ -85,7 +89,7 @@ let vendor = {
         vendor.queue.push(item);
     },
 
-    remove_item(vendor, id) {
+    remove_item(vendor, id, callback) {
         // loop through the displayed buttons
         for (let index = 0; index < vendor.shown.length; index++) {
             let item = vendor.shown[index];
@@ -94,6 +98,9 @@ let vendor = {
             if (item.data.id == id) {
                 // mark the button for removal
                 item.data.removed = true;
+
+                // set the item's callback method
+                item.data.callback = callback;
 
                 // update the lists
                 this.update_shown(vendor);
