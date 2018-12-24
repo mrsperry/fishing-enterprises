@@ -3,6 +3,12 @@ var river = {
     display: "River",
     unlock: "lake",
     license: "Fly Fishing permit",
+    workers: {
+        license: "Mass Angler Dissuasion",
+        description: "Construct fences and warning signs along river banks to deter competition",
+        min: 3,
+        check: "pier"
+    },
     purchased: {
         price: 300,
         buttons: [

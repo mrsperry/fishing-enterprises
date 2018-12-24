@@ -39,7 +39,7 @@ button:disabled {
 }
 
 .button_header_title {
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .horizontal_button {

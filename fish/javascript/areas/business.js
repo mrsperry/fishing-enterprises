@@ -7,8 +7,29 @@ var business = {
         price: 15000
     },
 
+    hire_worker: {
+        data: {
+            parent: "investments_section",
+            id: "hire_worker",
+            classes: ["button", "horizontal_button"],
+            header: {
+                bold: "Expand the workforce",
+                regular: "($100)"
+            },
+            text: "Hire a worker to be assigned to an available area",
+            on_click: function() {
+                shop.update_money(-business.get_worker_cost());
+
+                resources.workers.count += 1;
+                resources.workers.total += 1;
+                business.update();
+            }
+        }
+    },
+
     initialize() {
         this.vendor = vendor.create(5);
+        vendor.add_item(this.vendor, this.hire_worker);
     },
 
     update() {
@@ -18,23 +39,48 @@ var business = {
         $("#workers")
             .text("Workers: " + workers);
 
-        for (let index in resources.workers.areas) {
+        for (let index of areas.fish_list) {
+            let area = window[index];
+
             $("#" + index + "_worker_count")
-                .text(resources.workers.areas[index].workers);
+                .text(area.workers.count);
+
+            let enabled = area.workers.enabled == null ? false : area.workers.enabled;
+            let min = true;
+            let check = false;
+            if (index != "lake") {
+                if (index == "reef") {
+                    min = pier.workers.count >= reef.workers.min;
+                } else {
+                    min = window[area.unlock].workers.count >= area.workers.min;
+                }
+            }
+            if (index != "deep_sea") {
+                let check_workers = window[area.workers.check].workers;
+                check = (check_workers.count > 0
+                    && check_workers.min == area.workers.count);
+            }
+
             $("#" + index + "_worker_buttons_left")
                 .children()
-                    .prop("disabled", resources.workers.areas[index].workers == 0)
+                    .prop("disabled", area.workers.count == 0 || !enabled || check);
             $("#" + index + "_worker_buttons_right")
                 .children()
-                    .prop("disabled", workers == 0);
+                    .prop("disabled", workers == 0 || !enabled || !min);
         }
 
         let worker_button = $("#hire_worker_button");
         $(worker_button)
-            .text("Hire worker ($" + main.stringify(this.get_worker_cost()) + ")")
-            .prop("disabled", (business.get_worker_cost() > resources.money.count));
+            .prop("disabled", (business.get_worker_cost() > resources.money.count))
+            .find(".button_header_extra")
+                .text("($" + main.stringify(this.get_worker_cost()) + ")");
         if (resources.workers.total == 80) {
-            vendor.remove_item(this.vendor, "hire_worker");
+            vendor.remove_item(this.vendor, "hire_worker", this.check_empty);
+        }
+
+        for (let item of this.vendor.shown) {
+            $("#" + item.data.id + "_button")
+                .prop("disabled", item.data.disabled);
         }
 
         let element = $("#no_investments");
@@ -96,26 +142,12 @@ var business = {
         });
 
         for (let index of this.vendor.shown) {
-            buttons.create(index);
+            buttons.create(index.data);
         }
 
         if (resources.workers.total != 80) {
             if (!vendor.registered_item(this.vendor, "hire_worker")) {
-                vendor.add_item(this.vendor,
-                    {
-                        parent: "investments_section",
-                        id: "hire_worker",
-                        classes: ["button", "horizontal_button"],
-                        text: "Hire worker ($" + main.stringify(this.get_worker_cost()) + ")",
-                        on_click: function() {
-                            shop.update_money(-business.get_worker_cost());
-
-                            resources.workers.count += 1;
-                            resources.workers.total += 1;
-                            business.update();
-                        }
-                    }
-                );
+                vendor.add_item(this.vendor, this.hire_worker);
             }
         }
 
@@ -128,75 +160,73 @@ var business = {
             .addClass("counter_break")
             .appendTo(management);
 
-        for (let index in workers.areas) {
-            let area = workers.areas[index];
-            if (area.unlocked != null && area.unlocked) {
-                let parent = $("<div>")
-                    .attr("id", index + "_workers")
-                    .addClass("worker_area")
-                    .addClass("counter_header")
-                    .text(window[index].display)
-                    .appendTo(management);
+        for (let index of areas.fish_list) {
+            let area = window[index];
+            let parent = $("<div>")
+                .attr("id", index + "_workers")
+                .addClass("worker_area")
+                .addClass("counter_header")
+                .text(area.display)
+                .appendTo(management);
+            $("<div>")
+                .addClass("counter_break")
+                .appendTo(parent);
+            
+            $("<div>")
+                .attr("id", index + "_worker_count")
+                .addClass("worker_count")
+                .text("0")
+                .appendTo(parent);
+            $("<span>")
+                .attr("id", index + "_worker_buttons_left")
+                .addClass("worker_buttons_left")
+                .appendTo(parent);
+            $("<span>")
+                .attr("id", index + "_worker_buttons_right")
+                .addClass("worker_buttons_right")
+                .appendTo(parent);
+
+            buttons.create({
+                parent: index + "_worker_buttons_left",
+                classes: ["worker_button"],
+                text: "<<",
+                breaks: 0,
+                on_click: function() {
+                    business.change_workers(index, -10);
+                }
+            });
+            buttons.create({
+                parent: index + "_worker_buttons_left",
+                classes: ["worker_button"],
+                text: "<",
+                breaks: 0,
+                on_click: function() {
+                    business.change_workers(index, -1);
+                }
+            });
+            buttons.create({
+                parent: index + "_worker_buttons_right",
+                classes: ["worker_button"],
+                text: ">",
+                breaks: 0,
+                on_click: function() {
+                    business.change_workers(index, 1);
+                }
+            });
+            buttons.create({
+                parent: index + "_worker_buttons_right",
+                classes: ["worker_button"],
+                text: ">>",
+                breaks: 0,
+                on_click: function() {
+                    business.change_workers(index, 10);
+                }
+            });
+
+            if (index != "deep_sea") {
                 $("<div>")
                     .addClass("counter_break")
                     .appendTo(parent);
-                
-                $("<div>")
-                    .attr("id", index + "_worker_count")
-                    .addClass("worker_count")
-                    .text("0")
-                    .appendTo(parent);
-                $("<span>")
-                    .attr("id", index + "_worker_buttons_left")
-                    .addClass("worker_buttons_left")
-                    .appendTo(parent);
-                $("<span>")
-                    .attr("id", index + "_worker_buttons_right")
-                    .addClass("worker_buttons_right")
-                    .appendTo(parent);
-
-                buttons.create({
-                    parent: index + "_worker_buttons_left",
-                    classes: ["worker_button"],
-                    text: "<<",
-                    breaks: 0,
-                    on_click: function() {
-                        business.change_workers(index, -10);
-                    }
-                });
-                buttons.create({
-                    parent: index + "_worker_buttons_left",
-                    classes: ["worker_button"],
-                    text: "<",
-                    breaks: 0,
-                    on_click: function() {
-                        business.change_workers(index, -1);
-                    }
-                });
-                buttons.create({
-                    parent: index + "_worker_buttons_right",
-                    classes: ["worker_button"],
-                    text: ">",
-                    breaks: 0,
-                    on_click: function() {
-                        business.change_workers(index, 1);
-                    }
-                });
-                buttons.create({
-                    parent: index + "_worker_buttons_right",
-                    classes: ["worker_button"],
-                    text: ">>",
-                    breaks: 0,
-                    on_click: function() {
-                        business.change_workers(index, 10);
-                    }
-                });
-
-                if (index != "deep_sea") {
-                    $("<div>")
-                        .addClass("counter_break")
-                        .appendTo(parent);
-                }
             }
         }
 
@@ -219,19 +249,32 @@ var business = {
 
     change_workers(parent, amount) {
         let total = resources.workers.count;
-        let workers = resources.workers.areas[parent].workers;
+        let area = window[parent];
+        let workers = window[parent].workers;
         
         if (total < amount) {
             amount = total;
-        } else if (amount < 0 && (-workers > amount)) {
-            amount = -workers;
+        } else if (amount < 0) {
+            if (-workers.count > amount) {
+                amount = -workers.count;
+            }
+            
+            if (parent != "deep_sea") {
+                let check = window[area.workers.check].workers;
+                let min = check.min;
+                if (check.count > 0) {
+                    if ((workers.count + amount) < (min == null ? 0 : min)) {
+                        amount += (min - (workers.count + amount));
+                    }
+                }
+            }
         }
 
-        resources.workers.areas[parent].workers += amount;
+        area.workers.count += amount;
         resources.workers.count -= amount;
 
         $("#" + parent + "_worker_count")
-            .text(resources.workers.areas[parent].workers);
+            .text(workers.count);
 
         this.update();
     },

@@ -3,6 +3,12 @@ var pier = {
     display: "Pier",
     unlock: "river",
     license: "Pier Fishing permit",
+    workers: {
+        license: "Private Pier Allocation",
+        description: "Significant purchasing of public and private piers enables greater utilization of your workers",
+        min: 7,
+        check: "reef"
+    },
     purchased: {
         price: 500,
         buttons: [

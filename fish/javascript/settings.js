@@ -87,11 +87,11 @@ var settings = {
                 parent: "right",
                 text: "Max workers",
                 on_click: function() {
-                    for (let area in resources.workers.areas) {
-                        business.change_workers(area, -80);
+                    for (let area of areas.fish_list) {
+                        window[area].workers.count = 0;
                     }
-                    resources.workers.count = 80;
-                    resources.workers.total = 80;
+                    resources.workers.count = 79;
+                    resources.workers.total = 79;
                     business.update();
                 }
             })

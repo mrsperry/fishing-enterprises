@@ -4,6 +4,12 @@ var spear_fishing = {
     unlock: "reef",
     license: "Spear Fishing permit",
     ocean: true,
+    workers: {
+        license: "Spear Wielding SCUBA Teams",
+        description: "Groups of men and women given equipment to act like fish and hunt them down",
+        min: 15,
+        check: "deep_sea"
+    },
     purchased: {
         price: 1250,
         buttons: [

@@ -10,9 +10,16 @@ var areas = {
         "deep_sea"
     ],
 
-    initialize() {
-        resources.workers.areas = {};
+    fish_list: [
+        "lake",
+        "river",
+        "pier",
+        "reef",
+        "spear_fishing",
+        "deep_sea"
+    ],
 
+    initialize() {
         for (let index of this.list) {
             let area = window[index];
             if (index != "business") {
@@ -57,16 +64,45 @@ var areas = {
             }
 
             if (index != "shop" && index != "business") {
-                let work_area = {};
-                work_area.workers = 0;
-                work_area.unlocked = true;
+                let area = window[index];
+                area.workers.count = 0;
 
                 if (index == "lake") {
-                    work_area.unlocked = true;
-                    work_area.break = true;
+                    area.workers.break = true;
                 }
-                
-                resources.workers.areas[index] = work_area;
+
+                vendor.add_item(business.vendor, {
+                    data: {
+                        parent: "investments_section",
+                        id: index + "_worker_unlock",
+                        classes: ["button", "horizontal_button"],
+                        header: {
+                            bold: area.workers.license,
+                            regular: "($" + main.stringify(area.purchased.price * 10) + ")",
+                        },
+                        text: area.workers.description,
+                        on_click: function() {
+                            area.workers.enabled = true;
+                            shop.update_money(-(area.purchased.price * 10));
+                            vendor.remove_item(business.vendor, index + "_worker_unlock", business.check_empty);
+                            business.update();
+                        },
+                        disabled: function() {
+                            let enabled;
+                            if (area.internal == "lake") {
+                                enabled = true;
+                            } else if (area.internal == "reef") {
+                                enabled = pier.workers.enabled == null ? false : pier.workers.enabled;
+                            } else {
+                                let workers = window[area.unlock].workers.enabled;
+                                enabled = workers == null ? false : workers;
+                            }
+
+                            return resources.money.count <= (area.purchased.price * 10)
+                                || !enabled;
+                        }
+                    }
+                });
             }
 
             area.initialize();

@@ -2,8 +2,14 @@ var reef = {
     internal: "reef",
     display: "Reef",
     ocean: true,
+    workers: {
+        license: "Tear-Resistant Nets",
+        description: "Smaller net meshes mean they can be reinforced to combat sharp coral",
+        min: 10,
+        check: "spear_fishing"
+    },
     purchased: {
-        price: 0,
+        price: 850,
         buttons: [
             {
                 resource: resources.bait.mussels,

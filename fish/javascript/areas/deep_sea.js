@@ -4,6 +4,11 @@ var deep_sea = {
     unlock: "spear_fishing",
     license: "Deep Sea permit",
     ocean: true,
+    workers: {
+        license: "Deep Sea Barges",
+        description: "Fleets of large ships to harvest the darkest corners of every ocean",
+        min: 20
+    },
     purchased: {
         price: 2000,
         buttons: [

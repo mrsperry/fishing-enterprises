@@ -1,6 +1,14 @@
 var lake = {
     internal: "lake",
     display: "Lake",
+    workers: {
+        license: "Local Group Control",
+        description: "Send out \"influencers\" to spread false rumors about specific lakes to free them for your workers",
+        check: "river"
+    },
+    purchased: {
+        price: 100
+    },
 
     initialize() {
         this.state = new fishing.state([

@@ -58,12 +58,10 @@ var counters = {
             .hide()
             .appendTo(parent);
         // create the area counters
-        for (let index of areas.list) {
-            if (index != "shop") {
-                $("<div>")
-                    .attr("id", index + "_counters")
-                    .appendTo(fish);
-            }
+        for (let index of areas.fish_list) {
+            $("<div>")
+                .attr("id", index + "_counters")
+                .appendTo(fish);
         }
 
         shop.money_difference = 0;
@@ -138,7 +136,7 @@ var counters = {
         $("#boat_counters")
             .remove();
 
-        for (let area of areas.list) {
+        for (let area of areas.fish_list) {
             $("#" + area + "_counters")
                 .empty();
         }
