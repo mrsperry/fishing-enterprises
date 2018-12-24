@@ -90,8 +90,8 @@ var settings = {
                     for (let area of areas.fish_list) {
                         window[area].workers.count = 0;
                     }
-                    resources.workers.count = 79;
-                    resources.workers.total = 79;
+                    resources.workers.count = 80;
+                    resources.workers.total = 80;
                     business.update();
                 }
             })
