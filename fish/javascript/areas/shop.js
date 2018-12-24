@@ -57,6 +57,10 @@ var shop = {
                         buttons.create(item.data);
                     }
                 }
+
+                if (item.removed != null && item.removed) {
+                    buttons.remove(item.data.id);
+                }
             }
 
             for (let section of ["bait", "tackle", "misc"]) {
@@ -261,6 +265,10 @@ var shop = {
                         counters.add_auto_buy(resource);
                         shop.remove_item(resource.internal + "_auto_buy");
                         shop.update_money(-item.price);
+
+                        if (resource.internal == "fuel") {
+                            shop.remove_item("buy_fuel");
+                        }
                     },
                     disabled: function() {
                         return resources.money.count < item.price;
