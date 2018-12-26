@@ -81,6 +81,7 @@ var settings = {
                 on_click: function() {
                     areas.switch_area(business);
                     business.purchase();
+                    business.unlocked = true;
                 }
             });
             buttons.create({
