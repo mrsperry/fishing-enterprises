@@ -43,7 +43,7 @@ var shop = {
     },
 
     update() {
-        if (business.unlocked == null) {
+        if (areas.current_area.internal == "shop") {
             vendor.update(this.vendor);
             for (let id in this.buttons) {
                 let item = this.buttons[id];
@@ -57,10 +57,6 @@ var shop = {
                         buttons.create(item.data);
                     }
                 }
-
-                if (item.removed != null && item.removed) {
-                    buttons.remove(item.data.id);
-                }
             }
 
             for (let section of ["bait", "tackle", "misc"]) {
@@ -73,47 +69,49 @@ var shop = {
                 }
             }
             this.check_empty();
-        } else {
-            business.update();
         }
     },
 
     load() {
-        let parent = $("#resource_buttons");
-        $("<div>")
-            .attr("id", "above_section")
-            .appendTo(parent);
-
-        let names = ["Bait", "Tackle", "Misc"];
-        for (let name of names) {
+        if (business.unlocked == null) {
+            let parent = $("#resource_buttons");
             $("<div>")
-                .attr("id", name.toLowerCase() + "_section")
-                .attr("display", name)
-                .addClass("before")
-                .addClass("section")
+                .attr("id", "above_section")
                 .appendTo(parent);
-        }
-        $("#tackle_section")
-            .addClass("section_center")
-        $("#misc_section")
-            .addClass("section_right")
 
-        for (let index in this.buttons) {
-            let item = this.buttons[index];
-            if (this.check_button(item)) {
-                let element = $("#" + item.data.parent);
-                if ($(element)
-                    .is(":hidden")) {
-                    $(element)
-                        .fadeIn();
-                }
-
-                item.data["classes"] = ["button"];
-                buttons.create(item.data);
+            let names = ["Bait", "Tackle", "Misc"];
+            for (let name of names) {
+                $("<div>")
+                    .attr("id", name.toLowerCase() + "_section")
+                    .attr("display", name)
+                    .addClass("before")
+                    .addClass("section")
+                    .appendTo(parent);
             }
-        }
+            $("#tackle_section")
+                .addClass("section_center")
+            $("#misc_section")
+                .addClass("section_right")
 
-        this.check_empty();
+            for (let index in this.buttons) {
+                let item = this.buttons[index];
+                if (this.check_button(item)) {
+                    let element = $("#" + item.data.parent);
+                    if ($(element)
+                        .is(":hidden")) {
+                        $(element)
+                            .fadeIn();
+                    }
+
+                    item.data["classes"] = ["button"];
+                    buttons.create(item.data);
+                }
+            }
+
+            this.check_empty();
+        } else {
+            business.load();
+        }
     },
 
     unload() {
@@ -170,8 +168,6 @@ var shop = {
     },
 
     purchase_item(item) {
-        item.purchased = true;
-
         let element = $("#" + item.internal);
         let parent = $(element)
             .parent();
@@ -202,7 +198,7 @@ var shop = {
         }
 
         counters.update();
-        shop.update();
+        this.update();
     },
 
     purchase_area(name) {
@@ -213,12 +209,12 @@ var shop = {
 
         let data = area.purchased;
 
-        shop.remove_item(name + "_unlock");
-        shop.update_money(-data.price);
+        this.remove_item(name + "_unlock");
+        this.update_money(-data.price);
 
         if (data.buttons != null) {
             for (let item of data.buttons) {
-                shop.add_item(name, item.resource, item.parent);
+                this.add_item(name, item.resource, item.parent);
             }
         }
 
@@ -226,11 +222,11 @@ var shop = {
             area.purchase();
         }
 
-        shop.update();
+        this.update();
     },
 
     add_item(name, item, section) {
-        shop.buttons[item.internal] = {
+        this.buttons[item.internal] = {
             condition: function() {
                 return !$("#" + name + "_button")
                     .is(":hidden");
@@ -252,7 +248,7 @@ var shop = {
     add_auto_buy_items(items) {
         for (let item of items.auto_buys) {
             let resource = item.resource;
-            shop.buttons[resource.internal + "_auto_buy"] = {
+            this.buttons[resource.internal + "_auto_buy"] = {
                 condition: function() {
                     return !$("#" + items.internal + "_button")
                         .is(":hidden");
@@ -280,11 +276,7 @@ var shop = {
 
     remove_item(id) {
         this.buttons[id].removed = true;
-        $("#" + id + "_button")
-            .prop("disabled", true)
-            .fadeOut();
-        $("#" + id + "_break")
-            .remove();
+        buttons.remove(id);
     },
 
     check_button(item) {

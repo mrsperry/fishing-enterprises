@@ -46,6 +46,10 @@ var areas = {
                         text: area.license + " ($" + main.stringify(area.purchased.price) + ")",
                         on_click: function() {
                             shop.purchase_area(index);
+
+                            if (index == "business") {
+                                areas.switch_area(business);
+                            }
                         },
                         disabled: function() {
                             return resources.money.count <= area.purchased.price

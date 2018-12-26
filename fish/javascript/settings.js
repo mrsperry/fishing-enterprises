@@ -79,7 +79,7 @@ var settings = {
                 parent: "right",
                 text: "Unlock business",
                 on_click: function() {
-                    areas.switch_area(window["shop"]);
+                    areas.switch_area(business);
                     business.purchase();
                 }
             });

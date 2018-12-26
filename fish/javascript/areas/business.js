@@ -102,6 +102,9 @@ var business = {
         }
 
         let sections = $("#resource_buttons");
+        $("<div>")
+            .attr("id", "above_section")
+            .appendTo(sections);
 
         let management = $("<div>")
             .attr("id", "management_section")
@@ -243,8 +246,6 @@ var business = {
             .click(function() {
                 areas.switch_area(business);
             });
-            
-        this.load();
     },
 
     change_workers(parent, amount) {
