@@ -76,7 +76,8 @@ var fishing = {
                     // check prerequesite fish
                     if (resources.fish[fish.after] == null || resources.fish[fish.after].caught) {
                         // check if the fish should append to bait
-                        if (fishing.catch(fish, resources.bait[fish.internal] == null ? false : true)) {
+                        if (fishing.catch(fish, resources.bait[fish.internal] == null ? false : true)
+                            || (business.unlocked != null && business.unlocked)) {
                             // subtract the bait
                             if (fish.bait != null) {
                                 for (let bait of fish.bait) {
@@ -209,6 +210,9 @@ var fishing = {
 
             return true;
         } else {
+            if (business.unlocked != null && business.unlocked) {
+                shop.update_money(fish.price);
+            }
             return false;
         }
     },
