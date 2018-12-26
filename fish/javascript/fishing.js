@@ -181,6 +181,10 @@ var fishing = {
             }
             fish.total += amount;
 
+            if (!is_bait) {
+                resources.fish_meta.count += amount;
+            }
+
             // check this after so we don't display the message until after the max has been hit
             if (fish.count == fish.max) {
                 // unlock the shop

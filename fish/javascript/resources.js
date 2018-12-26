@@ -25,6 +25,12 @@ var resources = {
         max: 10
     },
 
+    fish_meta: {
+        internal: "fish_meta",
+        display: "Total fish caught",
+        count: 0
+    },
+
     /* 
         breakdown of the bait/tackle/fish objects
         guppies: {

@@ -38,6 +38,9 @@ var business = {
         let workers = resources.workers.count;
         $("#workers")
             .text("Workers: " + workers);
+        
+        $("#fish_meta_count")
+            .text(main.stringify(resources.fish_meta.count));
 
         for (let index of areas.fish_list) {
             let area = window[index];
@@ -102,9 +105,11 @@ var business = {
         }
 
         let sections = $("#resource_buttons");
-        $("<div>")
-            .attr("id", "above_section")
-            .appendTo(sections);
+        if ($("#above_section").length == 0) {
+            $("<div>")
+                .attr("id", "above_section")
+                .appendTo(sections);
+        }
 
         let management = $("<div>")
             .attr("id", "management_section")
@@ -122,12 +127,15 @@ var business = {
             .addClass("section_top")
             .appendTo(sections);
 
+        counters.create_counter(resources.fish_meta, "above_section");
+
         buttons.create({
             parent: "above_section",
             id: "advisor",
             text: "Financial Advisor",
             on_click: function() {
-                buttons.remove("advisor");
+                $("#above_section")
+                    .empty();
 
                 $("#management_section")
                     .fadeOut(400, function() {
