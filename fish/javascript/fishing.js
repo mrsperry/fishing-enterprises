@@ -173,8 +173,8 @@ var fishing = {
             fish.max_caught = 1;
         }
 
+        let amount = main.random(1, fish.max_caught);
         if (fish.count != fish.max) {
-            let amount = main.random(1, fish.max_caught);
             if (fish.count + amount >= fish.max) {
                 fish.count = fish.max;
             } else {
@@ -211,7 +211,11 @@ var fishing = {
             return true;
         } else {
             if (business.unlocked != null && business.unlocked) {
-                shop.update_money(fish.price);
+                fish.total += amount;
+                if (!is_bait) {
+                    resources.fish_meta.count += amount;
+                    shop.update_money(fish.price);
+                }
             }
             return false;
         }

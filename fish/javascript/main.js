@@ -34,8 +34,20 @@ var main = {
             }
         }
         counters.auto_buy(resources.fuel);
-
         counters.update();
+
+        for (let name of areas.fish_list) {
+            let area = window[name];
+            for (let index = 0; index < area.workers.count; index++) {
+                let fish;
+                do {
+                    fish = area.state.fish[main.random(0, area.state.fish.length - 1)];
+                } while (fish.internal == "minnows");
+                if (fish.caught != null && fish.caught) {
+                    fishing.catch(fish, false);
+                }
+            }
+        }
     },
 
     update_interval(millis) {
