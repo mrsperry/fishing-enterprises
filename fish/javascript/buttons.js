@@ -81,6 +81,7 @@ var buttons = {
 
     remove(id, callback) {
         $("#" + id + "_button")
+            .prop("disabled", true)
             .fadeOut(400, (function() {
                 $("#" + id + "_button")
                     .remove();

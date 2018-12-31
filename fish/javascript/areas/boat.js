@@ -24,8 +24,7 @@ var boat = {
         $("<div>")
             .attr("id", "boat_counters")
             .attr("display", "Boat")
-            .addClass("before")
-            .addClass("counter")
+            .addClass("before counter")
             .fadeIn()
             .appendTo($("#resource_counters"));
         $(counters.create_counter(resources.fuel, "boat_counters"))

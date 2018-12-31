@@ -21,10 +21,7 @@ var settings = {
                 parent: "right",
                 text: "Money +5000",
                 on_click: function() {
-                    resources.money.count += 5000;
-                    counters.update();
-                    shop.update();
-                    business.update();
+                    shop.update_money(5000);
                 }
             });
             buttons.create({
@@ -58,7 +55,6 @@ var settings = {
                 text: "Max fuel",
                 on_click: function() {
                     resources.fuel.count = 30;
-                    counters.update();
                 }
             });
             buttons.create({
@@ -79,8 +75,8 @@ var settings = {
                 parent: "right",
                 text: "Unlock business",
                 on_click: function() {
-                    areas.switch_area(business);
                     business.purchase();
+                    areas.switch_area(business);
                     business.unlocked = true;
                 }
             });
@@ -93,7 +89,11 @@ var settings = {
                     }
                     resources.workers.count = 80;
                     resources.workers.total = 80;
-                    business.update();
+                    business.update_workers();
+                    $("#hire_worker_button")
+                        .find(".button_header_extra")
+                            .text("($" + main.stringify(business.get_worker_cost()) + ")");
+                    vendor.update(business.vendor);
                 }
             })
         } else {
@@ -112,7 +112,6 @@ var settings = {
             $("#" + item.internal)
                 .fadeIn();
         }
-        counters.update();
     },
 
     save_game() {
@@ -348,7 +347,9 @@ var settings = {
         }
 
         counters.load(save);
-        shop.update();
+        if (areas.current_area.internal != "business") {
+            shop.update_buttons();
+        }
     },
 
     save_settings() {

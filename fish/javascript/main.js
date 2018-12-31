@@ -26,15 +26,16 @@ var main = {
     },
 
     update() {
-        areas.current_area.update();
-
+        let area = areas.current_area;
+        if (typeof area.update == "function") {
+            areas.current_area.update();
+        }
         for (let type of ["bait", "tackle"]) {
             for (let index in resources[type]) {
                 counters.auto_buy(resources[type][index]);
             }
         }
         counters.auto_buy(resources.fuel);
-        counters.update();
 
         for (let name of areas.fish_list) {
             let area = window[name];

@@ -39,83 +39,71 @@ var shop = {
     },
 
     initialize() {
-        this.vendor = vendor.create(6, [])
+        this.vendor = vendor.create(6);
     },
 
-    update() {
-        if (areas.current_area.internal == "shop") {
-            vendor.update(this.vendor);
-            for (let id in this.buttons) {
-                let item = this.buttons[id];
-                if ($("#" + item.data.id + "_button").length == 1) {
-                    let disabled = (item.removed != null ? item.removed : item.data.disabled);
-                    $("#" + item.data.id + "_button")
-                        .prop("disabled", disabled);
-                } else {
-                    if (this.check_button(item)) {
-                        item.data["classes"] = ["button"];
-                        buttons.create(item.data);
-                    }
-                }
-            }
-
-            for (let section of ["bait", "tackle", "misc"]) {
-                let element = $("#no_sale_" + section);
-                if (element
-                    .parent()
-                        .children().length > 1) {
-                    $(element)
-                        .remove();
-                }
-            }
-            this.check_empty();
-        }
-    },
-
-    load() {
-        if (business.unlocked == null) {
-            let parent = $("#resource_buttons");
-            $("<div>")
-                .attr("id", "above_section")
-                .appendTo(parent);
-
-            let names = ["Bait", "Tackle", "Misc"];
-            for (let name of names) {
-                $("<div>")
-                    .attr("id", name.toLowerCase() + "_section")
-                    .attr("display", name)
-                    .addClass("before")
-                    .addClass("section")
-                    .appendTo(parent);
-            }
-            $("#tackle_section")
-                .addClass("section_center")
-            $("#misc_section")
-                .addClass("section_right")
-
-            for (let index in this.buttons) {
-                let item = this.buttons[index];
+    update_buttons() {
+        vendor.update(this.vendor);
+        for (let id in this.buttons) {
+            let item = this.buttons[id];
+            if ($("#" + item.data.id + "_button").length == 1) {
+                let disabled = (item.removed != null ? item.removed : item.data.disabled);
+                $("#" + item.data.id + "_button")
+                    .prop("disabled", disabled);
+            } else {
                 if (this.check_button(item)) {
-                    let element = $("#" + item.data.parent);
-                    if ($(element)
-                        .is(":hidden")) {
-                        $(element)
-                            .fadeIn();
-                    }
-
                     item.data["classes"] = ["button"];
                     buttons.create(item.data);
                 }
             }
+        }
 
-            this.check_empty();
-        } else {
-            business.load();
+        for (let section of ["bait", "tackle", "misc"]) {
+            let element = $("#no_sale_" + section);
+            if (element
+                .parent()
+                    .children().length > 1) {
+                $(element)
+                    .remove();
+            }
         }
     },
 
-    unload() {
+    load() {
+        let parent = $("#resource_buttons");
+        $("<div>")
+            .attr("id", "above_section")
+            .appendTo(parent);
 
+        let names = ["Bait", "Tackle", "Misc"];
+        for (let name of names) {
+            $("<div>")
+                .attr("id", name.toLowerCase() + "_section")
+                .attr("display", name)
+                .addClass("before section")
+                .appendTo(parent);
+        }
+        $("#tackle_section")
+            .addClass("section_center")
+        $("#misc_section")
+            .addClass("section_right")
+
+        for (let index in this.buttons) {
+            let item = this.buttons[index];
+            if (this.check_button(item)) {
+                let element = $("#" + item.data.parent);
+                if ($(element)
+                    .is(":hidden")) {
+                    $(element)
+                        .fadeIn();
+                }
+
+                item.data["classes"] = ["button"];
+                buttons.create(item.data);
+            }
+        }
+
+        this.check_empty();
     },
 
     update_money(value) {
@@ -125,9 +113,6 @@ var shop = {
         if (value > 0) {
             resources.money.total += value;
         }
-
-        counters.update();
-        this.update();
 
         let amount = this.money_difference;
         if (amount != 0) {
@@ -139,6 +124,20 @@ var shop = {
                 .fadeOut(1200, function() {
                     shop.money_difference = 0;
                 });
+        }
+
+        if (business.unlocked != null & business.unlocked) {
+            for (let item of business.vendor.shown) {
+                $("#" + item.data.id + "_button")
+                    .prop("disabled", item.data.disabled);
+            }
+
+            vendor.update(business.vendor);
+        }
+
+        counters.update_counter(resources.money);
+        if (areas.current_area.internal == this.internal) {
+            this.update_buttons();
         }
     },
 
@@ -154,8 +153,6 @@ var shop = {
                 }
             }
         }
-
-        counters.update();
 
         return amount;
     },
@@ -197,8 +194,7 @@ var shop = {
             }
         }
 
-        counters.update();
-        this.update();
+        counters.update_counter(item);
     },
 
     purchase_area(name) {
@@ -221,8 +217,6 @@ var shop = {
         if (typeof area.purchase == "function") {
             area.purchase();
         }
-
-        this.update();
     },
 
     add_item(name, item, section) {
@@ -276,6 +270,8 @@ var shop = {
 
     remove_item(id) {
         this.buttons[id].removed = true;
+        $("#" + id + "_button")
+            .prop("disabled", true);
         buttons.remove(id);
     },
 

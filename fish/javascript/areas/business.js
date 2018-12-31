@@ -18,11 +18,26 @@ var business = {
             },
             text: "Hire a worker to be assigned to an available area",
             on_click: function() {
-                shop.update_money(-business.get_worker_cost());
+                let cost = business.get_worker_cost();
+                shop.update_money(-cost);
 
                 resources.workers.count += 1;
                 resources.workers.total += 1;
-                business.update();
+                cost += 100;
+                
+                $(this)
+                    .prop("disabled", resources.money.count < cost)
+                    .find(".button_header_extra")
+                        .text("($" + main.stringify(cost) + ")");
+            
+                business.update_workers();
+                vendor.update(business.vendor);
+            },
+            disabled: function() {
+                return resources.money.count < business.get_worker_cost();
+            },
+            removed: function() {
+                return resources.workers.total == 80;
             }
         }
     },
@@ -30,71 +45,6 @@ var business = {
     initialize() {
         this.vendor = vendor.create(5);
         vendor.add_item(this.vendor, this.hire_worker);
-    },
-
-    update() {
-        vendor.update(this.vendor);
-
-        let workers = resources.workers.count;
-        $("#workers")
-            .text("Workers: " + workers);
-        
-        $("#fish_meta_count")
-            .text(main.stringify(resources.fish_meta.count));
-
-        for (let index of areas.fish_list) {
-            let area = window[index];
-
-            $("#" + index + "_worker_count")
-                .text(area.workers.count);
-
-            let enabled = area.workers.enabled == null ? false : area.workers.enabled;
-            let min = true;
-            let check = false;
-            if (index != "lake") {
-                if (index == "reef") {
-                    min = pier.workers.count >= reef.workers.min;
-                } else {
-                    min = window[area.unlock].workers.count >= area.workers.min;
-                }
-            }
-            if (index != "deep_sea") {
-                let check_workers = window[area.workers.check].workers;
-                check = (check_workers.count > 0
-                    && check_workers.min == area.workers.count);
-            }
-
-            $("#" + index + "_worker_buttons_left")
-                .children()
-                    .prop("disabled", area.workers.count == 0 || !enabled || check);
-            $("#" + index + "_worker_buttons_right")
-                .children()
-                    .prop("disabled", workers == 0 || !enabled || !min);
-        }
-
-        let worker_button = $("#hire_worker_button");
-        $(worker_button)
-            .prop("disabled", (business.get_worker_cost() > resources.money.count))
-            .find(".button_header_extra")
-                .text("($" + main.stringify(this.get_worker_cost()) + ")");
-        if (resources.workers.total == 80) {
-            vendor.remove_item(this.vendor, "hire_worker", this.check_empty);
-        }
-
-        for (let item of this.vendor.shown) {
-            $("#" + item.data.id + "_button")
-                .prop("disabled", item.data.disabled);
-        }
-
-        let element = $("#no_investments");
-        if (element
-            .parent()
-                .children().length > 1) {
-            $(element)
-                .remove();
-        }
-
-        this.check_empty();
     },
 
     load() {
@@ -114,29 +64,23 @@ var business = {
         let management = $("<div>")
             .attr("id", "management_section")
             .attr("display", "Management")
-            .addClass("before")
-            .addClass("section")
+            .addClass("before section")
             .appendTo(sections);
 
-        $("<div>")
+        let investments = $("<div>")
             .attr("id", "investments_section")
             .attr("display", "Investments")
-            .addClass("before")
-            .addClass("section")
-            .addClass("section_center")
-            .addClass("section_top")
+            .addClass("before section section_center section_top")
             .appendTo(sections);
 
         counters.create_counter(resources.fish_meta, "above_section");
+        counters.update_counter(resources.fish_meta);
 
         buttons.create({
             parent: "above_section",
             id: "advisor",
             text: "Financial Advisor",
             on_click: function() {
-                $("#above_section")
-                    .empty();
-
                 $("#management_section")
                     .fadeOut(400, function() {
                         $(this)
@@ -146,15 +90,16 @@ var business = {
                     .fadeOut(400, function() {
                         $(this)
                             .remove();
+                    });
+                $("#above_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .empty();
 
                         business.load_advisor();
                     });
             }
         });
-
-        for (let index of this.vendor.shown) {
-            buttons.create(index.data);
-        }
 
         if (resources.workers.total != 80) {
             if (!vendor.registered_item(this.vendor, "hire_worker")) {
@@ -162,11 +107,31 @@ var business = {
             }
         }
 
+        vendor.update(this.vendor);
+        for (let item of this.vendor.shown) {
+            if ($("#" + item.data.id + "_button").length == 0) {
+                buttons.create(item.data);
+            }
+        }
+    
+        if (this.vendor.shown.length == 0) {
+            $("<div>")
+                .attr("id", "no_investments")
+                .text("No investments available!")
+                .appendTo(investments);
+        } else {
+            $("#hire_worker_button")
+                .find(".button_header_extra")
+                    .text("($" + main.stringify(this.get_worker_cost()) + ")");
+        }
+
         let workers = resources.workers;
         $("<div>")
             .attr("id", "workers_counter")
             .appendTo(management);
         counters.create_counter(workers, "workers_counter");
+        $("#workers_count")
+            .text(resources.workers.count);
         $("<div>")
             .addClass("counter_break")
             .appendTo(management);
@@ -175,8 +140,7 @@ var business = {
             let area = window[index];
             let parent = $("<div>")
                 .attr("id", index + "_workers")
-                .addClass("worker_area")
-                .addClass("counter_header")
+                .addClass("worker_area counter_header")
                 .text(area.display)
                 .appendTo(management);
             $("<div>")
@@ -202,6 +166,7 @@ var business = {
                 classes: ["worker_button"],
                 text: "<<",
                 breaks: 0,
+                disabled: true,
                 on_click: function() {
                     business.change_workers(index, -10);
                 }
@@ -211,6 +176,7 @@ var business = {
                 classes: ["worker_button"],
                 text: "<",
                 breaks: 0,
+                disabled: true,
                 on_click: function() {
                     business.change_workers(index, -1);
                 }
@@ -220,6 +186,7 @@ var business = {
                 classes: ["worker_button"],
                 text: ">",
                 breaks: 0,
+                disabled: true,
                 on_click: function() {
                     business.change_workers(index, 1);
                 }
@@ -229,6 +196,7 @@ var business = {
                 classes: ["worker_button"],
                 text: ">>",
                 breaks: 0,
+                disabled: true,
                 on_click: function() {
                     business.change_workers(index, 10);
                 }
@@ -241,15 +209,13 @@ var business = {
             }
         }
 
-        this.update();
-    },
-
-    unload() {
-
+        this.update_workers();
     },
 
     purchase() {
         $("#shop_button")
+            .attr("id", "business_button")
+            .text("Business")
             .off("click")
             .click(function() {
                 areas.switch_area(business);
@@ -285,7 +251,43 @@ var business = {
         $("#" + parent + "_worker_count")
             .text(workers.count);
 
-        this.update();
+        this.update_workers();
+    },
+
+    update_workers() {
+        workers = resources.workers.count;
+        $("#workers")
+            .text("Workers: " + workers);
+        
+        for (let index of areas.fish_list) {
+            area = window[index];
+
+            $("#" + index + "_worker_count")
+                .text(area.workers.count);
+
+            let enabled = area.workers.enabled == null ? false : area.workers.enabled;
+            let min = true;
+            let check = false;
+            if (index != "lake") {
+                if (index == "reef") {
+                    min = pier.workers.count >= reef.workers.min;
+                } else {
+                    min = window[area.unlock].workers.count >= area.workers.min;
+                }
+            }
+            if (index != "deep_sea") {
+                let check_workers = window[area.workers.check].workers;
+                check = (check_workers.count > 0
+                    && check_workers.min == area.workers.count);
+            }
+
+            $("#" + index + "_worker_buttons_left")
+                .children()
+                    .prop("disabled", area.workers.count == 0 || !enabled || check);
+            $("#" + index + "_worker_buttons_right")
+                .children()
+                    .prop("disabled", workers == 0 || !enabled || !min);
+        }
     },
 
     get_worker_cost() {
@@ -305,6 +307,8 @@ var business = {
     },
 
     load_advisor() {
+        $("#above_section")
+            .show();
         buttons.create({
             parent: "above_section",
             id: "advisor",
@@ -336,9 +340,7 @@ var business = {
         $("<div>")
             .attr("id", "stocks_section")
             .attr("display", "Stocks")
-            .addClass("section")
-            .addClass("section_middle")
-            .addClass("before")
+            .addClass("section section_middle before")
             .appendTo(parent);
     }
 }

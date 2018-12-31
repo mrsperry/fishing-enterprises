@@ -7,7 +7,7 @@ var counters = {
             .text("Money: $")
             .appendTo(parent);
         $("<span>")
-            .attr("id", "money")
+            .attr("id", "money_count")
             .text("0")
             .appendTo(money);
         $("<span>")
@@ -20,8 +20,7 @@ var counters = {
         $("<div>")
             .attr("id", "bait_counters")
             .attr("display", "Bait")
-            .addClass("before")
-            .addClass("counter")
+            .addClass("before counter")
             .hide()
             .appendTo(parent);
         for (let index in resources.bait) {
@@ -35,9 +34,7 @@ var counters = {
         $("<div>") 
             .attr("id", "tackle_counters")
             .attr("display", "Tackle")
-            .addClass("before")
-            .addClass("tackle")
-            .addClass("counter")
+            .addClass("before tackle counter")
             .hide()
             .appendTo(parent);
         for (let index in resources.tackle) {
@@ -53,8 +50,7 @@ var counters = {
         let fish = $("<div>")
             .attr("id", "fish_counters")
             .attr("display", "Fish")
-            .addClass("before")
-            .addClass("counter")
+            .addClass("before counter")
             .hide()
             .appendTo(parent);
         // create the area counters
@@ -67,19 +63,7 @@ var counters = {
         shop.money_difference = 0;
     },
 
-    update() {
-        let keys = ["bait", "tackle", "fish"];
-        for (let type of keys) {
-            for (let index in resources[type]) {
-                let item = resources[type][index];
-                this.update_counter(item, item.internal + "_count");
-            }
-        }
-        this.update_counter(resources.money, "money");
-        this.update_counter(resources.fuel, "fuel_count");
-    },
-
-    update_counter(item, id) {
+    update_counter(item) {
         if (item.count > 0) {
             let element = $("#" + item.internal)
             $(element)
@@ -92,11 +76,11 @@ var counters = {
             }
         }
 
-        let max = item.count == item.max;
-        $("#" + id)
+        let max = (item.count == item.max);
+        $("#" + item.internal + "_count")
             .text(main.stringify(item.count == null ? 0 : item.count))
             .css("opacity", max ? 0.5 : 1.0);
-            
+
         if (max && (item.show_max == null || !item.show_max)) {
             this.show_max(item);
         }
@@ -170,6 +154,8 @@ var counters = {
                     if (item.auto_buy) {
                         this.add_auto_buy(resources[type][index]);
                     }
+
+                    this.update_counter(resources[type][index]);
                 }
             }
         }
@@ -181,7 +167,8 @@ var counters = {
             }
         }
 
-        this.update();
+        this.update_counter(resources.fuel);
+        this.update_counter(resources.money);
     },
 
     create_counter(item, id) {
@@ -260,7 +247,9 @@ var counters = {
     auto_buy(item) {
         if (item.auto_buy != null && item.auto_buy) {
             if (resources.money.count >= item.price) {
-                shop.purchase_item(item);
+                if (item.count != item.max) {
+                    shop.purchase_item(item);
+                }
             }
         }
     }

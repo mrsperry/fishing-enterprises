@@ -1,5 +1,6 @@
 var resources = {
     money: {
+        internal: "money",
         message: "money often costs too much, but I doubt the fish care",
         count: 0,
         total: 0

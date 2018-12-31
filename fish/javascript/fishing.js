@@ -82,17 +82,20 @@ var fishing = {
                             if (fish.bait != null) {
                                 for (let bait of fish.bait) {
                                     resources.bait[bait.type].count -= bait.amount;
+                                    counters.update_counter(resources.bait[bait.type]);
                                 }
                             }
                             // subtract the tackle
                             if (fish.tackle != null) {
                                 for (let tackle of fish.tackle) {
                                     resources.tackle[tackle.type].count -= tackle.amount;
+                                    counters.update_counter(resources.tackle[tackle.type]);
                                 }
                             }
                             // subtract the fuel
                             if (use_fuel) {
                                 resources.fuel.count--;
+                                counters.update_counter(resources.fuel);
                             }
                         }
 
@@ -205,8 +208,8 @@ var fishing = {
                         .prop("disabled", (fish.count == fish.max));
                 }
             }
-            
-            counters.update();
+
+            counters.update_counter(fish);
 
             return true;
         } else {
@@ -216,6 +219,9 @@ var fishing = {
                     resources.fish_meta.count += amount;
                     shop.update_money(fish.price);
                 }
+
+                $("#fish_meta_count")
+                    .text(main.stringify(resources.fish_meta.count));
             }
             return false;
         }

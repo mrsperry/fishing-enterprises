@@ -52,10 +52,11 @@ var areas = {
                             }
                         },
                         disabled: function() {
+                            let length = (index == "business" ? $("#misc_section").children().length : 0);
                             return resources.money.count <= area.purchased.price
                                 // disable the pier until the river troll has been talked to
                                 || (index == "pier" ? !river.queue_change : false)
-                                || (index == "business" ? !($("#misc_section").children().length == 2) : false);
+                                || (index == "business" ? !(length == 1 || length == 2) : false);
                         }
                     }
                 }
@@ -90,7 +91,7 @@ var areas = {
                             area.workers.enabled = true;
                             shop.update_money(-(area.purchased.price * 10));
                             vendor.remove_item(business.vendor, index + "_worker_unlock", business.check_empty);
-                            business.update();
+                            business.update_workers();
                         },
                         disabled: function() {
                             let enabled;
@@ -103,7 +104,7 @@ var areas = {
                                 enabled = workers == null ? false : workers;
                             }
 
-                            return resources.money.count <= (area.purchased.price * 10)
+                            return resources.money.count < (area.purchased.price * 10)
                                 || !enabled;
                         }
                     }
@@ -129,7 +130,9 @@ var areas = {
             .prop("disabled", true);
 
         if (this.current_area != null) {
-            this.current_area.unload();
+            if (typeof this.current_area.unload == "function") {
+                this.current_area.unload();
+            }
         }
 
         area.load();

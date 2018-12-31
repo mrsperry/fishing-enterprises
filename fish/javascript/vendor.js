@@ -27,7 +27,8 @@ let vendor = {
             let item = vendor.shown[index];
 
             // check if the button should be removed
-            if (item.data.removed != null && item.data.removed) {
+            let removed = (typeof item.data.removed == "function" ? item.data.removed() : item.data.removed);
+            if (removed != null && removed) {
                 // remove the button
                 buttons.remove(item.data.id, function() {
                     vendor.remove_index(vendor, index);
