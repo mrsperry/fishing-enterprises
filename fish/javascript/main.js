@@ -49,6 +49,8 @@ var main = {
                 }
             }
         }
+
+        news.update();
     },
 
     update_interval(millis) {

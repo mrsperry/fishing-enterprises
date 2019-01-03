@@ -60,6 +60,15 @@ var business = {
                 .attr("id", "above_section")
                 .appendTo(sections);
         }
+        
+        let news_section = $("<div>")
+            .attr("id", "news_section")
+            .attr("display", "News")
+            .addClass("before")
+            .appendTo(sections);
+        $("<div>")
+            .attr("id", "news_container")
+            .appendTo(news_section);
 
         let management = $("<div>")
             .attr("id", "management_section")
@@ -81,6 +90,11 @@ var business = {
             id: "advisor",
             text: "Financial Advisor",
             on_click: function() {
+                $("#news_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                    });
                 $("#management_section")
                     .fadeOut(400, function() {
                         $(this)
@@ -141,8 +155,12 @@ var business = {
             let parent = $("<div>")
                 .attr("id", index + "_workers")
                 .addClass("worker_area counter_header")
-                .text(area.display)
                 .appendTo(management);
+            $("<div>")
+                .attr("id", index + "_workers_header")
+                .addClass("counter_header")
+                .text(area.display)
+                .appendTo(parent);
             $("<div>")
                 .addClass("counter_break")
                 .appendTo(parent);
@@ -210,6 +228,7 @@ var business = {
         }
 
         this.update_workers();
+        news.generate();
     },
 
     purchase() {

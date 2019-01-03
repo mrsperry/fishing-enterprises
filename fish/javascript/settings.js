@@ -95,7 +95,25 @@ var settings = {
                             .text("($" + main.stringify(business.get_worker_cost()) + ")");
                     vendor.update(business.vendor);
                 }
-            })
+            });
+            buttons.create({
+                parent: "right",
+                text: "News",
+                on_click: function() {
+                    $("#news_text")
+                        .remove();
+                    news.generate_significant_news();
+                }
+            });
+            buttons.create({
+                parent: "right",
+                text: "Non News",
+                on_click: function() {
+                    $("#news_text")
+                        .remove();
+                    news.generate_insignificant_news();
+                }
+            });
         } else {
             this.dev = false;
             $("#right")

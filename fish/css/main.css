@@ -209,6 +209,21 @@ of the container of the body :^) */
     left: 123px;
 }
 
+#news_section {
+    position: relative;
+    margin: 13px 0px 5px 0px;
+}
+
+#news_container {
+    position: absolute;
+    overflow: hidden;
+}
+
+#news_section, #news_container {
+    width: 506px;
+    height: 32px;
+}
+
 #management_section {
     width: 150px;
 }
@@ -224,6 +239,19 @@ of the container of the body :^) */
     white-space: nowrap;
     font-size: 10pt;
     text-align: center;
+}
+
+@keyframes scrolling_text {
+    0% { left: 100%; }
+    100% { left: -150%; }
+}
+
+#news_text {
+    position: absolute;
+    text-align: left;
+    white-space: nowrap;
+    margin: 7px 0px 0px 0px;
+    animation: scrolling_text 15s linear;
 }
 
 .section {

@@ -1,4 +1,6 @@
 var fishing = {
+    locked_areas: [],
+
     state: function(fish) {
         this.is_fishing = false;
 
@@ -217,7 +219,16 @@ var fishing = {
                 fish.total += amount;
                 if (!is_bait) {
                     resources.fish_meta.count += amount;
-                    shop.update_money(fish.price);
+
+                    let update = true;
+                    for (let index of fishing.locked_areas) {
+                        if (index.area == fish.area) {
+                            update = false;
+                        }
+                    }
+                    if (update) {
+                        shop.update_money(fish.price);
+                    }
                 }
 
                 $("#fish_meta_count")
