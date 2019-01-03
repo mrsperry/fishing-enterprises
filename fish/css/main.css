@@ -98,6 +98,7 @@ button:disabled {
 /* history panel */
 #history_panel {
     margin-bottom: 15px;
+    width: 1056px;
 }
 
 .history {

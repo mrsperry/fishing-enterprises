@@ -126,7 +126,7 @@ var news = {
         "colonization of the Moon",
         "sunglasses",
         "social media",
-        "the Internet",
+        "the internet",
         "cats",
         "breadsticks",
         "vapes",
@@ -159,8 +159,8 @@ var news = {
         ", scientists agree.",
         ", in the face of a high chance of rain.",
         ", lawsuits continue to pile up.",
-        ", how will the President respond?",
-        ", the Government may shut down.",
+        ", how will the president respond?",
+        ", the government may shut down.",
         ", riots begin to break out.",
         ", you won't believe what happens next!",
         ", and the results are spectacular!",
@@ -175,7 +175,7 @@ var news = {
         for (let index = 0; index < fishing.locked_areas.length; index++) {
             let item = fishing.locked_areas[index];
             item.days--;
-            console.log(item.days);
+
             if (item.days == 0) {
                 indices.push(index);
             }
@@ -204,7 +204,6 @@ var news = {
     generate() {
         if (main.random(1, 5) == 1) {
             if (fishing.locked_areas.length < 4) {
-                console.log("significant!");
                 this.generate_significant_news();
                 return;
             }
