@@ -70,7 +70,7 @@ var news = {
         "received excess cargo containing",
         "discovered disease in",
         "found counterfeit",
-        "encountered a budget issue with",
+        "encountered a budget issue regarding",
         "does not want to overfish",
         "considers the morals of harvesting"
     ],
@@ -88,7 +88,7 @@ var news = {
         "starts debates about",
         "starts revitalization of",
         "has banned",
-        "de-materialize",
+        "de-materializes",
         "eliminates",
         "cancels",
         "ruins",
@@ -110,7 +110,7 @@ var news = {
         "hats",
         "pigeons",
         "ice water",
-        "lemonaide",
+        "lemonade",
         "peacocks",
         "facial masks",
         "fidget spinners",
@@ -136,7 +136,12 @@ var news = {
         "paper",
         "barbecue sauce",
         "ranch dressing",
-        "dog treats"
+        "dog treats",
+        "ketchup",
+        "napkins",
+        "diapers",
+        "wine",
+        "pillows"
     ],
 
     effects: [
@@ -165,7 +170,7 @@ var news = {
         ", you won't believe what happens next!",
         ", and the results are spectacular!",
         ", this story will shake you!",
-        ", we were left speachless!",
+        ", we were left speechless!",
         ", see for yourself.",
         ", could they be hiding something?"
     ],
