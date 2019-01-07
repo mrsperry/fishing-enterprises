@@ -67,6 +67,10 @@ var buttons = {
         if (options.hide == true) {
             $(element)
                 .hide();
+        } else {
+            $(element)
+                .hide()
+                .fadeIn();
         }
 
         // add a line break so buttons aren't next to each other
