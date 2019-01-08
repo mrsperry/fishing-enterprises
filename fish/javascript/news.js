@@ -14,14 +14,14 @@ var news = {
         "Germany", 
         "Sweden",
         "The Netherlands", 
-        "The United Kingdom", 
+        "The UK", 
         "Denmark", 
         "Portugal",
         "Poland",
         // latin american/carribean
         "Brazil",
         // north american
-        "The United States", 
+        "The US", 
         "Canada"
     ],
     // imports less than 1 billion
@@ -175,6 +175,8 @@ var news = {
         ", could they be hiding something?"
     ],
 
+    previous: {},
+
     update() {
         let indices = [];
         for (let index = 0; index < fishing.locked_areas.length; index++) {
@@ -219,37 +221,64 @@ var news = {
 
     generate_significant_news() {
         if ($("#news_text").length == 0) {
-            let list = this.major_importers;
-            
-            let country = list[main.random(0, list.length - 1)];
-            let modifier = this.modifiers[main.random(0, this.modifiers.length - 1)];
-            let area;
-            let days = main.random(7, 35);
-
-            let check = (area) => {
-                for (let index of fishing.locked_areas) {
-                    if (index.area == area.internal) {
-                        return true;
+            if (areas.fish_list.length != fishing.locked_areas.length) {
+                let previous = this.previous.significant;
+                if (previous == null) {
+                    previous = {
+                        country: null,
+                        modifier: null,
+                        area: null,
+                        days: null
                     }
                 }
-                return false;
+                
+                let check = (area) => {
+                    for (let index of fishing.locked_areas) {
+                        if (index.area == area.internal) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                let list = this.major_importers;
+                let country;
+                let modifier;
+                let area;
+                let days;
+                do {
+                    country = list[main.random(0, list.length - 1)];
+                } while (country == previous.country);
+                do {
+                    modifier = this.modifiers[main.random(0, this.modifiers.length - 1)];
+                } while (modifier == previous.modifier);
+                do {
+                    area = window[areas.fish_list[main.random(0, areas.fish_list.length - 1)]];
+                } while (check(area));
+                do {
+                    days = main.random(7, 35);
+                } while (country == previous.country);
+
+                this.previous.significant = {
+                    country: country,
+                    modifier: modifier,
+                    area: area,
+                    days: days
+                }
+
+                let result = country + " " + modifier + " \"" + area.display + "\" fish.";
+
+                messenger.write_message(result + " No profits will be gained from these fish for " + days + " days.");
+                this.create_element(result);
+
+                fishing.locked_areas.push({
+                    area: area.internal,
+                    days: days
+                });
+
+                $("#" + area.internal + "_workers_header")
+                    .css("opacity", 0.5);
             }
-            do {
-                area = window[areas.fish_list[main.random(0, areas.fish_list.length - 1)]];
-            } while (check(area));
-            
-            let result = country + " " + modifier + " \"" + area.display + "\" fish.";
-
-            messenger.write_message(result + " No profits will be gained from these fish for " + days + " days.");
-            this.create_element(result);
-
-            fishing.locked_areas.push({
-                area: area.internal,
-                days: days
-            });
-
-            $("#" + area.internal + "_workers_header")
-                .css("opacity", 0.5);
         }
     },
 
@@ -257,20 +286,44 @@ var news = {
         if ($("#news_text").length == 0) {
             let result = "";
 
+            let previous = this.previous.insignificant;
+            if (previous == null) {
+                previous = {
+                    country: null,
+                    actions: null,
+                    subjects: null,
+                    effects: null
+                }
+            }
+
+            let countries = $.merge($.merge([], this.major_importers), this.minor_importers);
+            let country;
+            do {
+                country = countries[main.random(0, countries.length - 1)];
+            } while (country == previous.country);
+            result += country + " ";
+            previous.country = country;
+
             let components = [
-                (main.random(0, 1) == 1 ? "major_importers" : "minor_importers"), 
                 "actions",
                 "subjects",
                 "effects"
             ];
             for (let component of components) {
                 let list = this[component];
-                result += list[main.random(0, list.length - 1)];
+                let item;
+                do {
+                    item = list[main.random(0, list.length - 1)];
+                } while (item == previous[component]);
+
+                result += item;
+                previous[component] = item;
 
                 if (component != "subjects") {
                     result += " ";
                 }
             }
+            this.previous.insignificant = previous;
 
             this.create_element(result.substring(0, result.length - 1));
         }

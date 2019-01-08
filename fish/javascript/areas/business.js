@@ -228,7 +228,7 @@ var business = {
         }
 
         this.update_workers();
-        news.generate();
+        news.generate_insignificant_news();
     },
 
     purchase() {
