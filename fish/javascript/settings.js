@@ -129,6 +129,7 @@ var settings = {
             item.count = item.max;
             $("#" + item.internal)
                 .fadeIn();
+            counters.update_counter(item);
         }
     },
 
