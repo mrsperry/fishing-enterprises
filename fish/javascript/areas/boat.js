@@ -90,5 +90,6 @@ var boat = {
         }
 
         reef.purchase();
+        shop.update_buttons();
     }
 }
