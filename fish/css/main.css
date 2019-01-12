@@ -221,7 +221,6 @@ of the container of the body :^) */
 }
 
 #news_section, #news_container {
-    width: 506px;
     height: 32px;
 }
 
@@ -229,10 +228,31 @@ of the container of the body :^) */
     width: 150px;
 }
 
-#advisor_button {
+#opportunities_button {
     position: absolute;
     margin-top: 5px;
     left: 364px;
+}
+
+#morality_section {
+    position: absolute;
+    margin: 3px 0px 0px 6px;
+}
+
+#morality_header {
+    text-align: center;
+}
+
+#opportunities_section {
+    margin: 50px 0px 0px 3px;
+}
+
+#opportunity_end_button {
+    margin-top: 55px;
+}
+
+#continue_button {
+    margin-left: 178px;
 }
 
 #no_investments {
@@ -260,6 +280,10 @@ of the container of the body :^) */
     display: inline-block;
 }
 
+.section_span {
+    width: 506px;
+}
+
 .section_center {
     position: absolute;
     margin-left: 5px;
@@ -276,6 +300,38 @@ of the container of the body :^) */
 
 .section_bottom {
     width: 200px;
+}
+
+.situation {
+    margin-left: 87px;
+    cursor: default;
+}
+
+.situation:disabled {
+    opacity: 1.0;
+}
+
+.connecter {
+    white-space: pre;
+    margin-left: 120px;
+}
+
+.connecter_bottom {
+    position: absolute;
+    margin-top: 109px;
+}
+
+.choice {
+    width: 243px;
+    height: 100px;
+}
+
+.choice_left {
+    float: left;
+}
+
+.choice_right {
+    float: right;
 }
 
 .no_sale {
@@ -302,17 +358,20 @@ of the container of the body :^) */
     padding: 0px 20px;
 }
 
-#header {
-    text-align: center;
-}
-
 #close_button {
     margin-top: 10px;
-    margin-left: 30%;
     bottom: 5px;
 }
 
 p#save_intervals {
     margin: 0px;
+    text-align: center;
+}
+
+#settings_div {
+    text-align: left;
+}
+
+.centered {
     text-align: center;
 }

@@ -141,7 +141,10 @@ var news = {
         "napkins",
         "diapers",
         "wine",
-        "pillows"
+        "pillows",
+        "french fries",
+        "onion rings",
+        "towels"
     ],
 
     effects: [
@@ -181,15 +184,22 @@ var news = {
         let indices = [];
         for (let index = 0; index < fishing.locked_areas.length; index++) {
             let item = fishing.locked_areas[index];
-            item.days--;
+            $("#" + item.area +"_timer")
+                .text(" (" + --item.days + ")");
 
             if (item.days == 0) {
                 indices.push(index);
             }
         }
         for (let index of indices.reverse()) {
-            $("#" + fishing.locked_areas[index].area + "_workers_header")
+            let area = fishing.locked_areas[index].area;
+            $("#" + area + "_workers_header")
                 .css("opacity", 1.0);
+            $("#" + area + "_timer")
+                .fadeOut(400, function() {
+                    $(this)
+                        .remove();
+                });
 
             fishing.locked_areas.splice(index, 1);
         }
@@ -275,6 +285,11 @@ var news = {
                     area: area.internal,
                     days: days
                 });
+
+                $("<span>")
+                    .attr("id", area.internal + "_timer")
+                    .text(" (" + days + ")")
+                    .appendTo($("#" + area.internal + "_workers_header"));
 
                 $("#" + area.internal + "_workers_header")
                     .css("opacity", 0.5);

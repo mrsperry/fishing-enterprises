@@ -41,7 +41,7 @@ let vendor = {
 
             // check if the button should be disabled
             $("#" + item.data.id)
-                .prop("disabled", (item.data.disabled == null ? false : item.data.disabled));
+                .prop("disabled", (item.data.disabled == null ? false : item.data.disabled()));
         }
     },
 
@@ -59,7 +59,7 @@ let vendor = {
             }
 
             // check if the item's display condition has been met
-            if (item.condition == null || item.condition) {
+            if (item.condition == null || item.condition()) {
                 // mark the index for removal
                 indices.push(index);
 

@@ -65,7 +65,7 @@ var counters = {
 
     update_counter(item) {
         if (item.count > 0) {
-            let element = $("#" + item.internal)
+            let element = $("#" + item.internal);
             $(element)
                 .fadeIn();
             if ($(element)

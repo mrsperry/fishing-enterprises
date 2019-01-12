@@ -125,19 +125,21 @@ var shop = {
                     shop.money_difference = 0;
                 });
         }
+        
+        counters.update_counter(resources.money);
 
-        if (business.unlocked != null & business.unlocked) {
+        let internal = areas.current_area.internal;
+        if (internal == this.internal) {
+            this.update_buttons();
+        } else if (internal == "business") {
             for (let item of business.vendor.shown) {
                 $("#" + item.data.id + "_button")
                     .prop("disabled", item.data.disabled);
             }
 
             vendor.update(business.vendor);
-        }
 
-        counters.update_counter(resources.money);
-        if (areas.current_area.internal == this.internal) {
-            this.update_buttons();
+            opportunities.update();
         }
     },
 

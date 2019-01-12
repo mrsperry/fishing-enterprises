@@ -55,6 +55,10 @@ div.before:before {
     background: #222222;
 }
 
+.situation:disabled {
+    background-color: #222222;
+}
+
 /* about/settings popup */
 #overlay {
     background-color: rgba(0, 0, 0, 0.7);

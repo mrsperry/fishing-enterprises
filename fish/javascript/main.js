@@ -1,5 +1,5 @@
 var main = {
-    version: 0.1,
+    version: "dev-0.2",
 
     initialize(interval) {
         counters.initialize();
@@ -119,8 +119,23 @@ var main = {
         messenger.reset();
     },
 
+    end() {
+        let text = $.parseHTML("Congratulations you've reached the end of the game -- for now!<br><br>"
+            + "<span id='restart' class='link'>Click here to restart the game.</span><br><br>"
+            + "You can <a class='link' target='_blank' href='https://twitter.com/FishEnterprises'>follow my Twitter</a> for releases, "
+            + "donate via <a class='link' target='_blank' href='https://paypal.me/fishingenterprises'>Paypal</a> "
+            + "or support me and get frequent updates and changelogs with <a class='link' target='_blank' href='https://www.patreon.com/fishingenterprises'>Patreon</a>.<br><br>"
+            + "I hope you enjoyed your time and continue playing!");
+        this.create_popup("Goodbye", text);
+
+        $("#restart")
+            .click(function () {
+                settings.restart_game();
+            });
+    },
+
     show_settings() {
-        let text = $.parseHTML("Color theme: "
+        let text = $.parseHTML("<div id='settings_div'>Color theme: "
             + "<span id='lights_on' class='link' onclick='lights.toggle(true)'>light</span> | "
             + "<span id='lights_off' class='link' onclick='lights.toggle(false)'>dark</span><br><br>"
             + "Saves: "
@@ -136,7 +151,7 @@ var main = {
             + "<span id='dev_enable' class='link' onclick='settings.toggle_dev_tools(true)'>enable</span> | "
             + "<span id='dev_disable' class='link' onclick='settings.toggle_dev_tools(false)'>disable</span><br><br>"
             + "<span id='version'></span>"
-            + "<br>");
+            + "<br></div>");
         this.create_popup("Settings", text);
 
         $("#lights_" + (lights.lights ? "on" : "off"))
@@ -180,20 +195,31 @@ var main = {
             + "<a class='link' target='_blank' href='https://www.javascript.com/'>Javascript</a> with "
             + "<a class='link' target='_blank' href='https://jquery.com/'>jQuery</a> "
             + "and is freely avaliable to view on "
-            + "<a class='link' target='_blank' href='https://github.com/mrsperry/mrsperry.github.io'>my Github</a>.");
+            + "<a class='link' target='_blank' href='https://github.com/mrsperry/mrsperry.github.io'>my Github</a>.<br>");
         this.create_popup("About", text);
+    },
+
+    show_support() {
+        let text = $.parseHTML("Donate to me <a class='link' target='_blank' href='https://paypal.me/fishingenterprises'>via Paypal</a>.<br><br>"
+            + "Follow the <a class='link' target='_blank' href='https://twitter.com/FishEnterprises'>official Twitter</a>.<br><br>"
+            + "Email me kind words at mrjoshuasperry@gmail.com<br><br>"
+            + "For additional benefits you can subscribe to the official <a class='link' target='_blank' href='https://www.patreon.com/fishingenterprises'>Patreon page</a>."
+            + "<br><br>");
+        this.create_popup("Support Me", text);
     },
     
     create_popup(header, text) {
         let overlay =  $("<div>")
             .attr("id", "overlay")
+            .hide()
+            .fadeIn()
             .appendTo($("body"));
         let popup = $("<div>")
             .attr("id", "popup")
             .appendTo(overlay);
 
         let head = $("<h3>")
-            .attr("id", "header")
+            .addClass("centered")
             .text(header)
             .appendTo(popup);
         $("<div>")
@@ -202,20 +228,24 @@ var main = {
 
         let content = $("<p>")
             .attr("id", "content")
+            .addClass("centered")
             .appendTo(popup);
+                
         $(text)
             .appendTo(content);
 
-        buttons.create({
-            parent: "content",
-            id: "close",
-            text: "Close",
-            breaks: 0,
-            on_click: function() {
-                $(overlay)
-                    .remove();
-            }
-        });
+        if (header != "Goodbye") {
+            buttons.create({
+                parent: "content",
+                id: "close",
+                text: "Close",
+                breaks: 0,
+                on_click: function() {
+                    $(overlay)
+                        .remove();
+                }
+            });
+        }
         return popup;
     },
 
@@ -242,5 +272,10 @@ var main = {
     // adds commas to a number where neccessary ex: 1000 -> 1,000
     stringify(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+
+    // replaces all occurences of a string inside a string
+    replaceAll(string, key, value) {
+        return string.replace(new RegExp(key, 'g'), value);
     }
 }

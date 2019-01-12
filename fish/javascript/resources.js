@@ -21,9 +21,10 @@ var resources = {
         internal: "workers",
         message: "",
         price: 1000,
-        count: 1,
-        total: 1,
-        max: 10
+        count: 0,
+        total: 0,
+        max: 10,
+        show_max: true
     },
 
     fish_meta: {

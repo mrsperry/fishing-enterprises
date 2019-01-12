@@ -48,6 +48,11 @@ div.before:before {
     background: white;
 }
 
+.situation:disabled {
+    color: black;
+    background-color: white;
+}
+
 /* about/settings popup */
 #overlay {
     background-color: rgba(0, 0, 0, 0.7);

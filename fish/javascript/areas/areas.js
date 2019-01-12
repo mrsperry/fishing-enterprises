@@ -78,6 +78,13 @@ var areas = {
                 }
 
                 vendor.add_item(business.vendor, {
+                    condition: function() {
+                        let unlocked = area.unlock == null ? true : window[area.unlock].workers.enabled;
+                        if (area.unlock == null && area.internal == "reef") {
+                            unlocked = pier.workers.enabled;
+                        }
+                        return unlocked;
+                    },
                     data: {
                         parent: "investments_section",
                         id: index + "_worker_unlock",
