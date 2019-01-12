@@ -153,6 +153,8 @@ var shop = {
                 if (reset) {
                     fish.count = 0;
                 }
+
+                counters.update_counter(fish);
             }
         }
 
