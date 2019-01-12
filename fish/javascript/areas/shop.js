@@ -43,28 +43,30 @@ var shop = {
     },
 
     update_buttons() {
-        vendor.update(this.vendor);
-        for (let id in this.buttons) {
-            let item = this.buttons[id];
-            if ($("#" + item.data.id + "_button").length == 1) {
-                let disabled = (item.removed != null ? item.removed : item.data.disabled);
-                $("#" + item.data.id + "_button")
-                    .prop("disabled", disabled);
-            } else {
-                if (this.check_button(item)) {
-                    item.data["classes"] = ["button"];
-                    buttons.create(item.data);
+        if (areas.current_area.internal == this.internal) {
+            vendor.update(this.vendor);
+            for (let id in this.buttons) {
+                let item = this.buttons[id];
+                if ($("#" + item.data.id + "_button").length == 1) {
+                    let disabled = (item.removed != null ? item.removed : item.data.disabled);
+                    $("#" + item.data.id + "_button")
+                        .prop("disabled", disabled);
+                } else {
+                    if (this.check_button(item)) {
+                        item.data["classes"] = ["button"];
+                        buttons.create(item.data);
+                    }
                 }
             }
-        }
 
-        for (let section of ["bait", "tackle", "misc"]) {
-            let element = $("#no_sale_" + section);
-            if (element
-                .parent()
-                    .children().length > 1) {
-                $(element)
-                    .remove();
+            for (let section of ["bait", "tackle", "misc"]) {
+                let element = $("#no_sale_" + section);
+                if (element
+                    .parent()
+                        .children().length > 1) {
+                    $(element)
+                        .remove();
+                }
             }
         }
     },

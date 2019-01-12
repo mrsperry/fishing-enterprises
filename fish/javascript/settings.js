@@ -141,7 +141,7 @@ var settings = {
 
             let parent = resources[section];
 
-            if (section == "money" || section == "fuel") {
+            if (section == "money" || section == "fuel" || section == "workers") {
                 if (parent.count > 0) {
                     results.count = parent.count;
                 }
@@ -149,7 +149,7 @@ var settings = {
                     results.total = parent.total;
                 }
 
-                if (section == "fuel") {
+                if (section == "fuel" || section == "workers") {
                     for (let key of settings.keys) {
                         let value = parent[key];
                         if (value != null) {
@@ -157,12 +157,33 @@ var settings = {
                         }
                     }
                 }
+
+                if (section == "workers") {
+                    results.max = parent.max;
+                    
+                    let areas_list = {};
+                    for (let name of areas.fish_list) {
+                        let area = window[name];
+
+                        let area_settings = {};
+                        if (area.workers.enabled != null && area.workers.enabled) {
+                            area_settings.enabled = true;
+                        }
+                        if (area.workers.count != null && area.workers.count != 0) {
+                            area_settings.count = area.workers.count;
+                        }
+
+                        areas_list[area.internal] = area_settings;
+                    }
+
+                    results["worker_list"] = areas_list;
+                }
             }
 
             if (section == "bait" || section == "tackle" || section == "fish") {
                 for (let id in parent) {
                     let values = {};
-                    for (let key of settings.keys) {
+                    for (let key of this.keys) {
                         let value = parent[id][key];
                         if (value != null) {
                             values[key] = value;
@@ -218,6 +239,15 @@ var settings = {
         }
         save["shop"] = save_shop;
 
+        let save_business = {};
+        save_business.fish_total = resources.fish_meta.count;
+        if (business.opportunities != null && business.opportunities) {
+            save_business.opportunities = business.opportunities;
+        }
+        save_business.morality = opportunities.morality;
+        save_business.removed = business.vendor.removed;
+        save["business"] = save_business;
+
         let save_boat = {};
         for (let part in boat.parts) {
             let results = {};
@@ -270,13 +300,14 @@ var settings = {
 
         main.reset(save);
 
+        let switch_to;
         for (let index in save) {
             let parent = save[index];
             if (index == "resources") {
                 for (let child in parent) {
                     let value = parent[child];
 
-                    if (child == "money" || child == "fuel") {
+                    if (child == "money" || child == "fuel" || child == "workers") {
                         if (value.count != null) {
                             resources[child].count = value.count;
                         }
@@ -284,10 +315,31 @@ var settings = {
                             resources[child].total = value.total;
                         }
 
-                        if (child == "fuel") {
+                        if (child == "fuel" || child == "workers") {
                             for (let key of settings.keys) {
                                 if (value[key] != null) {
                                     resources.fuel[key] = value[key];
+                                }
+                            }
+                        }
+
+                        if (child == "workers") {
+                            if (value.max != null) {
+                                resources[child].max = value.max;
+                            }
+
+                            if (value.worker_list != null) {
+                                for (let name in value.worker_list) {
+                                    let area = window[name];
+
+                                    let settings = value.worker_list[name];
+                                    if (settings.enabled != null) {
+                                        area.workers.enabled = settings.enabled;
+                                    }
+
+                                    if (settings.count != null) {
+                                        area.workers.count = settings.count;
+                                    }
                                 }
                             }
                         }
@@ -320,16 +372,21 @@ var settings = {
                             river.queue_change = true;
                         }
                     }
-
-                    if (item.current != null && item.current) {
-                        areas.switch_area(window[child]);
-                    }
+                    
                     if (item.unlocked != null && item.unlocked) {
                         areas.set_unlocked(child);
 
                         if (child == "pier") {
                             boat.initialize();
                         }
+
+                        if (child == "business") {
+                            business.purchase();
+                        }
+                    }
+                    
+                    if (item.current != null && item.current) {
+                        switch_to = child;
                     }
                 }
             }
@@ -342,6 +399,28 @@ var settings = {
                         shop.buttons[child].removed = item.removed;
                     }
                 }
+            }
+
+            if (index == "business") {
+                if (parent.fish_total != null) {
+                    resources.fish_meta.count = parent.fish_total;
+                }
+
+                if (parent.opportunities != null) {
+                    business.opportunities = parent.opportunities;
+                    business.create_opportunities_button();
+                }
+
+                if (parent.morality != null) {
+                    opportunities.morality = parent.morality;
+                }
+
+                if (parent.removed != null) {
+                    console.log("setting removed");
+                    business.vendor.removed = parent.removed;
+                }
+                
+                vendor.update(business.vendor);
             }
 
             if (index == "boat") {
@@ -365,8 +444,12 @@ var settings = {
         }
 
         counters.load(save);
+        areas.switch_area(window[switch_to]);
+
         if (areas.current_area.internal != "business") {
             shop.update_buttons();
+        } else {
+            business.update_workers();
         }
     },
 

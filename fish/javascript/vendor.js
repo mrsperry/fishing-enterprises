@@ -2,6 +2,7 @@ let vendor = {
     create: function(max, buttons) {
         this.shown = [];
         this.queue = [];
+        this.removed = [];
 
         // set the max number of buttons
         this.max = max;
@@ -28,7 +29,11 @@ let vendor = {
 
             // check if the button should be removed
             let removed = (typeof item.data.removed == "function" ? item.data.removed() : item.data.removed);
-            if (removed != null && removed) {
+            if (removed != null && removed || vendor.removed.includes(item.data.id)) {
+                if (!vendor.removed.includes(item.data.id)) {
+                    vendor.removed.push(item.data.id);
+                }
+
                 // remove the button
                 buttons.remove(item.data.id, function() {
                     vendor.remove_index(vendor, index);
@@ -55,6 +60,11 @@ let vendor = {
 
             // check if there is room in the shown list
             if (vendor.shown.length == vendor.max || item == null) {
+                continue;
+            }
+
+            if (vendor.removed.includes(item.data.id)) {
+                indices.push(index);
                 continue;
             }
 
@@ -111,6 +121,10 @@ let vendor = {
         }
 
         return false;
+    },
+
+    add_removed_item(vendor, id) {
+        vendor.removed.push(id);
     },
 
     registered_item(vendor, id) {

@@ -57,7 +57,7 @@ var business = {
                     bold: "Buy Adjoining Lot",
                     regular: "($3,000)"
                 },
-                text: "Your currently building is getting cramped and there is a great empty lot next to you for sale",
+                text: "Your current building is getting cramped and there is a great empty lot next to you for sale",
                 on_click: function() {
                     shop.update_money(-3000);
 
@@ -186,6 +186,7 @@ var business = {
     },
 
     load() {
+        console.log("loading");
         let list = ["bait", "tackle", "misc"];
         for (let index of list) {
             $("#" + index + "_section")

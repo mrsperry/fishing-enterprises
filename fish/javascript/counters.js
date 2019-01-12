@@ -169,6 +169,7 @@ var counters = {
 
         this.update_counter(resources.fuel);
         this.update_counter(resources.money);
+        this.update_counter(resources.fish_meta);
     },
 
     create_counter(item, id) {

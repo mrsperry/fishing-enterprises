@@ -80,7 +80,7 @@ var main = {
                     delete item.purchased;
 
                     if (type == "fuel") {
-                        delete resources.fuel.purchsed;
+                        delete resources.fuel.purchased;
                     }
                 }
                 if (type != "money") {
@@ -112,6 +112,7 @@ var main = {
             delete item.purchased;
         }
         delete lake.show_buttons;
+        delete business.opportunities;
         river.queue_change = false;
         river.river_troll = true;
 
@@ -121,17 +122,12 @@ var main = {
 
     end() {
         let text = $.parseHTML("Congratulations you've reached the end of the game -- for now!<br><br>"
-            + "<span id='restart' class='link'>Click here to restart the game.</span><br><br>"
+            + "<span id='restart_2' class='link' onclick='settings.restart_game()'>Click here to restart the game.</span><br><br>"
             + "You can <a class='link' target='_blank' href='https://twitter.com/FishEnterprises'>follow my Twitter</a> for releases, "
             + "donate via <a class='link' target='_blank' href='https://paypal.me/fishingenterprises'>Paypal</a> "
             + "or support me and get frequent updates and changelogs with <a class='link' target='_blank' href='https://www.patreon.com/fishingenterprises'>Patreon</a>.<br><br>"
-            + "I hope you enjoyed your time and continue playing!");
+            + "I hope you enjoyed your time and continue playing! <>< <>< <><");
         this.create_popup("Goodbye", text);
-
-        $("#restart")
-            .click(function () {
-                settings.restart_game();
-            });
     },
 
     show_settings() {
