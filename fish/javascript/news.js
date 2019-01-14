@@ -66,7 +66,7 @@ var news = {
     // important news words/phrases
     modifiers: [
         "halts imports of",
-        "cancelles shipment of",
+        "cancels shipment of",
         "received excess cargo containing",
         "discovered disease in",
         "found counterfeit",
