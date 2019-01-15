@@ -212,6 +212,7 @@ var fishing = {
             }
 
             counters.update_counter(fish);
+            counters.update_counter(resources.fish_meta);
 
             return true;
         } else {
@@ -230,10 +231,9 @@ var fishing = {
                         shop.update_money(fish.price);
                     }
                 }
-
-                $("#fish_meta_count")
-                    .text(main.stringify(resources.fish_meta.count));
             }
+            counters.update_counter(resources.fish_meta);
+
             return false;
         }
     },
