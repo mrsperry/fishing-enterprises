@@ -222,8 +222,10 @@ var business = {
             .addClass("before section section_center section_top")
             .appendTo(sections);
 
-        counters.create_counter(resources.fish_meta, "above_section");
-        counters.update_counter(resources.fish_meta);
+        if ($("#fish_meta").length == 0) {
+            counters.create_counter(resources.fish_meta, "below_messages");
+            counters.update_counter(resources.fish_meta);
+        }
 
         if (this.opportunities != null && this.opportunities) {
             this.create_opportunities_button();

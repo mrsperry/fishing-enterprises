@@ -3,9 +3,12 @@ var counters = {
         let parent = $("#resource_counters");
 
         // create money counter
+        let below = $("<div>")
+            .attr("id", "below_messages")
+            .appendTo(parent);
         let money = $("<div>")
             .text("Money: $")
-            .appendTo(parent);
+            .appendTo(below);
         $("<span>")
             .attr("id", "money_count")
             .text("0")
@@ -13,8 +16,6 @@ var counters = {
         $("<span>")
             .attr("id", "money_difference")
             .appendTo(money);
-        $("<br><br>")
-            .appendTo(parent);
 
         // create bait counter
         $("<div>")

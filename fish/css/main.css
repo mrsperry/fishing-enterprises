@@ -119,6 +119,11 @@ button:disabled {
     top: 3px;
 }
 
+#below_messages {
+    height: 46px;
+    margin-bottom: 5px;
+}
+
 #fish_counters {
     left: 5px;
     top: 160px;
@@ -131,8 +136,7 @@ button:disabled {
 }
 
 #fish_meta {
-    display: inline-block;
-    margin: 18px 5px 12px 5px;
+    padding: 0;
 }
 
 .value {
@@ -212,7 +216,7 @@ of the container of the body :^) */
 
 #news_section {
     position: relative;
-    margin: 13px 0px 5px 0px;
+    margin: 5px 0px 5px 0px;
 }
 
 #news_container {
