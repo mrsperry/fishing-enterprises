@@ -175,8 +175,6 @@ var business = {
                                     
                                 main.end();
                             });
-
-                    
                 },
                 disabled: function() {
                     return resources.money.count < 50000;
@@ -186,7 +184,6 @@ var business = {
     },
 
     load() {
-        console.log("loading");
         let list = ["bait", "tackle", "misc"];
         for (let index of list) {
             $("#" + index + "_section")
