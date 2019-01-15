@@ -213,6 +213,7 @@ var fishing = {
 
             counters.update_counter(fish);
             counters.update_counter(resources.fish_meta);
+            shop.update_buttons();
 
             return true;
         } else {
@@ -233,6 +234,7 @@ var fishing = {
                 }
             }
             counters.update_counter(resources.fish_meta);
+            shop.update_buttons();
 
             return false;
         }

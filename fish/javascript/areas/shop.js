@@ -69,8 +69,10 @@ var shop = {
                 }
             }
         } else {
+            let value = this.fish_value(false);
             $("#sell_fish_button")
-                .prop("disabled", this.fish_value(false) == 0);
+                .text("Sell fish ($" + value + ")")
+                .prop("disabled", value == 0);
         }
     },
 
