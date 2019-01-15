@@ -306,6 +306,10 @@ of the container of the body :^) */
     width: 200px;
 }
 
+.business_button {
+    margin: 5px 0px 15px 5px;
+}
+
 .situation {
     margin-left: 87px;
     cursor: default;

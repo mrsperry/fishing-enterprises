@@ -199,7 +199,13 @@ var business = {
                 .attr("id", "above_section")
                 .appendTo(sections);
         }
-        
+
+        buttons.create(shop.buttons.sell_fish.data);
+        $("#sell_fish_button")
+            .addClass("business_button");
+        $("#sell_fish_break")
+            .remove();
+
         let news_section = $("<div>")
             .attr("id", "news_section")
             .attr("display", "News")

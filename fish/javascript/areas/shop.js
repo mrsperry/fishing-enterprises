@@ -68,6 +68,9 @@ var shop = {
                         .remove();
                 }
             }
+        } else {
+            $("#sell_fish_button")
+                .prop("disabled", this.fish_value(false) == 0);
         }
     },
 
@@ -129,11 +132,9 @@ var shop = {
         }
         
         counters.update_counter(resources.money);
+        this.update_buttons();
 
-        let internal = areas.current_area.internal;
-        if (internal == this.internal) {
-            this.update_buttons();
-        } else if (internal == "business") {
+        if (areas.current_area.internal == "business") {
             for (let item of business.vendor.shown) {
                 $("#" + item.data.id + "_button")
                     .prop("disabled", item.data.disabled);
