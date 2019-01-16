@@ -36,7 +36,7 @@ var fishing = {
     update(state) {
         if (state.is_fishing) {
             // randomize fish order so chances aren't skewed
-            for (let fish of main.shuffle(state.fish)) {
+            for (let fish of main.shuffle($.merge([], state.fish))) {
                 // random chance to catch the fish
                 if (main.random(1, 100) <= fish.chance) {
                     // make sure there is bait
