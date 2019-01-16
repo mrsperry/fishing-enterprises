@@ -89,10 +89,9 @@ button:disabled {
 
 .bottom {
     position: fixed;
-    bottom: 0;
-    width: 95%;
+    width: 98%;
+    bottom: 15px;
     text-align: center;
-    padding-bottom: 1%;
 }
 
 /* history panel */
@@ -347,7 +346,7 @@ of the container of the body :^) */
     white-space: nowrap;
 }
 
-/* about/settings popup */
+/* popups (modals) */
 #overlay {
     position: fixed;
     left: 0;
@@ -359,10 +358,11 @@ of the container of the body :^) */
 
 #popup {
     position: absolute;
-    top: 37%;
-    left: 37%;
+    top: 50%;
+    left: 50%;
     width: 400px;
     height: 270px;
+    transform: translate(-50%, -50%);
     padding: 0px 20px;
 }
 
