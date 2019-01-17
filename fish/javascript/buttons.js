@@ -67,7 +67,7 @@ var buttons = {
         if (options.hide == true) {
             $(element)
                 .hide();
-        } else {
+        } else if (options.hide == null) {
             $(element)
                 .hide()
                 .fadeIn();
