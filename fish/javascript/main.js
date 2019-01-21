@@ -105,6 +105,8 @@ var main = {
             delete window[index].unlocked;
             $("#" + index + "_button")
                 .hide();
+            $("#" + index + "_break")
+                .hide();
         }
         for (let index in shop.buttons) {
             let item = shop.buttons[index];

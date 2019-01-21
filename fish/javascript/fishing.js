@@ -197,7 +197,11 @@ var fishing = {
                 if (fish.internal != "worms" && fish.internal != "guppies") {
                     $("#shop_button")
                         .fadeIn();
+                    $("#shop_break")
+                        .fadeIn();
                     $("#lake_button")
+                        .fadeIn();
+                    $("#lake_break")
                         .fadeIn();
                     shop.unlocked = true;
                     lake.unlocked = true;

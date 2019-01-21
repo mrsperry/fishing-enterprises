@@ -75,9 +75,13 @@ var buttons = {
 
         // add a line break so buttons aren't next to each other
         for (let index = 0; index < options.breaks; index++) {
-            $("<br>")
+            let after = $("<br>")
                 .attr("id", options.id + "_break")
                 .appendTo(parent);
+            if (options.hide == true) {
+                $(after)
+                    .hide();
+            }
         }
 
         return this;

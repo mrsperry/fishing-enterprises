@@ -151,6 +151,8 @@ var areas = {
 
         $("#" + area + "_button")
             .fadeIn();
+        $("#" + area + "_break")
+            .fadeIn();
     },
 
     get_header(area) {

@@ -230,6 +230,8 @@ var shop = {
         area.unlocked = true;
         $("#" + name + "_button")
             .fadeIn();
+        $("#" + name + "_break")
+            .fadeIn();
 
         let data = area.purchased;
 
