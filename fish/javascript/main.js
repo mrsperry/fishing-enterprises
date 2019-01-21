@@ -233,7 +233,7 @@ var main = {
         if (header != "Goodbye") {
             buttons.create({
                 parent: "content",
-                id: "close",
+                classes: ["popup_button"],
                 text: "Close",
                 breaks: 0,
                 on_click: function() {

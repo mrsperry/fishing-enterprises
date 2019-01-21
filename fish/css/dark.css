@@ -64,12 +64,20 @@ div.before:before {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-#popup {
+#popup, #catalog {
     background-color: #222222;
     color: #dddddd;
     border: solid #666666 1px;
 }
 
-.divider {
+.divider, .page_divider {
     border: solid #666666 0.5px;
+}
+
+.fish_table_data {
+    border-top: solid #666666 1px;
+}
+
+.fish_table_data:first-child, .fish_table_header {
+    border-right: solid #666666 1px;
 }

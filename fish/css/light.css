@@ -59,12 +59,20 @@ div.before:before {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-#popup {
+#popup, #catalog {
     background-color: white;
     color: black;
     border: solid black 1px;
 }
 
-.divider {
+.divider, .page_divider, .table_divider {
     border: solid black 0.5px;
+}
+
+.fish_table_data {
+    border-top: solid black 1px;
+}
+
+.fish_table_data:first-child, .fish_table_header {
+    border-right: solid black 1px;
 }

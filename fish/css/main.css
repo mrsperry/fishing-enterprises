@@ -356,7 +356,7 @@ of the container of the body :^) */
     opacity: 1.0;
 }
 
-#popup {
+#popup, #catalog {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -366,9 +366,28 @@ of the container of the body :^) */
     padding: 0px 20px;
 }
 
-#close_button {
-    margin-top: 10px;
-    bottom: 5px;
+#catalog {
+    width: 800px;
+    height: 800px;
+}
+
+#catalog_next_button {
+    left: 85%;
+}
+
+#catalog_previous_button {
+    left: 15%;
+}
+
+#catalog_left, #catalog_right {
+    position: absolute;
+    margin: 10px 20px 10px 20px;
+    width: 360px;
+    height: 725px;
+}
+
+#catalog_right {
+    left: 50%;
 }
 
 p#save_intervals {
@@ -380,6 +399,146 @@ p#save_intervals {
     text-align: left;
 }
 
+.popup_button {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pre {
+    white-space: pre;
+}
+
 .centered {
     text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.vertical_center {
+    position: absolute;
+    top: 50%;
+    width: inherit;
+    transform: translateY(-50%);
+    margin: 0px;
+}
+
+.page_divider {
+    position: fixed;
+    left: 50%;
+    height: 724px;
+    margin-top: 10px;
+}
+
+.table_divider {
+    display: inline-block;
+    left: 215px;
+    height: 105px;
+    width: 0px;
+    margin: 0px 5px 0px 5px;
+}
+
+.table_divider_short {
+    height: 80px;
+}
+
+.divider_bottom {
+    margin-bottom: 10px;
+}
+
+.area_divider {
+    margin: 10px 0px 20px 0px;
+}
+
+.area_catalog_art {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fish_catalog_art {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fish_title {
+    margin-top: 185px;
+}
+
+.catalog_return {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+.catalog_return_link {
+    margin: 5px 0px;
+}
+
+.catalog_bottom_art {
+    position: absolute;
+    top: 605px;
+}
+
+.index_section {
+    display: inline-block;
+    margin: 10px 20px 10px 20px;
+    width: 360px;
+}
+
+.index_section {
+    width: 140px;
+    margin-bottom: 35px;
+}
+
+.index_header, .catalog_title {
+    margin-bottom: 5px;
+}
+
+.index_list {
+    margin: 0px;
+    padding: 0px 0px 0px 27px;
+}
+
+.align_top {
+    vertical-align: top;
+}
+
+.fish_table_section {
+    display: inline-block;
+    width: 170px;
+    vertical-align: top;
+    margin-bottom: 15px;
+}
+
+.fish_table_section:nth-child(even) {
+    margin-left: 10px;
+}
+
+.fish_table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 170px;
+}
+
+.fish_nothing {
+    margin: 0px;
+}
+
+.fish_table_title {
+    width: 170px;
+    margin: 0px 0px 10px 0px;
+}
+
+.fish_table_data {
+    padding: 5px 5px;
+}
+
+.fish_table_data:first-child {
+    width: 97px;
 }

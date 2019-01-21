@@ -114,6 +114,13 @@ var settings = {
                     news.generate_insignificant_news();
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Catalog",
+                on_click: function() {
+                    catalog.show();
+                }
+            });
         } else {
             this.dev = false;
             $("#right")
@@ -270,6 +277,7 @@ var settings = {
             }
         }
         save_misc["messages"] = messages;
+        save_misc["catalog"] = catalog.purchased == null ? false : true;
         save["misc"] = save_misc;
 
         let clear = (parent) => {
@@ -440,6 +448,11 @@ var settings = {
                     for (let message of messages.reverse()) {
                         messenger.write_message(message, false);
                     }
+                }
+
+                let has_catalog = parent["catalog"];
+                if (has_catalog != null && has_catalog) {
+                    catalog.purchase();
                 }
             }
         }

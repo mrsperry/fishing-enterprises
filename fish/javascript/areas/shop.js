@@ -35,6 +35,25 @@ var shop = {
                     return resources.money.count < 5 || fuel.count == fuel.max;
                 }
             }
+        },
+        buy_catalog: {
+            condition: function() {
+                return !$("#catalog_button")
+                    .is(":hidden");
+            },
+            data: {
+                parent: "misc_section",
+                id: "buy_catalog",
+                text: "Fish Catalog ($250)",
+                on_click: function() {
+                    shop.update_money(-250);
+                    catalog.purchase();
+                    shop.remove_item("buy_catalog");
+                },
+                disabled: function() {
+                    return resources.money.count < 250;
+                }
+            }
         }
     },
 
