@@ -47,6 +47,8 @@ var reef = {
     purchase() {
         $("#reef_button")
             .fadeIn();
+        $("#reef_break")
+            .fadeIn();
         this.unlocked = true;
     },
 
