@@ -426,7 +426,6 @@ var settings = {
                 }
 
                 if (parent.removed != null) {
-                    console.log("setting removed");
                     business.vendor.removed = parent.removed;
                 }
                 
