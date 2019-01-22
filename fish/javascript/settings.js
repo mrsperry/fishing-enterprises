@@ -191,7 +191,7 @@ var settings = {
             if (section == "bait" || section == "tackle" || section == "fish") {
                 for (let id in parent) {
                     let values = {};
-                    for (let key of this.keys) {
+                    for (let key of settings.keys) {
                         let value = parent[id][key];
                         if (value != null) {
                             values[key] = value;
