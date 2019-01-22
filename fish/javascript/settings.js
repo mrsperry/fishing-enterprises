@@ -278,6 +278,7 @@ var settings = {
         }
         save_misc["messages"] = messages;
         save_misc["catalog"] = catalog.purchased == null ? false : true;
+        save_misc["auto_save"] = main.save_interval_number == null ? 10 : main.save_interval_number;
         save["misc"] = save_misc;
 
         let clear = (parent) => {
@@ -453,6 +454,12 @@ var settings = {
                 let has_catalog = parent["catalog"];
                 if (has_catalog != null && has_catalog) {
                     catalog.purchase();
+                }
+
+                let auto_save = parent["auto_save"];
+                if (typeof auto_save == "number") {
+                    let valid = [3, 5, 10];
+                    main.update_save_interval(valid.includes(auto_save) ? auto_save : 10);
                 }
             }
         }
