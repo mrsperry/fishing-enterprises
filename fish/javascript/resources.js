@@ -257,7 +257,7 @@ var resources = {
             price: 10,
             max: 5,
             chance: 45,
-            after: "minnows",
+            after: "bass",
             bait: [
                 {
                     type: "worms",
