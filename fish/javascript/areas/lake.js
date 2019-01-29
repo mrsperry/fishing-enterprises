@@ -121,7 +121,7 @@ var lake = {
             let left = 35 + ((index % 4) * 85);
             let top = 10 + ((Math.floor(index / 4)) * 100);
 
-            $("<div>")
+            let spawn = $("<div>")
                 .addClass("worm_spawn pre")
                 .css("left", left + "px")
                 .css("top", top + "px")
@@ -144,6 +144,9 @@ var lake = {
                 .hide()
                 .fadeIn()
                 .appendTo($("#worm_game_background"));
+            floaters.register_element(spawn, "+1 Worm", () => {
+                return resources.bait.worms.count != resources.bait.worms.max;
+            });
 
             lake.worm_count += 1;
         }
