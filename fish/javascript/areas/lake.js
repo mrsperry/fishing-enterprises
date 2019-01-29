@@ -46,13 +46,21 @@ var lake = {
             id: "forage_for_worms",
             text: "Forage for worms",
             on_click: function() {
-                fishing.catch(resources.bait.worms, true);
-                $("#cast_out_line_button")
-                    .prop("disabled", false);
-                lake.show_buttons = true;
-            },
-            disabled: function() {
-                return resources.bait.worms.count == resources.bait.worms.max;
+                let element = $("#fishing_buttons");
+
+                if (lake.worm_game) {
+                    if (lake.show_buttons) {
+                        $(element)
+                            .fadeIn();
+                    }
+
+                    lake.toggle_worm_game();
+                } else {
+                    $(element)
+                        .fadeOut(400, function() {
+                            lake.toggle_worm_game();
+                        });
+                }
             }
         });
 
@@ -65,6 +73,115 @@ var lake = {
         } else {
             $("#fishing_buttons")
                 .hide();
+        }
+    },
+
+    toggle_worm_game() {
+        if (this.worm_game == null || !this.worm_game) {
+            this.worm_game = true;
+
+            $("#forage_for_worms_button")
+                .text("Back to the water");
+            $("<div>")
+                .attr("id", "worm_game_background")
+                .addClass("pre")
+                .appendTo($("#resource_buttons"));
+            
+            this.worm_interval = window.setInterval(this.worm_game_update, 500);
+        } else {
+            this.worm_game = false;
+            this.worm_count = 0;
+            this.worm_grid = [];
+
+            $("#forage_for_worms_button")
+                .text("Forage for worms");
+            $("#worm_game_background")
+                .fadeOut(400, function() {
+                    $(this)
+                        .remove();
+                });
+            
+            window.clearInterval(this.worm_interval);
+        }
+    },
+
+    worm_game_update() {
+        if (lake.worm_count == null) {
+            lake.worm_count = 0;
+            lake.worm_grid = [];
+        }
+        
+        if (lake.worm_count < 7) {
+            let index;
+            do {
+                index = main.random(0, 15);
+            } while (lake.worm_grid[index] == true);
+            lake.worm_grid[index] = true;
+
+            let left = 35 + ((index % 4) * 85);
+            let top = 10 + ((Math.floor(index / 4)) * 100);
+
+            $("<div>")
+                .addClass("worm_spawn pre")
+                .css("left", left + "px")
+                .css("top", top + "px")
+                .css("transform", "rotate(" + main.random(0, 360) + "deg)")
+                .click(function() {
+                    if (resources.bait.worms.count != resources.bait.worms.max) {
+                        lake.worm_count -= 1;
+                        lake.show_buttons = true;
+                        lake.worm_grid[index] = false;
+
+                        fishing.catch(resources.bait.worms, true);
+
+                        $(this)
+                            .off("click")
+                            .remove();
+                    } else {
+                        messenger.write_message("You can't hold any more worms!");
+                    }
+                })
+                .hide()
+                .fadeIn()
+                .appendTo($("#worm_game_background"));
+
+            lake.worm_count += 1;
+        }
+
+        let art_1 = 
+              "   ___<br>"
+            + "  /___\\<br>"
+            + " |_____|<br>"
+            + " | ____|<br>"
+            + "  \\ ____\\<br>"
+            + "   \\ ____\\<br>"
+            + "    |_____|<br>"
+            + "    |_____|<br>"
+            + "    |_____|<br>"
+            + "   /____ /<br>"
+            + "  |_____|<br>"
+            + " /____ /<br>"
+            + "|_____|<br>"
+            + " \\___/";
+        let art_2 = 
+              "    ____<br>"
+            + "   /____\\<br>"
+            + "  /____ /<br>"
+            + " |_____|<br>"
+            + "  \\ ____\\<br>"
+            + "   \\ ____\\<br>"
+            + "    |_____|<br>"
+            + "    |_____|<br>"
+            + "    |_____|<br>"
+            + "     \\ ___\\<br>"
+            + "      |____|<br>"
+            + "     /___ /<br>"
+            + "    |____|<br>"
+            + "    \\___/";
+
+        for (let element of $(".worm_spawn")) {
+            $(element)
+                .html(main.random(0, 1) == 0 ? art_1 : art_2);
         }
     }
 }

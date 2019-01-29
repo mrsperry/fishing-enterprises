@@ -101,7 +101,6 @@ var resources = {
             display: "Worms",
             internal: "worms",
             message: "writhing around in the mud, these would make good bait",
-            max_caught: 3,
             price: 1,
             max: 30
         },

@@ -136,12 +136,6 @@ var fishing = {
 
     catch(fish, is_bait) {
         if (is_bait) {
-            // show fishing buttons
-            let fishing = $("#fishing_buttons");
-            if ($(fishing)
-                .is(":hidden"))
-                $(fishing)
-                    .fadeIn();
             // show the bait counters
             let bait = $("#bait_counters");
             if ($(bait)
@@ -149,7 +143,7 @@ var fishing = {
                 $(bait)
                     .fadeIn();
         } else {
-            // show the fish counters if this is the first fish
+            // show the fish counters
             let fish = $("#fish_counters");
             if ($(fish)
                 .is(":hidden"))
@@ -205,13 +199,6 @@ var fishing = {
                         .fadeIn();
                     shop.unlocked = true;
                     lake.unlocked = true;
-                }
-            }
-
-            if (fish.internal == "worms") {
-                if (areas.current_area.internal == "lake") {
-                    $("#forage_for_worms_button")
-                        .prop("disabled", (fish.count == fish.max));
                 }
             }
 

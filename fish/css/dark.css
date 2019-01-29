@@ -81,3 +81,8 @@ div.before:before {
 .fish_table_data:first-child, .fish_table_header {
     border-right: solid #666666 1px;
 }
+
+/* worm game */
+.worm_spawn {
+    background-color: #222222;
+}

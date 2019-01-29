@@ -542,3 +542,25 @@ p#save_intervals {
 .fish_table_data:first-child {
     width: 97px;
 }
+
+/* worm game */
+#worm_game_background {
+    position: absolute;
+    top: 0px;
+    left: 160px;
+    width: 358px;
+    height: 408px;
+}
+
+.worm_spawn {
+    position: absolute;
+    cursor: pointer;
+    font-size: 4pt;
+    font-weight: bold;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
