@@ -247,6 +247,16 @@ var main = {
         return popup;
     },
 
+    remove_elements(elements) {
+        for (let name of elements) {
+            $("#" + name)
+                .fadeOut(400, function() {
+                    $(this)
+                        .remove();
+                });
+        }
+    },
+
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },

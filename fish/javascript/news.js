@@ -195,11 +195,7 @@ var news = {
             let area = fishing.locked_areas[index].area;
             $("#" + area + "_workers_header")
                 .css("opacity", 1.0);
-            $("#" + area + "_timer")
-                .fadeOut(400, function() {
-                    $(this)
-                        .remove();
-                });
+            main.remove_elements([area + "_timer"]);
 
             fishing.locked_areas.splice(index, 1);
         }

@@ -471,21 +471,7 @@ var business = {
             id: "opportunities",
             text: "Opportunities and Morality",
             on_click: function() {
-                $("#news_section")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-                    });
-                $("#management_section")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-                    });
-                $("#investments_section")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-                    });
+                main.remove_elements(["news_section", "management_section", "investments_section"]);
                 $("#above_section")
                     .fadeOut(400, function() {
                         $(this)
@@ -522,11 +508,7 @@ var business = {
             on_click: function() {
                 buttons.remove("opportunities");
 
-                $("#morality_section")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-                    });
+                main.remove_elements(["morality_section"]);
                 $("#opportunities_section")
                     .fadeOut(400, function() {
                         $(this)

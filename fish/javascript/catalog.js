@@ -58,11 +58,7 @@ var catalog = {
             text: "Close",
             breaks: 0,
             on_click: function() {
-                $("#overlay")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-                    });
+                main.remove_elements(["overlay"]);
             }
         });
 

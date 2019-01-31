@@ -95,11 +95,7 @@ var lake = {
 
             $("#forage_for_worms_button")
                 .text("Forage for worms");
-            $("#worm_game_background")
-                .fadeOut(400, function() {
-                    $(this)
-                        .remove();
-                });
+            main.remove_elements(["worm_game_background"]);
             
             window.clearInterval(this.worm_interval);
         }

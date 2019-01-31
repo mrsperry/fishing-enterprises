@@ -121,6 +121,13 @@ var settings = {
                     catalog.show();
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Unlock Enterprises",
+                on_click: function() {
+                    enterprises.initialize();
+                }
+            });
         } else {
             this.dev = false;
             $("#right")
