@@ -77,11 +77,6 @@ button:disabled {
     width: 50px;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-}
-
 .left {
     width: 50%;
     float: left;
