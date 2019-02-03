@@ -14,7 +14,7 @@ let vendor = {
             }
         }
 
-        return this;
+        return $.extend({}, this);
     },
 
     update(vendor) {
