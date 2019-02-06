@@ -81,3 +81,12 @@ div.before:before {
 .worm_spawn {
     background-color: white;
 }
+
+/* enterprises */
+#news_divider {
+    border: solid 0.5px black;
+}
+
+#office_desk, #office_chair, #office_computer {
+    background-color: white;
+}

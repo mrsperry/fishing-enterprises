@@ -33,6 +33,12 @@ var resources = {
         count: 0
     },
 
+    research_points: {
+        internal: "research_points",
+        display: "Research Points",
+        count: 0,
+    },
+
     /* 
         breakdown of the bait/tackle/fish objects
         guppies: {

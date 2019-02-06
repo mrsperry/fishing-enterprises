@@ -128,6 +128,13 @@ var settings = {
                     enterprises.initialize();
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Create Stock",
+                on_click: function() {
+                    stocks.create_stock(main.random(1, 3));
+                }
+            });
         } else {
             this.dev = false;
             $("#right")

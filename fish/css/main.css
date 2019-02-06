@@ -570,3 +570,230 @@ p#save_intervals {
     position: absolute;
     animation: floating_text linear 0.4s;
 }
+
+/* enterprises */
+.desk_section {
+    position: absolute;
+    top: 153px;
+    left: 50px;
+    width: 313px;
+    height: 200px;
+}
+
+#office_button_section {
+    left: 379px;
+    height: 40px;
+}
+
+#office_button {
+    width: 100%;
+}
+
+#balance_header {
+    top: 200px;
+    left: 379px;
+    text-align: center;
+    font-weight: bold;
+    height: auto;
+}
+
+#balance_counter {
+    top: 220px;
+    left: 379px;
+    text-align: center;
+    height: auto;
+}
+
+#designer_section {
+    cursor: pointer;
+}
+
+#designer_art {
+    position: absolute;
+    top: -16px;
+}
+
+#designer_content {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 275px;
+    height: 175px;
+}
+
+#designer_header {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#research_section {
+    top: 369px;
+    left: 49px;
+    width: 308px;
+    height: 462px;
+}
+
+#research_header {
+    position: absolute;
+    margin-top: 15px;
+    left: 10%;
+    width: 80%;
+}
+
+#research_content {
+    position: absolute;
+    top: 73px;
+}
+
+#research_points {
+    margin-top: 15px;
+}
+
+#investments_section {
+    top: 251px;
+    left: 379px;
+    height: 393px;
+    width: 307px;
+}
+
+.enterprise_investment {
+    margin: 6px 6px 0px 6px;
+    height: 123px;
+    width: 295px;
+}
+
+#payroll_section {
+    top: 666px;
+    left: 379px;
+    height: 165px;
+    width: 307px;
+}
+
+#payroll_content {
+    position: absolute;
+    margin-top: 7px;
+    width: 80%;
+    left: 10%;
+}
+
+.payroll_margin {
+    margin-bottom: 5px;
+}
+
+.payroll_button {
+    position: absolute;
+    margin-top: 15px;
+    top: 105px;
+    left: 15px;
+    width: 140px;
+}
+
+.payroll_button:nth-child(odd) {
+    left: 160px;
+}
+
+#newspaper_section {
+    top: 137px;
+    left: 708px;
+    height: 400px;
+}
+
+#newspaper_content {
+    position: absolute;
+    top: 20px;
+    left: 36px;
+    height: 340px;
+    width: 275px;
+}
+
+#newspaper_header {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#insignificant_news_section, #significant_news_section {
+    position: absolute;
+    display: inline-block;
+    top: 26px;
+    width: 130px;
+    height: 311px;
+}
+
+#significant_news_section {
+    left: 145px;
+}
+
+#news_divider {
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    height: 310px;
+}
+
+#stocks_section {
+    top: 534px;
+    left: 708px;
+    width: 307px;
+    height: 297px;
+}
+
+#stocks_content {
+    position: absolute;
+    top: 5px;
+    left: 10%;
+    width: 80%;
+}
+
+#stocks_display {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+}
+
+#view_portfolio_button {
+    position: absolute;
+    top: 253px;
+    left: 10px;
+    width: 293px;
+}
+
+.stock_item {
+    margin-top: 5px;
+}
+
+.progress {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    width: 0%;
+    z-index: -1;
+    opacity: 0.4;
+    background-color: #AAAAAA;
+    height: 123px;
+}
+
+#no_projects {
+    margin-top: 3px;
+    width: 307px;
+    text-align: center;
+}
+
+/* enterprises */
+#office_desk {
+    position: absolute;
+    top: 421px;
+    left: 463px;
+}
+
+#office_chair {
+    position: absolute;
+    top: 354px;
+    left: 624px;
+}
+
+#office_computer {
+    position: absolute;
+    top: 404px;
+    left: 479px;   
+}
