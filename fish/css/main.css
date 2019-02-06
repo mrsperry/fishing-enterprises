@@ -226,6 +226,12 @@ of the container of the body :^) */
     width: 150px;
 }
 
+#investments_section {
+    position: absolute;
+    top: 100px;
+    height: 450px;
+}
+
 #opportunities_button {
     position: absolute;
     margin-top: 5px;
@@ -283,7 +289,6 @@ of the container of the body :^) */
 }
 
 .section_center {
-    position: absolute;
     margin-left: 5px;
 }
 
@@ -649,7 +654,7 @@ p#save_intervals {
     margin-top: 15px;
 }
 
-#investments_section {
+#enterprise_investments_section {
     top: 251px;
     left: 379px;
     height: 393px;
