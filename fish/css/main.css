@@ -802,3 +802,7 @@ p#save_intervals {
     top: 404px;
     left: 479px;   
 }
+
+.pointer {
+    cursor: pointer;
+}
