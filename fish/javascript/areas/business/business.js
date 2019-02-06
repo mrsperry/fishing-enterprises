@@ -222,7 +222,7 @@ var business = {
         let investments = $("<div>")
             .attr("id", "investments_section")
             .attr("display", "Investments")
-            .addClass("before section section_center section_top")
+            .addClass("before section section_center section_top absolute")
             .appendTo(sections);
 
         if ($("#fish_meta").length == 0) {

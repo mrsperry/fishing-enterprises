@@ -84,7 +84,7 @@ var lake = {
                 .text("Back to the water");
             $("<div>")
                 .attr("id", "worm_game_background")
-                .addClass("pre")
+                .addClass("pre absolute")
                 .appendTo($("#resource_buttons"));
             
             this.worm_interval = window.setInterval(this.worm_game_update, 500);
@@ -107,7 +107,7 @@ var lake = {
             lake.worm_grid = [];
         }
         
-        if (lake.worm_count < 7) {
+        if (lake.worm_count < 5) {
             let index;
             do {
                 index = main.random(0, 15);
@@ -118,7 +118,7 @@ var lake = {
             let top = 10 + ((Math.floor(index / 4)) * 100);
 
             let spawn = $("<div>")
-                .addClass("worm_spawn pre")
+                .addClass("worm_spawn absolute no_select")
                 .css("left", left + "px")
                 .css("top", top + "px")
                 .css("transform", "rotate(" + main.random(0, 360) + "deg)")

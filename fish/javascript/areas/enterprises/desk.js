@@ -1,19 +1,5 @@
-var enterprises = {
+var desk = {
     initialize() {
-        main.remove_elements(["resource_counters", "resource_buttons", "area_selector"]);
-
-        this.vendor = vendor.create(3);
-        this.research_vendor = vendor.create(3);
-
-        stocks.initialize();
-        for (let index = 1; index < 4; index++) {
-            stocks.create_stock(index);
-        }
-
-        this.load_desk();
-    },
-
-    load_desk() {
         main.remove_elements(["office_section"]);
 
         let parent = $("<div>")
@@ -73,19 +59,19 @@ var enterprises = {
         // header
         $("<div>")
             .attr("id", "office_button_section")
-            .addClass("desk_section")
+            .addClass("desk_section absolute")
             .appendTo(parent);
         buttons.create({
             parent: "office_button_section",
             id: "office",
             text: "Back to your office",
             on_click: function() {
-                enterprises.load_office();
+                office.initialize();
             }
         });
         let header = $("<div>")
             .attr("id", "balance_header")
-            .addClass("desk_section")
+            .addClass("desk_section centered bold absolute")
             .text("Balance")
             .appendTo(parent);
         $("<div>")
@@ -93,7 +79,7 @@ var enterprises = {
             .appendTo(header);
         let money = $("<span>")
             .attr("id", "balance_counter")
-            .addClass("desk_section")
+            .addClass("desk_section centered absolute")
             .text("$")
             .appendTo(parent);
         $("<span>")
@@ -107,12 +93,12 @@ var enterprises = {
         // designer
         let designer_section = $("<div>")
             .attr("id", "designer_section")
-            .addClass("desk_section")
+            .addClass("desk_section pointer absolute")
             .hide()
             .appendTo(parent);
         $("<div>")
             .attr("id", "designer_art")
-            .addClass("pre")
+            .addClass("pre absolute")
             .html("  ___________________________________<br>"
                 + " /                                   \\<br>"
                 + "|                                     |<br>"
@@ -129,10 +115,11 @@ var enterprises = {
             .appendTo(designer_section);
         let designer_content = $("<div>")
             .attr("id", "designer_content")
-            .addClass("centered")
+            .addClass("centered absolute")
             .appendTo(designer_section);
         let designer_header = $("<div>")
             .attr("id", "designer_header")
+            .addClass("bold")
             .text("Research Update Card")
             .appendTo(designer_content);
         $("<div>")
@@ -149,7 +136,7 @@ var enterprises = {
         let research_section = $("<div>")
             .attr("id", "research_section")
             .attr("display", "Research")
-            .addClass("desk_section before")
+            .addClass("desk_section before absolute")
             .hide()
             .appendTo(parent);
         let research_points = $("<div>")
@@ -167,7 +154,7 @@ var enterprises = {
             .appendTo(research_points);
         let research_header = $("<div>")
             .attr("id", "research_header")
-            .addClass("centered bold")
+            .addClass("centered bold absolute")
             .text("Projects")
             .appendTo(research_section);
         $("<div>")
@@ -183,7 +170,7 @@ var enterprises = {
 
             let element = $("<div>")
                 .attr("progress", 3)
-                .addClass("progress")
+                .addClass("progress absolute")
                 .css("top", $(parent).position().top + 6)
                 .css("left", $(parent).position().left + 6)
                 .appendTo($(parent));
@@ -197,28 +184,28 @@ var enterprises = {
                     }
                 );
         }
-        vendor.add_item(this.research_vendor, {
+        vendor.add_item(enterprises.research_vendor, {
             data: {
                 parent: "research_content",
                 id: "designer_research",
-                classes: ["enterprise_investment"],
+                classes: ["enterprise_investment absolute"],
                 text: "hello test",
                 on_click: function() {
                     progress_function($(this));
                 }
             }
         });
-        vendor.update(this.research_vendor);
+        vendor.update(enterprises.research_vendor);
 
         // investments
         $("<div>")
-            .attr("id", "investments_section")
+            .attr("id", "enterprise_investments_section")
             .attr("display", "Investments")
-            .addClass("desk_section before")
+            .addClass("desk_section before absolute")
             .appendTo(parent);
-        vendor.add_item(this.vendor, {
+        vendor.add_item(enterprises.vendor, {
             data: {
-                parent: "investments_section",
+                parent: "enterprise_investments_section",
                 id: "newspaper_unlock",
                 classes: ["enterprise_investment"],
                 header: {
@@ -233,9 +220,9 @@ var enterprises = {
                 }
             }
         });
-        vendor.add_item(this.vendor, {
+        vendor.add_item(enterprises.vendor, {
             data: {
-                parent: "investments_section",
+                parent: "enterprise_investments_section",
                 id: "designer_unlock",
                 classes: ["enterprise_investment"],
                 header: {
@@ -250,9 +237,9 @@ var enterprises = {
                 }
             }
         });
-        vendor.add_item(this.vendor, {
+        vendor.add_item(enterprises.vendor, {
             data: {
-                parent: "investments_section",
+                parent: "enterprise_investments_section",
                 id: "stocks_unlock",
                 classes: ["enterprise_investment"],
                 header: {
@@ -267,9 +254,9 @@ var enterprises = {
                 }
             }
         });
-        vendor.add_item(this.vendor, {
+        vendor.add_item(enterprises.vendor, {
             data: {
-                parent: "investments_section",
+                parent: "enterprise_investments_section",
                 id: "research_unlock",
                 classes: ["enterprise_investment"],
                 header: {
@@ -284,16 +271,17 @@ var enterprises = {
                 }
             }
         });
-        vendor.update(this.vendor);
+        vendor.update(enterprises.vendor);
 
         // payroll
         let payroll_section = $("<div>")
             .attr("id", "payroll_section")
             .attr("display", "Payroll & Workers")
-            .addClass("desk_section before")
+            .addClass("desk_section before absolute")
             .appendTo(parent);
         let payroll_content = $("<div>")
             .attr("id", "payroll_content")
+            .addClass("absolute")
             .appendTo(payroll_section);
         let payroll_header = $("<div>")
             .attr("id", "payroll_header")
@@ -334,13 +322,13 @@ var enterprises = {
         buttons.create({
             parent: "payroll_section",
             id: "payroll_edit",
-            classes: ["payroll_button"],
+            classes: ["payroll_button absolute"],
             text: "Edit Payroll",
             breaks: 0
         });
         buttons.create({
             parent: "payroll_section",
-            classes: ["payroll_button"],
+            classes: ["payroll_button absolute"],
             id: "worker_edit",
             text: "Edit Workers",
             breaks: 0
@@ -349,7 +337,7 @@ var enterprises = {
         // newspaper
         let newspaper_section = $("<div>")
             .attr("id", "newspaper_section")
-            .addClass("desk_section")
+            .addClass("desk_section absolute")
             .hide()
             .appendTo(parent);
         $("<div>")
@@ -381,9 +369,11 @@ var enterprises = {
             .appendTo(newspaper_section);
         let newspaper_content = $("<div>")
             .attr("id", "newspaper_content")
+            .addClass("absolute")
             .appendTo(newspaper_section);
         let newspaper_header = $("<div>")
             .attr("id", "newspaper_header")
+            .addClass("centered bold")
             .text("~~~ The Miami Bulletin ~~~")
             .appendTo(newspaper_content);
         $("<div>")
@@ -391,23 +381,27 @@ var enterprises = {
             .appendTo(newspaper_header);
         $("<div>")
             .attr("id", "insignificant_news_section")
+            .addClass("absolute block")
             .appendTo(newspaper_content);
         $("<div>")
             .attr("id", "significant_news_section")
+            .addClass("absolute block")
             .appendTo(newspaper_content);
         $("<div>")
             .attr("id", "news_divider")
+            .addClass("absolute")
             .appendTo(newspaper_content);
 
         // stocks
         let stocks_section = $("<div>")
             .attr("id", "stocks_section")
             .attr("display", "Stocks")
-            .addClass("desk_section before")
+            .addClass("desk_section before absolute")
             .hide()
             .appendTo(parent);
         let stocks_content = $("<div>")
             .attr("id", "stocks_content")
+            .addClass("absolute")
             .appendTo(stocks_section);
         let stocks_header = $("<div>")
             .addClass("centered bold")
@@ -418,126 +412,28 @@ var enterprises = {
             .appendTo(stocks_header);
         $("<div>")
             .attr("id", "stocks_display")
+            .addClass("absolute")
             .appendTo(stocks_content);
         buttons.create({
             parent: "stocks_section",
             id: "view_portfolio",
+            classes: ["absolute"],
             text: "View Your Portfolio",
             breaks: 0
         });
         stocks.update_display();
     },
 
-    load_office() {
-        main.remove_elements(["desk_section"]);
-        let parent = $("<div>")
-            .attr("id", "office_section")
-            .addClass("pre")
-            .html("                                            ______________________________________________________________________________________<br>"
-                + "                                         __/|                                                                                     |<br>"
-                + "                                      __/   |                                                                                     |<br>"
-                + "                                   __/      |                                                                                     |<br>"
-                + "                                __/         |                                                                                     |<br>"
-                + "                             __/            |                                                                                     |<br>"
-                + "                          __/               |                                                                                     |<br>"
-                + "                       __/                  |                                                                                     |<br>"
-                + "                    __/                     |                                                                                     |<br>"
-                + "                 __/                        |                                                                                     |<br>"
-                + "              __/                           |                                                                                     |<br>"
-                + "           __/                              |                                                                                     |<br>"
-                + "        __/                                 |                                                                                     |<br>"
-                + "     __/                                    |                                                                                     |<br>"
-                + "  __/                                       |                                                                                     |<br>"
-                + " /                                          |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |                                                                                     |<br>"
-                + "|                                           |_____________________________________________________________________________________|<br>"
-                + "|                                        __/<br>"
-                + "|                                     __/<br>"
-                + "|                                  __/<br>"
-                + "|                               __/<br>"
-                + "|                            __/<br>"
-                + "|                         __/<br>"
-                + "|                      __/<br>"
-                + "|                   __/<br>"
-                + "|                __/<br>"
-                + "|             __/<br>"
-                + "|          __/<br>"
-                + "|       __/<br>"
-                + "|    __/<br>"
-                + "| __/<br>"
-                + "|/")
-            .appendTo($(".left"));
-        $("<div>")
-            .attr("id", "office_desk")
-            .addClass("pre")
-            .html(" ___                                                      ___<br>"
-                + "|   \\___                                              ___/   |<br>"
-                + "|       \\___                                      ___/       |<br>"
-                + "|           \\____________________________________/   ____    |<br>"
-                + "|                    ___   _____   ___              |[][]|   |<br>"
-                + "|                   |   | |     | |   |           _ |[][]| _ |<br>"
-                + "|                   |___| |_____| |   |          ( \\|====|/ )|<br>"
-                + "|             ____ ____    _____  |___|           \\________/ |<br>"
-                + "|___         |    |    |  |     |  ___                    ___|<br>"
-                + "|   \\___     |    |    |  |     | |   |               ___/   |<br>"
-                + "|    __ \\___ |____|____|  |_____| |___|           ___/ __    |<br>"
-                + "|   |  \\___ \\____________________________________/ ___/  |   |<br>"
-                + "|   |      \\      __________________________      /      |   |<br>"
-                + "|   |___    |    /                          \\    |    ___|   |<br>"
-                + "|   |   \\___|   |                            |   |___/   |   |<br>"
-                + "|   |       |   |____________________________|   |       |   |<br>"
-                + "|   |       |   |                            |   |       |   |<br>"
-                + "|   |       |   |                            |   |       |   |<br>"
-                + "|___|       |   |                            |   |       |___|<br>"
-                + "            |   |                            |   |<br>"
-                + "            |___|                            |___|<br>")
-            .appendTo(parent);
-        $("<div>")
-            .attr("id", "office_chair")
-            .addClass("pre")
-            .html(" ____________________<br>"
-                + "(____________________)<br>"
-                + "|  ________________  |<br>"
-                + "| |                | |<br>"
-                + "| |  ()        ()  | |<br>"
-                + "| |                | |<br>"
-                + "| |  ()        ()  | |<br>"
-                + "|_|________________|_|")
-            .click(function() {
-                enterprises.load_desk();
-            })
-            .appendTo(parent);
-        $("<div>")
-            .attr("id", "office_computer")
-            .addClass("pre")
-            .html(" _______________<br>"
-                + "|               |<br>"
-                + "|               |<br>"
-                + "|       @       |<br>"
-                + "|               |<br>"
-                + "|_______ _______|<br>"
-                + "       _|_<br>"
-                + "      /___\\")
-            .appendTo(parent);
-    },
-
     update_research() {
-        enterprises.check_empty();
+        desk.check_empty();
     },
 
     check_empty() {
-        let investments = $("#investments_section");
+        let investments = $("#enterprise_investments_section");
         if (investments.children().length == 0) {
             $("<div>")
                 .attr("id", "no_investments")
+                .addClass("centered")
                 .text("No investments available!")
                 .appendTo(investments);
         }
@@ -546,6 +442,7 @@ var enterprises = {
         if (research.children().length == 0) {
             $("<div>")
                 .attr("id", "no_projects")
+                .addClass("centered")
                 .text("No projects available!")
                 .appendTo(research);
         }
