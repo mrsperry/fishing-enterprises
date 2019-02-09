@@ -90,3 +90,8 @@ div.before:before {
 #office_desk, #office_chair, #office_computer {
     background-color: white;
 }
+
+/* games */
+#earth_defender_section, #tutorial_moving_alien, #tutorial_shooting_alien {
+    border: 1px solid black;
+}

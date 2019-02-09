@@ -806,3 +806,205 @@ p#save_intervals {
 .pointer {
     cursor: pointer;
 }
+
+/* earth defender */
+#earth_defender_section {
+    position: absolute;
+    left: 248px;
+    width: 560px;
+    height: 708px;
+}
+
+#earth_defender_content {
+    position: absolute;
+    top: 30px;
+    left: 5%;
+    width: 90%;
+}
+
+#earth_defender_header {
+    position: absolute;
+    left: 50px;
+}
+
+#play_earth_defender_button, #earth_defender_tutorial_button, #exit_earth_defender_button {
+    position: relative;
+    top: 250px;
+    width: 50%;
+    left: 25%;
+}
+
+#earth_defender_hiscores {
+    position: absolute;
+    top: 460px;
+    width: 70%;
+    left: 15%;
+}
+
+#earth_defender_scores_left {
+    position: absolute;
+    top: 485px;
+    left: 150px;
+}
+
+#earth_defender_scores_right {
+    position: absolute;
+    top: 485px;
+    left: 300px;
+    text-align: right;
+}
+
+#tutorial_section {
+    position: absolute;
+    top: 15px;
+    left: 5%;
+    width: 90%;
+}
+
+#tutorial_art {
+    position: absolute;
+    left: 63px;
+}
+
+#movement_description {
+    display: inline-block;
+    margin: 15px 0px 5px 123px;
+    width: 50%;
+}
+
+#tutorial_moving_alien, #tutorial_shooting_alien {
+    padding: 5px 3px;
+}
+
+#moving_alien_description {
+    margin-bottom: 0px;
+}
+
+#tutorial_shooting_alien {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 100px;
+}
+
+#shooting_alien_description {
+    margin: 35px 0px 50px 175px;
+}
+
+#shooting_alien_lasers {
+    position: absolute;
+    top: 40px;
+}
+
+#tutorial_main_menu_button {
+    position: absolute;
+    top: 650px;
+    left: 30%;
+    width: 40%;
+    height: 35px;
+}
+
+.tutorial_paragraph {
+    margin: 5px 0px;
+}
+
+.tutorial_section_end {
+    margin-bottom: 70px;
+}
+
+.tutorial_header {
+    margin-bottom: 10px;
+}
+
+.tutorial_misc {
+    display: inline-block;
+    vertical-align: top;
+    width: 240px;
+}
+
+.misc_description {
+    margin-top: 5px;
+}
+
+#points, #quit_game_button, #lives {
+    display: inline-block;
+    margin: 10px;
+}
+
+#quit_game_button {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    height: 27px;
+    margin: 5px;
+}
+
+#game_section {
+    width: 550px;
+    height: 660px;
+    margin: 5px;
+}
+
+#lives {
+    float: right;
+}
+
+#player, .laser, .enemy {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 33px;
+}
+
+#player {
+    top: 650px;
+}
+
+#level_display, #game_over_text {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+#game_over_text {
+    margin-top: 20px;
+}
+
+#total_score_header {
+    position: absolute;
+    top: 300px;
+    left: 30%;
+    width: 40%;
+}
+
+#total_score {
+    position: absolute;
+    top: 325px;
+    width: 100%;
+}
+
+#earth_defender_main_menu_button {
+    position: absolute;
+    top: 500px;
+    left: 35%;
+    width: 30%;
+}
+
+.enemy {
+    font-size: 9pt;
+}
+
+.level_number {
+    width: 60px;
+}
+
+.hiscore {
+    margin-bottom: 5px;
+}
+
+.right {
+    float: right;
+}

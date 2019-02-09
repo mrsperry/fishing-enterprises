@@ -1,6 +1,6 @@
 var office = {
     initialize() {
-        main.remove_elements(["desk_section"]);
+        main.remove_elements(["desk_section", "earth_defender_section"]);
         let parent = $("<div>")
             .attr("id", "office_section")
             .addClass("pre")
@@ -97,6 +97,9 @@ var office = {
                 + "|_______ _______|<br>"
                 + "       _|_<br>"
                 + "      /___\\")
+            .click(function() {
+                earth_defender.initialize();  
+            })
             .appendTo(parent);
     }
 }
