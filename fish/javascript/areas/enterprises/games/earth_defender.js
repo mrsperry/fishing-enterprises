@@ -397,12 +397,6 @@ var earth_defender = {
                 $(enemy.element)
                     .css("top", 43 + (location.y * 33))
                     .css("left", 5 + (location.x * 55));
-
-                if (location.y == 18) {
-                    enemy_removal.push(index);
-
-                    state.player.lives--;
-                }
             }
         }
 
@@ -442,6 +436,15 @@ var earth_defender = {
                 }
             }
 
+            for (let index = 0; index < state.enemies.length; index++) {
+                let location = state.enemies[index].location;
+                if (location.y >= 18) {
+                    enemy_removal.push(index);
+
+                    state.player.lives--;
+                }
+            }
+
             if (state.enemies.length == 0) {
                 for (let laser of state.lasers) {
                     $(laser.element)
@@ -452,28 +455,23 @@ var earth_defender = {
                 if (!state.level_queued) {
                     earth_defender.next_level();
                 }
+            } else {
+                for (let index of laser_removal.reverse()) {
+                    $(state.lasers[index].element)
+                        .remove();
+        
+                    state.lasers.splice(index, 1);
+                }
             }
         }
 
         for (let index of enemy_removal.reverse()) {
-            try {
-                if (index < state.enemies.length) {
-                    $(state.enemies[index].element)
-                        .remove();
+            if (index < state.enemies.length) {
+                $(state.enemies[index].element)
+                    .remove();
 
-                    state.enemies.splice(index, 1);
-                }
-            } catch(e) {
-                console.log(e);
-                console.log(index + " : " + state.enemies.length);
+                state.enemies.splice(index, 1);
             }
-        }
-
-        for (let index of laser_removal.reverse()) {
-            $(state.lasers[index].element)
-                .remove();
-
-            state.lasers.splice(index, 1);
         }
 
         let initial_location;
@@ -487,7 +485,7 @@ var earth_defender = {
             let location = enemy.location;
             registered_locations += location.x + "," + location.y + "|";
 
-            if (location.y == 17) {
+            if (location.y >= 17) {
                 continue;
             }
 
