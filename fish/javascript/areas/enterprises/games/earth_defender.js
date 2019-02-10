@@ -374,11 +374,11 @@ var earth_defender = {
 
         let enemy_removal = [];
         let update = 10 - Math.floor(0.15 * state.level);
-        if (count % (update < 6 ? 6 : update) == 0) {
+        if (count % (update < 4 ? 4 : update) == 0) {
             for (let index = 0; index < state.enemies.length; index++) {
                 let enemy = state.enemies[index];
 
-                if (count % ((update < 6 ? 6 : update) * 2) == 0) {
+                if (count % ((update < 4 ? 4 : update) * 2) == 0) {
                     $(enemy.element)
                         .html("\\__[]__/<br>"
                             + " \\|  |/");
