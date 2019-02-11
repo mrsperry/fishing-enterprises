@@ -87,6 +87,17 @@ let vendor = {
         }
     },
 
+    redraw_shown(vendor) {
+        // loop over all displayed buttons
+        for (let item of vendor.shown) {
+            // check if the button is not on screen
+            if ($("#" + item.data.id + "_button").length == 0) {
+                // create the button
+                buttons.create(item.data);
+            }
+        }
+    },
+
     remove_index(vendor, index) {
         // remove the index from the displayed list
         vendor.shown.splice(index, 1);

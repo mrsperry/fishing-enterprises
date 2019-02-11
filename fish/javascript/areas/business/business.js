@@ -241,11 +241,7 @@ var business = {
         }
 
         vendor.update(this.vendor);
-        for (let item of this.vendor.shown) {
-            if ($("#" + item.data.id + "_button").length == 0) {
-                buttons.create(item.data);
-            }
-        }
+        vendor.redraw_shown(this.vendor);
     
         if (this.vendor.shown.length == 0) {
             $("<div>")
