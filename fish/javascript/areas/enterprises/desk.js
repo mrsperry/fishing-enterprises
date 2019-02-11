@@ -1,7 +1,118 @@
 var desk = {
     initialize() {
-        main.remove_elements(["office_section"]);
+        // research
+        let progress_function = (parent) => {
+            $(parent)
+                .css("background-color", "transparent");
 
+            let element = $("<div>")
+                .attr("progress", 3)
+                .addClass("progress absolute")
+                .css("top", $(parent).position().top + 6)
+                .css("left", $(parent).position().left + 6)
+                .appendTo($(parent));
+            $(element)
+                .animate(
+                    { "width": "295px" },
+                    $(element).attr("progress") * 1000,
+                    "linear",
+                    function() {
+                        buttons.remove($(parent).attr("id").replace("_button", ""), enterprises.update_research);
+                    }
+                );
+        }
+        vendor.add_item(enterprises.research_vendor, {
+            data: {
+                parent: "research_content",
+                id: "designer_research",
+                classes: ["enterprise_investment absolute"],
+                text: "hello test",
+                on_click: function() {
+                    progress_function($(this));
+                }
+            }
+        });
+
+        // investments
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "newspaper_unlock",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Newspaper Promotion",
+                    regular: "(Free!)"
+                },
+                text: "A local newspaper bulletin is running a campaign to get more readers. For you that means free papers!",
+                on_click: function() {
+                    $("#newspaper_section")
+                        .fadeIn();
+                    enterprises.desk_data.newspaper = true;
+
+                    vendor.remove_item(enterprises.vendor, "newspaper_unlock", enterprises.check_empty);
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "designer_unlock",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Designer Unlock",
+                    regular: ""
+                },
+                text: "Unlock the designer section.",
+                on_click: function() {
+                    $("#designer_section")
+                        .fadeIn();
+                    enterprises.desk_data.designer = true;
+
+                    vendor.remove_item(enterprises.vendor, "designer_unlock", enterprises.check_empty);
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "stocks_unlock",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Stocks Unlock",
+                    regular: ""
+                },
+                text: "Unlock the stocks section.",
+                on_click: function() {
+                    $("#stocks_section")
+                        .fadeIn();
+                    enterprises.desk_data.stocks = true;
+
+                    vendor.remove_item(enterprises.vendor, "stocks_unlock", enterprises.check_empty);
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "research_unlock",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Research Unlock",
+                    regular: ""
+                },
+                text: "Unlock the research section.",
+                on_click: function() {
+                    $("#research_section")
+                        .fadeIn();
+                    enterprises.desk_data.research = true;
+
+                    vendor.remove_item(enterprises.vendor, "research_unlock", enterprises.check_empty);
+                }
+            }
+        });
+    },
+
+    load() {
         let parent = $("<div>")
             .attr("id", "desk_section")
             .appendTo($(".left"));
@@ -57,23 +168,31 @@ var desk = {
             .appendTo(parent);
 
         // header
-        $("<div>")
-            .attr("id", "office_button_section")
+        let header_section = $("<div>")
+            .attr("id", "header_section")
             .addClass("desk_section absolute")
+            .hide()
+            .fadeIn()
             .appendTo(parent);
         buttons.create({
-            parent: "office_button_section",
+            parent: "header_section",
             id: "office",
             text: "Back to your office",
             on_click: function() {
-                office.initialize();
+                $("#desk_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                        
+                        office.load();
+                    });
             }
         });
         let header = $("<div>")
             .attr("id", "balance_header")
             .addClass("desk_section centered bold absolute")
             .text("Balance")
-            .appendTo(parent);
+            .appendTo(header_section);
         $("<div>")
             .addClass("divider")
             .appendTo(header);
@@ -81,7 +200,7 @@ var desk = {
             .attr("id", "balance_counter")
             .addClass("desk_section centered absolute")
             .text("$")
-            .appendTo(parent);
+            .appendTo(header_section);
         $("<span>")
             .attr("id", "money_count")
             .text("0")
@@ -96,6 +215,10 @@ var desk = {
             .addClass("desk_section pointer absolute")
             .hide()
             .appendTo(parent);
+        if (enterprises.desk_data.designer != null) {
+            $(designer_section)
+                .fadeIn();
+        }
         $("<div>")
             .attr("id", "designer_art")
             .addClass("pre absolute")
@@ -139,6 +262,10 @@ var desk = {
             .addClass("desk_section before absolute")
             .hide()
             .appendTo(parent);
+        if (enterprises.desk_data.research != null) {
+            $(research_section)
+                .fadeIn();
+        }
         let research_points = $("<div>")
             .attr("id", "research_points")
             .addClass("centered")
@@ -163,121 +290,27 @@ var desk = {
         $("<div>")
             .attr("id", "research_content")
             .appendTo(research_section);
-
-        let progress_function = (parent) => {
-            $(parent)
-                .css("background-color", "transparent");
-
-            let element = $("<div>")
-                .attr("progress", 3)
-                .addClass("progress absolute")
-                .css("top", $(parent).position().top + 6)
-                .css("left", $(parent).position().left + 6)
-                .appendTo($(parent));
-            $(element)
-                .animate(
-                    { "width": "295px" },
-                    $(element).attr("progress") * 1000,
-                    "linear",
-                    function() {
-                        buttons.remove($(parent).attr("id").replace("_button", ""), enterprises.update_research);
-                    }
-                );
-        }
-        vendor.add_item(enterprises.research_vendor, {
-            data: {
-                parent: "research_content",
-                id: "designer_research",
-                classes: ["enterprise_investment absolute"],
-                text: "hello test",
-                on_click: function() {
-                    progress_function($(this));
-                }
-            }
-        });
         vendor.update(enterprises.research_vendor);
+        vendor.redraw_shown(enterprises.research_vendor);
 
         // investments
         $("<div>")
             .attr("id", "enterprise_investments_section")
             .attr("display", "Investments")
             .addClass("desk_section before absolute")
+            .hide()
+            .fadeIn()
             .appendTo(parent);
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
-                id: "newspaper_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Newspaper Promotion",
-                    regular: "(Free!)"
-                },
-                text: "A local newspaper bulletin is running a campaign to get more readers. For you that means free papers!",
-                on_click: function() {
-                    $("#newspaper_section")
-                        .fadeIn();
-                    vendor.remove_item(enterprises.vendor, "newspaper_unlock", enterprises.check_empty);
-                }
-            }
-        });
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
-                id: "designer_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Designer Unlock",
-                    regular: ""
-                },
-                text: "Unlock the designer section.",
-                on_click: function() {
-                    $("#designer_section")
-                        .fadeIn();
-                    vendor.remove_item(enterprises.vendor, "designer_unlock", enterprises.check_empty);
-                }
-            }
-        });
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
-                id: "stocks_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Stocks Unlock",
-                    regular: ""
-                },
-                text: "Unlock the stocks section.",
-                on_click: function() {
-                    $("#stocks_section")
-                        .fadeIn();
-                    vendor.remove_item(enterprises.vendor, "stocks_unlock", enterprises.check_empty);
-                }
-            }
-        });
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
-                id: "research_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Research Unlock",
-                    regular: ""
-                },
-                text: "Unlock the research section.",
-                on_click: function() {
-                    $("#research_section")
-                        .fadeIn();
-                    vendor.remove_item(enterprises.vendor, "research_unlock", enterprises.check_empty);
-                }
-            }
-        });
         vendor.update(enterprises.vendor);
+        vendor.redraw_shown(enterprises.vendor);
 
         // payroll
         let payroll_section = $("<div>")
             .attr("id", "payroll_section")
             .attr("display", "Payroll & Workers")
             .addClass("desk_section before absolute")
+            .hide()
+            .fadeIn()
             .appendTo(parent);
         let payroll_content = $("<div>")
             .attr("id", "payroll_content")
@@ -340,6 +373,10 @@ var desk = {
             .addClass("desk_section absolute")
             .hide()
             .appendTo(parent);
+        if (enterprises.desk_data.newspaper != null) {
+            $(newspaper_section)
+                .fadeIn();
+        }
         $("<div>")
             .attr("id", "newspaper_art")
             .addClass("pre")
@@ -399,6 +436,10 @@ var desk = {
             .addClass("desk_section before absolute")
             .hide()
             .appendTo(parent);
+        if (enterprises.desk_data.stocks != null) {
+            $(stocks_section)
+                .fadeIn();
+        }
         let stocks_content = $("<div>")
             .attr("id", "stocks_content")
             .addClass("absolute")
@@ -422,6 +463,8 @@ var desk = {
             breaks: 0
         });
         stocks.update_display();
+
+        desk.check_empty();
     },
 
     update_research() {
@@ -432,7 +475,7 @@ var desk = {
         let investments = $("#enterprise_investments_section");
         if (investments.children().length == 0) {
             $("<div>")
-                .attr("id", "no_investments")
+                .attr("id", "enterprise_no_investments")
                 .addClass("centered")
                 .text("No investments available!")
                 .appendTo(investments);

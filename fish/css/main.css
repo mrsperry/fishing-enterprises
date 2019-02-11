@@ -585,7 +585,7 @@ p#save_intervals {
     height: 200px;
 }
 
-#office_button_section {
+#header_section {
     left: 379px;
     height: 40px;
 }
@@ -595,16 +595,16 @@ p#save_intervals {
 }
 
 #balance_header {
-    top: 200px;
-    left: 379px;
+    top: 50px;
+    left: 0px;
     text-align: center;
     font-weight: bold;
     height: auto;
 }
 
 #balance_counter {
-    top: 220px;
-    left: 379px;
+    top: 70px;
+    left: 0px;
     text-align: center;
     height: auto;
 }
@@ -778,7 +778,7 @@ p#save_intervals {
     height: 123px;
 }
 
-#no_projects {
+#no_projects, #enterprise_no_investments {
     margin-top: 3px;
     width: 307px;
     text-align: center;

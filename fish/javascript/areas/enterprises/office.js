@@ -1,6 +1,5 @@
 var office = {
-    initialize() {
-        main.remove_elements(["desk_section", "earth_defender_section"]);
+    load() {
         let parent = $("<div>")
             .attr("id", "office_section")
             .addClass("pre")
@@ -83,7 +82,13 @@ var office = {
                 + "| |  ()        ()  | |<br>"
                 + "|_|________________|_|")
             .click(function() {
-                desk.initialize();
+                $("#office_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+
+                        desk.load();
+                    });
             })
             .appendTo(parent);
         $("<div>")
@@ -98,7 +103,13 @@ var office = {
                 + "       _|_<br>"
                 + "      /___\\")
             .click(function() {
-                earth_defender.initialize();  
+                $("#office_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+
+                        earth_defender.load();  
+                    });
             })
             .appendTo(parent);
     }

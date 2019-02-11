@@ -125,7 +125,21 @@ var settings = {
                 parent: "right",
                 text: "Unlock Enterprises",
                 on_click: function() {
-                    enterprises.initialize();
+                    $("#resource_counters")
+                        .fadeOut();
+                    $("#resource_buttons")
+                        .fadeOut();
+                    $("#area_selector")
+                        .fadeOut(400, function() {
+                            $("#resource_counters")
+                                .remove();
+                            $("#resource_buttons")
+                                .remove();
+                            $(this)
+                                .remove();
+
+                            enterprises.initialize();
+                        });
                 }
             });
             buttons.create({

@@ -1,7 +1,5 @@
 var earth_defender = {
-    initialize() {
-        main.remove_elements(["office_section", "earth_defender_section"]);
-
+    load() {
         let left = $(".left");
         let section = $("<div>")
             .attr("id", "earth_defender_section")
@@ -66,7 +64,10 @@ var earth_defender = {
             on_click: function() {
                 $("#earth_defender_section")
                     .fadeOut(400, function() {
-                        office.initialize();
+                        $(this)
+                            .remove();
+
+                        office.load();
                     });
             }
         });
@@ -261,7 +262,7 @@ var earth_defender = {
 
                         window.clearInterval(moving_interval);
 
-                        earth_defender.initialize();
+                        earth_defender.load();
                     });
             }
         });
@@ -771,7 +772,7 @@ var earth_defender = {
                         .fadeOut(400, function() {
                             $(this)
                                 .remove();
-                            earth_defender.initialize();
+                            earth_defender.load();
                         });
                 }
             });
