@@ -1,9 +1,8 @@
 var earth_defender = {
     load() {
-        let left = $(".left");
         let section = $("<div>")
             .attr("id", "earth_defender_section")
-            .appendTo(left);
+            .appendTo($("#left"));
 
         let content = $("<div>")
             .attr("id", "earth_defender_content")

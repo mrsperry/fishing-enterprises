@@ -77,8 +77,8 @@ button:disabled {
     width: 50px;
 }
 
-.left {
-    width: 50%;
+#left {
+    width: 1056px;
     float: left;
 }
 

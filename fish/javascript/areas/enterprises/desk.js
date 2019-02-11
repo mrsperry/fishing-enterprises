@@ -115,7 +115,7 @@ var desk = {
     load() {
         let parent = $("<div>")
             .attr("id", "desk_section")
-            .appendTo($(".left"));
+            .appendTo($("#left"));
         $("<div>")
             .attr("id", "desk_art")
             .addClass("pre")

@@ -44,7 +44,7 @@ var office = {
                 + "|    __/<br>"
                 + "| __/<br>"
                 + "|/")
-            .appendTo($(".left"));
+            .appendTo($("#left"));
         $("<div>")
             .attr("id", "office_desk")
             .addClass("pre absolute")
