@@ -92,14 +92,13 @@ var earth_defender = {
                 .attr("id", "hiscore_" + real)
                 .addClass("hiscore")
                 .text(real + ". ")
-                .appendTo($("#earth_defender_scores_" + (real > 5 ? "right" : "left")))
+                .appendTo($("#earth_defender_scores_" + (real > 5 ? "right" : "left")));
+            let score = this.hiscores == null ? null : this.hiscores["score_" + (index + 1)];
             $("<span>")
                 .attr("id", "hiscore_" + real + "_score")
-                .text("--")
+                .text(score == null ? "--" : main.stringify(score))
                 .appendTo(number);
         }
-
-        this.hiscores = {};
     },
 
     show_tutorial() {
@@ -776,6 +775,26 @@ var earth_defender = {
                         });
                 }
             });
+
+            let score = this.state.player.points;
+            if (this.hiscores == null) {
+                this.hiscores = {
+                    score_1: score
+                };
+            } else {
+                let insert_index = 11;
+                let array = Object.values(this.hiscores);
+                for (let index = array.length; index >= 0; index--) {
+                    if (array[index] < score) {
+                        insert_index = index;
+                    }
+                }
+                array.splice(insert_index, 0, score);
+
+                for (let index = 0; index < (array.length > 10 ? (array.length - 1) : array.length); index++) {
+                    this.hiscores["score_" + (index + 1)] = array[index];
+                }
+            }
         }
         
         $("#info_section")
