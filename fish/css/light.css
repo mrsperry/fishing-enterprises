@@ -95,3 +95,38 @@ div.before:before {
 #earth_defender_section, #tutorial_moving_alien, #tutorial_shooting_alien {
     border: 1px solid black;
 }
+
+/* stocks */
+#portfolio_divider, #stocks_divider {
+    border: 0.5px solid black;
+}
+
+#graph_vertical_divider, #graph_horizontal_divider {
+    border: 0.5px solid black;
+}
+
+.stocks_table_header:not(:first-child) {
+    border-left: solid black 1px;
+}
+
+.stocks_table_row:nth-child(even), .stocks_table_row_empty:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.stocks_table_row:hover {
+    color: #008ae6;
+    cursor: pointer;
+    background-color: #e3e3e3;
+}
+
+.stocks_table_row:hover .stock_positive, .stocks_table_row:hover .stock_negative {
+    color: #008ae6;
+}
+
+.stocks_table_data, .invested_table_data {
+    border-top: solid black 1px;
+}
+
+.stocks_table_data:not(:last-child), .invested_table_data:not(:last-child) {
+    border-right: solid black 1px;
+}

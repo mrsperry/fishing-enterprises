@@ -460,9 +460,18 @@ var desk = {
             id: "view_portfolio",
             classes: ["absolute"],
             text: "View Your Portfolio",
-            breaks: 0
+            breaks: 0,
+            on_click() {
+                $("#desk_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                        
+                        stocks.load();
+                    });
+            }
         });
-        stocks.update_display();
+        stocks.update_desk_display();
 
         desk.check_empty();
     },
