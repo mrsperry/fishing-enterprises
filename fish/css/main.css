@@ -764,7 +764,8 @@ p#save_intervals {
 }
 
 .stock_item {
-    margin-top: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .progress {
