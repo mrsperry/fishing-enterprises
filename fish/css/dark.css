@@ -96,6 +96,10 @@ div.before:before {
     background-color: #222222;
 }
 
+#designer_art, #newspaper_art {
+    color: #666666;
+}
+
 /* games */
 #earth_defender_section, #tutorial_moving_alien, #tutorial_shooting_alien {
     border: 1px solid #666666;
