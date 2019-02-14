@@ -46,7 +46,7 @@ var shop = {
                 id: "buy_catalog",
                 text: "Fish Catalog ($250)",
                 on_click: function() {
-                    shop.update_money(-250);
+                    main.update_money(-250);
                     catalog.purchase();
                     shop.remove_item("buy_catalog");
                 },
@@ -130,41 +130,6 @@ var shop = {
         }
 
         this.check_empty();
-    },
-
-    update_money(value) {
-        resources.money.count += value;
-        this.money_difference += value;
-
-        if (value > 0) {
-            resources.money.total += value;
-        }
-
-        let amount = this.money_difference;
-        if (amount != 0) {
-            $("#money_difference")
-                .text(" (" + (amount > 0 ? "+" : "-") + main.stringify(Math.abs(amount)) + ")")
-                .stop()
-                .show()
-                .css("opacity", 1.0)
-                .fadeOut(1200, function() {
-                    shop.money_difference = 0;
-                });
-        }
-        
-        counters.update_counter(resources.money);
-        this.update_buttons();
-
-        if (areas.current_area.internal == "business") {
-            for (let item of business.vendor.shown) {
-                $("#" + item.data.id + "_button")
-                    .prop("disabled", item.data.disabled);
-            }
-
-            vendor.update(business.vendor);
-
-            opportunities.update();
-        }
     },
 
     fish_value(reset) {
@@ -284,7 +249,7 @@ var shop = {
                     on_click: function() {
                         counters.add_auto_buy(resource);
                         shop.remove_item(resource.internal + "_auto_buy");
-                        shop.update_money(-item.price);
+                        main.update_money(-item.price);
 
                         if (resource.internal == "fuel") {
                             shop.remove_item("buy_fuel");

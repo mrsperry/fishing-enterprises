@@ -59,7 +59,7 @@ var boat = {
     },
 
     purchase_part(item) {
-        shop.update_money(-item.price);
+        main.update_money(-item.price);
         this.add_part(item);
     },
 

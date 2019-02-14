@@ -96,7 +96,7 @@ var areas = {
                         text: area.workers.description,
                         on_click: function() {
                             area.workers.enabled = true;
-                            shop.update_money(-(area.purchased.price * 10));
+                            main.update_money(-(area.purchased.price * 10));
                             vendor.remove_item(business.vendor, index + "_worker_unlock", business.check_empty);
                             business.update_workers();
                         },

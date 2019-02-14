@@ -65,6 +65,41 @@ var main = {
         settings.toggle_auto_save();
     },
 
+    update_money(value) {
+        resources.money.count += value;
+        shop.money_difference += value;
+
+        if (value > 0) {
+            resources.money.total += value;
+        }
+
+        let amount = shop.money_difference;
+        if (amount != 0) {
+            $("#money_difference")
+                .text(" (" + (amount > 0 ? "+" : "-") + main.stringify(Math.abs(amount)) + ")")
+                .stop()
+                .show()
+                .css("opacity", 1.0)
+                .fadeOut(1200, function() {
+                    shop.money_difference = 0;
+                });
+        }
+        
+        counters.update_counter(resources.money);
+        shop.update_buttons();
+
+        if (areas.current_area.internal == "business") {
+            for (let item of business.vendor.shown) {
+                $("#" + item.data.id + "_button")
+                    .prop("disabled", item.data.disabled);
+            }
+
+            vendor.update(business.vendor);
+
+            opportunities.update();
+        }
+    },
+
     reset(save) {
         for (let type in resources) {
             for (let index in resources[type]) {

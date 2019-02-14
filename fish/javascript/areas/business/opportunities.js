@@ -808,11 +808,11 @@ var opportunities = {
                     });
                     
                     if (item.cost != null) {
-                        shop.update_money(-item.cost);
+                        main.update_money(-item.cost);
                     }
 
                     if (item.ending.payout != null) {
-                        shop.update_money(item.ending.payout);
+                        main.update_money(item.ending.payout);
                     }
 
                     if (item.ending.morality != null) {

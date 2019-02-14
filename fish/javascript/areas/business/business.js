@@ -19,7 +19,7 @@ var business = {
             text: "Hire a worker to be assigned to an available area",
             on_click: function() {
                 let cost = business.get_worker_cost();
-                shop.update_money(-cost);
+                main.update_money(-cost);
 
                 resources.workers.count += 1;
                 resources.workers.total += 1;
@@ -59,7 +59,7 @@ var business = {
                 },
                 text: "Your current building is getting cramped and there is a great empty lot next to you for sale",
                 on_click: function() {
-                    shop.update_money(-3000);
+                    main.update_money(-3000);
 
                     resources.workers.max += 10;
                 
@@ -86,7 +86,7 @@ var business = {
                 },
                 text: "You'll need more space for departments if you want to grow your business",
                 on_click: function() {
-                    shop.update_money(-9000);
+                    main.update_money(-9000);
 
                     resources.workers.max += 20;
  
@@ -113,7 +113,7 @@ var business = {
                 },
                 text: "The other side of town is rapidly developing and no fishing shops -- best to take advantage quickly",
                 on_click: function() {
-                    shop.update_money(-15000);
+                    main.update_money(-15000);
 
                     resources.workers.max += 40;
                 
@@ -140,7 +140,7 @@ var business = {
                 },
                 text: "Hire additional upper management so you have time to focus on exterior issues.",
                 on_click: function() {
-                    shop.update_money(-4000);
+                    main.update_money(-4000);
 
                     business.opportunities = true;
                     business.create_opportunities_button();
@@ -166,7 +166,7 @@ var business = {
                 },
                 text: "It's time to take your business to the next level: create your dream enterprise",
                 on_click: function() {
-                    shop.update_money(-50000);
+                    main.update_money(-50000);
 
                         $(".container")
                             .fadeOut(1200, function() {

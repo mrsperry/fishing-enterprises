@@ -21,7 +21,7 @@ var settings = {
                 parent: "right",
                 text: "Money +5000",
                 on_click: function() {
-                    shop.update_money(5000);
+                    main.update_money(5000);
                 }
             });
             buttons.create({

@@ -220,7 +220,7 @@ var fishing = {
                         }
                     }
                     if (update) {
-                        shop.update_money(fish.price);
+                        main.update_money(fish.price);
                     }
                 }
             }
