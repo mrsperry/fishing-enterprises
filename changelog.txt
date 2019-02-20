@@ -1,0 +1,28 @@
+Patch dev-0.2.1 14/1/2019
+==============================
+Changes:
+    - Moved the money counter up
+    - Moved the total fish counter to below the money counter
+    - Added the sell fish button to the business
+    - Minor spelling fixes 
+
+Release dev-0.2 - 12/1/2019
+==============================
+Additions:
+    - Multiple menu popups for settings, supporting me, and when you end the game
+    - Implemented auto-buying buttons
+    - Added localstorage saving
+    - Added the business section of the game
+        - Fish are automatically sold
+        - News sidescroller with area locking
+        - Worker allocation
+        - Opportunities
+            - Morality system
+            - Promotes active gameplay
+        - Added end of game screen
+    - Added social and donation links
+    - Added location name above fish counters
+    - Added number of fish caught in a certain area
+    - Implemented river troll
+
+Initial release dev-0.1 - 30-11-2018
