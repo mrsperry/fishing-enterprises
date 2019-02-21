@@ -439,7 +439,7 @@ var stocks = {
                 breaks: 0,
                 disabled: function() {
                     return stock.price.actual > resources.money.count
-                        && stock.amount > 0;
+                        || stock.amount == 0;
                 },
                 on_click: function() {
                     stocks.buy_stock(stock, 1);
@@ -453,7 +453,7 @@ var stocks = {
                 breaks: 0,
                 disabled: function() {
                     return (stock.price.actual * 10) > resources.money.count
-                        && stock.amount >= 10;
+                        || stock.amount < 10;
                 },
                 on_click: function() {
                     stocks.buy_stock(stock, 10);
@@ -467,7 +467,7 @@ var stocks = {
                 breaks: 0,
                 disabled: function() {
                     return (stock.price.actual * stock.amount) > resources.money.count
-                        && stock.amount > 0;
+                        || stock.amount == 0;
                 },
                 on_click: function() {
                     stocks.buy_stock(stock, stock.amount);
