@@ -676,21 +676,21 @@ p#save_intervals {
 
 #payroll_content {
     position: absolute;
-    margin-top: 7px;
+    margin-top: 8px;
     width: 80%;
     left: 10%;
 }
 
-.payroll_margin {
-    margin-bottom: 5px;
-}
-
-.payroll_button {
+#worker_edit_button {
     position: absolute;
     margin-top: 15px;
-    top: 105px;
+    top: 106px;
     left: 15px;
-    width: 140px;
+    width: 280px;
+}
+
+.payroll_margin {
+    margin-bottom: 5px;
 }
 
 .payroll_button:nth-child(odd) {

@@ -357,18 +357,21 @@ var desk = {
             .appendTo(payroll_content);
         buttons.create({
             parent: "payroll_section",
-            id: "payroll_edit",
-            classes: ["payroll_button absolute"],
-            text: "Edit Payroll",
-            breaks: 0
-        });
-        buttons.create({
-            parent: "payroll_section",
-            classes: ["payroll_button absolute"],
+            classes: ["absolute"],
             id: "worker_edit",
-            text: "Edit Workers",
-            breaks: 0
+            text: "Edit Payroll & Workers",
+            breaks: 0,
+            on_click() {
+                $("#desk_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                        
+                        workers.load();
+                    });
+            }
         });
+        workers.initialize();
 
         // newspaper
         let newspaper_section = $("<div>")
