@@ -175,6 +175,8 @@ var stocks = {
             if (stocks.invested.includes(stock) && stock.purchased == 0) {
                 invested_removal.push(index);
             }
+
+            stocks.update_selected_stock(stock);
         }
 
         for (let index of stock_removal.reverse()) {
@@ -301,6 +303,21 @@ var stocks = {
                         .text("$" + main.stringify(stock.price.actual * stock.purchased));
                 });
         }
+
+        this.update_selected_stock(stock);
+    },
+
+    update_selected_stock(stock) {
+        if (this.selected_stock != null) {
+            if (this.selected_stock.name == stock.name) {
+                $("#buy_max_stock_button")
+                    .text("Buy Max ($" + main.stringify(stock.amount * stock.price.actual) + ")");
+                if (stock.purchased != null) {
+                    $("#sell_max_stock_button")
+                        .text("Sell All ($" + main.stringify(stock.purchased * stock.price.actual) + ")");
+                }
+            }
+        }
     },
 
     create_stock_display(stock, invested) {
@@ -379,6 +396,8 @@ var stocks = {
     },
 
     select_stock(stock) {
+        this.selected_stock = stock;
+
         $("#selected_stock_header")
             .text("Selected Stock: " + stock.name);
             
