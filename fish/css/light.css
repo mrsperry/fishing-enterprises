@@ -105,21 +105,23 @@ div.before:before {
     border: 0.5px solid black;
 }
 
-.stocks_table_header:not(:first-child) {
+.stocks_table_header:not(:first-child), .invested_table_header:not(:first-child) {
     border-left: solid black 1px;
 }
 
-.stocks_table_row:nth-child(even), .stocks_table_row_empty:nth-child(even) {
+.stocks_table_row:nth-child(even), .stocks_table_row_empty:nth-child(even),
+.invested_table_row:nth-child(even), .invested_table_row_empty:nth-child(even) {
     background-color: #eeeeee;
 }
 
-.stocks_table_row:hover {
+.stocks_table_row:hover, .sibling_highlight {
     color: #008ae6;
     cursor: pointer;
-    background-color: #e3e3e3;
+    background-color: #e3e3e3 !important;
 }
 
-.stocks_table_row:hover .stock_positive, .stocks_table_row:hover .stock_negative {
+.stocks_table_row:hover > .stock_positive, .stocks_table_row:hover > .stock_negative,
+.sibling_highlight > .stock_positive, .sibling_highlight > .stock_negative {
     color: #008ae6;
 }
 

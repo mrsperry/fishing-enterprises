@@ -123,6 +123,9 @@ var areas = {
     },
 
     switch_area(area) {
+        if (area == null) {
+            return;
+        }
         $("#resource_buttons")
             .empty();
     

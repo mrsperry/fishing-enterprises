@@ -97,6 +97,10 @@ var main = {
             vendor.update(business.vendor);
 
             opportunities.update();
+        } else if (areas.current_area.internal == "enterprises") {
+            if (enterprises.current_view == "stocks") {
+                stocks.update_display();
+            }
         }
     },
 

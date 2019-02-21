@@ -1,15 +1,21 @@
 var stocks = {
     initialize() {
-        // initialize the list of stocks
+        this.buttons = [];
+
+        this.stock_id = 0;
         this.stock_list = [];
         this.invested = [];
 
-        for (let index = 0; index < 40; index++) {
+        for (let index = 0; index < 15; index++) {
             this.create_stock(main.random(1, 3));
         }
+
+        enterprises.stocks_interval = window.setInterval(this.update, 15000);
     },
 
     load() {
+        enterprises.current_view = "stocks";
+
         let parent = $("<div>")
             .attr("id", "stocks_section")
             .hide()
@@ -24,7 +30,7 @@ var stocks = {
             .attr("id", "available_stocks_right")
             .appendTo(parent);
 
-        for (let text of ["Name", "Price", "Amount", "Change"]) {
+        for (let text of ["Name", "Amount", "Price", "Change"]) {
             $("<th>")
                 .addClass("stocks_table_header")
                 .text(text)
@@ -34,75 +40,9 @@ var stocks = {
                 .text(text)
                 .appendTo(table_right);
         }
-        let select_stock = (stock) => {
-            let parent = $("#selected_stock_content")
-            if ($(parent).children().length != 0) {
-                if ($("#selected_stock_info_name").text().split(" ")[1] != stock.name) {
-                    main.remove_elements(["selected_stock_graph", "graph_horizontal_divider", "graph_vertical_divider"]);
-
-                    let select = true;
-                    for (let element of $.merge($(".selected_stock_info_content"), $(".stock_purchase_button"))) {
-                        $(element)
-                            .fadeOut(400, function() {
-                                $(this)
-                                    .remove()
-                                    .fadeIn();
-
-                                if (select) {
-                                    stocks.select_stock(stock);
-                                    select = false;
-                                }
-                            });
-                    }
-                }
-            } else {
-                $("#no_stock_selected")
-                    .fadeOut(400, function() {
-                        $(this)
-                            .remove();
-
-                        stocks.select_stock(stock);
-                    });
-            }
-        }
         for (let index = 0; index < 40; index++) {
-            let stock = this.stock_list[index];
-            let table_parent = index >= 20 ? table_right : table;
-
-            if (stock != null) {
-                let row = $("<tr>")
-                    .addClass("stocks_table_row")
-                    .click(function() {
-                        select_stock(stock);
-                    })
-                    .appendTo(table_parent);
-                $("<td>")
-                    .addClass("stocks_table_data")
-                    .text(stock.name)
-                    .appendTo(row);
-                $("<td>")
-                    .addClass("stocks_table_data")
-                    .text("$" + main.stringify(stock.price) + ".00")
-                    .appendTo(row);
-                $("<td>")
-                    .addClass("stocks_table_data")
-                    .text(stock.amount)
-                    .appendTo(row);
-                let above_zero = stock.points.change >= 0;
-                $("<td>")
-                    .addClass("stocks_table_data stock_" + (above_zero ? "positive" : "negative"))
-                    .text((above_zero ? "+" : "") + stock.points.change)
-                    .appendTo(row);
-            } else {
-                let row = $("<tr>")
-                    .addClass("stocks_table_row_empty")
-                    .appendTo(table_parent);
-                for (let data = 0; data < 4; data++) {
-                    $("<td>")
-                        .addClass("stocks_table_data")
-                        .appendTo(row);
-                }
-            }
+            $(this.get_empty_row("stocks"))
+                .appendTo(index < 20 ? table_right : table);
         }
 
         $("<div>")
@@ -158,57 +98,29 @@ var stocks = {
         let invested_table = $("<table>")
             .attr("id", "invested_stocks_table")
             .appendTo(portfolio);
-        for (let title of ["Name", "Amount", "Change", "Est. Worth"]) {
+        for (let title of ["Name", "Amount", "Value", "Change"]) {
             $("<th>")
-                .addClass("stocks_table_header")
+                .addClass("invested_table_header")
                 .text(title)
                 .appendTo(invested_table);
         }
         for (let index = 0; index < 24; index++) {
-            let stock = this.invested[index];
-            
-            if (stock != null) {
-                let row = $("<tr>")
-                    .addClass("stocks_table_row")
-                    .appendTo(invested_table);
-                $("<td>")
-                    .addClass("invested_table_data")
-                    .text(stock.name)
-                    .appendTo(row);
-                $("<td>")
-                    .addClass("invested_table_data")
-                    .text(stock.purchased)
-                    .appendTo(row);
-                $("<td>")
-                    .addClass("invested_table_data")
-                    .text(stock.points.change)
-                    .appendTo(row);
-                $("<td>")
-                    .addClass("invested_table_data")
-                    .appendTo(row);
-            } else {
-                let row = $("<tr>")
-                    .addClass("stocks_table_row_empty")
-                    .appendTo(invested_table);
-                for (let data = 0; data < 4; data++) {
-                    $("<td>")
-                        .addClass("invested_table_data")
-                        .appendTo(row);
-                }
-            }
+            $(this.get_empty_row("invested"))
+                .appendTo(invested_table);
         }
 
         // selected stock
         let selected_stock = $("<div>")
             .attr("id", "selected_stock")
             .appendTo(parent);
-        let selected_stock_header = $("<div>")
+        $("<div>")
+            .attr("id", "selected_stock_header")
             .addClass("centered bold")
             .text("Selected Stock")
             .appendTo(selected_stock);
         $("<div>")
             .addClass("divider")
-            .appendTo(selected_stock_header);
+            .appendTo(selected_stock);
         $("<div>")
             .attr("id", "no_stock_selected")
             .addClass("centered")
@@ -218,13 +130,112 @@ var stocks = {
             .attr("id", "selected_stock_content")
             .hide()
             .appendTo(selected_stock);
+
+        this.update();
     },
 
     update() {
+        let stock_removal = [];
+        let invested_removal = [];
 
+        for (let index = 0; index < stocks.stock_list.length; index++) {
+            let stock = stocks.stock_list[index];
+
+            let points = stock.points;
+            if (points.actual <= points.hover) {
+                points.change = main.random(1, 7);
+
+                if (main.random(1, 3) == 1) {
+                    points.change *= -1;
+                }
+            } else {
+                points.change = -main.random(1, 10);
+            }
+
+            points.history.push(points.actual);
+            if (points.history.length == 11) {
+                points.history.splice(0, 1);
+            }
+
+            let total = points.actual + points.change;
+            if (total > 10) {
+                points.change -= total % 10;
+            } else if (total < -10) {
+                points.change += total % 10;
+            }
+            points.actual = points.change;
+            
+            let price = stock.price;
+            price.actual = Math.round(price.initial * (1.0 + (points.actual / 10)));
+
+            if (price.actual <= 0 || stock.amount == 0) {
+                stock_removal.push(index);
+            }
+
+            if (stocks.invested.includes(stock) && stock.purchased == 0) {
+                invested_removal.push(index);
+            }
+        }
+
+        for (let index of stock_removal.reverse()) {
+            stocks.stock_list.splice(index, 1);
+        }
+        for (let index of invested_removal.reverse()) {
+            stocks.invested.splice(index, 1);
+        }
+
+        let difference = 40 - stocks.stock_list.length;
+        for (let add = 0; add < (difference > 3 ? main.random(1, 3) : difference); add++) {
+            stocks.create_stock(main.random(1, 3));
+        }
+
+        if (enterprises.current_view == "stocks") {
+            let update_table = (array, index, invested) => {
+                let update_row = (element) => {
+                    $(element)
+                        .replaceWith(stocks.get_empty_row(invested ? "invested" : "stocks"));
+                        
+                    let stock = invested ? stocks.invested[index] : stocks.stock_list[index];
+                    if (stock != null) {
+                        stocks.create_stock_display(stock, invested);
+                    }
+
+                    update_table(array, index + 1, invested);
+                }
+
+                let parent = array[index];
+                if ($(parent).hasClass((invested ? "invested" : "stocks") + "_table_row_empty")) {
+                    $(parent)
+                        .fadeOut(0, function() {
+                            update_row($(this));
+                        });
+                } else {
+                    $(parent)
+                        .fadeOut(25, function() {
+                            update_row($(this));
+                        });
+                }
+            }
+            update_table($.merge($(".stocks_table_row"), $(".stocks_table_row_empty")), 0, false);
+            update_table($.merge($(".invested_table_row"), $(".invested_table_row_empty")), 0, true);
+        }
+    },
+
+    update_display() {
+        $("#stocks_balance")
+            .text("$" + main.stringify(resources.money.count));
+        
+        for (let options of this.buttons) {
+            $("#" + options.id + "_button")
+                .prop("disabled", options.disabled);
+        }
     },
 
     update_desk_display() {
+        if (enterprises.stocks_interval == null) {
+            return;
+        }
+        
         let parent = $("#stocks_display");
 
         // find three stocks with the highest point change
@@ -264,7 +275,7 @@ var stocks = {
                 .appendTo(parent);
             $("<div>")
                 .addClass("centered")
-                .text("Price per Unit: " + stock.price)
+                .text("Price per Unit: $" + stock.price.actual)
                 .appendTo(parent);
             $("<div>")
                 .addClass("centered")
@@ -273,58 +284,135 @@ var stocks = {
         }
     },
 
+    update_stock(stock) {
+        for (let prefix of ["stock_", "invested_"]) {
+            let id = "#" + prefix + stock.id;
+
+            $(id)
+                .fadeOut(200, function() {
+                    $(this)
+                        .fadeIn(200);
+
+                    $(id + "_amount")
+                        .text(main.stringify(stock.amount));
+                    $(id + "_purchased")
+                        .text(main.stringify(stock.purchased));
+                    $(id + "_value")
+                        .text("$" + main.stringify(stock.price.actual * stock.purchased));
+                });
+        }
+    },
+
+    create_stock_display(stock, invested) {
+        let parent = invested ? $(".invested_table_row_empty")[0] : $(".stocks_table_row_empty")[0];
+
+        $(parent)
+            .attr("id", (invested ? "invested_" : "stock_") + stock.id)
+            .removeClass(invested ? "invested_table_row_empty" : "stocks_table_row_empty")
+            .addClass(invested ? "invested_table_row" : "stocks_table_row")
+            .click(function() {
+                stocks.check_selected_stock(stock);
+            })
+            .hover(function() {
+                stocks.highlight_sibling_stocks(stock, true);
+            }, function() {
+                stocks.highlight_sibling_stocks(stock, false);
+            })
+            .hide()
+            .fadeIn(400)
+            .empty();
+        let prefix = (invested ? "invested_" : "stock_") + stock.id + "_";
+        let clazz = invested ? "stocks_table_data" : "invested_table_data";
+        $("<td>")
+            .attr("id", prefix + "name")
+            .addClass(clazz)
+            .text(stock.name)
+            .appendTo(parent);
+        $("<td>")
+            .attr("id", prefix + (invested ? "purchased" : "amount"))
+            .addClass(clazz)
+            .text(main.stringify(invested ? stock.purchased : stock.amount))
+            .appendTo(parent);
+        $("<td>")
+            .attr("id", prefix + (invested ? "value" : "price"))
+            .addClass(clazz)
+            .text("$" + (invested ? main.stringify(stock.price.actual * stock.purchased) : (main.stringify(stock.price.actual) + ".00")))
+            .appendTo(parent);
+        let above_zero = stock.points.change > 0;
+        $("<td>")
+            .attr("id", prefix + "change")
+            .addClass(clazz + " stock_" + (above_zero ? "positive" : "negative"))
+            .text((above_zero ? "+" : "") + stock.points.change)
+            .appendTo(parent);
+    },
+
+    check_selected_stock(stock) {
+        let parent = $("#selected_stock_content");
+        if ($(parent).children().length != 0) {
+            if ($("#selected_stock_info_name").text().split(" ")[1] != stock.name) {
+                main.remove_elements(["selected_stock_graph", "graph_horizontal_divider", "graph_vertical_divider"]);
+
+                let select = true;
+                for (let element of $.merge($(".selected_stock_info_content"), $(".stock_purchase_button"))) {
+                    $(element)
+                        .fadeOut(400, function() {
+                            $(this)
+                                .remove()
+                                .fadeIn();
+
+                            if (select) {
+                                stocks.select_stock(stock);
+                                select = false;
+                            }
+                        });
+                }
+            }
+        } else {
+            $("#no_stock_selected")
+                .fadeOut(400, function() {
+                    $(this)
+                        .remove();
+
+                    stocks.select_stock(stock);
+                });
+        }
+    },
+
     select_stock(stock) {
+        $("#selected_stock_header")
+            .text("Selected Stock: " + stock.name);
+            
         let parent = $("#selected_stock_content")
             .fadeIn();
         
-        let info = $("#selected_stock_info");
+        let buttons_section = $("#selected_stock_buttons_section");
         let graph_section = $("#selected_graph_section");
-        if ($(info).length == 0) {
-            info = $("<div>")
-                .attr("id", "selected_stock_info")
+        if ($(buttons_section).length == 0) {
+            buttons_section = $("<div>")
+                .attr("id", "selected_stock_buttons_section")
                 .appendTo(parent);
-            let stock_info_header = $("<div>")
+            let buy_header = $("<div>")
+                .attr("id", "stock_buy_header")
                 .addClass("centered bold")
-                .text("Stock Information")
-                .appendTo(info);
+                .text("Buy Stock")
+                .appendTo(buttons_section);
             $("<div>")
                 .addClass("divider")
-                .appendTo(stock_info_header);
-            let stock_info_list = $("<div>")
-                .attr("id", "selected_stock_info_list")
-                .appendTo(info);
+                .appendTo(buy_header);
             $("<div>")
-                .attr("id", "selected_stock_info_name")
-                .addClass("selected_stock_info")
-                .text("Name: ")
-                .appendTo(stock_info_list);
-            $("<div>")
-                .attr("id", "selected_stock_info_price")
-                .addClass("selected_stock_info")
-                .text("Price: ")
-                .appendTo(stock_info_list);
-            $("<div>")
-                .attr("id", "selected_stock_info_amount")
-                .addClass("selected_stock_info")
-                .text("Amount: ")
-                .appendTo(stock_info_list);
-            $("<div>")
-                .attr("id", "selected_stock_info_change")
-                .addClass("selected_stock_info")
-                .text("Change: ")
-                .appendTo(stock_info_list);
-
-            let purchase_header = $("<div>")
-                .attr("id", "stock_purchase_header")
+                .attr("id", "buy_selected_stock_buttons")
+                .appendTo(buttons_section);
+            let sell_header = $("<div>")
+                .attr("id", "stock_sell_header")
                 .addClass("centered bold")
-                .text("Purchase Stock")
-                .appendTo(info);
+                .text("Sell Stock")
+                .appendTo(buttons_section);
             $("<div>")
                 .addClass("divider")
-                .appendTo(purchase_header);
+                .appendTo(sell_header);
             $("<div>")
-                .attr("id", "selected_stock_buttons")
-                .appendTo(info);
+                .attr("id", "sell_selected_stock_buttons")
+                .appendTo(buttons_section);
             
             $("<div>")
                 .attr("id", "stocks_divider")
@@ -335,80 +423,96 @@ var stocks = {
                 .appendTo(parent);
             let graph_header = $("<div>")
                 .addClass("centered bold")
-                .text("Point Change History")
+                .text("Recent Change History")
                 .appendTo(graph_section);
             $("<div>")
                 .addClass("divider")
                 .appendTo(graph_header);
         }
-        $("<span>")
-            .attr("id", "selected_stock_name_content")
-            .addClass("selected_stock_info_content")
-            .text(stock.name)
-            .hide()
-            .fadeIn()
-            .appendTo($("#selected_stock_info_name"));
-        $("<span>")
-            .addClass("selected_stock_info_content")
-            .text("$" + main.stringify(stock.price) + ".00")
-            .hide()
-            .fadeIn()
-            .appendTo($("#selected_stock_info_price"));
-        $("<span>")
-            .addClass("selected_stock_info_content")
-            .text(stock.amount + " units")
-            .hide()
-            .fadeIn()
-            .appendTo($("#selected_stock_info_amount"));
-        $("<span>")
-            .addClass("selected_stock_info_content")
-            .text((stock.points.change >= 0 ? "+" : "") + stock.points.change + " points")
-            .hide()
-            .fadeIn()
-            .appendTo($("#selected_stock_info_change"));
 
-        buttons.create({
-            parent: "selected_stock_buttons",
-            id: "buy_one_stock",
-            classes: ["stock_purchase_button"],
-            text: "Buy 1 ($" + main.stringify(stock.price) + ")",
-            breaks: 0,
-            disabled: function() {
-                return stock.price > resources.money.count
-                    && stock.amount > 0;
-            },
-            on_click: function() {
-                stocks.purchase_stock(stock, 1);
-            }
-        });
-        buttons.create({
-            parent: "selected_stock_buttons",
-            id: "buy_ten_stock",
-            classes: ["stock_purchase_button"],
-            text: "Buy 10 ($" + main.stringify(stock.price * 10) + ")",
-            breaks: 0,
-            disabled: function() {
-                return (stock.price * 10) > resources.money.count
-                    && stock.amount >= 10;
-            },
-            on_click: function() {
-                stocks.purchase_stock(stock, 10);
-            }
-        });
-        buttons.create({
-            parent: "selected_stock_buttons",
-            id: "buy_max_stock",
-            classes: ["stock_purchase_button"],
-            text: "Buy Max ($" + main.stringify(stock.price * stock.amount) + ")",
-            breaks: 0,
-            disabled: function() {
-                return (stock.price * stock.amount) > resources.money.count
-                    && stock.amount > 0;
-            },
-            on_click: function() {
-                stocks.purchase_stock(stock, stock.amount);
-            }
-        });
+        stocks.buttons = [
+            buttons.create({
+                parent: "buy_selected_stock_buttons",
+                id: "buy_one_stock",
+                classes: ["stock_purchase_button"],
+                text: "Buy 1 ($" + main.stringify(stock.price.actual) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return stock.price.actual > resources.money.count
+                        && stock.amount > 0;
+                },
+                on_click: function() {
+                    stocks.buy_stock(stock, 1);
+                }
+            }).options,
+            buttons.create({
+                parent: "buy_selected_stock_buttons",
+                id: "buy_ten_stock",
+                classes: ["stock_purchase_button"],
+                text: "Buy 10 ($" + main.stringify(stock.price.actual * 10) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return (stock.price.actual * 10) > resources.money.count
+                        && stock.amount >= 10;
+                },
+                on_click: function() {
+                    stocks.buy_stock(stock, 10);
+                }
+            }).options,
+            buttons.create({
+                parent: "buy_selected_stock_buttons",
+                id: "buy_max_stock",
+                classes: ["stock_purchase_button"],
+                text: "Buy Max ($" + main.stringify(stock.price.actual * stock.amount) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return (stock.price.actual * stock.amount) > resources.money.count
+                        && stock.amount > 0;
+                },
+                on_click: function() {
+                    stocks.buy_stock(stock, stock.amount);
+                }
+            }).options,
+            buttons.create({
+                parent: "sell_selected_stock_buttons",
+                id: "sell_one_stock",
+                classes: ["stock_purchase_button"],
+                text: "Sell 1 ($" + main.stringify(stock.price.actual) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return stock.purchased == null || stock.purchased == 0;
+                },
+                on_click: function() {
+                    stocks.sell_stock(stock, 1);
+                }
+            }).options,
+            buttons.create({
+                parent: "sell_selected_stock_buttons",
+                id: "sell_ten_stock",
+                classes: ["stock_purchase_button"],
+                text: "Sell 10 ($" + main.stringify(stock.price.actual * 10) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return stock.purchased == null || stock.purchased < 10;
+                },
+                on_click: function() {
+                    stocks.sell_stock(stock, 10);
+                }
+            }).options,
+            buttons.create({
+                parent: "sell_selected_stock_buttons",
+                id: "sell_max_stock",
+                classes: ["stock_purchase_button"],
+                text: "Sell All ($" + main.stringify(stock.price.actual * (stock.purchased == null ? 0 : stock.purchased)) + ")",
+                breaks: 0,
+                disabled: function() {
+                    return stock.purchased == null || stock.purchased == 0;
+                },
+                on_click: function() {
+                    stocks.sell_stock(stock, stock.purchased);
+                }
+            }).options
+        ];
 
         let graph = $("<canvas>")
             .attr("id", "selected_stock_graph")
@@ -462,7 +566,7 @@ var stocks = {
             }
         }
 
-        let history = stock.points.history == null ? [stock.points.change] : stock.points.history;
+        let history = stock.points.history.length == 0 ? [stock.points.change] : stock.points.history;
         context.lineWidth = 2;
         context.strokeStyle = lights.lights ? "#000000" : "#dddddd";
         context.beginPath();
@@ -487,12 +591,64 @@ var stocks = {
         }
     },
 
-    purchase_stock() {
+    buy_stock(stock, amount) {
+        if (stock.purchased == null) {
+            stock.purchased = 0;
+        }
+        stock.purchased += amount;
+        stock.amount -= amount;
 
+        if (!this.invested.includes(stock)) {
+            this.invested.push(stock);
+        }
+
+        if ($("#invested_" + stock.id).length == 0) {
+            this.create_stock_display(stock, true);
+        } else {
+            this.update_stock(stock);
+        }
+
+        main.update_money(-stock.price.actual * amount);
+    },
+
+    sell_stock(stock, amount) {
+        stock.purchased -= amount;
+        stock.amount += amount;
+
+        this.update_stock(stock);
+
+        main.update_money(stock.price.actual * amount);
+    },
+
+    highlight_sibling_stocks(stock, highlight) {
+        for (let prefix of ["stock_", "invested_"]) {
+            let element = $("#" + prefix + stock.id);
+
+            if (highlight) {
+                $(element)
+                    .addClass("sibling_highlight");
+            } else {
+                $(element)
+                    .removeClass("sibling_highlight");
+            }
+        }
+    },
+
+    get_empty_row(clazz) {
+        let row = $("<tr>")
+            .addClass(clazz + "_table_row_empty")
+        for (let data = 0; data < 4; data++) {
+            $("<td>")
+                .addClass(clazz + "_table_data")
+                .appendTo(row);
+        }
+
+        return row;
     },
 
     create_stock(volatility) {
         let stock = {
+            id: ++this.stock_id,
             volatility: volatility,
             name: this.get_name(),
             amount: this.get_amount(volatility),
@@ -500,8 +656,11 @@ var stocks = {
             points: this.get_points(volatility)
         };
 
-        console.log(stock);
         this.stock_list.push(stock);
+
+        if (this.stock_id == 1000) {
+            this.stock_id = 0;
+        }
     },
 
     get_name() {
@@ -557,27 +716,25 @@ var stocks = {
     get_price(volatility) {
         // generates a number (5-45) to add to the initial 5
         // lower numbers are expected at higher volatility
-        return 5 + (main.random(5, 15) * (4 - volatility));
+        let initial = 15 + (main.random(5, 15) * (4 - volatility));
+
+        return {
+            initial: initial,
+            actual: initial
+        };
     },
 
     get_points(volatility) {
-        let points = {
+        return {
             // the latest point change
-            change: main.random(1, 10),
-            // where the points start
-            start: 10
+            change: main.random(-10, 10),
+            // the actual point value
+            actual: main.random(-10, 10),
+            // the point at which to hover around
+            // lower volatility means less variation
+            hover: main.random(-8 + (volatility * 2), 8 + (volatility * 2)),
+            // the point change history
+            history: []
         };
-
-        // find a point to end at
-        // lower volatility means that point is closer to the start
-        do {
-            points.end = main.random(10 - (volatility * 2), 10 + (volatility * 2));
-        } while (points.end == 10);
-
-        // set the time to live
-        // lower volatility has longer life
-        points.time_to_live = main.random(20, 20 * (4 - volatility));
-
-        return points;
     }
 }

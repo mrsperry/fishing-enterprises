@@ -88,6 +88,9 @@ var desk = {
                     enterprises.desk_data.stocks = true;
 
                     vendor.remove_item(enterprises.vendor, "stocks_unlock", enterprises.check_empty);
+
+                    stocks.initialize();
+                    stocks.update_desk_display();
                 }
             }
         });

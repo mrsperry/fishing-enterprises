@@ -1059,13 +1059,13 @@ p#save_intervals {
     width: 670px;
 }
 
-#selected_stock_info {
+#selected_stock_buttons_section {
     margin-top: 7px;
     width: 200px;
 }
 
-#selected_stock_info_name {
-    margin-top: 8px;
+#stock_buy_header, #stock_sell_header {
+    margin-top: 9px;
 }
 
 #stocks_divider {
@@ -1073,10 +1073,6 @@ p#save_intervals {
     top: 655px;
     left: 219px;
     height: 208px;
-}
-
-#stock_purchase_header {
-    margin-top: 9px;
 }
 
 #selected_graph_section {
@@ -1101,18 +1097,18 @@ p#save_intervals {
     width: 416px;
 }
 
+.stocks_table_header {
+    width: 82px;
+}
+
 .stocks_table_data, .invested_table_data {
     height: 17px;
     width: 82px;
     padding: 3px 10px;
 }
 
-.invested_table_data {
+.invested_table_header, .invested_table_data {
     width: 91px;
-}
-
-.selected_stock_info {
-    margin-top: 2px;
 }
 
 .stock_purchase_button {
