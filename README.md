@@ -36,7 +36,7 @@ Once you have purchased the shop you are immediately granted a new set of featur
 After you have earned enough money, you receive the option to diversify your business and turn it into an enterprise. This section of the game is currently a work in progress.
 
 ## Contributing
-I allow and appreciate issues however I'm currently not accepting any pull requests as I'm frequently changing files and may already have fixed the issue. Eventually I may accept pull requests and add a license but that is not certain.
+I allow and appreciate issues, however I'm currently not accepting any pull requests as I'm frequently changing files and may already have fixed the issue. Eventually I may accept pull requests and add a license but that is not certain.
 
 ## Support Me
 I regularly post [screenshots on Twitter](https://twitter.com/FishEnterprises).
