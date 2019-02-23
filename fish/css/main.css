@@ -609,10 +609,6 @@ p#save_intervals {
     height: auto;
 }
 
-#designer_section {
-    cursor: pointer;
-}
-
 #designer_art {
     position: absolute;
     top: -16px;
@@ -629,6 +625,12 @@ p#save_intervals {
 #designer_header {
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+#designer_button {
+    margin-top: 7px;
+    width: 200px;
+    height: 30px;
 }
 
 #research_section {
@@ -1220,4 +1222,39 @@ p#save_intervals {
 
 #worker_background_divider {
     margin-top: 10px;
+}
+
+#designer_back_to_office_button, #designer_box {
+    position: absolute;
+    left: 230px;
+    width: 612px;
+    height: 35px;
+}
+
+#heads_section, #tails_section {
+    position: absolute;
+    top: 86px;
+    width: 200px;
+    height: 443px;
+}
+
+#designer_box {
+    top: 155px;
+    height: 400px;
+    width: 610px;
+}
+
+#tails_section {
+    left: 856px;
+}
+
+#body_section, #fins_section {
+    position: absolute;
+    top: 551px;
+    width: 513px;
+    height: 150px;
+}
+
+#fins_section {
+    left: 543px;
 }

@@ -132,3 +132,7 @@ div.before:before {
 .stocks_table_data:not(:last-child), .invested_table_data:not(:last-child) {
     border-right: solid black 1px;
 }
+
+#designer_box {
+    border: solid black 1px;
+}

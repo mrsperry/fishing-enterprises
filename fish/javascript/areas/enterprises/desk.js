@@ -215,7 +215,7 @@ var desk = {
         // designer
         let designer_section = $("<div>")
             .attr("id", "designer_section")
-            .addClass("desk_section pointer absolute")
+            .addClass("desk_section absolute")
             .hide()
             .appendTo(parent);
         if (enterprises.desk_data.designer != null) {
@@ -254,9 +254,22 @@ var desk = {
         $("<div>")
             .attr("id", "designer_text")
             .html("Hey boss, we finished that 'designer' project you wanted us to work on. Come on down to the lab any time and we'll set you up designing your own fish!<br><br>"
-                + "- Tim, Research Department<br><br>"
-                + "<>< <>< <><")
+                + "- Tim, Research Department")
             .appendTo(designer_content);
+        buttons.create({
+            parent: "designer_content",
+            id: "designer",
+            text: "Go to designer lab",
+            on_click: function() {
+                $("#desk_section")
+                    .fadeOut(400, function() {
+                        $(this)
+                            .remove();
+                        
+                        designer.load();
+                    });
+            }
+        });
 
         // research
         let research_section = $("<div>")
