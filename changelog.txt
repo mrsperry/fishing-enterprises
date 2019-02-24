@@ -1,4 +1,4 @@
-Patch dev-0.2.1 14/1/2019
+Patch dev-0.2.1 - 14/1/2019
 ==============================
 Changes:
     - Moved the money counter up
@@ -25,4 +25,4 @@ Additions:
     - Added number of fish caught in a certain area
     - Implemented river troll
 
-Initial release dev-0.1 - 30-11-2018
+Initial release dev-0.1 - 30/11/2018
