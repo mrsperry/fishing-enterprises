@@ -24,15 +24,15 @@ let newspaper = {
             .appendTo(box);
         
         $("<p>")
-            .addClass("progress_description")
+            .addClass("newspaper_content")
             .text("A local business has recent gone corporate in an attempt to make it's way into the global fishing market.")
             .appendTo(left);
         $("<p>")
-            .addClass("progress_description")
+            .addClass("newspaper_content")
             .text("The CEO of Fishing Enterprises told us in an interview that they are making substantial progress.")
             .appendTo(left);
         $("<p>")
-            .addClass("progress_description")
+            .addClass("newspaper_content")
             .text("Fishing Enterprises currently holds none of the global market share.")
             .appendTo(left);
 
@@ -48,7 +48,7 @@ let newspaper = {
             previous = result.previous;
 
             $("<p>")
-                .addClass("progress_description")
+                .addClass("newspaper_content")
                 .text(result.text)
                 .appendTo(right);
         }

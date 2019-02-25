@@ -1287,7 +1287,7 @@ p#save_intervals {
     font-size: 16pt;
 }
 
-.progress_description {
-    text-align: justify;
+.newspaper_content {
+    text-align: left;
     font-size: 8pt;
 }
