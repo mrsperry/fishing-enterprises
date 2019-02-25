@@ -1,5 +1,6 @@
 var enterprises = {
     internal: "enterprises",
+    global_share: 0,
 
     initialize() {
         areas.current_area = this;

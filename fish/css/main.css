@@ -719,7 +719,7 @@ p#save_intervals {
     font-weight: bold;
 }
 
-#insignificant_news_section, #significant_news_section {
+#market_share_section, #insignificant_news_section {
     position: absolute;
     display: inline-block;
     top: 26px;
@@ -727,7 +727,7 @@ p#save_intervals {
     height: 311px;
 }
 
-#significant_news_section {
+#insignificant_news_section {
     left: 145px;
 }
 
@@ -1257,4 +1257,20 @@ p#save_intervals {
 
 #fins_section {
     left: 543px;
+}
+
+#progress_divider {
+    position: absolute;
+    left: 5%;
+    width: 90%;
+}
+
+#progress_text {
+    margin: 10px 0px;
+    font-size: 16pt;
+}
+
+.progress_description {
+    text-align: justify;
+    font-size: 8pt;
 }

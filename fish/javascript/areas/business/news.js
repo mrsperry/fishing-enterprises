@@ -295,8 +295,6 @@ var news = {
 
     generate_insignificant_news() {
         if ($("#news_text").length == 0) {
-            let result = "";
-
             let previous = this.previous.insignificant;
             if (previous == null) {
                 previous = {
@@ -307,36 +305,48 @@ var news = {
                 }
             }
 
-            let countries = $.merge($.merge([], this.major_importers), this.minor_importers);
-            let country;
-            do {
-                country = countries[main.random(0, countries.length - 1)];
-            } while (country == previous.country);
-            result += country + " ";
-            previous.country = country;
+            let result = this.get_insignificant_text(previous);
+            this.previous.insignificant = result.previous;
 
-            let components = [
-                "actions",
-                "subjects",
-                "effects"
-            ];
-            for (let component of components) {
-                let list = this[component];
-                let item;
-                do {
-                    item = list[main.random(0, list.length - 1)];
-                } while (item == previous[component]);
-
-                result += item;
-                previous[component] = item;
-
-                if (component != "subjects") {
-                    result += " ";
-                }
-            }
-            this.previous.insignificant = previous;
-
-            this.create_element(result.substring(0, result.length - 1));
+            this.create_element(result.text);
         }
+    },
+
+    get_insignificant_text(previous) {
+        let result = {
+            text: "",
+            previous: previous
+        }
+
+        let countries = $.merge($.merge([], this.major_importers), this.minor_importers);
+        let country;
+        do {
+            country = countries[main.random(0, countries.length - 1)];
+        } while (country == previous.country);
+        result.text += country + " ";
+        result.previous.country = country;
+
+        let components = [
+            "actions",
+            "subjects",
+            "effects"
+        ];
+        for (let component of components) {
+            let list = this[component];
+            let item;
+            do {
+                item = list[main.random(0, list.length - 1)];
+            } while (item == previous[component]);
+
+            result.text += item;
+            result.previous[component] = item;
+
+            if (component != "subjects") {
+                result.text += " ";
+            }
+        }
+
+        result.text = result.text.substring(0, result.text.length - 1);
+        return result;
     }
 }

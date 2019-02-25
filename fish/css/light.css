@@ -136,3 +136,7 @@ div.before:before {
 #designer_box {
     border: solid black 1px;
 }
+
+#progress_box {
+    border: solid black 1px;
+}

@@ -436,17 +436,18 @@ var desk = {
             .addClass("divider")
             .appendTo(newspaper_header);
         $("<div>")
-            .attr("id", "insignificant_news_section")
+            .attr("id", "market_share_section")
             .addClass("absolute block")
             .appendTo(newspaper_content);
         $("<div>")
-            .attr("id", "significant_news_section")
+            .attr("id", "insignificant_news_section")
             .addClass("absolute block")
             .appendTo(newspaper_content);
         $("<div>")
             .attr("id", "news_divider")
             .addClass("absolute")
             .appendTo(newspaper_content);
+        newspaper.load();
 
         // stocks
         let stocks_section = $("<div>")
