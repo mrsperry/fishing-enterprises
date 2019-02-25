@@ -322,33 +322,43 @@ var desk = {
             .addClass("divider")
             .appendTo(payroll_header);
         let payroll_sales = $("<div>")
+            .addClass("payroll_left")
             .text("Sales: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("0%")
+            .text("100%")
             .appendTo(payroll_sales);
         let payroll_workers = $("<div>")
+            .addClass("payroll_right")
             .text("Workers: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("0%")
+            .text("100%")
             .appendTo(payroll_workers);
+        let payroll_transit = $("<div>")
+            .addClass("payroll_left payroll_margin")
+            .text("Transit: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text("100%")
+            .appendTo(payroll_transit);
         let payroll_marketing = $("<div>")
+            .addClass("payroll_right")
             .text("Marketing: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("0%")
+            .text("100%")
             .appendTo(payroll_marketing);
-        let payroll_transportation = $("<div>")
-            .addClass("payroll_margin")
-            .text("Transportation: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text("0%")
-            .appendTo(payroll_transportation);
         $("<div>")
             .addClass("divider")
             .appendTo(payroll_content);
+        let payroll_efficiency = $("<div>")
+            .attr("id", "payroll_efficiency")
+            .text("Efficiency: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text("100%")
+            .appendTo(payroll_efficiency);
         buttons.create({
             parent: "payroll_section",
             classes: ["absolute"],

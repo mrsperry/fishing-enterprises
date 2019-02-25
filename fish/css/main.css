@@ -679,8 +679,17 @@ p#save_intervals {
 #payroll_content {
     position: absolute;
     margin-top: 8px;
-    width: 80%;
-    left: 10%;
+    width: 90%;
+    left: 5%;
+}
+
+#payroll_header {
+    margin-bottom: 5px;
+}
+
+#payroll_efficiency {
+    margin-top: 15px;
+    text-align: center;
 }
 
 #worker_edit_button {
@@ -689,6 +698,14 @@ p#save_intervals {
     top: 106px;
     left: 15px;
     width: 280px;
+}
+
+.payroll_left {
+    display: inline-block;
+}
+.payroll_right {
+    float: right;
+    top: 0px;
 }
 
 .payroll_margin {

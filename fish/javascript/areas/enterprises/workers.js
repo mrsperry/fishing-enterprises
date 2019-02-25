@@ -4,8 +4,8 @@ let workers = {
             remaining: 100,
             sales: 0,
             workers: 0,
-            marketing: 0,
-            transportation: 0
+            transit: 0,
+            marketing: 0
         }
 
         enterprises.workers_interval = window.setInterval(this.update, 15000);
@@ -64,7 +64,7 @@ let workers = {
         let right = $("<div>")
             .attr("id", "payroll_section_right")
             .appendTo(payroll_section);
-        let array = ["Sales", "Workers", "Marketing", "Transportation"];
+        let array = ["Sales", "Workers", "Transit", "Marketing"];
         for (let index = 0; index < array.length; index++) {
             let item = array[index];
             let id = item.toLowerCase();
