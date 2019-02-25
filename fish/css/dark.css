@@ -115,7 +115,7 @@ div.before:before {
 }
 
 .stocks_table_header:not(:first-child), .invested_table_header:not(:first-child) {
-    border-left: solid black 1px;
+    border-left: solid #666666 1px;
 }
 
 .stocks_table_row:nth-child(even), .stocks_table_row_empty:nth-child(even),
@@ -140,4 +140,12 @@ div.before:before {
 
 .stocks_table_data:not(:last-child), .invested_table_data:not(:last-child) {
     border-right: 1px solid #666666;
+}
+
+#designer_box {
+    border: solid #666666 1px;
+}
+
+#progress_box {
+    border: solid #666666 1px;
 }
