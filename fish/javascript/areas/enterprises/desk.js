@@ -37,25 +37,6 @@ var desk = {
         vendor.add_item(enterprises.vendor, {
             data: {
                 parent: "enterprise_investments_section",
-                id: "newspaper_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Newspaper Promotion",
-                    regular: "(Free!)"
-                },
-                text: "A local newspaper bulletin is running a campaign to get more readers. For you that means free papers!",
-                on_click: function() {
-                    $("#newspaper_section")
-                        .fadeIn();
-                    enterprises.desk_data.newspaper = true;
-
-                    vendor.remove_item(enterprises.vendor, "newspaper_unlock", enterprises.check_empty);
-                }
-            }
-        });
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
                 id: "designer_unlock",
                 classes: ["enterprise_investment"],
                 header: {
@@ -391,11 +372,8 @@ var desk = {
             .attr("id", "newspaper_section")
             .addClass("desk_section absolute")
             .hide()
+            .fadeIn()
             .appendTo(parent);
-        if (enterprises.desk_data.newspaper != null) {
-            $(newspaper_section)
-                .fadeIn();
-        }
         $("<div>")
             .attr("id", "newspaper_art")
             .addClass("pre")
