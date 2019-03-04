@@ -702,7 +702,9 @@ p#save_intervals {
 
 .payroll_left {
     display: inline-block;
+    width: 120px;
 }
+
 .payroll_right {
     float: right;
     top: 0px;
@@ -1149,31 +1151,31 @@ p#save_intervals {
     margin-bottom: 0px;
 }
 
-#remaining_payroll {
+#remaining_payroll, #payroll_income {
     margin: 10px 0px;
-}
-
-#remaining_divider {
-    position: relative;
-    margin-left: 20%;
-    width: 60%;
 }
 
 #payroll_section_left {
     display: inline-block;
     vertical-align: top;
-    width: 44%;
+    width: 38%;
 }
 
 #payroll_section_right {
     display: inline-block;
     vertical-align: top;
     margin-left: 3%;
-    width: 47%;
+    width: 59%;
 }
 
 #efficiency_header {
     margin-top: 14px;
+}
+
+.payroll_divider {
+    position: relative;
+    margin-left: 10%;
+    width: 80%;
 }
 
 .payroll_list {
@@ -1188,8 +1190,15 @@ p#save_intervals {
     margin: 5px 2px;
 }
 
+.payroll_button_right {
+    margin-left: 36px;
+}
+
 .payroll_percent {
-    margin: 0px 5px;
+    position: absolute;
+    text-align: center;
+    width: 34px;
+    margin: 6px 0px;
 }
 
 .worker_divider {
@@ -1197,7 +1206,7 @@ p#save_intervals {
     top: 120px;
     left: 330px;
     width: 0px;
-    height: 700px;
+    height: 715px;
 }
 
 #worker_section {
@@ -1238,7 +1247,61 @@ p#save_intervals {
 }
 
 #worker_background_divider {
-    margin-top: 10px;
+    margin: 10px 0px;
+}
+
+#ocean_remaining_workers_count {
+    position: absolute;
+    left: 20%;
+    width: 60%;
+}
+
+.ocean_section {
+    position: absolute;
+    top: 425px;
+    width: 230px;
+}
+
+.ocean_section_bottom {
+    top: 580px;
+}
+
+.ocean_info_content {
+    margin: 5px 0px 0px 1px;
+}
+
+.ocean_worker_count {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.ocean_workers_count_text {
+    position: absolute;
+    top: 30px;
+    left: 131px;
+    width: 41px;
+}
+
+.ocean_button_right {
+    margin-left: 47px;
+}
+
+.ocean_button_end {
+    margin-right: 0px;
+}
+
+.ocean_life_level {
+    margin-top: 5px;
+}
+
+.ocean_life_bar {
+    position: absolute;
+    width: 30px;
+    height: 50px;
+}
+
+.life_level_text {
+    margin-top: 60px;
 }
 
 #designer_back_to_office_button, #designer_box {

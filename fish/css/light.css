@@ -140,3 +140,11 @@ div.before:before {
 #progress_box {
     border: solid black 1px;
 }
+
+.ocean_life_bar {
+    border: solid black 1px;
+}
+
+.ocean_life_bar_filled {
+    background-color: #aaaaaa;
+}

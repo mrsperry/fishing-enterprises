@@ -326,28 +326,28 @@ var desk = {
             .text("Sales: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("100%")
+            .text(workers.payroll.sales + "%")
             .appendTo(payroll_sales);
         let payroll_workers = $("<div>")
             .addClass("payroll_right")
             .text("Workers: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("100%")
+            .text(workers.payroll.workers + "%")
             .appendTo(payroll_workers);
         let payroll_transit = $("<div>")
             .addClass("payroll_left payroll_margin")
             .text("Transit: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("100%")
+            .text(workers.payroll.transit + "%")
             .appendTo(payroll_transit);
         let payroll_marketing = $("<div>")
             .addClass("payroll_right")
             .text("Marketing: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("100%")
+            .text(workers.payroll.marketing + "%")
             .appendTo(payroll_marketing);
         $("<div>")
             .addClass("divider")
@@ -357,7 +357,7 @@ var desk = {
             .text("Efficiency: ")
             .appendTo(payroll_content);
         $("<span>")
-            .text("100%")
+            .text(workers.payroll.efficiency + "%")
             .appendTo(payroll_efficiency);
         buttons.create({
             parent: "payroll_section",
@@ -375,7 +375,6 @@ var desk = {
                     });
             }
         });
-        workers.initialize();
 
         // newspaper
         let newspaper_section = $("<div>")
