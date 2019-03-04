@@ -1,11 +1,60 @@
-button {
-    margin: 5% 5%;
-    background: white;
-    border: 1px solid black;
-    padding: 10px 16px;
-    font-size: 20px;
+body {
+    font-family: "Consolas", "Times New Roman", serif;
+    font-size: 11pt;
+    margin-top: 5px;
+    text-align: center;
 }
 
-button:hover {
-    background: #eeeeee;
+img {
+    width: 280px;
+    height: 100px;
+    margin: 10px 10px;
+}
+
+a {
+    color: #0066ff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #4ab7ff;
+}
+
+p {
+    margin: 10px 10px;
+}
+
+#container {
+    position: absolute;
+    width: 60%;
+    left: 20%;
+}
+
+#flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.links {
+    font-size: 9.5pt;
+}
+
+.header, .section_header {
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.section_header {
+    position: relative;
+    margin-top: 0px;
+    margin-left: 5%;
+    width: 90%;
+}
+
+.section {
+    width: 300px;
+    border-radius:10px;
+    border: 1px solid black;
+    margin: 10px;
 }
