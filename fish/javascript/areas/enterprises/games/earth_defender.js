@@ -2,6 +2,8 @@ var earth_defender = {
     load() {
         let section = $("<div>")
             .attr("id", "earth_defender_section")
+            .hide()
+            .fadeIn()
             .appendTo($("#left"));
 
         let content = $("<div>")
@@ -767,7 +769,7 @@ var earth_defender = {
                 id: "earth_defender_main_menu",
                 text: "Main Menu",
                 on_click: function() {
-                    $(parent)
+                    $("#earth_defender_section")
                         .fadeOut(400, function() {
                             $(this)
                                 .remove();
