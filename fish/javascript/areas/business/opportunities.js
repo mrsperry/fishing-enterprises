@@ -347,7 +347,7 @@ var opportunities = {
                 },
                 charges: {
                     header: "Call your lawyer",
-                    text: "This behavior is unaceptable and you wish to make that clear.",
+                    text: "This behavior is unacceptable and you wish to make that clear.",
                     cost: 1000,
                     ending: {
                         text: "{name} can't afford {gender-1} own lawyer and breaks down when {gender-3} ends up with prison time.",
@@ -366,19 +366,19 @@ var opportunities = {
                 },
                 trick: {
                     header: "Trick {gender-2}",
-                    text: "Decieve {gender-2} to get your money back, with interest.",
+                    text: "Deceive {gender-2} to get your money back, with interest.",
                     condition: function() {
                         return opportunities.morality < -10;
                     },
                     ending: {
-                        text: "You tell {name} there won't be any reprecussions if the money is returned. After you get the cash, you fire him.",
+                        text: "You tell {name} there won't be any repercussions if the money is returned. After you get the cash, you fire him.",
                         morality: -10,
                         workers: 1,
                         payout: 500
                     }
                 },
                 blackmail: {
-                    header: "Backmail {gender-2}",
+                    header: "Blackmail {gender-2}",
                     text: "Only one other person knows of the skimming. Maybe you can both profit?",
                     condition: function() {
                         return opportunities.morality < -50;
@@ -396,7 +396,7 @@ var opportunities = {
                         return opportunities.morality < -70;
                     },
                     ending: {
-                        text: "It happens after a late shift. Quick and painless, your man finds your money -- and someone else's too!",
+                        text: "It happens after a late shift. Quick and painless, your man finds your money -- and someone elses too!",
                         morality: -20,
                         payout: 5000
                     }
@@ -466,7 +466,7 @@ var opportunities = {
                     }
                 },
                 blackmail: {
-                    header: "Backmail {gender-2}",
+                    header: "Blackmail {gender-2}",
                     text: "{name} knows the police are looking for {gender-2}. It would be a shame if you helped their search.",
                     condition: function() {
                         return opportunities.morality < -25;
@@ -599,7 +599,7 @@ var opportunities = {
                     header: "Ask for proof",
                     text: "You can't be firing people on a whim without any proof.",
                     ending: {
-                        text: "Unfortunately no witnesses or camera feed can be found. {name} does not wish to pursue it any further when you suggest invloving the police.",
+                        text: "Unfortunately no witnesses or camera feed can be found. {name} does not wish to pursue it any further when you suggest involving the police.",
                         morality: 5
                     }
                 },
@@ -619,7 +619,7 @@ var opportunities = {
                         return resources.workers.total > 0;
                     },
                     ending: {
-                        text: "Appalled at your non-action, {name} decides it's time to lawyer up. Fortunately for you she quit and therefore cannot pursure charges against you.",
+                        text: "Appalled at your non-action, {name} decides it's time to lawyer up. Fortunately for you she quit and therefore cannot pursue charges against you.",
                         morality: -5,
                         workers: 1
                     }
@@ -643,7 +643,7 @@ var opportunities = {
                         return resources.workers.total > 1;
                     },
                     ending: {
-                        text: "{name} and {gender-1} co-worker are both unhappy about their severence but don't wish to cause any further disruptions.",
+                        text: "{name} and {gender-1} co-worker are both unhappy about their severance but don't wish to cause any further disruptions.",
                         morality: -10,
                         workers: 2
                     }

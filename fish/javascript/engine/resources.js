@@ -72,13 +72,13 @@ var resources = {
             the max number of this fish you can store at once
             max: 10
 
-            the chance to catch if you have avaliable bait
+            the chance to catch if you have available bait
             chance: 60,
 
             disallow catching this fish before the specified fish is caught
             after: "bass",
 
-            all of these baits must be avaliable to catch the fish
+            all of these baits must be available to catch the fish
             bait: [
                 {
                     the type of bait
@@ -89,7 +89,7 @@ var resources = {
                 }
             ],
 
-            all of these tackle must be avaliable to catch the fish
+            all of these tackle must be available to catch the fish
             tackle: [
                 {
                     the type of tackle
@@ -343,7 +343,7 @@ var resources = {
                 length: "28-30 inches",
                 weight: "7.9-11.9 pounds",
                 description: [
-                    "Atlantic salmon have been the target of commercial and recreational fishing for a significant amount of time due to its prevelence in cooked and raw food.",
+                    "Atlantic salmon have been the target of commercial and recreational fishing for a significant amount of time due to its prevalence in cooked and raw food.",
                     "While not guaranteed, it has been proven that the majority of salmon remember where they were born and go to lay their eggs in the same spot."
                 ],
                 art : [
@@ -381,7 +381,7 @@ var resources = {
                 weight: "1-5 pounds",
                 description: [
                     "River dwelling rainbow trout are smaller than their lake dwelling counterparts and generally blue-green or olive green with heavy black spotting over their body.",
-                    "Rainbow trout tend to eat anything they can get their mouth around and are commercally farmed for culinary purposes."
+                    "Rainbow trout tend to eat anything they can get their mouth around and are commercially farmed for culinary purposes."
                 ],
                 art : [
                     "<><"
@@ -475,7 +475,7 @@ var resources = {
                 weight: "6-8 pounds",
                 description: [
                     "Also known as the Red Drum, they have a distinguishing spot typically located on their tail that resembles an eye. Multiple spots are not uncommon but having no spots is extremely rare.",
-                    "In the early 1980s they were overfished to near extinction and have been allowed to re-populate after numerous state and federal protections were enacted."
+                    "In the early 1980s they were over-fished to near extinction and have been allowed to re-populate after numerous state and federal protections were enacted."
                 ],
                 art : [
                     "<><"
@@ -511,7 +511,7 @@ var resources = {
                 length: "19.7-35.4 inches",
                 weight: "11-30.8 pounds",
                 description: [
-                    "King mackerel are voracious carnivores and will even attack humans if they percieve them as a threat, specifically when the human is flailing or thrashing.",
+                    "King mackerel are voracious carnivores and will even attack humans if they perceive them as a threat, specifically when the human is flailing or thrashing.",
                     "While they are eaten commonly, due to their high mercury content it is suggested that children and pregnant women avoid them for fear of mercury poisoning."
                 ],
                 art : [
@@ -549,7 +549,7 @@ var resources = {
         black_drum: {
             display: "Black Drum",
             internal: "black_drum",
-            message: "this bottomfeeder won't hesistate to fight the line",
+            message: "this bottom-feeder won't hesitate to fight the line",
             price: 35,
             max: 3,
             chance: 30,
@@ -575,7 +575,7 @@ var resources = {
                 length: "8.2-19.6 inches",
                 weight: "5-30 pounds",
                 description: [
-                    "They are a member of the same family as redfish and the taste of young black drum is often indistiguishable from redfish.",
+                    "They are a member of the same family as redfish and the taste of young black drum is often indistinguishable from redfish.",
                     "All members of the drum family have the ability to make a loud drumming noise between 100Hz to 500Hz when performing mating calls."
                 ],
                 art : [
@@ -828,7 +828,7 @@ var resources = {
                 weight: "~400 pounds",
                 description: [
                     "Atlantic goliath grouper are fearless and as such are considered an easy target for spear fishers. They have been known to attack divers and even large lemon sharks.",
-                    "A combination of their fine meat quality and their inquisitve nature led to overfishing and restrictions had to be put in place."
+                    "A combination of their fine meat quality and their inquisitive nature led to over-fishing and restrictions had to be put in place."
                 ],
                 art : [
                     "<><"
@@ -1146,7 +1146,7 @@ var resources = {
                 length: "16 feet",
                 weight: "510 pounds",
                 description: [
-                    "The long tail of the common thresher shark is used in a whip-like fashon to deliver incapacitating blows to its prey.",
+                    "The long tail of the common thresher shark is used in a whip-like fashion to deliver incapacitating blows to its prey.",
                     "Despite their size, they are not very dangerous to humans due to relatively small teeth and a timid nature."
                 ],
                 art : [

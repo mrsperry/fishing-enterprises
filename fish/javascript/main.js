@@ -231,7 +231,7 @@ var main = {
             + "The majority of the source code is written in "
             + "<a class='link' target='_blank' href='https://www.javascript.com/'>Javascript</a> with "
             + "<a class='link' target='_blank' href='https://jquery.com/'>jQuery</a> "
-            + "and is freely avaliable to view on "
+            + "and is freely available to view on "
             + "<a class='link' target='_blank' href='https://github.com/mrsperry/mrsperry.github.io'>my Github</a>.<br>");
         this.create_popup("About", text);
     },
@@ -316,12 +316,12 @@ var main = {
         return array;
     },
 
-    // adds commas to a number where neccessary ex: 1000 -> 1,000
+    // adds commas to a number where necessary ex: 1000 -> 1,000
     stringify(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
 
-    // replaces all occurences of a string inside a string
+    // replaces all occurrences of a string inside a string
     replaceAll(string, key, value) {
         return string.replace(new RegExp(key, 'g'), value);
     }

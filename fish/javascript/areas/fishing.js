@@ -75,7 +75,7 @@ var fishing = {
                         continue;
                     }
 
-                    // check prerequesite fish
+                    // check prerequisite fish
                     if (resources.fish[fish.after] == null || resources.fish[fish.after].caught) {
                         // check if the fish should append to bait
                         if (fishing.catch(fish, resources.bait[fish.internal] == null ? false : true)

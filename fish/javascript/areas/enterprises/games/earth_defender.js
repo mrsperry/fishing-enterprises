@@ -235,7 +235,7 @@ var earth_defender = {
             .appendTo(left_section);
         $("<p>")
             .addClass("misc_description")
-            .text("You recieve 50 points for every alien ship you destroy. Your total points are displayed in the top left corner and on the game over screen.")
+            .text("You receive 50 points for every alien ship you destroy. Your total points are displayed in the top left corner and on the game over screen.")
             .appendTo(left_section);
         let right_section = $("<div>")
             .addClass("centered tutorial_misc right")
