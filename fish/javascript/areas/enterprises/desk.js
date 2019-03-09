@@ -15,8 +15,7 @@ var desk = {
                     $("#stocks_section")
                         .fadeIn();
                     enterprises.desk_data.stocks = true;
-
-                    vendor.remove_item(enterprises.vendor, "stocks_unlock", enterprises.check_empty);
+                    vendor.remove_item(enterprises.vendor, "stocks_unlock", desk.check_empty);
 
                     stocks.initialize();
                     stocks.update_desk_display();
@@ -37,9 +36,9 @@ var desk = {
                     $("#research_section")
                         .fadeIn();
                     enterprises.desk_data.research = true;
+                    vendor.remove_item(enterprises.vendor, "research_unlock", desk.check_empty);
+                    
                     research.theories_per_second = 1;
-
-                    vendor.remove_item(enterprises.vendor, "research_unlock", enterprises.check_empty);
                 }
             }
         });
