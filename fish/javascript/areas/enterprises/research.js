@@ -9,10 +9,10 @@ let research = {
                 id: "designer_research",
                 classes: ["enterprise_investment absolute"],
                 header: {
-                    bold: "Fish Designing",
+                    bold: "Future Market Analysis",
                     regular: "(§1,000)"
                 },
-                text: "Advances in genetic engineering that would allow you to mix and match parts of fish, essentially allowing you to design new species of fish.",
+                text: "Studying current and past market trends will allow us to accurately predict future trends, increasing the efficiency of our marketing.",
                 on_click: function() {
                     research.animate($(this), function() {
                         $("#designer_section")
@@ -40,16 +40,14 @@ let research = {
         research.theory_difference += amount;
 
         let difference = research.theory_difference;
-        if (difference != 0) {
-            $("#research_theory_difference")
-                .text(" (" + (difference > 0 ? "+" : "-") + main.stringify(Math.abs(difference)) + ")")
-                .stop()
-                .show()
-                .css("opacity", 1.0)
-                .fadeOut(1200, function() {
-                    research.theory_difference = 0;
-                });
-        }
+        $("#research_theory_difference")
+            .text(" (" + (difference >= 0 ? "+" : "-") + main.stringify(Math.abs(difference)) + ")")
+            .stop()
+            .show()
+            .css("opacity", 1.0)
+            .fadeOut(1200, function() {
+                research.theory_difference = 0;
+            });
 
         if (enterprises.current_view == "desk") {
             $("#research_theories_count")
