@@ -652,8 +652,8 @@ p#save_intervals {
     top: 73px;
 }
 
-#research_points {
-    margin-top: 15px;
+#research_theories {
+    margin: 15px 0px 0px 15px;
 }
 
 #enterprise_investments_section {
@@ -796,7 +796,7 @@ p#save_intervals {
     width: 0%;
     z-index: -1;
     opacity: 0.4;
-    background-color: #AAAAAA;
+    background-color: black;
     height: 123px;
 }
 

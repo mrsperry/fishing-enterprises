@@ -11,6 +11,7 @@ var enterprises = {
 
         resources.workers.count = 1000;
         
+        research.initialize();
         desk.initialize();
         workers.initialize();
 

@@ -33,9 +33,9 @@ var resources = {
         count: 0
     },
 
-    research_points: {
-        internal: "research_points",
-        display: "Research Points",
+    research_theories: {
+        internal: "research_theories",
+        display: "Research Theories",
         count: 0,
     },
 

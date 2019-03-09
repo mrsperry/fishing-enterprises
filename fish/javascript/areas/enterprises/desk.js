@@ -1,58 +1,6 @@
 var desk = {
     initialize() {
-        // research
-        let progress_function = (parent) => {
-            $(parent)
-                .css("background-color", "transparent");
-
-            let element = $("<div>")
-                .attr("progress", 3)
-                .addClass("progress absolute")
-                .css("top", $(parent).position().top + 6)
-                .css("left", $(parent).position().left + 6)
-                .appendTo($(parent));
-            $(element)
-                .animate(
-                    { "width": "295px" },
-                    $(element).attr("progress") * 1000,
-                    "linear",
-                    function() {
-                        buttons.remove($(parent).attr("id").replace("_button", ""), enterprises.update_research);
-                    }
-                );
-        }
-        vendor.add_item(enterprises.research_vendor, {
-            data: {
-                parent: "research_content",
-                id: "designer_research",
-                classes: ["enterprise_investment absolute"],
-                text: "hello test",
-                on_click: function() {
-                    progress_function($(this));
-                }
-            }
-        });
-
         // investments
-        vendor.add_item(enterprises.vendor, {
-            data: {
-                parent: "enterprise_investments_section",
-                id: "designer_unlock",
-                classes: ["enterprise_investment"],
-                header: {
-                    bold: "Designer Unlock",
-                    regular: ""
-                },
-                text: "Unlock the designer section.",
-                on_click: function() {
-                    $("#designer_section")
-                        .fadeIn();
-                    enterprises.desk_data.designer = true;
-
-                    vendor.remove_item(enterprises.vendor, "designer_unlock", enterprises.check_empty);
-                }
-            }
-        });
         vendor.add_item(enterprises.vendor, {
             data: {
                 parent: "enterprise_investments_section",
@@ -89,6 +37,7 @@ var desk = {
                     $("#research_section")
                         .fadeIn();
                     enterprises.desk_data.research = true;
+                    research.theories_per_second = 1;
 
                     vendor.remove_item(enterprises.vendor, "research_unlock", enterprises.check_empty);
                 }
@@ -263,19 +212,18 @@ var desk = {
             $(research_section)
                 .fadeIn();
         }
-        let research_points = $("<div>")
-            .attr("id", "research_points")
-            .addClass("centered")
-            .text("Research Points")
+        let research_theories = $("<div>")
+            .attr("id", "research_theories")
+            .text("Research Theories: §")
             .appendTo(research_section);
         $("<span>")
-            .attr("id", "research_points_per_second")
-            .text(" (0/s): ")
-            .appendTo(research_points);
+            .attr("id", "research_theories_count")
+            .text(main.stringify(resources.research_theories.count))
+            .appendTo(research_theories);
         $("<span>")
-            .attr("id", "research_points_count")
-            .text(resources.research_points.count)
-            .appendTo(research_points);
+            .attr("id", "research_theory_difference")
+            .hide()
+            .appendTo(research_theories);
         let research_header = $("<div>")
             .attr("id", "research_header")
             .addClass("centered bold absolute")
@@ -481,10 +429,10 @@ var desk = {
         stocks.update_desk_display();
 
         desk.check_empty();
-    },
 
-    update_research() {
-        desk.check_empty();
+        research.theory_difference = 0;
+
+        enterprises.current_view = "desk";
     },
 
     check_empty() {
@@ -494,6 +442,8 @@ var desk = {
                 .attr("id", "enterprise_no_investments")
                 .addClass("centered")
                 .text("No investments available!")
+                .hide()
+                .fadeIn()
                 .appendTo(investments);
         }
 
@@ -503,6 +453,8 @@ var desk = {
                 .attr("id", "no_projects")
                 .addClass("centered")
                 .text("No projects available!")
+                .hide()
+                .fadeIn()
                 .appendTo(research);
         }
     }
