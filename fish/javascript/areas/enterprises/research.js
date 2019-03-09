@@ -57,8 +57,11 @@ let research = {
         }
 
         for (let button of enterprises.research_vendor.shown) {
-            $("#" + button.data.id + "_button")
-                .prop("disabled", button.data.disabled());
+            let parent = $("#" + button.data.id + "_button");
+            if ($(parent).prop("purchased") != true) {
+                $(parent)
+                    .prop("disabled", button.data.disabled());
+            }
         }
     },
 
@@ -76,6 +79,7 @@ let research = {
     animate(parent, callback) {
         $(parent)
             .css("background-color", "transparent")
+            .prop("purchased", true)
             .prop("disabled", true);
 
         let id = $(parent).attr("id").replace("_button", "");
