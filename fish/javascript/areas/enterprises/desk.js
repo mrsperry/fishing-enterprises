@@ -135,7 +135,7 @@ var desk = {
             .appendTo(header_section);
         $("<span>")
             .attr("id", "money_count")
-            .text("0")
+            .text(main.stringify(resources.money.count))
             .appendTo(money);
         $("<span>")
             .attr("id", "money_difference")
