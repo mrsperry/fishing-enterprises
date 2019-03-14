@@ -36,7 +36,7 @@ let workers = {
                 life: 5
             },
         }
-        this.income = 0;
+        this.output = 0;
         this.buttons = [];
 
         enterprises.workers_interval = window.setInterval(this.update, 15000);
@@ -370,7 +370,7 @@ let workers = {
     },
 
     update() {
-        main.update_money(workers.income);
+        main.update_money(workers.output);
 
         for (let ocean in workers.oceans) {
             ocean = workers.oceans[ocean];
