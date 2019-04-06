@@ -149,6 +149,13 @@ var settings = {
                     stocks.create_stock(main.random(1, 3));
                 }
             });
+            buttons.create({
+                parent: "right",
+                text: "Research Theories (+5000)",
+                on_click: function() {
+                    research.update_theories(5000);
+                }
+            });
         } else {
             this.dev = false;
             $("#right")
