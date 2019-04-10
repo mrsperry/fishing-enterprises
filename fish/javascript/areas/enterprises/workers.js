@@ -1,4 +1,4 @@
-let workers = {
+var workers = {
     initialize() {
         this.payroll = {
             remaining: 100,

@@ -1,4 +1,4 @@
-let newspaper = {
+var newspaper = {
     initialize() {
         enterprises.newspaper_interval = window.setInterval(this.update, 15000);
     },

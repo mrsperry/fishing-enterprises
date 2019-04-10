@@ -1,4 +1,4 @@
-let designer = {
+var designer = {
     load() {
         enterprises.current_view = "designer";
 

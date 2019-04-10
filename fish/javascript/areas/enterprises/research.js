@@ -1,4 +1,4 @@
-let research = {
+var research = {
     initialize() {
         this.theory_difference = 0;
         this.theories_per_second = 0;
