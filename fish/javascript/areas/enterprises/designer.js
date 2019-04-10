@@ -2,6 +2,9 @@ let designer = {
     load() {
         enterprises.current_view = "designer";
 
+        this.part_pack_1 = false;
+        this.part_pack_2 = false;
+
         let parent = $("<div>")
             .attr("id", "designer_lab_section")
             .hide()

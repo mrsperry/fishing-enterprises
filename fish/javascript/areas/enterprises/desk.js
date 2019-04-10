@@ -4,13 +4,81 @@ var desk = {
         vendor.add_item(enterprises.vendor, {
             data: {
                 parent: "enterprise_investments_section",
+                id: "sales_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Enthusiastic Salespeople",
+                    regular: "($10,000)"
+                },
+                text: "Investments into young and charismatic salespeople appeal to next generation markets, increasing your overall sales.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "sales_upgrade_1");
+
+                    workers.efficiency.sales -= 7;
+                    workers.efficiency.transit += 5;
+
+                    main.update_money(-10000);
+                },
+                disabled: function() {
+                    return resources.money.count < 10000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "workers_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Discourage Unions",
+                    regular: "($15,000)"
+                },
+                text: "By creating false rumors and discouraging your workers to unionize you're able to pay them less and work them longer.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "workers_upgrade_1");
+
+                    workers.efficiency.workers -= 7;
+                    workers.efficiency.marketing += 5;
+
+                    main.update_money(-15000);
+                },
+                disabled: function() {
+                    return resources.money.count < 15000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "workers_increase_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Hostile Takeover",
+                    regular: "($20,000)"
+                },
+                text: "Pressure stock holders to sell and have your financial team buy up a majority share in your biggest competitor, Angler Amenities Inc.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "workers_increase_1");
+
+                    resources.workers.count += 9000;
+
+                    main.update_money(-20000);
+                },
+                disabled: function() {
+                    return resources.money.count < 20000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
                 id: "stocks_unlock",
                 classes: ["enterprise_investment"],
                 header: {
-                    bold: "Stocks Unlock",
-                    regular: ""
+                    bold: "Personal Portfolio",
+                    regular: "($25,000)"
                 },
-                text: "Unlock the stocks section.",
+                text: "Your financial advisors suggest opening a personal stock portfolio so you can fund your passion projects.",
                 on_click: function() {
                     $("#stocks_section")
                         .fadeIn();
@@ -19,6 +87,101 @@ var desk = {
 
                     stocks.initialize();
                     stocks.update_desk_display();
+
+                    main.update_money(-25000);
+                },
+                disabled: function() {
+                    return resources.money.count < 25000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "transit_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Mobile Restructuring",
+                    regular: "($30,000)"
+                },
+                text: "Hire experts to re-organize your fleet of delivery trucks to use more efficient delivery routes allowing you to cut costs.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "transit_upgrade_1");
+
+                    workers.efficiency.transit -= 7;
+                    workers.efficiency.sales += 5;
+
+                    main.update_money(-30000);
+                },
+                disabled: function() {
+                    return resources.money.count < 30000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "marketing_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Fast Food Toys",
+                    regular: "($35,000)"
+                },
+                text: "Enter a partnership with common fast-food chains to include small, branded toys in children's meals to encourage parents to buy your products.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "marketing_upgrade_1");
+
+                    workers.efficiency.marketing -= 7;
+                    workers.efficiency.workers += 5;
+
+                    main.update_money(-35000);
+                },
+                disabled: function() {
+                    return resources.money.count < 35000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "workers_increase_2",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Establish Monopoly",
+                    regular: "($40,000)"
+                },
+                text: "Stamp out local competition and finish takeovers of large-scale competitors, solidifying your global presence.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "workers_increase_2");
+
+                    resources.workers.count += 15000;
+
+                    main.update_money(-40000);
+                },
+                disabled: function() {
+                    return resources.money.count < 40000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "stock_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Insider Trading",
+                    regular: "($45,000)"
+                },
+                text: "Bribe market officials and bulk traders to occasionally throw you a bone on upcoming changes in the market.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "stock_upgrade_1");
+
+                    stocks.expected_return += 0.15;
+
+                    main.update_money(-45000);
+                },
+                disabled: function() {
+                    return resources.money.count < 45000;
                 }
             }
         });
@@ -28,10 +191,10 @@ var desk = {
                 id: "research_unlock",
                 classes: ["enterprise_investment"],
                 header: {
-                    bold: "Research Unlock",
-                    regular: ""
+                    bold: "R&D Department",
+                    regular: "($50,000)"
                 },
-                text: "Unlock the research section.",
+                text: "Create a new building and department branch that will be specifically tasked towards researching and developing new products.",
                 on_click: function() {
                     $("#research_section")
                         .fadeIn();
@@ -39,6 +202,77 @@ var desk = {
                     vendor.remove_item(enterprises.vendor, "research_unlock", desk.check_empty);
                     
                     research.theories_per_second = 1;
+
+                    main.update_money(-50000);
+                },
+                disabled: function() {
+                    return resources.money.count < 50000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "research_point_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Scientist Poaching",
+                    regular: "($75,000)"
+                },
+                text: "Offer major incentives to any scientifically inclined employees that currently work for other employers, increasing the rate at which we gain theories.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "research_point_upgrade_1", desk.check_empty);
+
+                    research.theories_per_second += 1;
+
+                    main.update_money(-75000);
+                },
+                disabled: function() {
+                    return resources.money.count < 75000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "workers_increase_3",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Labor Outsourcing",
+                    regular: "($80,000)"
+                },
+                text: "We could pay our workers fair wages and compensate them for injuries... or we could employ people who are desperate third-world workers.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "workers_increase_3");
+
+                    resources.workers.count += 25000;
+
+                    main.update_money(-80000);
+                },
+                disabled: function() {
+                    return resources.money.count < 80000;
+                }
+            }
+        });
+        vendor.add_item(enterprises.vendor, {
+            data: {
+                parent: "enterprise_investments_section",
+                id: "research_speed_upgrade_1",
+                classes: ["enterprise_investment"],
+                header: {
+                    bold: "Compartmentalization",
+                    regular: "($85,000)"
+                },
+                text: "By dividing our science teams and giving them narrowly scoped tasks we can more efficiently reach new discoveries.",
+                on_click: function() {
+                    vendor.remove_item(enterprises.vendor, "research_speed_upgrade_1", desk.check_empty);
+
+                    research.multiplier += 0.33;
+
+                    main.update_money(-85000);
+                },
+                disabled: function() {
+                    return resources.money.count < 85000;
                 }
             }
         });

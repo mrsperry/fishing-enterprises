@@ -36,6 +36,7 @@ let workers = {
                 life: 5
             },
         }
+        this.decay_multiplier = 1.5;
         this.output = 0;
         this.buttons = [];
 

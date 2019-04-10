@@ -5,6 +5,7 @@ var stocks = {
         this.stock_id = 0;
         this.stock_list = [];
         this.invested = [];
+        this.expected_return = 0.45;
 
         for (let index = 0; index < 15; index++) {
             this.create_stock(main.random(1, 3));
