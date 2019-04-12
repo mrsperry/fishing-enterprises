@@ -267,7 +267,7 @@ var desk = {
                 on_click: function() {
                     vendor.remove_item(enterprises.vendor, "research_speed_upgrade_1", desk.check_empty);
 
-                    research.multiplier += 0.33;
+                    research.multiplier -= 0.33;
 
                     main.update_money(-85000);
                 },

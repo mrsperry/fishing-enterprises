@@ -15,7 +15,7 @@ var research = {
                 },
                 text: "Studying current and past market trends will allow us to accurately predict future trends, increasing the efficiency of our marketing.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 3, function() {
                         workers.efficiency.sales -= 12;
                         workers.efficiency.transit += 7;
                     });
@@ -38,7 +38,7 @@ var research = {
                 },
                 text: "Introduce new company propaganda to your workers via mandatory re-training videos, resulting in a conflict of beliefs allowing you to work them harder.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 6, function() {
                         workers.efficiency.workers -= 12;
                         workers.efficiency.marketing += 7;
                     });
@@ -61,7 +61,7 @@ var research = {
                 },
                 text: "Introduces new methods for balancing the rising salinity in the oceans, allowing life to replenish faster.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 9, function() {
                         workers.decay_multiplier -= 0.5;
                     });
 
@@ -83,7 +83,7 @@ var research = {
                 },
                 text: "Opening up parts of our research to the public gives us a considerable boost to possible solutions via public contributions.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 12, function() {
                         research.theories_per_second += 3;
                     });
 
@@ -105,7 +105,7 @@ var research = {
                 },
                 text: "Advances in plant based fuels allow you to switch over from oil, lowering prices and increasing fuel efficiency.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 15, function() {
                         workers.efficiency.transit -= 12;
                         workers.efficiency.sales += 7;
                     });
@@ -128,7 +128,7 @@ var research = {
                 },
                 text: "Analyzes common beliefs and morals held by celebrities so we can target them with propaganda campaigns to bring in their audiences.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 18, function() {
                         workers.efficiency.marketing -= 12;
                         workers.efficiency.workers += 7;
                     });
@@ -151,7 +151,7 @@ var research = {
                 },
                 text: "The modification of genes allows you to create custom fish by adding or removing specific parts of existing aquatic life.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 21, function() {
                         $("#designer_section")
                             .fadeIn();
                         enterprises.desk_data.designer = true;
@@ -175,7 +175,7 @@ var research = {
                 },
                 text: "Begin utilizing hypnosis techniques within our company propaganda and training videos, allowing us to bring in significantly more workers.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 24, function() {
                         resources.workers.count += 25000;
                     });
 
@@ -197,8 +197,8 @@ var research = {
                 },
                 text: "Usage of AI allows us to rapidly cycle through low probability theories meaning our scientists can focus on higher probability theories thus vastly increasing our research speed.",
                 on_click: function() {
-                    research.animate($(this), function() {
-                        research.multiplier += 0.64;
+                    research.animate($(this), 27, function() {
+                        research.multiplier -= 0.64;
                     });
 
                     research.update_theories(-4500);
@@ -219,7 +219,7 @@ var research = {
                 },
                 text: "Use the companies influence to coerce other sectors into supporting stocks of interest by threating to stop your sale of goods in their markets.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 30, function() {
                         stocks.expected_return += 0.15;
                     });
 
@@ -241,7 +241,7 @@ var research = {
                 },
                 text: "Introduces experimental species that were previously non-receptive allowing you to splice new gene sequences, furthering your available gene pool.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 33, function() {
                         designer.part_pack_1 = true;
                     });
 
@@ -263,7 +263,7 @@ var research = {
                 },
                 text: "Discoveries around plastic and rubber disintegration emerge, allowing you to shear away the majority of the pollution in oceans thereby increase aquatic life fertility.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 36, function() {
                         workers.decay_multiplier -= 0.5;
                     });
 
@@ -285,7 +285,7 @@ var research = {
                 },
                 text: "Automation of gene editing allows you to use new genomes from species that were too complex for humans to efficiently splice.",
                 on_click: function() {
-                    research.animate($(this), function() {
+                    research.animate($(this), 39, function() {
                         designer.part_pack_2 = true;
                     });
 
@@ -348,7 +348,7 @@ var research = {
         desk.check_empty();
     },
 
-    animate(parent, callback) {
+    animate(parent, seconds, callback) {
         $(parent)
             .css("background-color", "transparent")
             .prop("purchased", true)
@@ -357,7 +357,6 @@ var research = {
         let id = $(parent).attr("id").replace("_button", "");
         let element = $("<div>")
             .attr("parent", id)
-            .attr("timer", 3)
             .addClass("progress absolute")
             .css("top", $(parent).position().top + 6)
             .css("left", $(parent).position().left + 6)
@@ -365,7 +364,7 @@ var research = {
         $(element)
             .animate(
                 { "width": "295px" },
-                $(element).attr("timer") * 1000,
+                Math.floor((seconds * 1000) * research.multiplier),
                 "linear",
                 function() {
                     vendor.remove_item(enterprises.research_vendor, id, research.update_display);
