@@ -339,10 +339,6 @@ var research = {
 
             $(element)
                 .css("top", $(parent).position().top + 6);
-
-            if (vendor.registered_item(enterprises.research_vendor, id)) {
-                console.log("registered: " + id);
-            }
         }
 
         desk.check_empty();
