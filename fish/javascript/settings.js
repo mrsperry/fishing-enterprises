@@ -314,6 +314,7 @@ var settings = {
         save_misc["messages"] = messages;
         save_misc["catalog"] = catalog.purchased == null ? false : true;
         save_misc["auto_save"] = main.save_interval_number == null ? 10 : main.save_interval_number;
+        save_misc["time_played"] = counters.time;
         if (earth_defender.hiscores != null) {
             save_misc["hiscores"] = earth_defender.hiscores;
         }
@@ -498,6 +499,15 @@ var settings = {
                     let valid = [3, 5, 10];
                     main.update_save_interval(valid.includes(auto_save) ? auto_save : 10);
                 }
+
+                let time_played = parent["time_played"];
+                for (let value of ["seconds", "minutes", "hours"]) {
+                    let number = time_played[value];
+                    if (typeof number == "number") {
+                        counters.time[value] = number;
+                    }
+                }
+                counters.update_time_display();
 
                 let hiscores = parent["hiscores"];
                 if (typeof hiscores == "object") {

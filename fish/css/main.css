@@ -102,6 +102,17 @@ button:disabled {
 }
 
 /* resource counters */
+#time_display {
+    position: absolute;
+    top: 105px;
+    left: 974px;
+    text-align: right;
+}
+
+#time_counter {
+    text-align: center;
+}
+
 #resource_counters {
     float: left;
 }

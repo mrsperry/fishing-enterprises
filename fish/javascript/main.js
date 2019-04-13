@@ -22,6 +22,8 @@ var main = {
                 .hide();
         }
 
+        window.setInterval(counters.update_time_played, 1000);
+
         settings.load_settings();
     },
 

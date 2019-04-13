@@ -17,6 +17,21 @@ var counters = {
             .attr("id", "money_difference")
             .appendTo(money);
 
+        this.time = {
+            seconds: 0,
+            minutes: 0,
+            hours: 0
+        };
+        // create time counter
+        let time = $("<div>")
+            .attr("id", "time_display")
+            .text("Time played")
+            .appendTo(below);
+        $("<div>")
+            .attr("id", "time_counter")
+            .text("00:00")
+            .appendTo(time);
+
         // create bait counter
         $("<div>")
             .attr("id", "bait_counters")
@@ -254,5 +269,44 @@ var counters = {
                 }
             }
         }
+    },
+
+    update_time_played() {
+        let time = counters.time;
+        time.seconds++;
+
+        if (time.seconds == 60) {
+            time.seconds = 0;
+            time.minutes++;
+        }
+        if (time.minutes == 60) {
+            time.minutes = 0;
+            time.hours++;
+        }
+
+        counters.update_time_display();
+    },
+
+    update_time_display() {
+        let time = counters.time;
+
+        let seconds = time.seconds;
+        let minutes = time.minutes;
+        let hours = time.hours;
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (hours == 0) {
+            hours = "";
+        } else {
+            hours += ":";
+        }
+
+        $("#time_counter")
+            .text(hours + minutes + ":" + seconds);
     }
 }
