@@ -305,7 +305,7 @@ of the container of the body :^) */
 
 .section_right {
     position: absolute;
-    margin-left: 179px;
+    margin-left: 5px; /* 179px */
 }
 
 .section_top {
