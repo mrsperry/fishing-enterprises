@@ -30,6 +30,12 @@ var lights = {
             this.lights = on;
 
             settings.save_settings();
+
+            if (areas.current_area.internal == "enterprises") {
+                if (enterprises.current_view == "stocks") {
+                    stocks.create_selected_graph();
+                }
+            }
         }
     }
 }

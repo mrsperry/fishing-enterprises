@@ -406,7 +406,6 @@ var stocks = {
             .fadeIn();
         
         let buttons_section = $("#selected_stock_buttons_section");
-        let graph_section = $("#selected_graph_section");
         if ($(buttons_section).length == 0) {
             buttons_section = $("<div>")
                 .attr("id", "selected_stock_buttons_section")
@@ -438,7 +437,7 @@ var stocks = {
                 .attr("id", "stocks_divider")
                 .appendTo(parent);
 
-            graph_section = $("<div>")
+            let graph_section = $("<div>")
                 .attr("id", "selected_graph_section")
                 .appendTo(parent);
             let graph_header = $("<div>")
@@ -533,6 +532,19 @@ var stocks = {
                 }
             }).options
         ];
+
+        this.selected_stock = stock;
+        this.create_selected_graph();
+    },
+
+    create_selected_graph() {
+        let stock = this.selected_stock;
+        if (stock == null) {
+            return;
+        }
+
+        let graph_section = $("#selected_graph_section")
+            .empty();
 
         let graph = $("<canvas>")
             .attr("id", "selected_stock_graph")

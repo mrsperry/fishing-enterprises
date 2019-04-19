@@ -1118,14 +1118,14 @@ p#save_intervals {
 
 #graph_vertical_divider {
     position: absolute;
-    top: 30px;
+    top: 10px;
     left: 30px;
     height: 144px;
 }
 
 #graph_horizontal_divider {
     position: absolute;
-    top: 174px;
+    top: 155px;
     left: 30px;
     width: 416px;
 }
