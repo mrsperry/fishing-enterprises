@@ -290,8 +290,14 @@ of the container of the body :^) */
     animation: scrolling_text 15s linear;
 }
 
+#vendor_containers {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .section {
-    margin-top: 20px;
+    margin: 20px 5px 0px 0px;
     display: inline-block;
 }
 
@@ -301,11 +307,6 @@ of the container of the body :^) */
 
 .section_center {
     margin-left: 5px;
-}
-
-.section_right {
-    position: absolute;
-    margin-left: 5px; /* 179px */
 }
 
 .section_top {

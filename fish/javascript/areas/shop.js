@@ -100,6 +100,9 @@ var shop = {
         $("<div>")
             .attr("id", "above_section")
             .appendTo(parent);
+        let containers = $("<div>")
+            .attr("id", "vendor_containers")
+            .appendTo(parent);
 
         let names = ["Bait", "Tackle", "Misc"];
         for (let name of names) {
@@ -107,12 +110,8 @@ var shop = {
                 .attr("id", name.toLowerCase() + "_section")
                 .attr("display", name)
                 .addClass("before section")
-                .appendTo(parent);
+                .appendTo(containers);
         }
-        $("#tackle_section")
-            .addClass("section_center")
-        $("#misc_section")
-            .addClass("section_right")
 
         for (let index in this.buttons) {
             let item = this.buttons[index];
