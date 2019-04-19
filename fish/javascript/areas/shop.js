@@ -151,7 +151,7 @@ var shop = {
     },
 
     sell_fish() {
-        this.update_money(this.fish_value(true));
+        main.update_money(this.fish_value(true));
 
         $("#sell_fish_button")
             .text("Sell fish ($0)");
@@ -179,7 +179,7 @@ var shop = {
             item.count++;
             item.total++;
 
-            this.update_money(-item.price);
+            main.update_money(-item.price);
 
             if (item.internal == "worms") {
                 $("#forage_for_worms_button")
@@ -201,7 +201,7 @@ var shop = {
         let data = area.purchased;
 
         this.remove_item(name + "_unlock");
-        this.update_money(-data.price);
+        main.update_money(-data.price);
 
         if (data.buttons != null) {
             for (let item of data.buttons) {
