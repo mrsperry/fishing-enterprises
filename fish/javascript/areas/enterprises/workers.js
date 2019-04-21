@@ -546,16 +546,16 @@ var workers = {
         }
 
         workers.oceans[id].workers += amount;
-        workers.oceans[id].output = Math.floor((5 * workers.oceans[id].workers) * (0.5 + (workers.oceans[id].life / 10)));
         resources.workers.count += -amount;
 
         $("#" + id + "_workers_count")
             .text(workers.stringify(workers.oceans[id].workers));
         $("#ocean_remaining_workers_count_text")
-            .text(workers.stringify(resources.workers.count));
+            .text(main.stringify(resources.workers.count));
 
         workers.update_buttons();
         workers.update_income();
+        workers.update_output();
     },
 
     update_ocean_life() {
@@ -602,6 +602,18 @@ var workers = {
                 .text(text)
                 .appendTo(life);
         }
+
+        this.update_output();
+    },
+
+    update_output() {
+        for (let id in workers.oceans) {
+            let ocean = workers.oceans[id];
+            ocean.output = Math.floor((5 * ocean.workers) * (0.5 + ocean.life / 10));
+
+            $("#" + id + "_output_text")
+                .text(main.stringify(ocean.output));
+        }
     },
 
     update_income() {
@@ -612,9 +624,6 @@ var workers = {
                 output = 0;
             }
             total += output;
-
-            $("#" + id + "_output_text")
-                .text(workers.stringify(output));
         }
 
         total = Math.floor(total * (workers.payroll.efficiency / 100));
@@ -622,6 +631,8 @@ var workers = {
 
         $("#payroll_income_text")
             .text(workers.stringify(total));
+
+        workers.update_output();
     },
 
     update_buttons() {
