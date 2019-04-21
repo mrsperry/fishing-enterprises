@@ -19,9 +19,9 @@ var settings = {
             
             buttons.create({
                 parent: "right",
-                text: "Money +5000",
+                text: "Money +100k",
                 on_click: function() {
-                    main.update_money(5000);
+                    main.update_money(100000);
                 }
             });
             buttons.create({
