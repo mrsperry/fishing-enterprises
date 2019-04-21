@@ -376,15 +376,25 @@ var workers = {
         for (let ocean in workers.oceans) {
             ocean = workers.oceans[ocean];
 
-            if (ocean.workers == 0) {
-                if (ocean.life < 5) {
-                    if (main.random(0, 10) == 0) {
-                        ocean.life++;
-                    }
+            if (ocean.life < 5) {
+                let replenish = 5;
+                if (ocean.workers > 10000) {
+                    replenish = 10;
                 }
-            } else {
+                if (ocean.workers > 25000) {
+                    replenish = 15;
+                }
+                if (ocean.workers > 35000) {
+                    replenish = 25;
+                }
+
+                if (main.random(0, replenish * workers.decay_multiplier) == 0) {
+                    ocean.life++;
+                }
+            }
+            if (ocean.workers != 0) {
                 if (ocean.life > 0) {
-                    if (main.random(0, 10) == 0) {
+                    if (main.random(1, 100) <= (Math.floor(ocean.workers / 1000) * 1.5)) {
                         ocean.life--;
                     }
                 }
