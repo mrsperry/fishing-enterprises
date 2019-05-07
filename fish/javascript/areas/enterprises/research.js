@@ -16,8 +16,7 @@ var research = {
                 text: "Studying current and past market trends will allow us to accurately predict future trends, increasing the efficiency of our marketing.",
                 on_click: function() {
                     research.animate($(this), 3, function() {
-                        workers.efficiency.sales -= 12;
-                        workers.efficiency.transit += 7;
+                        workers.change_efficiency("sales", "transit");
                     });
 
                     research.update_theories(-500);
@@ -39,8 +38,7 @@ var research = {
                 text: "Introduce new company propaganda to your workers via mandatory re-training videos, resulting in a conflict of beliefs allowing you to work them harder.",
                 on_click: function() {
                     research.animate($(this), 6, function() {
-                        workers.efficiency.workers -= 12;
-                        workers.efficiency.marketing += 7;
+                        workers.change_efficiency("workers", "marketing");
                     });
 
                     research.update_theories(-1000);
@@ -106,8 +104,7 @@ var research = {
                 text: "Advances in plant based fuels allow you to switch over from oil, lowering prices and increasing fuel efficiency.",
                 on_click: function() {
                     research.animate($(this), 15, function() {
-                        workers.efficiency.transit -= 12;
-                        workers.efficiency.sales += 7;
+                        workers.change_efficiency("transit", "sales");
                     });
 
                     research.update_theories(-2500);
@@ -129,8 +126,7 @@ var research = {
                 text: "Analyzes common beliefs and morals held by celebrities so we can target them with propaganda campaigns to bring in their audiences.",
                 on_click: function() {
                     research.animate($(this), 18, function() {
-                        workers.efficiency.marketing -= 12;
-                        workers.efficiency.workers += 7;
+                        workers.change_efficiency("marketing", "workers");
                     });
 
                     research.update_theories(-3000);

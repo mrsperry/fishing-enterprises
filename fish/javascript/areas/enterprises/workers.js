@@ -10,10 +10,11 @@ var workers = {
         }
         this.efficiency = {
             sales: 20,
-            workers: 40,
-            transit: 10,
+            workers: 35,
+            transit: 15,
             marketing: 30
         }
+        this.modifier = 0;
         this.oceans = {
             north_pacific: {
                 workers: 0,
@@ -428,19 +429,22 @@ var workers = {
         $("#" + id + "_percent_text")
             .text(workers.payroll[id] + "%");
 
+        workers.update_efficiency_score();
+        $("#payroll_efficiency_text")
+            .text(workers.payroll.efficiency + "%");
+
+        workers.update_efficiency_text();
+        workers.update_buttons();
+        workers.update_income();
+    },
+
+    update_efficiency_score() {
         let total_score = 0;
         for (let index in workers.efficiency) {
             total_score += Math.abs(workers.payroll[index] - workers.efficiency[index]);
         }
         total_score = 100 - total_score < 0 ? 0 : 100 - total_score;
         workers.payroll.efficiency = total_score;
-
-        $("#payroll_efficiency_text")
-            .text(total_score + "%");
-
-        workers.update_efficiency_text();
-        workers.update_buttons();
-        workers.update_income();
     },
 
     update_efficiency_text() {
@@ -617,6 +621,8 @@ var workers = {
     },
 
     update_income() {
+        workers.update_output();
+
         let total = 0;
         for (let id in workers.oceans) {
             let output = workers.oceans[id].output;
@@ -627,12 +633,13 @@ var workers = {
         }
 
         total = Math.floor(total * (workers.payroll.efficiency / 100));
+        if (workers.modifier != 0) {
+            total *= 1 + (workers.modifier / 10);
+        }
         workers.output = total;
 
         $("#payroll_income_text")
             .text(workers.stringify(total));
-
-        workers.update_output();
     },
 
     update_buttons() {
@@ -640,6 +647,23 @@ var workers = {
             $("#" + options.id + "_button")
                 .prop("disabled", options.disabled());
         }
+    },
+
+    change_efficiency(decrease, increase) {
+        let decrease_amount = this.efficiency[decrease];
+
+        let amount = 5
+        if (decrease_amount > 10) {
+            amount = main.random(5, decrease_amount - 5);
+        }
+
+        this.efficiency[decrease] -= amount;
+        this.efficiency[increase] += amount;
+        this.modifier += 5;
+
+        this.update_efficiency_score();
+
+        desk.load_payroll();
     },
 
     stringify(number) {

@@ -14,8 +14,7 @@ var desk = {
                 on_click: function() {
                     vendor.remove_item(enterprises.vendor, "sales_upgrade_1");
 
-                    workers.efficiency.sales -= 7;
-                    workers.efficiency.transit += 5;
+                    workers.change_efficiency("sales", "transit");
 
                     main.update_money(-10000);
                 },
@@ -37,8 +36,7 @@ var desk = {
                 on_click: function() {
                     vendor.remove_item(enterprises.vendor, "workers_upgrade_1");
 
-                    workers.efficiency.workers -= 7;
-                    workers.efficiency.marketing += 5;
+                    workers.change_efficiency("workers", "marketing");
 
                     main.update_money(-15000);
                 },
@@ -108,8 +106,7 @@ var desk = {
                 on_click: function() {
                     vendor.remove_item(enterprises.vendor, "transit_upgrade_1");
 
-                    workers.efficiency.transit -= 7;
-                    workers.efficiency.sales += 5;
+                    workers.change_efficiency("transit", "sales");
 
                     main.update_money(-30000);
                 },
@@ -131,8 +128,7 @@ var desk = {
                 on_click: function() {
                     vendor.remove_item(enterprises.vendor, "marketing_upgrade_1");
 
-                    workers.efficiency.marketing -= 7;
-                    workers.efficiency.workers += 5;
+                    workers.change_efficiency("marketing", "workers");
 
                     main.update_money(-35000);
                 },
@@ -490,56 +486,11 @@ var desk = {
             .hide()
             .fadeIn()
             .appendTo(parent);
-        let payroll_content = $("<div>")
+        $("<div>")
             .attr("id", "payroll_content")
             .addClass("absolute")
             .appendTo(payroll_section);
-        let payroll_header = $("<div>")
-            .attr("id", "payroll_header")
-            .addClass("centered bold payroll_margin")
-            .text("Payroll Overview")
-            .appendTo(payroll_content);
-        $("<div>")
-            .addClass("divider")
-            .appendTo(payroll_header);
-        let payroll_sales = $("<div>")
-            .addClass("payroll_left")
-            .text("Sales: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text(workers.payroll.sales + "%")
-            .appendTo(payroll_sales);
-        let payroll_workers = $("<div>")
-            .addClass("payroll_right")
-            .text("Workers: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text(workers.payroll.workers + "%")
-            .appendTo(payroll_workers);
-        let payroll_transit = $("<div>")
-            .addClass("payroll_left payroll_margin")
-            .text("Transit: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text(workers.payroll.transit + "%")
-            .appendTo(payroll_transit);
-        let payroll_marketing = $("<div>")
-            .addClass("payroll_right")
-            .text("Marketing: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text(workers.payroll.marketing + "%")
-            .appendTo(payroll_marketing);
-        $("<div>")
-            .addClass("divider")
-            .appendTo(payroll_content);
-        let payroll_efficiency = $("<div>")
-            .attr("id", "payroll_efficiency")
-            .text("Efficiency: ")
-            .appendTo(payroll_content);
-        $("<span>")
-            .text(workers.payroll.efficiency + "%")
-            .appendTo(payroll_efficiency);
+        this.load_payroll();
         buttons.create({
             parent: "payroll_section",
             classes: ["absolute"],
@@ -666,6 +617,58 @@ var desk = {
         research.theory_difference = 0;
 
         enterprises.current_view = "desk";
+    },
+
+    load_payroll() {
+        let payroll_content = $("#payroll_content")
+            .empty();
+
+        let payroll_header = $("<div>")
+            .attr("id", "payroll_header")
+            .addClass("centered bold payroll_margin")
+            .text("Payroll Overview")
+            .appendTo(payroll_content);
+        $("<div>")
+            .addClass("divider")
+            .appendTo(payroll_header);
+        let payroll_sales = $("<div>")
+            .addClass("payroll_left")
+            .text("Sales: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text(workers.payroll.sales + "%")
+            .appendTo(payroll_sales);
+        let payroll_workers = $("<div>")
+            .addClass("payroll_right")
+            .text("Workers: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text(workers.payroll.workers + "%")
+            .appendTo(payroll_workers);
+        let payroll_transit = $("<div>")
+            .addClass("payroll_left payroll_margin")
+            .text("Transit: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text(workers.payroll.transit + "%")
+            .appendTo(payroll_transit);
+        let payroll_marketing = $("<div>")
+            .addClass("payroll_right")
+            .text("Marketing: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text(workers.payroll.marketing + "%")
+            .appendTo(payroll_marketing);
+        $("<div>")
+            .addClass("divider")
+            .appendTo(payroll_content);
+        let payroll_efficiency = $("<div>")
+            .attr("id", "payroll_efficiency")
+            .text("Efficiency: ")
+            .appendTo(payroll_content);
+        $("<span>")
+            .text(workers.payroll.efficiency + "%")
+            .appendTo(payroll_efficiency);
     },
 
     check_empty() {
