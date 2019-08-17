@@ -5,20 +5,6 @@
     align-items: center;
 }
 
-/* Banner image */
-img {
-    width: 400px;
-    height: 200px;
-    /* Optimize image display, remove anti-aliasing */
-    image-rendering: optimizeSpeed;
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated;                 /* Chrome                         */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-}
-
 /* Title */
 h1 {
     font-size: 30pt !important;
