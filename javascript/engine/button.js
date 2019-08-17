@@ -40,7 +40,7 @@ class button {
             let text = (typeof(options.text) == "string" ? options.text : options.text());
 
             // Check if there is existing HTML
-            element.html((header != null ? element.html() : "")
+            element.html((element.html() || "")
                 + "<span class='button-text'>" + text + "</span>");
         }
 
