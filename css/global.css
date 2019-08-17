@@ -1,0 +1,67 @@
+/* Global font */
+* {
+    font-family: "Consolas", monospace;
+    font-size: 12pt;
+}
+
+/* Remove body margins & fill the entire screen */
+body {
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Main sections of the screen */
+#top-section, #middle-section #bottom-section {
+    width: 100%;
+}
+
+/* Used for text logging */
+#top-section {
+    height: 12%;
+}
+
+/* Used for content displays */
+#middle-section {
+    height: 85%;
+}
+
+/* Used as the footer */
+#bottom-section {
+    height: 3%;
+}
+
+/* Main content area */
+#content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+/* Button styles */
+button {
+    border: 1px solid black;
+    background-color: #ffffff;
+    width: 100px;
+    height: 35px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: #eeeeee;
+}
+
+.button-header-bold {
+    font-weight: bold;
+}
+
+/* Line breaks */
+.line-break {
+    border: 0.5px solid black;
+    height: 0px;
+    width: 80%;
+    margin-left: 10%;
+}
