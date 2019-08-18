@@ -49,6 +49,19 @@ class main_menu {
         main.transition(() => {
             main.set_state(main.states.fishing);
             window.setInterval(main.update, 1000);
+
+            // Fade in the bottom section
+            const parent = $("#bottom-section")
+                .hide()
+                .fadeIn();
+            // Create the footer
+            $("<span>")
+                .html("- <a onclick=''>Lights off</a>"
+                    + " | <a onclick=''>Settings</a>"
+                    + " | <a onclick=''>About</a>"
+                    + " | <a onclick=''>Support me</a>"
+                    + " | <a href='https://github.com/mrsperry/mrsperry.github.io/' target='_blank'>Github</a> -")
+                .appendTo(parent);
         });
     }
 
