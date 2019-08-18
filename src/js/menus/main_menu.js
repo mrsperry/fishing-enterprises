@@ -4,7 +4,7 @@ class main_menu {
         css.load(["main_menu"]);
 
         // Create a parent element
-        let parent = $("<div>")
+        const parent = $("<div>")
             .attr("id", "main-menu-content")
             .appendTo($("#content"));
 
@@ -14,7 +14,7 @@ class main_menu {
             .appendTo(parent);
 
         // Create the header text
-        let header = $("<h1>")
+        const header = $("<h1>")
             .text("Fishing Enterprises")
             .appendTo(parent);
         $("<div>")

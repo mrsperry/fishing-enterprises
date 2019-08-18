@@ -4,10 +4,10 @@ class button {
         this.options = options;
 
         // Set parent
-        let parent = $(options.parent || "body");
+        const parent = $(options.parent || "body");
 
         // Set button element
-        let element = $("<button>")
+        const element = $("<button>")
             .appendTo(parent);
         
         // Set ID
@@ -17,16 +17,16 @@ class button {
 
         // Set classes
         if (options.classes != null) {
-            for (let clazz of options.classes) {
+            for (const clazz of options.classes) {
                 element.addClass(clazz);
             }
         }
 
         // Set header
-        let header = options.header;
+        const header = options.header;
         if (header != null) {
-            let bold = header.bold || "";
-            let regular = header.regular || "";
+            const bold = header.bold || "";
+            const regular = header.regular || "";
 
             element.html(
                   "<div class='button-header'>"
@@ -37,7 +37,7 @@ class button {
 
         // Set text
         if (options.text != null) {
-            let text = (typeof(options.text) == "string" ? options.text : options.text());
+            const text = (typeof(options.text) == "string" ? options.text : options.text());
 
             // Check if there is existing HTML
             element.html((element.html() || "")
@@ -61,7 +61,7 @@ class button {
         }
         
         // Add line breaks
-        for (let index = 0; index < options.breaks || 0; index++) {
+        for (const index = 0; index < options.breaks || 0; index++) {
             $("<br>")
                 .attr("id", (options.id || undefined) + "-button-break")
                 .appendTo(parent);

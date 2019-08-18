@@ -3,12 +3,12 @@ class css {
 
     static load(hrefs) {
         // Get all CSS links
-        for (let link of css.parent.children(".temp-css-link")) {
+        for (const link of css.parent.children(".temp-css-link")) {
             link.remove();
         }
 
         // Load all new CSS
-        for (let href of hrefs) {
+        for (const href of hrefs) {
             $("<link>")
                 .attr("rel", "stylesheet")
                 .attr("type", "text/css")
