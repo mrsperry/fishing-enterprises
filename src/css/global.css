@@ -29,6 +29,8 @@ body {
 /* Used as the footer */
 #bottom-section {
     height: 3%;
+    display: flex;
+    justify-content: center;
 }
 
 /* Main content area */
@@ -64,4 +66,15 @@ button:hover {
     height: 0px;
     width: 80%;
     margin-left: 10%;
+}
+
+/* Links */
+a {
+    color: #0066ff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #0099ff;
 }
