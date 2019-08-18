@@ -47,7 +47,7 @@ class main_menu {
     static start_game() {
         // Fade out main menu and start the game
         main.transition(() => {
-            main.set_state(main.states.fishing);
+            fishing_area.initialize("lake");
             window.setInterval(main.update, 1000);
 
             // Fade in the bottom section
