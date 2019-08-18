@@ -12,7 +12,7 @@ class css {
             $("<link>")
                 .attr("rel", "stylesheet")
                 .attr("type", "text/css")
-                .attr("href", "css/" + href + ".css")
+                .attr("href", "src/css/" + href + ".css")
                 .addClass("temp-css-link")
                 .appendTo(css.parent);
         }
