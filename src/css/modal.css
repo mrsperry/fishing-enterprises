@@ -1,0 +1,28 @@
+/* Modal box */
+.modal-box {
+    padding: 10px 20px;
+}
+
+/* Modal headers */
+.modal-header {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Line breaks */
+.modal-line-break {
+    margin-left: 5%;
+    width: 90%;
+}
+
+.modal-break {
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.modal-close-button {
+    width: 40%;
+    height: 40px;
+    margin-bottom: 0px;
+}
