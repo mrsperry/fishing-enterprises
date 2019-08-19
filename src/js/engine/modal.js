@@ -30,5 +30,7 @@ class modal {
         if (height != null) {
             box.css("height", height);
         }
+
+        return box;
     }
 }
