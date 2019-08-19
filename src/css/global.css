@@ -45,7 +45,7 @@ body {
 
 /* Button styles */
 button {
-    border: 1px solid black;
+    border: 1px solid #000000;
     background-color: #ffffff;
     width: 100px;
     height: 35px;
@@ -62,7 +62,7 @@ button:hover {
 
 /* Line breaks */
 .line-break {
-    border: 0.5px solid black;
+    border: 0.5px solid #000000;
     height: 0px;
     width: 80%;
     margin-left: 10%;
