@@ -13,15 +13,37 @@ class css {
         }
     }
 
-    static remove() {
+    static remove(hrefs) {
         // Get all CSS links
         for (const link of css.parent.children(".temp-css-link")) {
-            link.remove();
+            // Check if there are specific links to remove
+            if (hrefs != null) {
+                // Return when all links are found
+                if (hrefs.length == 0) {
+                    return;
+                }
+
+                for (const index in hrefs) {
+                    const href = hrefs[index];
+
+                    // Check if this link should be removed
+                    if ($(link).attr("href").includes(href)) {
+                        // Remove the link from the array
+                        hrefs.splice(index, 1);
+
+                        // Remove the link element
+                        link.remove();
+                        break;
+                    }
+                }
+            } else {
+                link.remove();
+            }
         }
     }
 
-    static load_and_remove(hrefs) {
-        css.remove();
-        css.load(hrefs);
+    static load_and_remove(load, remove) {
+        css.remove(remove);
+        css.load(load);
     }
 }
