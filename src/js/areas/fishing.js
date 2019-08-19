@@ -11,7 +11,7 @@ class fishing {
             // Set the game state
             main.set_state(main.states.fishing);
             // Load fishing area CSS
-            css.load(["areas/fishing"]);
+            css.replace(["areas/fishing"]);
             // Set the area data
             fishing.data = area_data.get(name);
 

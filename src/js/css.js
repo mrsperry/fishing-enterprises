@@ -42,7 +42,7 @@ class css {
         }
     }
 
-    static load_and_remove(load, remove) {
+    static replace(load, remove) {
         css.remove(remove);
         css.load(load);
     }
