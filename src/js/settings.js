@@ -16,6 +16,6 @@ class settings {
     }
 
     static get(key) {
-        return settings.map[key] || null;
+        return settings.map[key];
     }
 }
