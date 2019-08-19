@@ -35,7 +35,7 @@ class main_menu {
         new button({
             parent: parent,
             text: "Settings",
-            on_click: main_menu.show_settings
+            on_click: settings_menu.show
         });
         new button({
             parent: parent,
@@ -66,10 +66,6 @@ class main_menu {
     }
 
     static load_game() {
-
-    }
-
-    static show_settings() {
 
     }
 
