@@ -8,23 +8,26 @@ class settings_menu {
             .addClass("modal-break")
             .text("Color theme: ")
             .appendTo(box);
-        $("<span>")
-            .attr("id", "theme-select-light")
-            .addClass("bold")
-            .text("light")
-            .appendTo(theme);
-        settings_menu.add_divider(theme);
-        $("<span>")
-            .attr("id", "theme-select-dark")
-            .addClass("link")
-            .text("dark")
-            .appendTo(theme);
-        settings_menu.add_divider(theme);
-        $("<span>")
-            .attr("id", "theme-select-blue")
-            .addClass("link")
-            .text("blue")
-            .appendTo(theme);
+        // Get the currently selected theme
+        const selected = settings.get("theme");
+        const colors = ["light", "dark", "blue"];
+        for (const index in colors) {
+            const type = colors[index];
+
+            // Add a link
+            $("<span>")
+                .attr("id", "theme-select-" + type)
+                .addClass(selected == index ? "bold" : "link")
+                .text(type)
+                .click(() => {
+                    themes.switch_theme(themes.state[type]);
+                })
+                .appendTo(theme);
+            // Only add divider between elements
+            if (index != 2) {
+                settings_menu.add_divider(theme);
+            }
+        }
 
         // Add save options
         const saves = $("<div>")
