@@ -32,7 +32,7 @@ class modal {
         if (title != null) {
             const text = $("<h1>")
                 .addClass("modal-header")
-                .text("title")
+                .text(title)
                 .appendTo(this.box);
             $("<div>")
                 .addClass("line-break modal-line-break")
