@@ -103,3 +103,8 @@ a:hover, .link:hover {
     border: 1px solid #000000;
     background-color: #ffffff;
 }
+
+/* Misc text styles */
+.bold {
+    font-weight: bold;
+}
