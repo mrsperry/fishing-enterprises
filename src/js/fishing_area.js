@@ -13,7 +13,7 @@ class fishing_area {
             // Load fishing area CSS
             css.load(["fishing_areas"]);
             // Set the area data
-            fishing_area.data = areas.get_area_data(name);
+            fishing_area.data = area_data.get(name);
 
             // Create fishing buttons
             new button({

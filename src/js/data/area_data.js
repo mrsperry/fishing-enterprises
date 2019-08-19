@@ -1,4 +1,4 @@
-class areas {
+class area_data {
     static area_list = {
         lake: {
             display: "Lake"
@@ -20,11 +20,11 @@ class areas {
         }
     };
 
-    static get_area_list() {
-        return areas.area_list;
+    static get_list() {
+        return area_data.area_list;
     }
 
-    static get_area_data(area) {
-        return areas.area_list[area];
+    static get(area) {
+        return area_data.area_list[area];
     }
 }
