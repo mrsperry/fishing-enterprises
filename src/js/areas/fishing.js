@@ -1,19 +1,19 @@
-class fishing_area {
+class fishing {
     static data = null;
 
     static initialize(name) {
         main.transition(() => {
             // Create initial HTML
-            if (fishing_area.get_data() == null) {
-                fishing_area.create_elements();
+            if (fishing.get_data() == null) {
+                fishing.create_elements();
             }
 
             // Set the game state
             main.set_state(main.states.fishing);
             // Load fishing area CSS
-            css.load(["fishing_areas"]);
+            css.load(["areas/fishing"]);
             // Set the area data
-            fishing_area.data = area_data.get(name);
+            fishing.data = area_data.get(name);
 
             // Create fishing buttons
             new button({
@@ -42,6 +42,6 @@ class fishing_area {
     }
 
     static get_data() {
-        return fishing_area.data;
+        return fishing.data;
     }
 }

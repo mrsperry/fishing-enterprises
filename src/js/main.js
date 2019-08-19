@@ -25,7 +25,7 @@ class main {
     static update() {
         switch (main.get_state()) {
             case 1:
-                fishing_area.update();
+                fishing.update();
                 break;
         }
     }
