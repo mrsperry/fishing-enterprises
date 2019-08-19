@@ -20,6 +20,8 @@ class main {
 
         // Load default settings
         settings.initialize();
+        // Load default theme
+        themes.initialize();
         // Load the main menu
         main_menu.initialize();
     }

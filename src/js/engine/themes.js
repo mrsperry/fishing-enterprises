@@ -5,10 +5,20 @@ class themes {
         blue: 2
     }
 
-    static current_state = themes.state.light;
+    static current_state;
+
+    static initialize() {
+        $("<link>")
+            .attr("id", "css-theme")
+            .attr("rel", "stylesheet")
+            .attr("type", "text/css")
+            .appendTo($("head"));
+
+        themes.switch_theme(settings.get("theme"));
+    }
 
     static switch_theme(state) {
-        this.current_state = state;
+        themes.current_state = state;
 
         let theme = "light";
         switch (state) {
@@ -19,6 +29,8 @@ class themes {
                 theme = "blue";
         }
 
-        css.load_and_remove(["themes/" + theme], ["themes/"]);
+        // Update the theme
+        $("#css-theme")
+            .attr("href", "src/css/themes/" + theme + ".css");
     }
 }
