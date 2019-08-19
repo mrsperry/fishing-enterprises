@@ -60,6 +60,16 @@ class modal {
             });
     }
 
+    add_close_button() {
+        new button({
+            parent: this.box,
+            text: "Close",
+            on_click: () => { 
+                this.close();
+            }
+        });
+    }
+
     get_box() {
         return this.box;
     }
