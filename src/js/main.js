@@ -1,4 +1,7 @@
 class main {
+    // Current game version
+    static version = "dev-0.3";
+
     // Enum of all states
     static states = {
         none: 0,
@@ -46,5 +49,9 @@ class main {
 
     static set_state(state) {
         main.state = state;
+    }
+
+    static get_version() {
+        return main.version;
     }
 }
