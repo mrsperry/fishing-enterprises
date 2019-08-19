@@ -14,6 +14,10 @@ class main {
     static state = main.states.none;
 
     static initialize() {
+        // Center all content
+        $("#content")
+            .addClass("flex flex-justify-center")
+
         // Load the main menu
         main_menu.initialize();
     }

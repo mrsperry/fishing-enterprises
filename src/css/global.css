@@ -35,8 +35,6 @@ body {
 
 /* Main content area */
 #content {
-    display: flex;
-    justify-content: center;
     align-content: center;
     align-items: stretch;
     width: 100%;
@@ -93,15 +91,27 @@ a:hover, .link:hover {
     background-color: #000000;
 }
 
-.modal-holder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .modal-box {
     border: 1px solid #000000;
     background-color: #ffffff;
+}
+
+/* Misc generic styles */
+.flex {
+    display: flex;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-centered {
+    justify-content: center;
+    align-items: center;
 }
 
 /* Misc text styles */

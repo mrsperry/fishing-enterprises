@@ -19,7 +19,7 @@ class modal {
             .appendTo(this.parent);
         // Create a holder element to center the modal
         const holder = $("<div>")
-            .addClass("modal-holder")
+            .addClass("modal-holder flex flex-centered")
             .hide()
             .fadeIn()
             .appendTo(this.parent);
