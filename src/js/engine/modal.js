@@ -1,8 +1,14 @@
 class modal {
+    parent = null;
+    box = null;
+
     // Sets up a basic modal to add elements to
-    constructor(width, height) {
+    constructor(title, width, height) {
+        // Load modal CSS
+        css.load(["modal"]);
+
         // Create the modal
-        const parent = $("<div>")
+        this.parent = $("<div>")
             .addClass("modal")
             .appendTo($("body"));
         // Create the background (faded out)
@@ -10,27 +16,51 @@ class modal {
             .addClass("modal-background")
             .hide()
             .fadeTo(400, 0.6)
-            .appendTo(parent);
+            .appendTo(this.parent);
         // Create a holder element to center the modal
         const holder = $("<div>")
             .addClass("modal-holder")
             .hide()
             .fadeIn()
-            .appendTo(parent);
+            .appendTo(this.parent);
         // Create the box in which the content is set
-        const box = $("<div>")
+        this.box = $("<div>")
             .addClass("modal-box")
             .appendTo(holder);
+        
+        // Set the title
+        if (title != null) {
+            const text = $("<h1>")
+                .addClass("modal-header")
+                .text("title")
+                .appendTo(this.box);
+            $("<div>")
+                .addClass("line-break")
+                .appendTo(text);
+        }
 
         // Set the width and height of the modal box
         if (width != null) {
-            box.css("width", width);
+            this.box.css("width", width);
         }
 
         if (height != null) {
-            box.css("height", height);
+            this.box.css("height", height);
         }
 
-        return box;
+        return this;
+    }
+
+    close() {
+        $(this.parent)
+            .fadeOut(400, () => {
+                this.parent.remove();
+
+                css.remove(["modal"]);
+            });
+    }
+
+    get_box() {
+        return this.box;
     }
 }
