@@ -35,7 +35,7 @@ class modal {
                 .text("title")
                 .appendTo(this.box);
             $("<div>")
-                .addClass("line-break")
+                .addClass("line-break modal-line-break")
                 .appendTo(text);
         }
 
