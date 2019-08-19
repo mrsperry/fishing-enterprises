@@ -34,8 +34,8 @@ class main_menu {
         });
         new button({
             parent: parent,
-            text: "Options",
-            on_click: main_menu.show_options
+            text: "Settings",
+            on_click: main_menu.show_settings
         });
         new button({
             parent: parent,
@@ -69,7 +69,7 @@ class main_menu {
 
     }
 
-    static show_options() {
+    static show_settings() {
 
     }
 
