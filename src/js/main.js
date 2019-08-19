@@ -18,6 +18,8 @@ class main {
         $("#content")
             .addClass("flex flex-justify-center")
 
+        // Load default settings
+        settings.initialize();
         // Load the main menu
         main_menu.initialize();
     }
