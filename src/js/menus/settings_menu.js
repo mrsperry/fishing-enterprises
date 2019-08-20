@@ -63,23 +63,40 @@ class settings_menu {
             .addClass("modal-break")
             .text("Auto-save every: (")
             .appendTo(box);
-        $("<span>")
-            .attr("id", "auto-save-three")
-            .addClass("link")
-            .text("three")
-            .appendTo(auto_save);
-        settings_menu.add_divider(auto_save);
-        $("<span>")
-            .attr("id", "auto-save-five")
-            .addClass("link")
-            .text("five")
-            .appendTo(auto_save);
-        settings_menu.add_divider(auto_save);
-        $("<span>")
-            .attr("id", "auto-save-ten")
-            .addClass("bold")
-            .text("ten")
-            .appendTo(auto_save);
+        // Get the current interval
+        const interval = settings.get("auto-save-interval");
+        // List out interval names and actual times
+        const intervals  = ["three", "3", "five", "5", "ten", "10"];
+        for (let index = 0; index < intervals.length; index += 2) {
+            // Get the time name
+            const name = intervals[index];
+            // Get the actual time
+            const time = intervals[index + 1];
+
+            $("<span>")
+                .attr("id", "auto-save-" + time)
+                .addClass(interval == time ? "bold" : "link")
+                .text(name)
+                .click(() => {
+                    // Get the current time interval
+                    const current = settings.get("auto-save-interval");
+                    // Make sure you can't change the interval to what is already set
+                    if (current != time) {
+                        // Select the new time
+                        settings_menu.swap_select("auto-save-" + time, "auto-save-" + current);
+
+                        // Set the interval
+                        settings.set("auto-save-interval", time);
+                    }
+                })
+                .appendTo(auto_save);
+
+            // Only add a divider between elements
+            if (index != 4) {
+                settings_menu.add_divider(auto_save);
+            }
+        }
+        // Add the postfix
         $("<span>")
             .text(") minutes")
             .appendTo(auto_save);
