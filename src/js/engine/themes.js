@@ -29,6 +29,8 @@ class themes {
                 theme = "blue";
         }
 
+        settings.set("theme", theme);
+
         // Update the theme
         $("#css-theme")
             .attr("href", "src/css/themes/" + theme + ".css");

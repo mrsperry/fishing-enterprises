@@ -17,10 +17,17 @@ class settings_menu {
             // Add a link
             $("<span>")
                 .attr("id", "theme-select-" + type)
-                .addClass(selected == index ? "bold" : "link")
+                .addClass(selected == type ? "bold" : "link")
                 .text(type)
                 .click(() => {
-                    themes.switch_theme(themes.state[type]);
+                    // Make sure you can't switch to the theme you're currently using
+                    if (settings.get("theme") != type) {
+                        // Switch the currently selected item in the menu
+                        settings_menu.swap_select("theme-select-" + type, "theme-select-" + settings.get("theme"));
+
+                        // Update CSS
+                        themes.switch_theme(themes.state[type]);
+                    }
                 })
                 .appendTo(theme);
             // Only add divider between elements
@@ -105,5 +112,14 @@ class settings_menu {
         $("<span>")
             .text(" | ")
             .appendTo(parent);
+    }
+
+    static swap_select(to, from) {
+        $("#" + to)
+            .addClass("bold")
+            .removeClass("link");
+        $("#" + from)
+            .addClass("link")
+            .removeClass("bold");
     }
 }
