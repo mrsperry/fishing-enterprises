@@ -1,3 +1,34 @@
+/* Global font color */
+* {
+    color: #dddddd;
+}
+
+/* Main background color */
 body {
-    background-color: #000000;
+    background-color: #222222;
+}
+
+/* Black border, white background */
+button, .modal-box {
+    border: 1px solid #666666;
+    background-color: #232323;
+}
+
+/* Button colors */
+button:hover {
+    background-color: #343434;
+}
+
+/* Line break colors */
+.line-break {
+    border: 0.5px solid #666666;
+}
+
+/* Links */
+a, .link {
+    color: #0099ff;
+}
+
+a:hover, .link:hover {
+    color: #00ccff;
 }
