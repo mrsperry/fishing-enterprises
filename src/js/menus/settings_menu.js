@@ -106,15 +106,40 @@ class settings_menu {
             .addClass("modal-break")
             .text("Dev tools: ")
             .appendTo(box);
-        $("<span>")
-            .addClass("link")
-            .text("enabled")
-            .appendTo(dev_tools);
-        settings_menu.add_divider(dev_tools);
-        $("<span>")
-            .addClass("bold")
-            .text("disabled")
-            .appendTo(dev_tools);
+        // Get the current enable state for dev tools
+        const enabled = settings.get("dev-tools");
+        const states = [true, false];
+        for (const index in states) {
+            const state = states[index];
+            // Convert true/false to an ID
+            const string = (state) => {
+                return state ? "enabled" : "disabled";
+            }
+
+            $("<span>")
+                .attr("id", "dev-tools-" + string(state))
+                .addClass(state == enabled ? "bold" : "link")
+                .text(string(state))
+                .click(() => {
+                    // Get the current enable state
+                    const current_state = settings.get("dev-tools");
+
+                    // Make sure you can't swap states when clicking the enabled state
+                    if (state != current_state) {
+                        // Select the new enable state
+                        settings_menu.swap_select("dev-tools-" + string(state), "dev-tools-" + string(!state));
+
+                        // Set the enable state
+                        settings.set("dev-tools", !current_state);
+                    }
+                })
+                .appendTo(dev_tools);
+
+            // Only add dividers between content
+            if (index != 1) {
+                settings_menu.add_divider(dev_tools);
+            }
+        }
 
         // Add the current game version
         $("<div>")
