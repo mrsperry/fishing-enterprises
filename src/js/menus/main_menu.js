@@ -41,7 +41,7 @@ class main_menu {
         new button({
             parent: parent,
             text: "About",
-            on_click: main_menu.show_about
+            on_click: about_menu.show
         });
     }
 
@@ -67,10 +67,6 @@ class main_menu {
     }
 
     static load_game() {
-
-    }
-
-    static show_about() {
 
     }
 }
