@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="images/banner.png">
+    <img src="images/banner-light.png">
     <br>
     Fishing Enterprises
 </h1>

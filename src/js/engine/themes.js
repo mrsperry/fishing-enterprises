@@ -34,5 +34,8 @@ class themes {
         // Update the theme
         $("#css-theme")
             .attr("href", "src/css/themes/" + theme + ".css");
+        // Swap the banner image if on the main menu
+        $("#banner-image")
+            .attr("src", "images/banner-" + theme + ".png");
     }
 }

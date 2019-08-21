@@ -10,7 +10,8 @@ class main_menu {
 
         // Load the banner image
         $("<img>")
-            .attr("src", "images/banner.png")
+            .attr("id", "banner-image")
+            .attr("src", "images/banner-light.png")
             .appendTo(parent);
 
         // Create the header text
