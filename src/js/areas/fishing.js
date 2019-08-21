@@ -36,9 +36,30 @@ class fishing {
 
     static create_elements() {
         const parent = $("#content");
-        $("<div>")
+
+        // Create the counters section
+        const counters = $("<div>")
             .attr("id", "resource-counters")
             .appendTo(parent);
+        // Create the fish counters
+        $("<div>")
+            .attr("id", "fish-counters")
+            .attr("section-header", "Fish")
+            .addClass("section")
+            .appendTo(counters);
+        // Bundle up the rest of the counters so they're stacked on top of each other
+        const misc = $("<div>")
+            .attr("id", "misc-counters")
+            .appendTo(counters);
+        for (const id of ["bait", "tackle", "boat"]) {
+            $("<div>")
+                .attr("id", id + "-counters")
+                .attr("section-header", utils.capitalize(id))
+                .addClass("section")
+                .appendTo(misc);
+        }
+
+        // Create the buttons section
         $("<div>")
             .attr("id", "resource-buttons")
             .appendTo(parent);

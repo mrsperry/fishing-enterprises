@@ -1,0 +1,23 @@
+/* Resource counters */
+#resource-counters {
+    display: flex;
+    align-items: flex-start;
+}
+
+#fish-counters {
+    display: inline;
+}
+
+/* Section headers */
+.section {
+    margin: 0px 15px 15px 0px;
+}
+
+/* Create text on-top of the section as a header */
+.section::before {
+    position: relative;
+    content: attr(section-header);
+    top: -13px;
+    left: 5px;
+    padding: 0px 2px;
+}

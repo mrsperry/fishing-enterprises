@@ -3,8 +3,8 @@
     color: #dddddd;
 }
 
-/* Main background color */
-body {
+/* Gray backgrounds */
+body, .section::before {
     background-color: #222222;
 }
 
@@ -31,4 +31,9 @@ a, .link {
 
 a:hover, .link:hover {
     color: #00ccff;
+}
+
+/* Section headers */
+.section {
+    border: 1px solid #666666;
 }
