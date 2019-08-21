@@ -15,6 +15,13 @@ class fishing {
             // Set the area data
             fishing.data = area_data.get(name);
 
+            if (name == "lake") {
+                new button({
+                    parent: "#resource-buttons",
+                    text: "Forage for worms"
+                });
+            }
+
             // Create fishing buttons
             new button({
                 parent: "#resource-buttons",
