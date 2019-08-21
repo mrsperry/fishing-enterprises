@@ -57,10 +57,9 @@ class main_menu {
                 .fadeIn();
             // Create the footer
             $("<span>")
-                .html("- <a onclick=''>Lights off</a>"
-                    + " | <a onclick=''>Settings</a>"
-                    + " | <a onclick=''>About</a>"
-                    + " | <a onclick=''>Support me</a>"
+                .html("- <a onclick='settings_menu.show()'>Settings</a>"
+                    + " | <a onclick='about_menu.show()'>About</a>"
+                    + " | <a onclick='support_menu.show()'>Support me</a>"
                     + " | <a href='https://github.com/mrsperry/mrsperry.github.io/' target='_blank'>Github</a> -")
                 .appendTo(parent);
         });
