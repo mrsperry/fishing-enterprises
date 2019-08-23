@@ -20,7 +20,7 @@ button:hover {
 }
 
 /* Line break colors */
-.line-break {
+.line-break, .counter-break {
     border: 0.5px solid #666666;
 }
 

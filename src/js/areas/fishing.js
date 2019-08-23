@@ -60,7 +60,7 @@ class fishing {
                 .text(settings.display)
                 .appendTo(fish_counters);
             $("<div>")
-                .addClass("line-break")
+                .addClass("counter-break")
                 .appendTo(header);
 
             // Create the fish counters
