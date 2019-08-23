@@ -62,6 +62,29 @@ class fishing {
             $("<div>")
                 .addClass("line-break")
                 .appendTo(header);
+
+            // Create the fish counters
+            const fish_data = settings.fish;
+            for (const fish_name in fish_data) {
+                const fish = fish_data[fish_name];
+
+                const fish_counter = $("<div>")
+                    .addClass("counter")
+                    .text(fish.display + ": ")
+                    .hide()
+                    .appendTo(fish_counters);
+                // Create the current fish count
+                $("<span>")
+                    .attr("id", fish.internal + "-count")
+                    .text("0")
+                    .appendTo(fish_counter);
+                // Create the max fish count
+                $("<span>")
+                    .attr("id", fish.internal + "-max")
+                    .text("/" + fish.max)
+                    .hide()
+                    .appendTo(fish_counter);
+            }
         }
         
         // Bundle up the rest of the counters so they're stacked on top of each other
