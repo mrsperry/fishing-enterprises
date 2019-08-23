@@ -8,6 +8,11 @@
     display: inline;
 }
 
+.counter-header {
+    font-size: 10pt;
+    padding: 0px 20px;
+}
+
 /* Section headers */
 .section {
     margin: 0px 15px 15px 0px;
@@ -20,4 +25,10 @@
     top: -13px;
     left: 5px;
     padding: 0px 2px;
+}
+
+/* Line breaks */
+.line-break {
+    margin: 3px 0px 0px -5%;
+    width: 110%;
 }

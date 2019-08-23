@@ -41,12 +41,26 @@ class fishing {
         const counters = $("<div>")
             .attr("id", "resource-counters")
             .appendTo(parent);
+
         // Create the fish counters
-        $("<div>")
+        const fish_counters = $("<div>")
             .attr("id", "fish-counters")
             .attr("section-header", "Fish")
             .addClass("section")
             .appendTo(counters);
+        const data = area_data.get_list();
+        for (const name in data) {
+            const settings = data[name];
+            const header = $("<div>")
+                .attr("id", name.replace("_", "-") + "-counters")
+                .addClass("counter-header centered")
+                .text(settings.display)
+                .appendTo(fish_counters);
+            $("<div>")
+                .addClass("line-break")
+                .appendTo(header);
+        }
+        
         // Bundle up the rest of the counters so they're stacked on top of each other
         const misc = $("<div>")
             .attr("id", "misc-counters")
@@ -66,6 +80,13 @@ class fishing {
     }
 
     static update() {
+
+    }
+
+    static create_fish_counter() {
+    }
+
+    static create_misc_counter() {
 
     }
 
