@@ -16,19 +16,19 @@
 /* Section headers */
 .section {
     margin: 0px 15px 15px 0px;
+    padding: 3px;
 }
 
 /* Create text on-top of the section as a header */
 .section::before {
-    position: relative;
+    position: absolute;
     content: attr(section-header);
-    top: -13px;
-    left: 5px;
+    margin: -14px 0px 0px 5px;
     padding: 0px 2px;
 }
 
 /* Line breaks */
 .line-break {
-    margin: 3px 0px 0px -5%;
-    width: 110%;
+    margin: 3px 0px 0px -10%;
+    width: 120%;
 }
