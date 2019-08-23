@@ -48,11 +48,14 @@ class fishing {
             .attr("section-header", "Fish")
             .addClass("section")
             .appendTo(counters);
+        // Create area headers and counter holders
         const data = area_data.get_list();
         for (const name in data) {
             const settings = data[name];
+
+            // Create the header
             const header = $("<div>")
-                .attr("id", name.replace("_", "-") + "-counters")
+                .attr("id", settings.internal + "-counters")
                 .addClass("counter-header centered")
                 .text(settings.display)
                 .appendTo(fish_counters);
