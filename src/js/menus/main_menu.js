@@ -43,6 +43,13 @@ class main_menu {
             text: "About",
             on_click: about_menu.show
         });
+        new button({
+            parent: parent,
+            text: "More Games",
+            on_click: () => {
+                window.open("https://mrsperry.github.io", "_blank");
+            }
+        });
     }
 
     static start_game() {
