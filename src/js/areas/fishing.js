@@ -53,12 +53,16 @@ class fishing {
         for (const name in data) {
             const settings = data[name];
 
+            // Create this area's counter section
+            const section = $("<div>")
+                .attr("id", settings.internal + "-counters")
+                .appendTo(fish_counters);
+
             // Create the header
             const header = $("<div>")
-                .attr("id", settings.internal + "-counters")
                 .addClass("counter-header centered")
                 .text(settings.display)
-                .appendTo(fish_counters);
+                .appendTo(section);
             $("<div>")
                 .addClass("counter-break")
                 .appendTo(header);
@@ -72,7 +76,7 @@ class fishing {
                     .addClass("counter")
                     .text(fish.display + ": ")
                     .hide()
-                    .appendTo(fish_counters);
+                    .appendTo(section);
                 // Create the current fish count
                 $("<span>")
                     .attr("id", fish.internal + "-count")
@@ -81,6 +85,7 @@ class fishing {
                 // Create the max fish count
                 $("<span>")
                     .attr("id", fish.internal + "-max")
+                    .addClass("counter-max")
                     .text("/" + fish.max)
                     .hide()
                     .appendTo(fish_counter);

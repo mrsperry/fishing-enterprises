@@ -11,10 +11,16 @@
 .counter-header {
     font-size: 10pt;
     padding: 0px 20px;
+    margin-bottom: 5px;
 }
 
 .counter {
     padding: 0px 7px;
+}
+
+/* The maximum number of the counter */
+.counter-max {
+    opacity: 0.5;
 }
 
 /* Section headers */
