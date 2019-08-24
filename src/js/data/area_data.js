@@ -1,10 +1,19 @@
 class area_data {
     static initialize() {
+        const data = area_data.get_list();
+
         // Fill in default fish information
-        for (const area in area_list) {
-            for (const fish in area.fish) {
+        for (const area_index in data) {
+            // Get the current area
+            const area = data[area_index];
+
+            for (const fish_index in area.fish) {
+                // Get the current fish
+                const fish = area.fish[fish_index];
+
                 fish.count = 0;
                 fish.caught = false;
+                fish.show_max = false;
             }
         }
     }
@@ -16,7 +25,7 @@ class area_data {
     static get(area) {
         return area_data.area_list[area];
     }
-    
+
     static area_list = {
         lake: {
             internal: "lake",
