@@ -13,4 +13,20 @@ class utils {
     static stringify(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+    // Fisher-Yates shuffle
+    static shuffle(array) {
+        let counter = array.length;
+        while (counter > 0) {
+            let index = Math.floor(Math.random() * counter);
+
+            counter--;
+
+            let current = array[counter];
+            array[counter] = array[index];
+            array[index] = current;
+        }
+
+        return array;
+    }
 }
