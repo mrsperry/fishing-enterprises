@@ -136,6 +136,7 @@ class fishing {
 
                 // Update the fish counter
                 const counter = $("#" + fish.internal + "-count")
+                    .css("opacity", fish.count == fish.max ? "0.5" : "1.0")
                     .text(utils.stringify(fish.count));
 
                 // Display the counter if it is hidden
