@@ -54,6 +54,7 @@ class fishing {
             .attr("id", "fish-counters")
             .attr("section-header", "Fish")
             .addClass("section")
+            .hide()
             .appendTo(counters);
         // Create area headers and counter holders
         const data = area_data.get_list();
@@ -63,6 +64,7 @@ class fishing {
             // Create this area's counter section
             const section = $("<div>")
                 .attr("id", settings.internal + "-counters")
+                .hide()
                 .appendTo(fish_counters);
 
             // Create the header
@@ -123,9 +125,10 @@ class fishing {
         }
 
         // Loop through all fish in the current area
-        const data = fishing.get_data().fish;
-        for (const index of utils.shuffle(Object.keys(data))) {
-            const fish = data[index];
+        const data = fishing.get_data();
+        const fish_data = data.fish;
+        for (const index of utils.shuffle(Object.keys(fish_data))) {
+            const fish = fish_data[index];
 
             // Roll a chance to check the conditions on this fish
             if (utils.random(0, 100) < fish.chance && fishing.conditions(fish)) {
@@ -147,6 +150,18 @@ class fishing {
 
                     $("#" + fish.internal + "-max")
                         .fadeIn();
+                }
+
+                // Check if this is the first fish caught in this area
+                const counters = $("#" + data.internal + "-counters");
+                if (counters.is(":hidden")) {
+                    counters.fadeIn();
+                }
+
+                // Check if this is the first fish caught ever
+                const section = $("#fish-counters");
+                if (section.is(":hidden")) {
+                    section.fadeIn();
                 }
 
                 // Return so that two fish cannot be caught on the same update
