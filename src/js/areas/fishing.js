@@ -1,5 +1,6 @@
 class fishing {
     static data = null;
+    static is_fishing = false;
 
     static initialize(name) {
         main.transition(() => {
@@ -25,11 +26,17 @@ class fishing {
             // Create fishing buttons
             new button({
                 parent: "#resource-buttons",
-                text: "Cast out line"
+                text: "Cast out line",
+                on_click: () => {
+                    fishing.is_fishing = true;
+                }
             });
             new button({
                 parent: "#resource-buttons",
-                text: "Reel in line"
+                text: "Reel in line",
+                on_click: () => {
+                    fishing.is_fishing = false;
+                }
             });
         });
     }
@@ -111,14 +118,60 @@ class fishing {
     }
 
     static update() {
+        if (!fishing.is_fishing) {
+            return;
+        }
 
+        // Loop through all fish in the current area
+        const data = fishing.get_data().fish;
+        for (const index of utils.shuffle(Object.keys(data))) {
+            const fish = data[index];
+
+            // Roll a chance to check the conditions on this fish
+            if (utils.random(0, 100) < fish.chance && fishing.conditions(fish)) {
+                fish.count++;
+
+                // Update the fish counter
+                const counter = $("#" + fish.internal + "-count")
+                    .text(utils.stringify(fish.count));
+
+                // Display the counter if it is hidden
+                if (!fish.caught) {
+                    fish.caught = true;
+                    counter.parent().fadeIn();
+                }
+
+                // Check if the max count should be displayed
+                if (fish.count == fish.max && !fish.show_max) {
+                    fish.show_max = true;
+
+                    $("#" + fish.internal + "-max")
+                        .fadeIn();
+                }
+
+                // Return so that two fish cannot be caught on the same update
+                return;
+            }
+        }
     }
 
-    static create_fish_counter() {
-    }
+    static conditions(fish) {
+        const data = fishing.get_data().fish;
 
-    static create_misc_counter() {
+        // Check if the current count is equal to the maximum number of fish
+        if (fish.count == fish.max) {
+            return false;
+        }
 
+        // Check if there is a prerequisite fish
+        if (fish.after != null) {
+            // Check if the fish has been caught
+            if (!data[fish.after].caught || true) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     static get_data() {
