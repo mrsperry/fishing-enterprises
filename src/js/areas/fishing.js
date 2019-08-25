@@ -182,7 +182,7 @@ class fishing {
         // Check if there is a prerequisite fish
         if (fish.after != null) {
             // Check if the fish has been caught
-            if (!data[fish.after].caught || true) {
+            if (!data[fish.after].caught) {
                 return false;
             }
         }

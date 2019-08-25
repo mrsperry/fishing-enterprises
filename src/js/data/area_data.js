@@ -52,7 +52,6 @@ class area_data {
                     price: 10,
                     max: 5,
                     chance: 45,
-                    after: "minnows",
                     bait: [
                         {
                             type: "worms",
