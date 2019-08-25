@@ -1,11 +1,11 @@
 /* Global font */
 * {
     font-family: "Consolas", monospace;
-    font-size: 11pt;
 }
 
 /* Remove body margins & fill the entire screen */
 body {
+    font-size: 11pt;
     margin: 0px;
     width: 100vw;
     height: 100vh;
@@ -43,8 +43,10 @@ body {
 
 /* Button styles */
 button {
-    width: 100px;
-    height: 35px;
+    font-size: 10pt;
+    display: block;
+    width: 150px;
+    height: 40px;
     margin-bottom: 5px;
 }
 
