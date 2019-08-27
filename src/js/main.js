@@ -24,8 +24,11 @@ class main {
         themes.initialize();
         // Load the main menu
         main_menu.initialize();
-        // Initialize default area data
+
+        // Initialize data
         area_data.initialize();
+        fishing_data.initialize();
+        misc_data.initialize();
 
         window.setTimeout(main.update, 1000);
     }

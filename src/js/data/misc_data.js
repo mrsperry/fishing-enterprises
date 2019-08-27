@@ -26,5 +26,5 @@ class misc_data {
             internal: "fish_meta",
             display: "Total fish caught"
         }
-    }
+    };
 }
