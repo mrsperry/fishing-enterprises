@@ -150,7 +150,7 @@ class fishing {
                     fish.show_max = true;
 
                     $("#" + fish.internal + "-max")
-                        .fadeIn();
+                        .show();
                 }
 
                 // Check if this is the first fish caught in this area
