@@ -18,7 +18,9 @@ body {
 
 /* Used for text logging */
 #top-section {
-    height: 12%;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 /* Used for content displays */
@@ -31,6 +33,12 @@ body {
     height: 3%;
     display: flex;
     justify-content: center;
+}
+
+/* Message history */
+.message-history {
+    white-space: pre;
+    margin-bottom: 2px;
 }
 
 /* Main content area */

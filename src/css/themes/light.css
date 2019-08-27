@@ -37,6 +37,11 @@ a:hover, .link:hover {
     color: #00aaee;
 }
 
+/* Message history */
+#top-section {
+    border-bottom: 1px solid #000000;
+}
+
 /* Section headers */
 .section {
     border: 1px solid #000000;

@@ -14,6 +14,9 @@ class main {
     static state = main.states.none;
 
     static initialize() {
+        // Hide the messenger
+        $("#top-section")
+            .hide();
         // Center all content
         $("#content")
             .addClass("flex flex-justify-center")

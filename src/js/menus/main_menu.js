@@ -55,6 +55,9 @@ class main_menu {
     static start_game() {
         // Fade out main menu and start the game
         main.transition(() => {
+            // Load messenger
+            messenger.initialize();
+
             fishing.initialize("lake");
             window.setInterval(main.update, 1000);
 

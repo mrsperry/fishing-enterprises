@@ -8,7 +8,7 @@ body, .section::before {
     background-color: #222222;
 }
 
-/* Black border, white background */
+/* Light gray border, dark gray background */
 button, .modal-box {
     border: 1px solid #666666;
     background-color: #232323;
@@ -31,6 +31,11 @@ a, .link {
 
 a:hover, .link:hover {
     color: #00ccff;
+}
+
+/* Message history */
+#top-section {
+    border-bottom: 1px solid #666666;
 }
 
 /* Section headers */
