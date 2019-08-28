@@ -144,6 +144,9 @@ class fishing {
                 if (!fish.caught) {
                     fish.caught = true;
                     counter.parent().fadeIn();
+
+                    // Show the unique fish message (only on first catch)
+                    messenger.write(fish.display + ": " + fish.message);
                 }
 
                 // Check if the max count should be displayed
