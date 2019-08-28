@@ -43,10 +43,10 @@ body {
 
 /* Main content area */
 #content {
-    align-content: center;
-    align-items: stretch;
     width: 100%;
     height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 /* Button styles */

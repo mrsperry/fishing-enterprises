@@ -110,6 +110,7 @@ class fishing {
                 .attr("id", id + "-counters")
                 .attr("section-header", utils.capitalize(id))
                 .addClass("section")
+                .hide()
                 .appendTo(misc);
         }
 

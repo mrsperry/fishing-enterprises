@@ -1,7 +1,7 @@
 /* Resource counters */
-#resource-counters {
-    display: flex;
-    align-items: flex-start;
+#fish-counters, #misc-counters, #resource-counters, #resource-buttons {
+    display: inline-block;
+    vertical-align: top;
 }
 
 .counter-header {
