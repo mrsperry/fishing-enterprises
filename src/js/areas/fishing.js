@@ -54,7 +54,7 @@ class fishing {
             .attr("id", "fish-counters")
             .attr("section-header", "Fish")
             .addClass("section")
-            .hide()
+            .css("visibility", "hidden")
             .appendTo(counters);
         // Create area headers and counter holders
         const data = area_data.get_list();
@@ -110,7 +110,7 @@ class fishing {
                 .attr("id", id + "-counters")
                 .attr("section-header", utils.capitalize(id))
                 .addClass("section")
-                .hide()
+                .css("visibility", "hidden")
                 .appendTo(misc);
         }
 
@@ -160,14 +160,14 @@ class fishing {
 
                 // Check if this is the first fish caught in this area
                 const counters = $("#" + data.internal + "-counters");
-                if (counters.is(":hidden")) {
-                    counters.fadeIn();
+                if (counters.css("visibility") == "hidden") {
+                    counters.css("visibility", "visible").hide().fadeIn();
                 }
 
                 // Check if this is the first fish caught ever
                 const section = $("#fish-counters");
-                if (section.is(":hidden")) {
-                    section.fadeIn();
+                if (section.css("visibility") == "hidden") {
+                    section.css("visibility", "visible").hide().fadeIn();
                 }
 
                 // Return so that two fish cannot be caught on the same update
