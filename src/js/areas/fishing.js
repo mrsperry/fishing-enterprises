@@ -133,6 +133,7 @@ class fishing {
             // Roll a chance to check the conditions on this fish
             if (utils.random(0, 100) < fish.chance && fishing.conditions(fish)) {
                 fish.count++;
+                fish.total++;
 
                 // Update the fish counter
                 const counter = $("#" + fish.internal + "-count")
