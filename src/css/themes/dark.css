@@ -19,6 +19,10 @@ button:hover {
     background-color: #343434;
 }
 
+button:disabled {
+    background-color: #222222;
+}
+
 /* Line break colors */
 .line-break, .counter-break {
     border: 0.5px solid #666666;

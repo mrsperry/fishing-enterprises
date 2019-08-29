@@ -26,18 +26,25 @@ class fishing {
             // Create fishing buttons
             new button({
                 parent: "#resource-buttons",
+                id: "cast-out",
                 text: "Cast out line",
                 on_click: () => {
-                    fishing.is_fishing = true;
+                    fishing.swap_state();
                 }
             });
             new button({
                 parent: "#resource-buttons",
+                id: "reel-in",
                 text: "Reel in line",
                 on_click: () => {
-                    fishing.is_fishing = false;
+                    fishing.swap_state();
                 }
-            });
+            }).get_element()
+                // Stop the fade in
+                .stop()
+                // Fade to the disabled opacity
+                .fadeTo(400, 0.4)
+                .prop("disabled", true);
         });
     }
 
@@ -193,6 +200,16 @@ class fishing {
         }
 
         return true;
+    }
+
+    static swap_state() {
+        fishing.is_fishing = !fishing.is_fishing;
+
+        // Swap button disables
+        $("#cast-out-button")
+            .prop("disabled", fishing.is_fishing);
+        $("#reel-in-button")
+            .prop("disabled", !fishing.is_fishing);
     }
 
     static get_data() {
