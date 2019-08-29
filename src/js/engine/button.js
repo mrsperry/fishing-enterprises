@@ -67,6 +67,12 @@ class button {
                 .appendTo(parent);
         }
 
+        this.element = element;
+
         return this;
+    }
+
+    get_element() {
+        return this.element;
     }
 }
