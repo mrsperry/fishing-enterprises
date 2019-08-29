@@ -32,19 +32,21 @@ class fishing {
                     fishing.swap_state();
                 }
             });
-            new button({
+            const reel_in_button = new button({
                 parent: "#resource-buttons",
                 id: "reel-in",
                 text: "Reel in line",
+                disabled: true,
                 on_click: () => {
                     fishing.swap_state();
                 }
-            }).get_element()
-                // Stop the fade in
-                .stop()
-                // Fade to the disabled opacity
-                .fadeTo(400, 0.4)
-                .prop("disabled", true);
+            }).get_element();
+
+            // Stop the default fading and fade to the disabled opacity
+            reel_in_button.stop().fadeTo(400, 0.4, () => { 
+                // Reset opacity so it can be edited later
+                reel_in_button.css("opacity", "");
+            });
         });
     }
 
