@@ -52,7 +52,7 @@ class button {
 
         // Set disabled
         if (options.disabled != null) {
-            element.prop("disabled", options.disabled());
+            element.prop("disabled", typeof(options.disabled) == "function" ? options.disabled() : options.disabled);
         }
 
         // Set on click function
