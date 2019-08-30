@@ -60,8 +60,15 @@ class fishing {
             // Create the header
             const header = $("<div>")
                 .addClass("counter-header centered")
-                .text(settings.display)
                 .appendTo(section);
+            if (settings.internal != "lake") {
+                $("<div>")
+                    .addClass("counter-break")
+                    .appendTo(header);
+            }
+            $("<span>")
+                .text(settings.display)
+                .appendTo(header);
             $("<div>")
                 .addClass("counter-break")
                 .appendTo(header);
