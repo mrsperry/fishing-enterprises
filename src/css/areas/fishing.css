@@ -42,7 +42,7 @@
 
 /* Area selector */
 #area-selector {
-    display: inline-block;
+    float: right;
 }
 
 /* Top counters */
