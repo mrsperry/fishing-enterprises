@@ -2,8 +2,11 @@ class messenger {
     static messages = [];
 
     static initialize() {
-        const parent = $("#top-section")
+        const section = $("#top-section")
             .fadeIn();
+        const parent = $("<div>")
+            .attr("id", "message-history")
+            .appendTo(section);
             
         for (let index = 4; index >= 0; index--) {
             const container = $("<div>")
