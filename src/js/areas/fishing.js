@@ -189,8 +189,8 @@ class fishing {
 
                 // Check if this is the first fish caught in this area
                 const counters = $("#" + data.internal + "-counters");
-                if (counters.css("visibility") == "hidden") {
-                    counters.css("visibility", "visible").hide().fadeIn();
+                if (counters.is(":hidden")) {
+                    counters.fadeIn();
                 }
 
                 // Check if this is the first fish caught ever
