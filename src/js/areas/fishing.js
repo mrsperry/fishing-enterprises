@@ -3,60 +3,40 @@ class fishing {
     static is_fishing = false;
 
     static initialize(name) {
-        main.transition(() => {
-            // Create initial HTML
-            if (fishing.get_data() == null) {
-                fishing.create_elements();
-            }
-
-            // Set the game state
-            main.set_state(main.states.fishing);
+        // Create initial HTML
+        if (fishing.get_data() == null) {
+            fishing.create_elements(name);
             // Load fishing area CSS
             css.replace(["areas/fishing"]);
-            // Set the area data
-            fishing.data = area_data.get(name);
+        }
 
-            if (name == "lake") {
-                new button({
-                    parent: "#resource-buttons",
-                    text: "Forage for worms"
-                });
-            }
-
-            // Create fishing buttons
-            new button({
-                parent: "#resource-buttons",
-                id: "cast-out",
-                text: "Cast out line",
-                on_click: () => {
-                    fishing.swap_state();
-                }
-            });
-            const reel_in_button = new button({
-                parent: "#resource-buttons",
-                id: "reel-in",
-                text: "Reel in line",
-                disabled: true,
-                on_click: () => {
-                    fishing.swap_state();
-                }
-            }).get_element();
-
-            // Stop the default fading and fade to the disabled opacity
-            reel_in_button.stop().fadeTo(400, 0.4, () => { 
-                // Reset opacity so it can be edited later
-                reel_in_button.css("opacity", "");
-            });
-        });
+        // Set the game state
+        main.set_state(main.states.fishing);
+        // Set the area data
+        fishing.data = area_data.get(name);
     }
 
-    static create_elements() {
+    static create_elements(name) {
         const parent = $("#content");
 
         // Create the counters section
         const counters = $("<div>")
             .attr("id", "resource-counters")
             .appendTo(parent);
+        // Create the buttons section
+        $("<div>")
+            .attr("id", "resource-buttons")
+            .appendTo(parent);
+        // Create the area selector
+        const selector = $("<div>")
+            .attr("id", "area-selector")
+            .appendTo(parent);
+        // Create the shop selector button
+        new button({
+            parent: selector,
+            id: "shop-selector",
+            text: "Shop"
+        });
 
         // Create the fish counters
         const fish_counters = $("<div>")
@@ -65,7 +45,8 @@ class fishing {
             .addClass("section")
             .css("visibility", "hidden")
             .appendTo(counters);
-        // Create area headers and counter holders
+
+        // Set area specific data
         const data = area_data.get_list();
         for (const name in data) {
             const settings = data[name];
@@ -108,6 +89,17 @@ class fishing {
                     .hide()
                     .appendTo(fish_counter);
             }
+
+            // Create area selector buttons
+            new button({
+                parent: selector,
+                id: settings.internal + "-selector",
+                text: settings.display,
+                disabled: settings.internal == "lake" ? true : false,
+                on_click: () => {
+                    fishing.initialize(settings.internal);
+                }
+            });
         }
         
         // Bundle up the rest of the counters so they're stacked on top of each other
@@ -123,10 +115,38 @@ class fishing {
                 .appendTo(misc);
         }
 
-        // Create the buttons section
-        $("<div>")
-            .attr("id", "resource-buttons")
-            .appendTo(parent);
+        // Create the forage for worms button if swapping to the lake
+        if (name == "lake") {
+            new button({
+                parent: "#resource-buttons",
+                text: "Forage for worms"
+            });
+        }
+
+        // Create fishing buttons
+        new button({
+            parent: "#resource-buttons",
+            id: "cast-out",
+            text: "Cast out line",
+            on_click: () => {
+                fishing.swap_state();
+            }
+        });
+        const reel_in_button = new button({
+            parent: "#resource-buttons",
+            id: "reel-in",
+            text: "Reel in line",
+            disabled: true,
+            on_click: () => {
+                fishing.swap_state();
+            }
+        }).get_element();
+
+        // Stop the default fading and fade to the disabled opacity
+        reel_in_button.stop().fadeTo(400, 0.4, () => { 
+            // Reset opacity so it can be edited later
+            reel_in_button.css("opacity", "");
+        });
     }
 
     static update() {

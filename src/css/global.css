@@ -100,6 +100,11 @@ a:hover, .link:hover {
     background-color: #000000;
 }
 
+/* Area selector */
+#area-selector {
+    display: inline-block;
+}
+
 /* Misc generic styles */
 .flex {
     display: flex;
