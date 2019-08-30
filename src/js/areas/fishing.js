@@ -19,6 +19,25 @@ class fishing {
     static create_elements(name) {
         const parent = $("#content");
 
+        // Create the money counter
+        const money = $("<div>")
+            .text("Money: $")
+            .appendTo(parent);
+        $("<span>")
+            .attr("id", "money-count")
+            .text("0")
+            .appendTo(money);
+        // Create the total fish caught counter
+        const fish_caught = $("<div>")
+            .attr("id", "total-fish-caught")
+            .css("visibility", "hidden")
+            .text("Total fish caught: ")
+            .appendTo(parent);
+        $("<span>")
+            .attr("id", "total-fish-caught-count")
+            .text("0")
+            .appendTo(fish_caught);
+
         // Create the counters section
         const counters = $("<div>")
             .attr("id", "resource-counters")
@@ -176,6 +195,12 @@ class fishing {
                 const counter = $("#" + fish.internal + "-count")
                     .css("opacity", fish.count == fish.max ? "0.5" : "1.0")
                     .text(utils.stringify(fish.count));
+
+                // Update the total fish counter
+                let total_caught = settings.get("total-fish-caught");
+                $("#total-fish-caught-count")
+                    .text(utils.stringify(++total_caught));
+                settings.set("total-fish-caught", total_caught);
 
                 // Display the counter if it is hidden
                 if (!fish.caught) {

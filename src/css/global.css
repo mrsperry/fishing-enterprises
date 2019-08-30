@@ -19,7 +19,6 @@ body {
 /* Used for text logging */
 #top-section {
     padding: 5px;
-    margin-bottom: 10px;
     box-sizing: border-box;
 }
 
@@ -98,11 +97,6 @@ a:hover, .link:hover {
 .modal-background {
     opacity: 0.6;
     background-color: #000000;
-}
-
-/* Area selector */
-#area-selector {
-    display: inline-block;
 }
 
 /* Misc generic styles */

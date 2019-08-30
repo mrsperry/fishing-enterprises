@@ -9,6 +9,9 @@ class settings {
         settings.set("auto-save-interval", 10);
         // Dev tools to disabled
         settings.set("dev-tools", false);
+
+        // Total fish caught
+        settings.set("total-fish-caught", 0);
     }
 
     static set(key, value) {

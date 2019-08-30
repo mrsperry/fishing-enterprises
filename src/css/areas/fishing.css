@@ -39,3 +39,14 @@
     margin: 3px 0px 0px -10%;
     width: 120%;
 }
+
+/* Area selector */
+#area-selector {
+    display: inline-block;
+}
+
+
+/* Total fish counter */
+#total-fish-caught {
+    margin-bottom: 15px;
+}
