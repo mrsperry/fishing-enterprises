@@ -10,6 +10,12 @@ class settings {
         // Dev tools to disabled
         settings.set("dev-tools", false);
 
+        // Time played
+        settings.set("time-played", {
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        });
         // Total fish caught
         settings.set("total-fish-caught", 0);
     }

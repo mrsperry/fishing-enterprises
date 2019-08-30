@@ -14,6 +14,11 @@ class utils {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    // Adds leading zeros to a number
+    static pad(number) {
+        return number.toString().padStart(2, "0");
+    }
+
     // Fisher-Yates shuffle
     static shuffle(array) {
         let counter = array.length;

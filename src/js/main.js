@@ -34,6 +34,26 @@ class main {
     }
 
     static update() {
+        // Update the time played
+        let time = settings.get("time-played");
+        if (++time.seconds == 60) {
+            time.minutes++;
+            time.seconds = 0;
+        }
+        if (time.minutes == 60) {
+            time.hours++;
+            time.minutes = 0;
+        }
+        // Set the time played
+        $("#time-played")
+            // Write the hours or nothing if they are zero
+            .text((time.hours == 0 ? "" : time.hours + ":")
+                // Write the minutes (pad them if hours is greater than 0)
+                + (time.hours == 0 ? time.minutes : utils.pad(time.minutes)) + ":"
+                // Write the seconds
+                + utils.pad(time.seconds));
+        settings.set("time-played", time);
+
         switch (main.get_state()) {
             case 1:
                 fishing.update();

@@ -21,12 +21,18 @@ class fishing {
 
         // Create the money counter
         const money = $("<div>")
+            .attr("id", "money-counter")
             .text("Money: $")
             .appendTo(parent);
         $("<span>")
             .attr("id", "money-count")
             .text("0")
             .appendTo(money);
+        // Create the time played counter
+        $("<div>")
+            .attr("id", "time-played")
+            .text("0:00")
+            .appendTo(parent);
         // Create the total fish caught counter
         const fish_caught = $("<div>")
             .attr("id", "total-fish-caught")

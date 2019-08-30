@@ -45,6 +45,14 @@
     display: inline-block;
 }
 
+/* Top counters */
+#money-counter, #time-played {
+    display: inline-block;
+}
+
+#time-played {
+    float: right;
+}
 
 /* Total fish counter */
 #total-fish-caught {
