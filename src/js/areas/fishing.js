@@ -10,6 +10,12 @@ class fishing {
             css.replace(["areas/fishing"]);
         }
 
+        // Enable all area selector buttons that are not this area
+        for (const internal in area_data.get_list()) {
+            $("#" + internal + "-selector-button")
+                .prop("disabled", internal == name);
+        }
+
         // Set the game state
         main.set_state(main.states.fishing);
         // Set the area data
@@ -127,7 +133,7 @@ class fishing {
                 parent: selector,
                 id: settings.internal + "-selector",
                 text: settings.display,
-                disabled: settings.internal == "lake" ? true : false,
+                disabled: false,
                 on_click: () => {
                     fishing.initialize(settings.internal);
                 }
