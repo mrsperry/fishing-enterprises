@@ -17,6 +17,9 @@ class main {
         // Hide the messenger
         $("#top-section")
             .hide();
+        // Center all content
+        $("#middle-section")
+            .addClass("flex flex-justify-center");
 
         // Load default settings
         settings.initialize();
