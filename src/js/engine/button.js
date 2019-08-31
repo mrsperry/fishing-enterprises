@@ -7,8 +7,14 @@ class button {
         const parent = $(options.parent || "body");
 
         // Set button element
-        const element = $("<button>")
-            .appendTo(parent);
+        const element = $("<button>");
+        
+        // Append or prepend to the parent
+        if (options.prepend) {
+            element.prependTo(parent);
+        } else {
+            element.appendTo(parent);
+        }
         
         // Set ID
         if (options.id != null) {
