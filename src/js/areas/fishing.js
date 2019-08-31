@@ -81,6 +81,19 @@ class fishing {
             .css("visibility", "hidden")
             .appendTo(counters);
 
+        // Bundle up the rest of the counters so they're stacked on top of each other
+        const misc = $("<div>")
+            .attr("id", "misc-counters")
+            .appendTo(counters);
+        for (const id of ["bait", "tackle", "boat"]) {
+            $("<div>")
+                .attr("id", id + "-counters")
+                .attr("section-header", utils.capitalize(id))
+                .addClass("section")
+                .css("visibility", "hidden")
+                .appendTo(misc);
+        }
+
         // Set area specific data
         const data = area_data.get_list();
         for (const name in data) {
@@ -117,7 +130,8 @@ class fishing {
                     .addClass("counter")
                     .text(fish.display + ": ")
                     .hide()
-                    .appendTo(section);
+                    // Edge case for bait caught in fishing areas
+                    .appendTo(fish.internal == "minnows" ? $("#bait-counters") : section);
                 // Create the current fish count
                 $("<span>")
                     .attr("id", fish.internal + "-count")
@@ -142,19 +156,6 @@ class fishing {
                     fishing.initialize(settings.internal);
                 }
             });
-        }
-        
-        // Bundle up the rest of the counters so they're stacked on top of each other
-        const misc = $("<div>")
-            .attr("id", "misc-counters")
-            .appendTo(counters);
-        for (const id of ["bait", "tackle", "boat"]) {
-            $("<div>")
-                .attr("id", id + "-counters")
-                .attr("section-header", utils.capitalize(id))
-                .addClass("section")
-                .css("visibility", "hidden")
-                .appendTo(misc);
         }
 
         // Create the forage for worms button if swapping to the lake
@@ -212,12 +213,6 @@ class fishing {
                     .css("opacity", fish.count == fish.max ? "0.5" : "1.0")
                     .text(utils.stringify(fish.count));
 
-                // Update the total fish counter
-                let total_caught = settings.get("total-fish-caught");
-                $("#total-fish-caught-count")
-                    .text(utils.stringify(++total_caught));
-                settings.set("total-fish-caught", total_caught);
-
                 // Display the counter if it is hidden
                 if (!fish.caught) {
                     fish.caught = true;
@@ -234,6 +229,17 @@ class fishing {
                     $("#" + fish.internal + "-max")
                         .show();
                 }
+
+                // Edge case for catching bait in fishing areas
+                if (fish.internal == "minnows") {
+                    return;
+                }
+
+                // Update the total fish counter
+                let total_caught = settings.get("total-fish-caught");
+                $("#total-fish-caught-count")
+                    .text(utils.stringify(++total_caught));
+                settings.set("total-fish-caught", total_caught);
 
                 // Check if this is the first fish caught in this area
                 const counters = $("#" + data.internal + "-counters");

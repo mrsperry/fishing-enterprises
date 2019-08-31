@@ -45,6 +45,22 @@ class area_data {
                         }
                     ]
                 },
+                minnows: {
+                    internal: "minnows",
+                    display: "Minnows",
+                    message: "These would make excellent bait for larger fish.",
+                    price: 1,
+                    max: 10,
+                    max_caught: 2,
+                    chance: 60,
+                    after: "bass",
+                    bait: [
+                        {
+                            type: "worms",
+                            amount: 1
+                        }
+                    ]
+                },
                 sturgeon: {
                     internal: "sturgeon",
                     display: "Sturgeon",
@@ -52,6 +68,7 @@ class area_data {
                     price: 10,
                     max: 5,
                     chance: 45,
+                    after: "minnows",
                     bait: [
                         {
                             type: "worms",
