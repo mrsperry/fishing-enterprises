@@ -10,6 +10,21 @@ class fishing {
             css.replace(["areas/fishing"]);
         }
 
+        if (name == "lake") {
+            // Create the forage for worms button if swapping to the lake
+            new button({
+                parent: "#resource-buttons",
+                prepend: true,
+                id: "forage-for-worms",
+                text: "Forage for worms",
+                show: true
+            });
+        } else {
+            // Remove the forage for worms button if swapping to a different area
+            $("#forage-for-worms-button")
+                .remove();
+        }
+
         // Enable all area selector buttons that are not this area
         for (const internal in area_data.get_list()) {
             $("#" + internal + "-selector-button")
@@ -155,14 +170,6 @@ class fishing {
                 on_click: () => {
                     fishing.initialize(settings.internal);
                 }
-            });
-        }
-
-        // Create the forage for worms button if swapping to the lake
-        if (name == "lake") {
-            new button({
-                parent: "#resource-buttons",
-                text: "Forage for worms"
             });
         }
 
