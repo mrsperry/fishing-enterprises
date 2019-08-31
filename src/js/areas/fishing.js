@@ -16,6 +16,10 @@ class fishing {
                 .prop("disabled", internal == name);
         }
 
+        // Disable fishing if enabled
+        if (fishing.is_fishing) {
+            fishing.swap_state();
+        }
         // Set the game state
         main.set_state(main.states.fishing);
         // Set the area data
