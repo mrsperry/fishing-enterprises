@@ -50,10 +50,22 @@ class button {
                 + "<span class='button-text'>" + text + "</span>");
         }
 
-        // Check if the button fades in or stays hidden
+        // Hide the button by default
         element.hide();
+
+        // Check if the button should be shown
+        if (options.show) {
+            element.show();
+        }
+
+        // Check if the button fades in or stays hidden
         if (options.hide != true) {
             element.fadeIn();
+        }
+
+        // Check if the button should be shown
+        if (options.show) {
+            element.show();
         }
 
         // Set disabled
