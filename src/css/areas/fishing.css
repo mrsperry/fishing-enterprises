@@ -58,3 +58,10 @@
 #total-fish-caught {
     margin-bottom: 15px;
 }
+
+/* Art */
+#area-art {
+    position: absolute;
+    display: inline-block;
+    white-space: pre;
+}

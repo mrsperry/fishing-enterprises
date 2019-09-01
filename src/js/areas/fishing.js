@@ -73,6 +73,10 @@ class fishing {
         const counters = $("<div>")
             .attr("id", "resource-counters")
             .appendTo(parent);
+        // Create the art section
+        $("<div>")
+            .attr("id", "area-art")
+            .appendTo(parent);
         // Create the buttons section
         $("<div>")
             .attr("id", "resource-buttons")
