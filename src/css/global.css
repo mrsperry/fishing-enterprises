@@ -92,6 +92,17 @@ a:hover, .link:hover {
     background-color: #000000;
 }
 
+/* Floater text */
+@keyframes floating_text {
+    0% { margin-top: 0px; }
+    100% { margin-top: -20px; }
+}
+
+.floater {
+    position: absolute;
+    animation: floating_text linear 0.4s;
+}
+
 /* Misc generic styles */
 .flex {
     display: flex;
