@@ -34,4 +34,9 @@ class utils {
 
         return array;
     }
+
+    // Replaces all occurrences of a string inside a string
+    static replace(string, key, value) {
+        return string.replace(new RegExp(key, 'g'), value);
+    }
 }
