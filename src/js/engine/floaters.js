@@ -16,7 +16,7 @@ class floaters {
             .click(() => {
                 if (condition()) {
                     const offset = element.offset();
-                    floaters.create(offset.left, offset.top, text);
+                    floaters.create(offset.left + (element.width() / 2), offset.top + (element.height() / 2), text);
                 }
             });
     }
