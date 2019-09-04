@@ -64,4 +64,5 @@
     position: absolute;
     display: inline-block;
     white-space: pre;
+    pointer-events: none;
 }

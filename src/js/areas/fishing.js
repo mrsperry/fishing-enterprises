@@ -17,7 +17,16 @@ class fishing {
                 prepend: true,
                 id: "forage-for-worms",
                 text: "Forage for worms",
-                show: true
+                show: true,
+                on_click: () => {
+                    // Disable fishing if its current enabled
+                    if (fishing.is_fishing) {
+                        fishing.swap_state();
+                    }
+
+                    // Initialize minigame
+                    worms.swap_state();
+                }
             });
         } else {
             // Remove the forage for worms button if swapping to a different area
