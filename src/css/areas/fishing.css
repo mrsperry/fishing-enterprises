@@ -30,7 +30,7 @@
 .section::before {
     position: absolute;
     content: attr(section-header);
-    margin: -14px 0px 0px 5px;
+    margin: -16px 0px 0px 5px;
     padding: 0px 2px;
 }
 
