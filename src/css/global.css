@@ -101,6 +101,7 @@ a:hover, .link:hover {
 .floater {
     position: absolute;
     animation: floating_text linear 0.4s;
+    cursor: default;
 }
 
 /* Misc generic styles */
