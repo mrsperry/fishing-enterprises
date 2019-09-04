@@ -130,6 +130,11 @@ class worms {
                             counter.parent().fadeIn();
                         }
 
+                        if (data.count == data.max) {
+                            counter.css("opacity", 0.5);
+                            $("#worms-max")
+                                .show();
+                        }
 
                         // Remove on click events so a worm cannot be collected twice
                         cell.off("click");
