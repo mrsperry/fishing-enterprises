@@ -95,12 +95,12 @@ a:hover, .link:hover {
 /* Floater text */
 @keyframes floating_text {
     0% { margin-top: 0px; }
-    100% { margin-top: -20px; }
+    100% { margin-top: -60px; }
 }
 
 .floater {
     position: absolute;
-    animation: floating_text linear 0.4s;
+    animation: floating_text linear 0.6s;
     cursor: default;
 }
 
