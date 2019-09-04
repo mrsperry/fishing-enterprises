@@ -19,6 +19,10 @@ class fishing_data {
         return fishing_data.data.tackle[index];
     }
 
+    static get_data() {
+        return fishing_data.data;
+    }
+
     static data = {
         bait: {
             worms: {
@@ -28,21 +32,6 @@ class fishing_data {
                 price: 1,
                 max: 30,
                 max_caught: 3
-            },
-            minnows: {
-                internal: "minnows",
-                display: "Minnows",
-                message: "Little fish that make excellent bait for larger fish.",
-                price: 1,
-                max: 20,
-                max_caught: 2,
-                after: "bass",
-                bait: [
-                    {
-                        type: "worms",
-                        amount: 1
-                    }
-                ]
             },
             guppies: {
                 internal: "guppies",

@@ -1,6 +1,6 @@
 class area_data {
     static initialize() {
-        const data = area_data.get_list();
+        const data = area_data.get_data();
 
         // Fill in default fish information
         for (const area_index in data) {
@@ -18,15 +18,15 @@ class area_data {
         }
     }
 
-    static get_list() {
-        return area_data.area_list;
+    static get_data() {
+        return area_data.area_data;
     }
 
     static get(area) {
-        return area_data.area_list[area];
+        return area_data.area_data[area];
     }
 
-    static area_list = {
+    static area_data = {
         lake: {
             internal: "lake",
             display: "Lake",
@@ -48,9 +48,9 @@ class area_data {
                 minnows: {
                     internal: "minnows",
                     display: "Minnows",
-                    message: "These would make excellent bait for larger fish.",
+                    message: "Little fish that make excellent bait for larger fish.",
                     price: 1,
-                    max: 10,
+                    max: 20,
                     max_caught: 2,
                     chance: 60,
                     after: "bass",

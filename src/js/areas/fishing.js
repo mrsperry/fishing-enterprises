@@ -26,7 +26,7 @@ class fishing {
         }
 
         // Enable all area selector buttons that are not this area
-        for (const internal in area_data.get_list()) {
+        for (const internal in area_data.get_data()) {
             $("#" + internal + "-selector-button")
                 .prop("disabled", internal == name);
         }
@@ -41,7 +41,7 @@ class fishing {
         fishing.data = area_data.get(name);
     }
 
-    static create_elements(name) {
+    static create_elements() {
         const parent = $("#content");
 
         // Create the money counter
@@ -113,8 +113,31 @@ class fishing {
                 .appendTo(misc);
         }
 
+        const create_counter = (parent, item, prepend) => {
+            const counter = $("<div>")
+                .addClass("counter")
+                .text(item.display + ": ")
+                .hide();
+            if (prepend) {
+                counter.prependTo(parent);
+            } else {
+                counter.appendTo(parent);
+            }
+
+            $("<span>")
+                .attr("id", item.internal + "-count")
+                .text("0")
+                .appendTo(counter);
+            $("<span>")
+                .attr("id", item.internal + "-max")
+                .addClass("counter-max")
+                .text("/" + item.max)
+                .hide()
+                .appendTo(counter);
+        }
+
         // Set area specific data
-        const data = area_data.get_list();
+        let data = area_data.get_data();
         for (const name in data) {
             const settings = data[name];
 
@@ -145,24 +168,9 @@ class fishing {
             for (const fish_name in fish_data) {
                 const fish = fish_data[fish_name];
 
-                const fish_counter = $("<div>")
-                    .addClass("counter")
-                    .text(fish.display + ": ")
-                    .hide()
-                    // Edge case for bait caught in fishing areas
-                    .appendTo(fish.internal == "minnows" ? $("#bait-counters") : section);
-                // Create the current fish count
-                $("<span>")
-                    .attr("id", fish.internal + "-count")
-                    .text("0")
-                    .appendTo(fish_counter);
-                // Create the max fish count
-                $("<span>")
-                    .attr("id", fish.internal + "-max")
-                    .addClass("counter-max")
-                    .text("/" + fish.max)
-                    .hide()
-                    .appendTo(fish_counter);
+                // Edge case for bait caught in fishing areas
+                const parent = fish.internal == "minnows" ? $("#bait-counters") : section;
+                create_counter(parent, fish, false);
             }
 
             // Create area selector buttons
@@ -175,6 +183,16 @@ class fishing {
                     fishing.initialize(settings.internal);
                 }
             });
+        }
+
+        data = fishing_data.get_data();
+        for (const type in data) {
+            for (const name in data[type]) {
+                const item = data[type][name];
+
+                // Edge case to prepend worms as the minnows counter has already been created
+                create_counter($("#" + type + "-counters"), item, item.internal == "worms")
+            }
         }
 
         // Create fishing buttons
