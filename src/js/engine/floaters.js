@@ -13,10 +13,9 @@ class floaters {
 
     static register(element, text, condition) {
         $(element)
-            .click(() => {
+            .click((e) => {
                 if (condition()) {
-                    const offset = element.offset();
-                    floaters.create(offset.left + (element.width() / 2), offset.top + (element.height() / 2), text);
+                    floaters.create(e.pageX, e.pageY, text);
                 }
             });
     }
