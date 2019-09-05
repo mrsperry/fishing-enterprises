@@ -1,7 +1,7 @@
 class floaters {
     static create(x, y, text) {
         const floater = $("<div>")
-            .addClass("floater")
+            .addClass("floater no-select")
             .css("left", x + "px")
             .css("top", y + "px")
             .text(text)

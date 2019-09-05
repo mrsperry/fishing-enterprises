@@ -22,10 +22,4 @@
     cursor: pointer;
     font-size: 4pt;
     font-weight: bold;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }

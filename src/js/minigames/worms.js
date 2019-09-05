@@ -118,7 +118,7 @@ class worms {
                 .attr("texture", 1)
                 // Set the current texture timer of this worm
                 .attr("texture-timer", utils.random(1, 3))
-                .addClass("worm-spawn")
+                .addClass("worm-spawn no-select")
                 // Rotate the worm randomly
                 .css("transform", "rotate(" + utils.random(0, 360) + "deg)")
                 // Create a random minor offset of the X and Y
