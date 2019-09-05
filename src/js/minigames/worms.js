@@ -110,8 +110,20 @@ class worms {
             // Get the current worm data
             const data = worms.get_worm_data();
 
-            // Set the cell on click event
-            const cell = $("#worm-cell-" + (index + 1))
+            // Get the current worm cell
+            const cell = $("#worm-cell-" + (index + 1));
+
+            const worm = $("<div>")
+                // Set the current texture for this worm
+                .attr("texture", 1)
+                // Set the current texture timer of this worm
+                .attr("texture-timer", utils.random(1, 3))
+                .addClass("worm-spawn")
+                // Rotate the worm randomly
+                .css("transform", "rotate(" + utils.random(0, 360) + "deg)")
+                // Create a random minor offset of the X and Y
+                .css("margin", utils.random(-20, 20) + "px 0px 0px " + utils.random(-20, 20) + "px")
+                .html(art_data.get("worm_game_1"))
                 .click(() => {
                     // Check if the max amount of worms is being held
                     if (data.count != data.max) {
@@ -130,17 +142,16 @@ class worms {
                             counter.parent().fadeIn();
                         }
 
+                        // Check if the maximum number of worms has been reached
                         if (data.count == data.max) {
                             counter.css("opacity", 0.5);
                             $("#worms-max")
                                 .show();
                         }
 
-                        // Remove on click events so a worm cannot be collected twice
-                        cell.off("click");
-
-                        // Get this cell's worm
+                        // Get this worm element
                         const worm = $(cell.children(".worm-spawn")[0]);
+
                         worm.fadeOut(400, () => {
                             // Decrement the number of visible worms
                             worms.count--;
@@ -150,24 +161,14 @@ class worms {
 
                             worm.remove();
                         });
+
+                        // Remove on click events so a worm cannot be collected twice
+                        worm.off("click");
                     } else {
                         // Write a failure message
                         messenger.write("You cannot hold any more worms!");
                     }
-                });
-
-            // Append the worm art to the cell
-            const worm = $("<div>")
-                // Set the current texture for this worm
-                .attr("texture", 1)
-                // Set the current texture timer of this worm
-                .attr("texture-timer", utils.random(1, 3))
-                .addClass("worm-spawn")
-                // Rotate the worm randomly
-                .css("transform", "rotate(" + utils.random(0, 360) + "deg)")
-                // Create a random minor offset of the X and Y
-                .css("margin", utils.random(-20, 20) + "px 0px 0px " + utils.random(-20, 20) + "px")
-                .html(art_data.get("worm_game_1"))
+                })
                 .hide()
                 .fadeIn()
                 .appendTo(cell);
