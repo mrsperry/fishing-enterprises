@@ -23,6 +23,11 @@ class messenger {
     static write(string) {
         const messages = messenger.messages;
 
+        // Filter out duplicate messages
+        if (string == messages[0]) {
+            return;
+        }
+
         // Add item to the start of the array
         messages.unshift(string);
 
