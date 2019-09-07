@@ -300,17 +300,45 @@ class fishing {
     static conditions(fish) {
         const data = fishing.get_data().fish;
 
-        // Check if the current count is equal to the maximum number of fish
+        // Check the max number of fish
         if (fish.count == fish.max) {
             return false;
         }
 
-        // Check if there is a prerequisite fish
+        // Check prerequisite fish
         if (fish.after != null) {
             // Check if the fish has been caught
             if (!data[fish.after].caught) {
                 return false;
             }
+        }
+
+        // Checks if there is available bait/tackle
+        const check_amount = (internal) => {
+            // Make sure this fish takes bait/tackle
+            if (fish[internal] != null) {
+                for (const item of fish[internal]) {
+                    let result;
+                    if (item.type == "minnows") {
+                        // Edge case for minnows as they are bait handled as a fish
+                        result = area_data.get("lake").fish.minnows;
+                    } else {
+                        // Get the current type of bait/tackle
+                        result = fishing_data["get_" + internal](item.type);
+                    }
+
+                    // Check if there is enough
+                    if (result.count < item.amount) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        };
+
+        if (!check_amount("bait") || !check_amount("tackle")) {
+            return false;
         }
 
         return true;
