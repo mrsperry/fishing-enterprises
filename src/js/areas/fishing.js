@@ -268,6 +268,40 @@ class fishing {
                         .show();
                 }
 
+                // Subtract bait and tackle
+                const subtract = (array, internal) => {
+                    if (array != null) {
+                        for (const item of array) {
+                            let type;
+
+                            if (item.type == "minnows") {
+                                // Edge case for minnows
+                                type = area_data.get("lake").fish.minnows;
+                            } else {
+                                // Get the current object from data
+                                type = fishing_data["get_" + internal](item.type);
+                            }
+
+                            // Check if the max has been reached
+                            const show_max = type.count == type.max;
+
+                            // Subtract the amount
+                            type.count -= item.amount;
+
+                            // Set the amount in its counter
+                            const counter = $("#" + item.type + "-count")
+                                .text(type.count);
+                            
+                            // Show the counter since if its no longer maxed
+                            if (show_max) {
+                                counter.css("opacity", 1);
+                            }
+                        }
+                    }
+                };
+                subtract(fish.bait, "bait");
+                subtract(fish.tackle, "tackle");
+
                 // Edge case for catching bait in fishing areas
                 if (fish.internal == "minnows") {
                     return;
