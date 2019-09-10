@@ -65,4 +65,6 @@
     display: inline-block;
     white-space: pre;
     pointer-events: none;
+    width: 525px;
+    height: 525px;
 }
