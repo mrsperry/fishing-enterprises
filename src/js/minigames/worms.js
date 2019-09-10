@@ -87,7 +87,7 @@ class worms {
                 // Set the texture
                 worm.attr("texture", texture);
                 worm.attr("texture-timer", utils.random(1, 3));
-                worm.html(art_data.get("worm_game_" + texture));
+                worm.html(art_data.get("worm_game", "state-" + texture));
             } else {
                 // Count the texture timer down
                 worm.attr("texture-timer", --timer);
@@ -123,7 +123,7 @@ class worms {
                 .css("transform", "rotate(" + utils.random(0, 360) + "deg)")
                 // Create a random minor offset of the X and Y
                 .css("margin", utils.random(-20, 20) + "px 0px 0px " + utils.random(-20, 20) + "px")
-                .html(art_data.get("worm_game_1"))
+                .html(art_data.get("worm_game", "state-1"))
                 .click(() => {
                     // Check if the max amount of worms is being held
                     if (data.count != data.max) {

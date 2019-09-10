@@ -27,6 +27,7 @@ class main {
 
         // Initialize data
         area_data.initialize();
+        art_data.initialize();
         fishing_data.initialize();
         misc_data.initialize();
 
