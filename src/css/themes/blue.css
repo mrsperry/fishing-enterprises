@@ -48,7 +48,7 @@ a:hover, .link:hover {
 }
 
 /* Tooltips */
-.tooltip {
+.bait-tooltip, .tackle-tooltip {
     background: #111125;
     border: 1px solid #444465;
 }

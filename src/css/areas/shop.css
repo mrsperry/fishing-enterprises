@@ -16,14 +16,21 @@
 }
 
 /* Clickable holders */
-#bait-item-holder {
-    font-size: 8pt;
+#bait-item-holder, #tackle-item-holder {
     display: flex;
     justify-content: space-evenly;
+    pointer-events: auto;
+    font-size: 8pt;
     top: -633px;
     left: 24px;
     width: 436px;
-    pointer-events: auto;
+}
+
+#tackle-item-holder {
+    flex-wrap: wrap;
+    top: -610px;
+    width: 240px;
+    height: 130px;
 }
 
 /* Shop items */
@@ -31,7 +38,8 @@
     cursor: pointer;
 }
 
-.shop-item-decor {
+/* Bait */
+.bait-decor {
     position: absolute;
     font-size: 6pt;
     font-weight: bold;
@@ -49,10 +57,29 @@
     margin-top: 21px;
 }
 
+/* Tackle */
+.tackle-hook {
+    width: 80px;
+}
+
+.tackle-decor {
+    position: absolute;
+    font-size: 10pt;
+    margin-top: -2px;
+}
+
+#fly_tackle-decor {
+    margin: -4px 0px 0px -2px;
+}
+
 /* Tooltips */
-.tooltip {
+.bait-tooltip, .tackle-tooltip {
     position: absolute;
     text-align: center;
     padding: 3px 5px;
     margin-top: 60px;
+}
+
+.tackle-tooltip {
+    margin-top: 47px;
 }
