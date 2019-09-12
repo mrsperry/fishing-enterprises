@@ -1,0 +1,58 @@
+/* Shop art */
+.art {
+    position: relative;
+    display: inline;
+    font-size: 10pt;
+}
+
+#area-license {
+    left: 15px;
+    top: -280px;
+}
+
+#area-license-decor {
+    left: 14px;
+    top: -36px;
+}
+
+/* Clickable holders */
+#bait-item-holder {
+    font-size: 8pt;
+    display: flex;
+    justify-content: space-evenly;
+    top: -633px;
+    left: 24px;
+    width: 436px;
+    pointer-events: auto;
+}
+
+/* Shop items */
+.shop-item {
+    cursor: pointer;
+}
+
+.shop-item-decor {
+    position: absolute;
+    font-size: 6pt;
+    font-weight: bold;
+    margin-top: 27px;
+}
+
+#guppies-decor {
+    font-size: 8pt;
+    margin-top: 30px;
+    font-weight: 100;
+}
+
+#mussels-decor, #ground_fish-decor {
+    font-size: 7pt;
+    margin-top: 21px;
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 3px 5px;
+    margin-top: 60px;
+}

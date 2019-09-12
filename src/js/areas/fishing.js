@@ -98,7 +98,10 @@ class fishing {
         new button({
             parent: selector,
             id: "shop-selector",
-            text: "Shop"
+            text: "Shop",
+            on_click: () => {
+                shop.initialize();
+            }
         });
 
         // Create the fish counters

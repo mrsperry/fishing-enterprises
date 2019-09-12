@@ -50,3 +50,9 @@ a:hover, .link:hover {
 .section {
     border: 1px solid #000000;
 }
+
+/* Tooltips */
+.tooltip {
+    background: #ffffff;
+    border: 1px solid #000000;
+}
