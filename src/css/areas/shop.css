@@ -29,7 +29,7 @@
 #tackle-item-holder {
     flex-wrap: wrap;
     top: -610px;
-    width: 240px;
+    width: 261px;
     height: 130px;
 }
 
@@ -59,7 +59,7 @@
 
 /* Tackle */
 .tackle-hook {
-    width: 80px;
+    width: 87px;
 }
 
 .tackle-decor {
