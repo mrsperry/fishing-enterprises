@@ -103,6 +103,9 @@ class fishing {
                 shop.initialize();
             }
         });
+        $("<div>")
+            .addClass("counter-break")
+            .appendTo(selector);
 
         // Create the fish counters
         const fish_counters = $("<div>")

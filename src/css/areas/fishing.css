@@ -45,6 +45,10 @@
     float: right;
 }
 
+#lake-selector-button {
+    margin-top: 5px;
+}
+
 /* Top counters */
 #money-counter, #time-played {
     display: inline-block;
