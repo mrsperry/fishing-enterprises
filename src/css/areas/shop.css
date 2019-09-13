@@ -8,17 +8,17 @@
 /* Desk items */
 #catalog-item {
     left: 22px;
-    top: -298px;
+    top: -278px;
 }
 
 #area-license {
     left: 70px;
-    top: -350px;
+    top: -310px;
 }
 
 #area-license-decor {
-    left: 14px;
-    top: -36px;
+    left: -36px;
+    top: -2px;
 }
 
 /* Clickable holders */
@@ -27,14 +27,14 @@
     justify-content: space-evenly;
     pointer-events: auto;
     font-size: 8pt;
-    top: -700px;
+    top: -610px;
     left: 24px;
     width: 436px;
 }
 
 #tackle-item-holder {
     flex-wrap: wrap;
-    top: -687px;
+    top: -582px;
     width: 261px;
     height: 130px;
 }

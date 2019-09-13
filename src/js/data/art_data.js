@@ -20,7 +20,7 @@ class art_data {
         // Adds art to the holder object
         const add_art = (id, lines) => {
             // Get rid of excess spacing
-            lines.trimRight();
+            lines = lines.trimRight();
 
             // Check if this is the first piece of art for this parent
             if (art_data.data[parent] == null) {
