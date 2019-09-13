@@ -44,10 +44,10 @@ class shop {
                 for (const internal in data.bait) {
                     const bait = data.bait[internal];
 
-                    // Create the bait cans
+                    // Create the bait jars
                     const bait_art = $("<div>")
                         .addClass("shop-item flex flex-justify-center")
-                        .text(art_data.get("shop", "can"))
+                        .text(art_data.get("shop", "jar"))
                         // Tooltip show/hide
                         .hover(() => {
                             $("#" + bait.internal + "-tooltip")
