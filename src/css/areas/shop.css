@@ -5,9 +5,15 @@
     font-size: 10pt;
 }
 
+/* Desk items */
+#catalog-item {
+    left: 22px;
+    top: -298px;
+}
+
 #area-license {
-    left: 15px;
-    top: -280px;
+    left: 70px;
+    top: -350px;
 }
 
 #area-license-decor {
@@ -21,14 +27,14 @@
     justify-content: space-evenly;
     pointer-events: auto;
     font-size: 8pt;
-    top: -633px;
+    top: -700px;
     left: 24px;
     width: 436px;
 }
 
 #tackle-item-holder {
     flex-wrap: wrap;
-    top: -610px;
+    top: -687px;
     width: 261px;
     height: 130px;
 }
@@ -73,7 +79,8 @@
 }
 
 /* Tooltips */
-.bait-tooltip, .tackle-tooltip {
+.tooltip, .bait-tooltip, .tackle-tooltip {
+    display: none;
     position: absolute;
     text-align: center;
     padding: 3px 5px;

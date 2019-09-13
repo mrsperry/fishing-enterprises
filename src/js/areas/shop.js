@@ -20,6 +20,31 @@ class shop {
                     .html(art_data.get("shop", "background"))
                     .hide()
                     .fadeIn();
+
+                // Create the catalog clickable
+                const catalog_parent = $("<div>")
+                    .attr("id", "catalog-item")
+                    .addClass("art")
+                    .appendTo(art);
+                const catalog = $("<div>")
+                    .addClass("shop-item")
+                    .text(art_data.get("shop", "catalog"))
+                    // Tooltip show/hide
+                    .hover(() => {
+                        $("#catalog-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#catalog-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(catalog_parent);
+                $("<div>")
+                    .attr("id", "catalog-tooltip")
+                    .addClass("tooltip")
+                    .text("Fish Catalog ($250)")
+                    .appendTo(catalog);
         
                 // Create the fishing license clickable
                 const license = $("<div>")
@@ -70,7 +95,6 @@ class shop {
                         .attr("id", bait.internal + "-tooltip")
                         .addClass("bait-tooltip")
                         .text(bait.display + " ($" + bait.price + ")")
-                        .hide()
                         .appendTo(bait_art);
                 }
 
@@ -109,7 +133,6 @@ class shop {
                         .attr("id", tackle.internal + "-tooltip")
                         .addClass("tackle-tooltip")
                         .text(tackle.display + " ($" + tackle.price + ")")
-                        .hide()
                         .appendTo(tackle_art);
                 }
             });
