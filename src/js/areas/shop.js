@@ -21,90 +21,6 @@ class shop {
                     .hide()
                     .fadeIn();
 
-                // Create the catalog clickable
-                const catalog_parent = $("<div>")
-                    .attr("id", "catalog-holder")
-                    .addClass("art shop-item no-select")
-                    .appendTo(art);
-                const catalog = $("<div>")
-                    .addClass("flex flex-justify-center")
-                    .text(art_data.get("shop", "catalog"))
-                    // Tooltip show/hide
-                    .hover(() => {
-                        $("#catalog-tooltip")
-                            .stop()
-                            .fadeIn();
-                    }, () => {
-                        $("#catalog-tooltip")
-                            .stop()
-                            .fadeOut();
-                    })
-                    .appendTo(catalog_parent);
-                $("<div>")
-                    .attr("id", "catalog-tooltip")
-                    .addClass("tooltip")
-                    .text("Fish Catalog ($250)")
-                    .appendTo(catalog);
-        
-                // Create the fishing license clickable
-                const license_parent = $("<div>")
-                    .attr("id", "license-holder")
-                    .addClass("art shop-item no-select")
-                    .appendTo(art);
-                const license = $("<div>")
-                    .addClass("flex flex-centered")
-                    .text(art_data.get("shop", "license"))
-                    .hover(() => {
-                        $("#license-tooltip")
-                            .stop()
-                            .fadeIn();
-                    }, () => {
-                        $("#license-tooltip")
-                            .stop()
-                            .fadeOut();
-                    })
-                    .appendTo(license_parent);
-                $("<div>")
-                    .attr("id", "license-decor")
-                    .addClass("art")
-                    .html(art_data.get("shop", "license-decor"))
-                    .appendTo(license);
-                $("<div>")
-                    .attr("id", "license-tooltip")
-                    .addClass("tooltip")
-                    .text("River License ($300)")
-                    .appendTo(license);
-
-                // Create the shop contract clickable
-                const contract_parent = $("<div>")
-                    .attr("id", "contract-holder")
-                    .addClass("art shop-item no-select")
-                    .css("visibility", "hidden")
-                    .appendTo(art);
-                const contract = $("<div>")
-                    .addClass("flex flex-centered")
-                    .text(art_data.get("shop", "contract"))
-                    .hover(() => {
-                        $("#contract-tooltip")
-                            .stop()
-                            .fadeIn();
-                    }, () => {
-                        $("#contract-tooltip")
-                            .stop()
-                            .fadeOut();
-                    })
-                    .appendTo(contract_parent);
-                $("<div>")
-                    .attr("id", "contract-decor")
-                    .addClass("art")
-                    .html(art_data.get("shop", "contract-decor"))
-                    .appendTo(contract);
-                $("<div>")
-                    .attr("id", "contract-tooltip")
-                    .addClass("tooltip")
-                    .text("Buy the Shop ($15,000)")
-                    .appendTo(contract);
-
                 const data = fishing_data.get_data();
 
                 // Create bait clickables
@@ -119,7 +35,7 @@ class shop {
                     // Create the bait jars
                     const bait_art = $("<div>")
                         .addClass("shop-item no-select flex flex-justify-center")
-                        .text(art_data.get("shop", "jar"))
+                        .html(art_data.get("shop", "jar"))
                         // Tooltip show/hide
                         .hover(() => {
                             $("#" + bait.internal + "-tooltip")
@@ -155,9 +71,8 @@ class shop {
                     const tackle = data.tackle[internal];
 
                     // Create the tackle hooks
-                    const tackle_art = $("<div>")
-                        .addClass("shop-item no-select flex flex-justify-center tackle-hook")
-                        .text(art_data.get("shop", "hook"))
+                    const tackle_holder = $("<div>")
+                        .addClass("shop-item no-select flex flex-justify-center tackle-item")
                         .hover(() => {
                             $("#" + tackle.internal + "-tooltip")
                             .stop()
@@ -174,14 +89,123 @@ class shop {
                         .attr("id", tackle.internal + "-decor")
                         .addClass("tackle-decor")
                         .html(art_data.get("shop", tackle.internal + "-decor"))
-                        .appendTo(tackle_art);
+                        .appendTo(tackle_holder);
                     // Create the tooltip element
                     $("<div>")
                         .attr("id", tackle.internal + "-tooltip")
                         .addClass("tackle-tooltip")
                         .text(tackle.display + " ($" + tackle.price + ")")
-                        .appendTo(tackle_art);
+                        .appendTo(tackle_holder);
                 }
+
+                // Create the catalog clickable
+                const catalog_parent = $("<div>")
+                    .attr("id", "catalog-holder")
+                    .addClass("art shop-item no-select")
+                    .appendTo(art);
+                const catalog = $("<div>")
+                    .addClass("flex flex-justify-center")
+                    .text(art_data.get("shop", "catalog"))
+                    // Tooltip show/hide
+                    .hover(() => {
+                        $("#catalog-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#catalog-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(catalog_parent);
+                $("<div>")
+                    .attr("id", "catalog-tooltip")
+                    .addClass("tooltip")
+                    .text("Fish Catalog ($250)")
+                    .appendTo(catalog);
+        
+                // Create the fishing license clickable
+                const license_parent = $("<div>")
+                    .attr("id", "license-holder")
+                    .addClass("art shop-item no-select")
+                    .appendTo(art);
+                const license = $("<div>")
+                    .addClass("flex flex-centered")
+                    .html(art_data.get("shop", "license"))
+                    .hover(() => {
+                        $("#license-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#license-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(license_parent);
+                $("<div>")
+                    .attr("id", "license-decor")
+                    .addClass("art")
+                    .html(art_data.get("shop", "license-decor"))
+                    .appendTo(license);
+                $("<div>")
+                    .attr("id", "license-tooltip")
+                    .addClass("tooltip")
+                    .text("River License ($300)")
+                    .appendTo(license);
+
+                // Create the shop contract clickable
+                const contract_parent = $("<div>")
+                    .attr("id", "contract-holder")
+                    .addClass("art shop-item no-select")
+                    .css("visibility", "hidden")
+                    .appendTo(art);
+                const contract = $("<div>")
+                    .addClass("flex flex-centered")
+                    .html(art_data.get("shop", "contract"))
+                    .hover(() => {
+                        $("#contract-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#contract-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(contract_parent);
+                $("<div>")
+                    .attr("id", "contract-decor")
+                    .addClass("art")
+                    .html(art_data.get("shop", "contract-decor"))
+                    .appendTo(contract);
+                $("<div>")
+                    .attr("id", "contract-tooltip")
+                    .addClass("tooltip")
+                    .text("Buy the Shop ($15,000)")
+                    .appendTo(contract);
+
+                // Create the door clickable
+                const door_parent = $("<div>")
+                    .attr("id", "door-holder")
+                    .addClass("art shop-item no-select")
+                    .appendTo(art);
+                const door = $("<div>")
+                    .addClass("flex flex-centered")
+                    .html(art_data.get("shop", "door"))
+                    .hover(() => {
+                        $("#door-decor")
+                            .stop()
+                            .fadeIn(200);
+                    }, () => {
+                        $("#door-decor")
+                            .stop()
+                            .fadeOut(200);
+                    })
+                    .appendTo(door_parent);
+                $("<div>")
+                    .attr("id", "door-decor")
+                    .addClass("art")
+                    .html(art_data.get("shop", "door-decor"))
+                    .hide()
+                    .appendTo(door);
             });
     }
 }

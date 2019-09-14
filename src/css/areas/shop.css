@@ -5,50 +5,10 @@
     font-size: 10pt;
 }
 
-/* Desk items */
-#catalog-holder {
-    display: block;
-    top: -278px;
-    left: 16px;
-    width: 40px;
-    height: 58px;
-}
-
-#license-holder {
-    display: block;
-    left: 75px;
-    top: -315px;
-    width: 50px;
-    height: 30px;
-}
-
-#license-decor {
-    left: -36px;
-    top: -1px;
-    width: 0px;
-    height: 0px;
-}
-
-#contract-holder {
-    display: block;
-    font-size: 8pt;
-    left: 150px;
-    top: -350px;
-    width: 50px;
-    height: 60px;
-}
-
-#contract-decor {
-    font-size: 8pt;
-    left: -41px;
-    top: -15px;
-    width: 0px;
-    height: 0px;
-}
-
-/* Clickable holders */
-#catalog-holder, #license-holder, #contract-holder, 
-    #bait-item-holder, #tackle-item-holder {
+/* Clickable holders */ 
+#bait-item-holder, #tackle-item-holder,
+    #catalog-holder, #license-holder, #contract-holder,
+    #door-holder {
     pointer-events: auto;
 }
 
@@ -56,25 +16,22 @@
     display: flex;
     justify-content: space-evenly;
     font-size: 8pt;
-    top: -680px;
+    top: -530px;
     left: 24px;
     width: 436px;
 }
 
 #tackle-item-holder {
     flex-wrap: wrap;
-    top: -642px;
-    width: 261px;
+    top: -505px;
+    left: 18px;
+    width: 264px;
     height: 130px;
 }
 
 /* Shop items */
 .shop-item {
     cursor: pointer;
-}
-
-.shop-item:hover {
-    font-weight: bold;
 }
 
 /* Bait */
@@ -97,8 +54,9 @@
 }
 
 /* Tackle */
-.tackle-hook {
-    width: 87px;
+.tackle-item {
+    width: 88px;
+    height: 45px;
 }
 
 .tackle-decor {
@@ -111,15 +69,72 @@
     margin: -4px 0px 0px -2px;
 }
 
+/* Desk items */
+#catalog-holder {
+    display: block;
+    top: -460px;
+    left: 16px;
+    width: 40px;
+    height: 58px;
+}
+
+#license-holder {
+    display: block;
+    left: 75px;
+    top: -500px;
+    width: 50px;
+    height: 30px;
+}
+
+#license-decor {
+    left: -36px;
+    top: -1px;
+    width: 0px;
+    height: 0px;
+}
+
+#contract-holder {
+    display: block;
+    font-size: 8pt;
+    left: 150px;
+    top: -532px;
+    width: 50px;
+    height: 60px;
+}
+
+#contract-decor {
+    font-size: 8pt;
+    left: -41px;
+    top: -15px;
+    width: 0px;
+    height: 0px;
+}
+
+#door-holder {
+    font-size: 11pt;
+    display: block;
+    top: -721px;
+    left: 334px;
+    width: 180px;
+    height: 295px;
+}
+
+#door-decor {
+    top: 10px;
+    left: -110px;
+    width: 0px;
+    height: 0px;
+}
+
 /* Tooltips */
 .tooltip, .bait-tooltip, .tackle-tooltip {
     display: none;
     position: absolute;
     text-align: center;
-    font-weight: normal;
     padding: 3px 5px;
     margin-top: 60px;
     cursor: default;
+    z-index: 1;
 }
 
 #license-tooltip {
