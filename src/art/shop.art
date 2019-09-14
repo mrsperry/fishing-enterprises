@@ -43,6 +43,17 @@
 #name:license-decor
 ><>
 
+#name:contract
+ _____
+|     |
+|     |
+|_____|
+
+#name:contract-decor
+  ~~~
+ ~~~~~
+ ~~~~~
+
 #name:jar
  _____
 (-----)

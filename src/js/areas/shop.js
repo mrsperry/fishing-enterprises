@@ -75,6 +75,36 @@ class shop {
                     .text("River License ($300)")
                     .appendTo(license);
 
+                // Create the shop contract clickable
+                const contract_parent = $("<div>")
+                    .attr("id", "contract-holder")
+                    .addClass("art shop-item no-select")
+                    .css("visibility", "hidden")
+                    .appendTo(art);
+                const contract = $("<div>")
+                    .addClass("flex flex-centered")
+                    .text(art_data.get("shop", "contract"))
+                    .hover(() => {
+                        $("#contract-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#contract-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(contract_parent);
+                $("<div>")
+                    .attr("id", "contract-decor")
+                    .addClass("art")
+                    .html(art_data.get("shop", "contract-decor"))
+                    .appendTo(contract);
+                $("<div>")
+                    .attr("id", "contract-tooltip")
+                    .addClass("tooltip")
+                    .text("Buy the Shop ($15,000)")
+                    .appendTo(contract);
+
                 const data = fishing_data.get_data();
 
                 // Create bait clickables
