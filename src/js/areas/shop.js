@@ -23,11 +23,11 @@ class shop {
 
                 // Create the catalog clickable
                 const catalog_parent = $("<div>")
-                    .attr("id", "catalog-item")
-                    .addClass("art")
+                    .attr("id", "catalog-holder")
+                    .addClass("art shop-item no-select")
                     .appendTo(art);
                 const catalog = $("<div>")
-                    .addClass("shop-item")
+                    .addClass("flex flex-justify-center")
                     .text(art_data.get("shop", "catalog"))
                     // Tooltip show/hide
                     .hover(() => {
@@ -47,15 +47,32 @@ class shop {
                     .appendTo(catalog);
         
                 // Create the fishing license clickable
-                const license = $("<div>")
-                    .attr("id", "area-license")
-                    .addClass("art")
-                    .html(art_data.get("shop", "license"))
+                const license_parent = $("<div>")
+                    .attr("id", "license-holder")
+                    .addClass("art shop-item no-select")
                     .appendTo(art);
+                const license = $("<div>")
+                    .addClass("flex flex-centered")
+                    .text(art_data.get("shop", "license"))
+                    .hover(() => {
+                        $("#license-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#license-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(license_parent);
                 $("<div>")
-                    .attr("id", "area-license-decor")
+                    .attr("id", "license-decor")
                     .addClass("art")
-                    .text(art_data.get("shop", "license-decor"))
+                    .html(art_data.get("shop", "license-decor"))
+                    .appendTo(license);
+                $("<div>")
+                    .attr("id", "license-tooltip")
+                    .addClass("tooltip")
+                    .text("River License ($300)")
                     .appendTo(license);
 
                 const data = fishing_data.get_data();
@@ -71,7 +88,7 @@ class shop {
 
                     // Create the bait jars
                     const bait_art = $("<div>")
-                        .addClass("shop-item flex flex-justify-center")
+                        .addClass("shop-item no-select flex flex-justify-center")
                         .text(art_data.get("shop", "jar"))
                         // Tooltip show/hide
                         .hover(() => {
@@ -109,7 +126,7 @@ class shop {
 
                     // Create the tackle hooks
                     const tackle_art = $("<div>")
-                        .addClass("shop-item flex flex-justify-center tackle-hook")
+                        .addClass("shop-item no-select flex flex-justify-center tackle-hook")
                         .text(art_data.get("shop", "hook"))
                         .hover(() => {
                             $("#" + tackle.internal + "-tooltip")

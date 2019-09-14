@@ -6,28 +6,39 @@
 }
 
 /* Desk items */
-#catalog-item {
-    left: 22px;
+#catalog-holder {
+    display: block;
     top: -278px;
+    left: 16px;
+    width: 40px;
+    height: 58px;
 }
 
-#area-license {
-    left: 70px;
-    top: -310px;
+#license-holder {
+    display: block;
+    left: 75px;
+    top: -315px;
+    width: 50px;
+    height: 30px;
 }
 
-#area-license-decor {
+#license-decor {
     left: -36px;
-    top: -2px;
+    top: -1px;
+    width: 0px;
+    height: 0px;
 }
 
 /* Clickable holders */
+#catalog-holder, #license-holder, #bait-item-holder, #tackle-item-holder {
+    pointer-events: auto;
+}
+
 #bait-item-holder, #tackle-item-holder {
     display: flex;
     justify-content: space-evenly;
-    pointer-events: auto;
     font-size: 8pt;
-    top: -610px;
+    top: -620px;
     left: 24px;
     width: 436px;
 }
@@ -85,6 +96,15 @@
     text-align: center;
     padding: 3px 5px;
     margin-top: 60px;
+    cursor: default;
+}
+
+#license-tooltip {
+    margin-top: 35px;
+}
+
+.tooltip {
+    font-size: 8pt;
 }
 
 .tackle-tooltip {
