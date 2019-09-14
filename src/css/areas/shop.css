@@ -73,6 +73,10 @@
     cursor: pointer;
 }
 
+.shop-item:hover {
+    font-weight: bold;
+}
+
 /* Bait */
 .bait-decor {
     position: absolute;
@@ -112,6 +116,7 @@
     display: none;
     position: absolute;
     text-align: center;
+    font-weight: normal;
     padding: 3px 5px;
     margin-top: 60px;
     cursor: default;
