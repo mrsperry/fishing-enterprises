@@ -99,7 +99,7 @@
 
 #license-decor {
     left: -36px;
-    top: -1px;
+    top: 14px;
     width: 0px;
     height: 0px;
 }
@@ -116,7 +116,7 @@
 #contract-decor {
     font-size: 8pt;
     left: -41px;
-    top: -15px;
+    top: 11px;
     width: 0px;
     height: 0px;
 }
@@ -139,7 +139,7 @@
 }
 
 #door-decor {
-    top: 10px;
+    top: 160px;
     left: -110px;
     width: 0px;
     height: 0px;
@@ -162,15 +162,15 @@
 }
 
 #license-tooltip {
-    margin-top: 35px;
+    margin-top: 40px;
 }
 
 #contract-tooltip {
-    margin-top: 43px;
+    margin-top: 59px;
 }
 
 #chest-tooltip {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .tooltip {
