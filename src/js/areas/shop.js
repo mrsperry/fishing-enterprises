@@ -207,6 +207,30 @@ class shop {
                     .text("Buy the Shop ($15,000)")
                     .appendTo(contract);
 
+                // Create the chest clickable
+                const chest_parent = $("<div>")
+                    .attr("id", "chest-holder")
+                    .addClass("art shop-item no-select")
+                    .appendTo(art);
+                const chest = $("<div>")
+                    .addClass("flex flex-centered")
+                    .html(art_data.get("shop", "chest"))
+                    .hover(() => {
+                        $("#chest-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#chest-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(chest_parent);
+                $("<div>")
+                    .attr("id", "chest-tooltip")
+                    .addClass("tooltip")
+                    .text("Requires key")
+                    .appendTo(chest);
+
                 // Create the door clickable
                 const door_parent = $("<div>")
                     .attr("id", "door-holder")

@@ -8,7 +8,7 @@
 /* Clickable holders */ 
 #bait-item-holder, #tackle-item-holder, #shopkeeper-holder,
     #catalog-holder, #license-holder, #contract-holder,
-    #door-holder {
+    #chest-holder, #door-holder {
     pointer-events: auto;
 }
 
@@ -121,10 +121,18 @@
     height: 0px;
 }
 
+#chest-holder {
+    display: block;
+    left: 210px;
+    top: -716px;
+    width: 40px;
+    height: 50px;
+}
+
 #door-holder {
     font-size: 11pt;
     display: block;
-    top: -821px;
+    top: -871px;
     left: 334px;
     width: 180px;
     height: 295px;
@@ -159,6 +167,10 @@
 
 #contract-tooltip {
     margin-top: 43px;
+}
+
+#chest-tooltip {
+    margin-top: 40px;
 }
 
 .tooltip {
