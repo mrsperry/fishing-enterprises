@@ -98,6 +98,31 @@ class shop {
                         .appendTo(tackle_holder);
                 }
 
+                // Create the shopkeeper clickable
+                const shopkeeper_parent = $("<div>")
+                    .attr("id", "shopkeeper-holder")
+                    .addClass("art shop-item no-select")
+                    .appendTo(art);
+                const shopkeeper = $("<div>")
+                    .addClass("flex flex-justify-center")
+                    .text(art_data.get("shop", "shopkeeper"))
+                    // Tooltip show/hide
+                    .hover(() => {
+                        $("#shopkeeper-tooltip")
+                            .stop()
+                            .fadeIn();
+                    }, () => {
+                        $("#shopkeeper-tooltip")
+                            .stop()
+                            .fadeOut();
+                    })
+                    .appendTo(shopkeeper_parent);
+                $("<div>")
+                    .attr("id", "shopkeeper-tooltip")
+                    .addClass("tooltip")
+                    .text("Sell your fish (+$0)")
+                    .appendTo(shopkeeper);
+
                 // Create the catalog clickable
                 const catalog_parent = $("<div>")
                     .attr("id", "catalog-holder")

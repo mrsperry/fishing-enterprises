@@ -6,7 +6,7 @@
 }
 
 /* Clickable holders */ 
-#bait-item-holder, #tackle-item-holder,
+#bait-item-holder, #tackle-item-holder, #shopkeeper-holder,
     #catalog-holder, #license-holder, #contract-holder,
     #door-holder {
     pointer-events: auto;
@@ -69,10 +69,21 @@
     margin: -4px 0px 0px -2px;
 }
 
+/* Shopkeeper */
+#shopkeeper-holder {
+    display: block;
+    font-size: 7pt;
+    font-weight: bold;
+    top: -537px;
+    left: 110px;
+    width: 90px;
+    height: 100px;
+}
+
 /* Desk items */
 #catalog-holder {
     display: block;
-    top: -460px;
+    top: -560px;
     left: 16px;
     width: 40px;
     height: 58px;
@@ -81,7 +92,7 @@
 #license-holder {
     display: block;
     left: 75px;
-    top: -500px;
+    top: -598px;
     width: 50px;
     height: 30px;
 }
@@ -97,7 +108,7 @@
     display: block;
     font-size: 8pt;
     left: 150px;
-    top: -532px;
+    top: -632px;
     width: 50px;
     height: 60px;
 }
@@ -113,7 +124,7 @@
 #door-holder {
     font-size: 11pt;
     display: block;
-    top: -721px;
+    top: -821px;
     left: 334px;
     width: 180px;
     height: 295px;
@@ -135,6 +146,11 @@
     margin-top: 60px;
     cursor: default;
     z-index: 1;
+}
+
+#shopkeeper-tooltip {
+    font-weight: normal;
+    margin-top: 104px;
 }
 
 #license-tooltip {
