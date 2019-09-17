@@ -3,9 +3,18 @@ class shop {
         {
             name: "shopkeeper",
             text: () => {
-                return "Sell your fish (+$0)";
+                return "Sell your fish (+$" + shop.get_fish_value(false) + ")";
             },
             on_click: () => {
+                // Get the player's money
+                const money = misc_data.get("money");
+
+                // Add the total value of all fish and reset their values
+                money.count += shop.get_fish_value(true);
+
+                // Display updated money
+                $("#money-count")
+                    .text(money.count);
             }
         },
         {
@@ -260,5 +269,38 @@ class shop {
             // Fade out the item
             count.css("opacity", 0.5);
         }
+    }
+
+    static get_fish_value(reset) {
+        let value = 0;
+
+        const data = area_data.get_data();
+
+        // Find all fish
+        for (const area in data) {
+            for (const internal in data[area].fish) {
+                const fish = data[area].fish[internal];
+
+                // Edge case for bait
+                if (internal == "minnows") {
+                    continue;
+                }
+
+                // Sell the fish
+                value += (fish.count * fish.price);
+
+                if (reset) {
+                    // Reset count
+                    fish.count = 0;
+
+                    // Reset counter
+                    $("#" + internal + "-count")
+                        .text(0)
+                        .css("opacity", "");
+                }
+            }
+        }
+
+        return value;
     }
 }
