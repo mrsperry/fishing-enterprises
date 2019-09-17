@@ -48,6 +48,9 @@ class fishing {
         main.set_state(main.states.fishing);
         // Set the area data
         fishing.data = area_data.get(name);
+
+        $("#area-art")
+            .html(art_data.get("areas", name));
     }
 
     static create_elements() {
