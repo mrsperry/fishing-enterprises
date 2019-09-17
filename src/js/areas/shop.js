@@ -179,6 +179,9 @@ class shop {
                     .stop()
                     .fadeOut(200);
             });
+        // Hide the door arrow
+        $("#door-decor")
+            .hide();
         // Remove door tooltip
         $("#door-tooltip")
             .remove();
