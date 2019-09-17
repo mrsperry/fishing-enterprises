@@ -66,9 +66,17 @@ class shop {
         // Remove fishing data as the shop isn't a fishing area
         fishing.data = null;
 
+        // Fade out any area art
+        $("#area-art")
+            .fadeOut();
+
         // Fade out resource buttons
         $("#resource-buttons")
             .fadeOut(400, () => {
+                // Get rid of unnecessary buttons
+                $("#resource-buttons")
+                    .empty();
+
                 // Load shop CSS
                 css.load(["areas/shop"]);
 

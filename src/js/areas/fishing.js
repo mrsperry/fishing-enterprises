@@ -2,37 +2,62 @@ class fishing {
     static data = null;
     static is_fishing = false;
 
+    static first_load = true;
+
     static initialize(name) {
-        // Create initial HTML
-        if (fishing.get_data() == null) {
+        const load = () => {
             fishing.create_elements(name);
             // Load fishing area CSS
             css.replace(["areas/fishing"]);
+        };
+
+        if (fishing.first_load) {
+            load();
+            fishing.data = area_data.get(name);
+
+            fishing.first_load = false;
         }
 
-        if (name == "lake") {
-            // Create the forage for worms button if swapping to the lake
-            new button({
-                parent: "#resource-buttons",
-                prepend: true,
-                id: "forage-for-worms",
-                text: "Forage for worms",
-                show: true,
-                on_click: () => {
-                    // Disable fishing if its current enabled
-                    if (fishing.is_fishing) {
-                        fishing.swap_state();
-                    }
+        // Transition
+        const art = $("#area-art")
+            .fadeOut(400, () => {
+                art.html(art_data.get("areas", name))
+                    .fadeIn();
 
-                    // Initialize minigame
-                    worms.swap_state();
+                if (fishing.get_data() == null) {
+                    load();
+                }
+
+                $("#resource-buttons")
+                    .fadeIn();
+
+                // Set the area data
+                fishing.data = area_data.get(name);
+
+                if (name == "lake") {
+                    // Create the forage for worms button if swapping to the lake
+                    new button({
+                        parent: "#resource-buttons",
+                        prepend: true,
+                        id: "forage-for-worms",
+                        text: "Forage for worms",
+                        show: true,
+                        on_click: () => {
+                            // Disable fishing if its current enabled
+                            if (fishing.is_fishing) {
+                                fishing.swap_state();
+                            }
+
+                            // Initialize minigame
+                            worms.swap_state();
+                        }
+                    });
+                } else {
+                    // Remove the forage for worms button if swapping to a different area
+                    $("#forage-for-worms-button")
+                        .remove();
                 }
             });
-        } else {
-            // Remove the forage for worms button if swapping to a different area
-            $("#forage-for-worms-button")
-                .remove();
-        }
 
         // Enable all area selector buttons that are not this area
         for (const internal in area_data.get_data()) {
@@ -46,170 +71,171 @@ class fishing {
         }
         // Set the game state
         main.set_state(main.states.fishing);
-        // Set the area data
-        fishing.data = area_data.get(name);
-
-        $("#area-art")
-            .html(art_data.get("areas", name));
     }
 
     static create_elements() {
         const parent = $("#content");
 
-        // Create the money counter
-        const money = $("<div>")
-            .attr("id", "money-counter")
-            .text("Money: $")
-            .appendTo(parent);
-        $("<span>")
-            .attr("id", "money-count")
-            .text("0")
-            .appendTo(money);
-        // Create the time played counter
-        $("<div>")
-            .attr("id", "time-played")
-            .text("0:00")
-            .appendTo(parent);
-        // Create the total fish caught counter
-        const fish_caught = $("<div>")
-            .attr("id", "total-fish-caught")
-            .css("visibility", "hidden")
-            .text("Total fish caught: ")
-            .appendTo(parent);
-        $("<span>")
-            .attr("id", "total-fish-caught-count")
-            .text("0")
-            .appendTo(fish_caught);
-
-        // Create the counters section
-        const counters = $("<div>")
-            .attr("id", "resource-counters")
-            .appendTo(parent);
-        // Create the art section
-        $("<div>")
-            .attr("id", "area-art")
-            .appendTo(parent);
-        // Create the buttons section
-        $("<div>")
-            .attr("id", "resource-buttons")
-            .appendTo(parent);
-        // Create the area selector
-        const selector = $("<div>")
-            .attr("id", "area-selector")
-            .appendTo(parent);
-        // Create the shop selector button
-        new button({
-            parent: selector,
-            id: "shop-selector",
-            text: "Shop",
-            on_click: () => {
-                shop.initialize();
-            }
-        });
-        $("<div>")
-            .addClass("counter-break")
-            .appendTo(selector);
-
-        // Create the fish counters
-        const fish_counters = $("<div>")
-            .attr("id", "fish-counters")
-            .attr("section-header", "Fish")
-            .addClass("section")
-            .css("visibility", "hidden")
-            .appendTo(counters);
-
-        // Bundle up the rest of the counters so they're stacked on top of each other
-        const misc = $("<div>")
-            .attr("id", "misc-counters")
-            .appendTo(counters);
-        for (const id of ["bait", "tackle", "boat"]) {
+        if (fishing.first_load) {
+            // Create the money counter
+            const money = $("<div>")
+                .attr("id", "money-counter")
+                .text("Money: $")
+                .appendTo(parent);
+            $("<span>")
+                .attr("id", "money-count")
+                .text("0")
+                .appendTo(money);
+            // Create the time played counter
             $("<div>")
-                .attr("id", id + "-counters")
-                .attr("section-header", utils.capitalize(id))
+                .attr("id", "time-played")
+                .text("0:00")
+                .appendTo(parent);
+            // Create the total fish caught counter
+            const fish_caught = $("<div>")
+                .attr("id", "total-fish-caught")
+                .css("visibility", "hidden")
+                .text("Total fish caught: ")
+                .appendTo(parent);
+            $("<span>")
+                .attr("id", "total-fish-caught-count")
+                .text("0")
+                .appendTo(fish_caught);
+
+            // Create the counters section
+            const counters = $("<div>")
+                .attr("id", "resource-counters")
+                .appendTo(parent);
+            // Create the art section
+            $("<div>")
+                .attr("id", "area-art")
+                .appendTo(parent);
+            // Create the buttons section
+            $("<div>")
+                .attr("id", "resource-buttons")
+                .appendTo(parent);
+            // Create the area selector
+            const selector = $("<div>")
+                .attr("id", "area-selector")
+                .appendTo(parent);
+            // Create the shop selector button
+            new button({
+                parent: selector,
+                id: "shop-selector",
+                text: "Shop",
+                on_click: () => {
+                    shop.initialize();
+                }
+            });
+            $("<div>")
+                .addClass("counter-break")
+                .appendTo(selector);
+
+            // Create the fish counters
+            const fish_counters = $("<div>")
+                .attr("id", "fish-counters")
+                .attr("section-header", "Fish")
                 .addClass("section")
                 .css("visibility", "hidden")
-                .appendTo(misc);
-        }
+                .appendTo(counters);
 
-        const create_counter = (parent, item, prepend) => {
-            const counter = $("<div>")
-                .addClass("counter")
-                .text(item.display + ": ")
-                .hide();
-            if (prepend) {
-                counter.prependTo(parent);
-            } else {
-                counter.appendTo(parent);
+            // Bundle up the rest of the counters so they're stacked on top of each other
+            const misc = $("<div>")
+                .attr("id", "misc-counters")
+                .appendTo(counters);
+            for (const id of ["bait", "tackle", "boat"]) {
+                $("<div>")
+                    .attr("id", id + "-counters")
+                    .attr("section-header", utils.capitalize(id))
+                    .addClass("section")
+                    .css("visibility", "hidden")
+                    .appendTo(misc);
             }
 
-            $("<span>")
-                .attr("id", item.internal + "-count")
-                .text("0")
-                .appendTo(counter);
-            $("<span>")
-                .attr("id", item.internal + "-max")
-                .addClass("counter-max")
-                .text("/" + item.max)
-                .hide()
-                .appendTo(counter);
-        }
+            const create_counter = (parent, item, prepend) => {
+                const counter = $("<div>")
+                    .addClass("counter")
+                    .text(item.display + ": ")
+                    .hide();
+                if (prepend) {
+                    counter.prependTo(parent);
+                } else {
+                    counter.appendTo(parent);
+                }
 
-        // Set area specific data
-        let data = area_data.get_data();
-        for (const name in data) {
-            const settings = data[name];
+                $("<span>")
+                    .attr("id", item.internal + "-count")
+                    .text("0")
+                    .appendTo(counter);
+                $("<span>")
+                    .attr("id", item.internal + "-max")
+                    .addClass("counter-max")
+                    .text("/" + item.max)
+                    .hide()
+                    .appendTo(counter);
+            }
 
-            // Create this area's counter section
-            const section = $("<div>")
-                .attr("id", settings.internal + "-counters")
-                .hide()
-                .appendTo(fish_counters);
+            // Set area specific data
+            let data = area_data.get_data();
+            for (const name in data) {
+                const settings = data[name];
 
-            // Create the header
-            const header = $("<div>")
-                .addClass("counter-header centered")
-                .appendTo(section);
-            if (settings.internal != "lake") {
+                // Create this area's counter section
+                const section = $("<div>")
+                    .attr("id", settings.internal + "-counters")
+                    .hide()
+                    .appendTo(fish_counters);
+
+                // Create the header
+                const header = $("<div>")
+                    .addClass("counter-header centered")
+                    .appendTo(section);
+                if (settings.internal != "lake") {
+                    $("<div>")
+                        .addClass("counter-break")
+                        .appendTo(header);
+                }
+                $("<span>")
+                    .text(settings.display)
+                    .appendTo(header);
                 $("<div>")
                     .addClass("counter-break")
                     .appendTo(header);
-            }
-            $("<span>")
-                .text(settings.display)
-                .appendTo(header);
-            $("<div>")
-                .addClass("counter-break")
-                .appendTo(header);
 
-            // Create the fish counters
-            const fish_data = settings.fish;
-            for (const fish_name in fish_data) {
-                const fish = fish_data[fish_name];
+                // Create the fish counters
+                const fish_data = settings.fish;
+                for (const fish_name in fish_data) {
+                    const fish = fish_data[fish_name];
 
-                // Edge case for bait caught in fishing areas
-                const parent = fish.internal == "minnows" ? $("#bait-counters") : section;
-                create_counter(parent, fish, false);
-            }
-
-            // Create area selector buttons
-            new button({
-                parent: selector,
-                id: settings.internal + "-selector",
-                text: settings.display,
-                disabled: false,
-                on_click: () => {
-                    fishing.initialize(settings.internal);
+                    // Edge case for bait caught in fishing areas
+                    const parent = fish.internal == "minnows" ? $("#bait-counters") : section;
+                    create_counter(parent, fish, false);
                 }
-            });
-        }
 
-        data = fishing_data.get_data();
-        for (const type in data) {
-            for (const name in data[type]) {
-                const item = data[type][name];
+                // Create area selector buttons
+                new button({
+                    parent: selector,
+                    id: settings.internal + "-selector",
+                    text: settings.display,
+                    disabled: false,
+                    on_click: () => {
+                        // Reset shop selector if it's selected
+                        $("#shop-selector-button")
+                            .prop("disabled", false);
 
-                // Edge case to prepend worms as the minnows counter has already been created
-                create_counter($("#" + type + "-counters"), item, item.internal == "worms")
+                        fishing.initialize(settings.internal);
+                    }
+                });
+            }
+
+            data = fishing_data.get_data();
+            for (const type in data) {
+                for (const name in data[type]) {
+                    const item = data[type][name];
+
+                    // Edge case to prepend worms as the minnows counter has already been created
+                    create_counter($("#" + type + "-counters"), item, item.internal == "worms")
+                }
             }
         }
 
