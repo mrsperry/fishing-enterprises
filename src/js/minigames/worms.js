@@ -174,7 +174,7 @@ class worms {
                 .appendTo(cell);
 
             // Create a floater on the cell
-            floaters.register(worm, "+1", () => {
+            floaters.register(worm, "+1", floaters.types.standard, () => {
                 // Check if he max amount of worms is being held
                 return data.count != data.max;
             });

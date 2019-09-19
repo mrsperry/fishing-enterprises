@@ -34,6 +34,11 @@ class main {
         window.setTimeout(main.update, 1000);
     }
 
+    static money() {
+        const money = misc_data.get("money");
+        money.count += 50000;
+    }
+
     static update() {
         // Update the time played
         let time = settings.get("time-played");
