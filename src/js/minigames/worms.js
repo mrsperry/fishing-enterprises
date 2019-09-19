@@ -44,7 +44,7 @@ class worms {
             }
 
             // Set the update interval
-            worms.interval = window.setInterval(worms.update, 800);
+            worms.interval = window.setInterval(worms.update, 500);
         } else {
             const grid = $("#worm-grid")
                 .fadeOut(400, () => {
