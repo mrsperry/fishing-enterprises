@@ -105,7 +105,13 @@ class shop {
 
                 const holder = $("<div>")
                     .addClass("shop-item no-select flex flex-justify-center")
-                    .click(() => shop.buy_consumable(item))
+                    .click((event) => {
+                        // Check if the item was purchased
+                        if (shop.buy_consumable(item)) {
+                            // Create a floater in a random direction
+                            floaters.create(event.pageX - 7, event.pageY, "+1", floaters.types.random);
+                        }
+                    })
                     // Tooltip show/hide
                     .hover(() => {
                         $("#" + item.internal + "-tooltip")
@@ -277,6 +283,8 @@ class shop {
             // Fade out the item
             count.css("opacity", 0.5);
         }
+
+        return true;
     }
 
     static get_fish_value(reset) {
