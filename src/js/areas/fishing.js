@@ -123,6 +123,7 @@ class fishing {
                 parent: selector,
                 id: "shop-selector",
                 text: "Shop",
+                hide: true,
                 on_click: () => {
                     shop.initialize();
                 }
@@ -218,6 +219,7 @@ class fishing {
                     id: settings.internal + "-selector",
                     text: settings.display,
                     disabled: false,
+                    hide: true,
                     on_click: () => {
                         // Reset shop selector if it's selected
                         $("#shop-selector-button")
@@ -301,6 +303,16 @@ class fishing {
 
                     $("#" + fish.internal + "-max")
                         .show();
+
+                    // Check if the selector buttons are hidden
+                    const lake = $("#lake-selector-button");
+                    if (lake.is(":hidden")) {
+                        // Show lake and shop buttons
+                        lake.fadeIn();
+
+                        $("#shop-selector-button")
+                            .fadeIn();
+                    }
                 }
 
                 // Subtract bait and tackle
