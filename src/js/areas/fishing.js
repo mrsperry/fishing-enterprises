@@ -125,6 +125,11 @@ class fishing {
                 text: "Shop",
                 hide: true,
                 on_click: () => {
+                    // Stop fishing if currently fishing
+                    if (fishing.is_fishing) {
+                        fishing.swap_state();
+                    }
+
                     shop.initialize();
                 }
             });
