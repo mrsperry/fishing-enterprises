@@ -81,9 +81,6 @@ class shop {
                 $("#resource-buttons")
                     .empty();
 
-                // Load shop CSS
-                css.load(["areas/shop"]);
-
                 shop.load_elements();
             });
     }

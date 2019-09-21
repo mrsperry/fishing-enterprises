@@ -5,14 +5,11 @@ class fishing {
     static first_load = true;
 
     static initialize(name) {
-        const load = () => {
-            fishing.create_elements(name);
-            // Load fishing area CSS
-            css.replace(["areas/fishing"]);
-        };
-
         if (fishing.first_load) {
-            load();
+            // Load fishing area and shop CSS
+            css.replace(["areas/fishing", "areas/shop"]);
+
+            fishing.create_elements(name);
             fishing.data = area_data.get(name);
 
             fishing.first_load = false;
@@ -25,7 +22,7 @@ class fishing {
                     .fadeIn();
 
                 if (fishing.get_data() == null) {
-                    load();
+                    fishing.create_elements(name);
                 }
 
                 $("#resource-buttons")
