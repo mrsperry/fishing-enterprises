@@ -15,6 +15,10 @@ class shop {
                 // Display updated money
                 $("#money-count")
                     .text(money.count);
+
+                // Reset the tooltip
+                $("#shopkeeper-tooltip")
+                    .text("Sell your fish ($0)");
             }
         },
         {
