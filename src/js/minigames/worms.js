@@ -124,9 +124,11 @@ class worms {
                 // Create a random minor offset of the X and Y
                 .css("margin", utils.random(-20, 20) + "px 0px 0px " + utils.random(-20, 20) + "px")
                 .html(art_data.get("worm_game", "state-1"))
-                .click(() => {
+                .click((event) => {
                     // Check if the max amount of worms is being held
                     if (data.count != data.max) {
+                        floaters.create(event.pageX - 7, event.pageY, "+1", floaters.types.standard);
+
                         const counter = $("#worms-count")
                             .text(++data.count);
 
@@ -172,12 +174,6 @@ class worms {
                 .hide()
                 .fadeIn()
                 .appendTo(cell);
-
-            // Create a floater on the cell
-            floaters.register(worm, "+1", floaters.types.standard, () => {
-                // Check if he max amount of worms is being held
-                return data.count != data.max;
-            });
         }
     }
 
