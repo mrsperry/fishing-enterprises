@@ -16,8 +16,10 @@ class worms {
             $("#forage-for-worms-button")
                 .text("Back to the water");
             // Hide the fishing buttons
-            $("#cast-out-button")
-                .fadeOut();
+            const cast_out = $("#cast-out-button")
+                .fadeOut(400, () => {
+                    cast_out.prop("disabled", false);
+                });
             $("#reel-in-button")
                 .fadeOut();
 
