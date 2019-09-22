@@ -61,7 +61,9 @@ class worms {
                         .fadeTo(400, 0.4, () => reel_in.attr("style", ""));
 
                     $("#area-art")
-                        .text("");
+                        .text(art_data.get("areas", "lake"))
+                        .hide()
+                        .fadeIn();
 
                     // Remove the grid
                     grid.remove();
