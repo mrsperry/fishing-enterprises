@@ -6,15 +6,8 @@ class shop {
                 return "Sell your fish (+$" + shop.get_fish_value(false) + ")";
             },
             on_click: () => {
-                // Get the player's money
-                const money = misc_data.get("money");
-
                 // Add the total value of all fish and reset their values
-                money.count += shop.get_fish_value(true);
-
-                // Display updated money
-                $("#money-count")
-                    .text(money.count);
+                misc_data.update_money(shop.get_fish_value(true));
 
                 // Reset the tooltip
                 $("#shopkeeper-tooltip")
@@ -237,11 +230,7 @@ class shop {
         item.purchased = true;
 
         // Subtract the cost of the item
-        money.count -= item.price;
-
-        // Display the new money count
-        $("#money-count")
-            .text(money.count);
+        misc_data.update_money(-item.price);
 
         return true;
     }

@@ -83,6 +83,10 @@ class fishing {
                 .attr("id", "money-count")
                 .text("0")
                 .appendTo(money);
+            $("<span>")
+                .attr("id", "money-difference")
+                .hide()
+                .appendTo(money);
             // Create the time played counter
             $("<div>")
                 .attr("id", "time-played")
