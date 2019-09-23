@@ -248,7 +248,7 @@ class fishing {
             parent: "#resource-buttons",
             id: "cast-out",
             text: "Cast out line",
-            disabled: true,
+            disabled: fishing.first_load ? true : false,
             on_click: () => {
                 fishing.swap_state();
             }
