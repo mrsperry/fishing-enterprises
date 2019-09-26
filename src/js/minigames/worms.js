@@ -24,7 +24,7 @@ class worms {
                 .fadeOut();
 
             const art = $("#area-art")
-                .text("");
+                .text(art_data.get("worm_game", "background"));
 
             // Create the worm grid
             const grid = $("<div>")
@@ -117,7 +117,7 @@ class worms {
             // Get the current worm cell
             const cell = $("#worm-cell-" + (index + 1));
 
-            const worm = $("<div>")
+            $("<div>")
                 // Set the current texture for this worm
                 .attr("texture", 1)
                 // Set the current texture timer of this worm

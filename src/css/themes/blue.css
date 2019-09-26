@@ -4,7 +4,7 @@
 }
 
 /* Blue backgrounds */
-body, .section::before {
+body, .section::before, .worm-spawn {
     background-color: #111125;
 }
 
