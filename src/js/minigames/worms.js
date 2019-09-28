@@ -24,31 +24,36 @@ class worms {
                 .fadeOut();
 
             const art = $("#area-art")
-                .text(art_data.get("worm_game", "background"));
+                .fadeOut(400, () => {
+                    art.text(art_data.get("worm_game", "background"));
 
-            // Create the worm grid
-            const grid = $("<div>")
-                .attr("id", "worm-grid")
-                .addClass("flex")
-                .hide()
-                .fadeIn()
-                .appendTo(art);
-            // Populate the grid
-            for (let index = 0; index < 9; index++) {
-                // Set the initial state of all grid elements
-                worms.grid[index] = false;
+                    // Create the worm grid
+                    const grid = $("<div>")
+                        .attr("id", "worm-grid")
+                        .addClass("flex")
+                        .hide()
+                        .fadeIn()
+                        .appendTo(art);
+                    // Populate the grid
+                    for (let index = 0; index < 9; index++) {
+                        // Set the initial state of all grid elements
+                        worms.grid[index] = false;
 
-                // Create the grid cell
-                $("<div>")
-                    .attr("id", "worm-cell-" + (index + 1))
-                    .addClass("grid-cell flex")
-                    .appendTo(grid);
-            }
+                        // Create the grid cell
+                        $("<div>")
+                            .attr("id", "worm-cell-" + (index + 1))
+                            .addClass("grid-cell flex")
+                            .appendTo(grid);
+                    }
 
-            // Set the update interval
-            worms.interval = window.setInterval(worms.update, 500);
+                    art.fadeIn();
+
+                    // Set the update interval
+                    worms.interval = window.setInterval(worms.update, 500);
+                    console.log("set interval");
+                });
         } else {
-            const grid = $("#worm-grid")
+            const art = $("#area-art")
                 .fadeOut(400, () => {
                     // Reset the forage for worms button text
                     $("#forage-for-worms-button")
@@ -56,17 +61,17 @@ class worms {
                     // Show the fishing buttons
                     $("#cast-out-button")
                         .fadeIn();
+                    // Set opacity to the default disabled opacity then reset the value
                     const reel_in = $("#reel-in-button")
-                        // Set opacity to the default disabled opacity then reset the value
                         .fadeTo(400, 0.4, () => reel_in.attr("style", ""));
 
-                    $("#area-art")
-                        .text(art_data.get("areas", "lake"))
+                    // Reset area art
+                    art.text(art_data.get("areas", "lake"))
                         .hide()
                         .fadeIn();
 
                     // Remove the grid
-                    grid.remove();
+                    $("#worm-grid").remove();
 
                     // Remove minigame CSS
                     css.remove(["minigames/worms"]);
