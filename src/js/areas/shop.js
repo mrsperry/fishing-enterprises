@@ -11,10 +11,6 @@ class shop {
                 if (value > 0) {
                     // Add the total value of all fish and reset their values
                     misc_data.update_money(value);
-
-                    // Reset the tooltip
-                    $("#shopkeeper-tooltip")
-                        .text("Sell your fish ($0)");
                 } else {
                     messenger.write("You don't have any fish to sell!");
                 }
@@ -178,12 +174,22 @@ class shop {
                     .appendTo(child);
             }
 
+            // Function to get the text of a tooltip
+            const tooltip_text = () => {
+                return typeof(item.text) == "function" ? item.text() : item.text;
+            };
+
             // Create the tooltip
-            $("<div>")
+            const tooltip = $("<div>")
                 .attr("id", item.name + "-tooltip")
                 .addClass("tooltip")
-                .text(typeof(item.text) == "function" ? item.text() : item.text)
+                .text(tooltip_text())
                 .appendTo(child);
+
+            // Update the tooltip text whenever its holder is clicked
+            holder.click(() => {
+                tooltip.text(tooltip_text());
+            });
         }
 
         // Hide the contract until all upgrades are bought
