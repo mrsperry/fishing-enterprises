@@ -50,7 +50,6 @@ class worms {
 
                     // Set the update interval
                     worms.interval = window.setInterval(worms.update, 500);
-                    console.log("set interval");
                 });
         } else {
             const art = $("#area-art")
