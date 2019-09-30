@@ -6,12 +6,18 @@ class shop {
                 return "Sell your fish (+$" + shop.get_fish_value(false) + ")";
             },
             on_click: () => {
-                // Add the total value of all fish and reset their values
-                misc_data.update_money(shop.get_fish_value(true));
+                const value = shop.get_fish_value(true);
 
-                // Reset the tooltip
-                $("#shopkeeper-tooltip")
-                    .text("Sell your fish ($0)");
+                if (value > 0) {
+                    // Add the total value of all fish and reset their values
+                    misc_data.update_money(value);
+
+                    // Reset the tooltip
+                    $("#shopkeeper-tooltip")
+                        .text("Sell your fish ($0)");
+                } else {
+                    messenger.write("You don't have any fish to sell!");
+                }
             }
         },
         {
