@@ -99,6 +99,33 @@ a:hover, .link:hover {
     pointer-events: none;
 }
 
+/* Achievements */
+.achievement {
+    position: fixed;
+    z-index: 1;
+    top: -100px;
+    right: 0px;
+    width: 300px;
+    height: 100px;
+}
+
+.achievement-art {
+    font-size: 7pt;
+    width: 33%;
+    height: 100%;
+}
+
+.achievement-text {
+    width: 67%;
+    height: 100%;
+}
+
+.achievement-title {
+    width: 80%;
+    padding-top: 10px;
+    margin: 0px 0px 5px 10%;
+}
+
 /* Misc generic styles */
 .flex {
     display: flex;
@@ -124,6 +151,10 @@ a:hover, .link:hover {
 
 .centered {
     text-align: center;
+}
+
+.pre {
+    white-space: pre;
 }
 
 .no-select {
