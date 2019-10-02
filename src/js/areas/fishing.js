@@ -314,6 +314,9 @@ class fishing {
                     // Check if the selector buttons are hidden
                     const lake = $("#lake-selector-button");
                     if (lake.is(":hidden")) {
+                        // Indicate the lake has been unlocked
+                        area_data.get("lake").purchased = true;
+                        
                         // Show lake and shop buttons
                         lake.fadeIn();
 

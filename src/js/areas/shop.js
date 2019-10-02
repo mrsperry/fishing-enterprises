@@ -26,9 +26,33 @@ class shop {
             name: "license",
             decor: true,
             text: () => {
-                return "River License ($300)";
+                const data = shop.get_next_area();
+                if (data != null) {
+                    return data.display + " License ($" + utils.stringify(data.price) + ")";
+                }
             },
             on_click: () => {
+                const money = misc_data.get("money").count;
+                const data = shop.get_next_area();
+
+                if (money > data.price) {
+                    misc_data.update_money(-data.price);
+
+                    // Show the area selector button
+                    $("#" + data.internal + "-selector-button")
+                        .fadeIn();
+
+                    data.purchased = true;
+
+                    // Remove the license art if the last one has been purchased
+                    if (shop.get_next_area() == null) {
+                        // Remove the license
+                        $("#license-holder")
+                            .css("visibility", "hidden");
+                    }
+                } else {
+                    messenger.write("You don't have enough money!");
+                }
             }
         },
         {
@@ -289,6 +313,11 @@ class shop {
         return true;
     }
 
+    /*
+     * Clickable functions
+     */
+
+    // Shopkeeper
     static get_fish_value(reset) {
         let value = 0;
 
@@ -320,5 +349,20 @@ class shop {
         }
 
         return value;
+    }
+
+    // Fishing License
+    static get_next_area() {
+        const data = area_data.get_data();
+
+        for (const internal in area_data.get_data()) {
+            const area = data[internal];
+
+            if (area.purchased != true) {
+                return area;
+            }
+        }
+
+        return null;
     }
 }
