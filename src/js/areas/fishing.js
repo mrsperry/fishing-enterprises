@@ -5,14 +5,11 @@ class fishing {
     static first_load = true;
 
     static initialize(name) {
-        const load = () => {
-            fishing.create_elements(name);
-            // Load fishing area CSS
-            css.replace(["areas/fishing"]);
-        };
-
         if (fishing.first_load) {
-            load();
+            // Load fishing area and shop CSS
+            css.replace(["areas/fishing", "areas/shop"]);
+
+            fishing.create_elements(name);
             fishing.data = area_data.get(name);
 
             fishing.first_load = false;
@@ -25,7 +22,7 @@ class fishing {
                     .fadeIn();
 
                 if (fishing.get_data() == null) {
-                    load();
+                    fishing.create_elements(name);
                 }
 
                 $("#resource-buttons")
@@ -86,6 +83,10 @@ class fishing {
                 .attr("id", "money-count")
                 .text("0")
                 .appendTo(money);
+            $("<span>")
+                .attr("id", "money-difference")
+                .hide()
+                .appendTo(money);
             // Create the time played counter
             $("<div>")
                 .attr("id", "time-played")
@@ -123,7 +124,13 @@ class fishing {
                 parent: selector,
                 id: "shop-selector",
                 text: "Shop",
+                hide: true,
                 on_click: () => {
+                    // Stop fishing if currently fishing
+                    if (fishing.is_fishing) {
+                        fishing.swap_state();
+                    }
+
                     shop.initialize();
                 }
             });
@@ -218,6 +225,7 @@ class fishing {
                     id: settings.internal + "-selector",
                     text: settings.display,
                     disabled: false,
+                    hide: true,
                     on_click: () => {
                         // Reset shop selector if it's selected
                         $("#shop-selector-button")
@@ -244,6 +252,7 @@ class fishing {
             parent: "#resource-buttons",
             id: "cast-out",
             text: "Cast out line",
+            disabled: fishing.first_load ? true : false,
             on_click: () => {
                 fishing.swap_state();
             }
@@ -301,6 +310,19 @@ class fishing {
 
                     $("#" + fish.internal + "-max")
                         .show();
+
+                    // Check if the selector buttons are hidden
+                    const lake = $("#lake-selector-button");
+                    if (lake.is(":hidden")) {
+                        // Indicate the lake has been unlocked
+                        area_data.get("lake").purchased = true;
+                        
+                        // Show lake and shop buttons
+                        lake.fadeIn();
+
+                        $("#shop-selector-button")
+                            .fadeIn();
+                    }
                 }
 
                 // Subtract bait and tackle

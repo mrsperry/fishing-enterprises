@@ -6,15 +6,14 @@ class shop {
                 return "Sell your fish (+$" + shop.get_fish_value(false) + ")";
             },
             on_click: () => {
-                // Get the player's money
-                const money = misc_data.get("money");
+                const value = shop.get_fish_value(true);
 
-                // Add the total value of all fish and reset their values
-                money.count += shop.get_fish_value(true);
-
-                // Display updated money
-                $("#money-count")
-                    .text(money.count);
+                if (value > 0) {
+                    // Add the total value of all fish and reset their values
+                    misc_data.update_money(value);
+                } else {
+                    messenger.write("You don't have any fish to sell!");
+                }
             }
         },
         {
@@ -27,9 +26,33 @@ class shop {
             name: "license",
             decor: true,
             text: () => {
-                return "River License ($300)";
+                const data = shop.get_next_area();
+                if (data != null) {
+                    return data.display + " License ($" + utils.stringify(data.price) + ")";
+                }
             },
             on_click: () => {
+                const money = misc_data.get("money").count;
+                const data = shop.get_next_area();
+
+                if (money > data.price) {
+                    misc_data.update_money(-data.price);
+
+                    // Show the area selector button
+                    $("#" + data.internal + "-selector-button")
+                        .fadeIn();
+
+                    data.purchased = true;
+
+                    // Remove the license art if the last one has been purchased
+                    if (shop.get_next_area() == null) {
+                        // Remove the license
+                        $("#license-holder")
+                            .css("visibility", "hidden");
+                    }
+                } else {
+                    messenger.write("You don't have enough money!");
+                }
             }
         },
         {
@@ -77,9 +100,6 @@ class shop {
                 $("#resource-buttons")
                     .empty();
 
-                // Load shop CSS
-                css.load(["areas/shop"]);
-
                 shop.load_elements();
             });
     }
@@ -105,7 +125,13 @@ class shop {
 
                 const holder = $("<div>")
                     .addClass("shop-item no-select flex flex-justify-center")
-                    .click(() => shop.buy_consumable(item))
+                    .click((event) => {
+                        // Check if the item was purchased
+                        if (shop.buy_consumable(item)) {
+                            // Create a floater in a random direction
+                            floaters.create(event.pageX - 7, event.pageY, "+1", floaters.types.random);
+                        }
+                    })
                     // Tooltip show/hide
                     .hover(() => {
                         $("#" + item.internal + "-tooltip")
@@ -172,12 +198,22 @@ class shop {
                     .appendTo(child);
             }
 
+            // Function to get the text of a tooltip
+            const tooltip_text = () => {
+                return typeof(item.text) == "function" ? item.text() : item.text;
+            };
+
             // Create the tooltip
-            $("<div>")
+            const tooltip = $("<div>")
                 .attr("id", item.name + "-tooltip")
                 .addClass("tooltip")
-                .text(typeof(item.text) == "function" ? item.text() : item.text)
+                .text(tooltip_text())
                 .appendTo(child);
+
+            // Update the tooltip text whenever its holder is clicked
+            holder.click(() => {
+                tooltip.text(tooltip_text());
+            });
         }
 
         // Hide the contract until all upgrades are bought
@@ -230,11 +266,7 @@ class shop {
         item.purchased = true;
 
         // Subtract the cost of the item
-        money.count -= item.price;
-
-        // Display the new money count
-        $("#money-count")
-            .text(money.count);
+        misc_data.update_money(-item.price);
 
         return true;
     }
@@ -277,8 +309,15 @@ class shop {
             // Fade out the item
             count.css("opacity", 0.5);
         }
+
+        return true;
     }
 
+    /*
+     * Clickable functions
+     */
+
+    // Shopkeeper
     static get_fish_value(reset) {
         let value = 0;
 
@@ -310,5 +349,20 @@ class shop {
         }
 
         return value;
+    }
+
+    // Fishing License
+    static get_next_area() {
+        const data = area_data.get_data();
+
+        for (const internal in area_data.get_data()) {
+            const area = data[internal];
+
+            if (area.purchased != true) {
+                return area;
+            }
+        }
+
+        return null;
     }
 }

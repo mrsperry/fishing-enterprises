@@ -3,8 +3,8 @@
     position: relative;
     flex-wrap: wrap;
     width: 300px;
-    left: 150px;
-    top: 150px;
+    left: 90px;
+    top: -350px;
 }
 
 /* Containers used for worm spawning */

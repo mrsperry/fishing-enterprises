@@ -16,37 +16,43 @@ class worms {
             $("#forage-for-worms-button")
                 .text("Back to the water");
             // Hide the fishing buttons
-            $("#cast-out-button")
-                .fadeOut();
+            const cast_out = $("#cast-out-button")
+                .fadeOut(400, () => {
+                    cast_out.prop("disabled", false);
+                });
             $("#reel-in-button")
                 .fadeOut();
 
             const art = $("#area-art")
-                .text("");
+                .fadeOut(400, () => {
+                    art.text(art_data.get("worm_game", "background"));
 
-            // Create the worm grid
-            const grid = $("<div>")
-                .attr("id", "worm-grid")
-                .addClass("flex")
-                .hide()
-                .fadeIn()
-                .appendTo(art);
-            // Populate the grid
-            for (let index = 0; index < 9; index++) {
-                // Set the initial state of all grid elements
-                worms.grid[index] = false;
+                    // Create the worm grid
+                    const grid = $("<div>")
+                        .attr("id", "worm-grid")
+                        .addClass("flex")
+                        .hide()
+                        .fadeIn()
+                        .appendTo(art);
+                    // Populate the grid
+                    for (let index = 0; index < 9; index++) {
+                        // Set the initial state of all grid elements
+                        worms.grid[index] = false;
 
-                // Create the grid cell
-                $("<div>")
-                    .attr("id", "worm-cell-" + (index + 1))
-                    .addClass("grid-cell flex")
-                    .appendTo(grid);
-            }
+                        // Create the grid cell
+                        $("<div>")
+                            .attr("id", "worm-cell-" + (index + 1))
+                            .addClass("grid-cell flex")
+                            .appendTo(grid);
+                    }
 
-            // Set the update interval
-            worms.interval = window.setInterval(worms.update, 500);
+                    art.fadeIn();
+
+                    // Set the update interval
+                    worms.interval = window.setInterval(worms.update, 500);
+                });
         } else {
-            const grid = $("#worm-grid")
+            const art = $("#area-art")
                 .fadeOut(400, () => {
                     // Reset the forage for worms button text
                     $("#forage-for-worms-button")
@@ -54,15 +60,17 @@ class worms {
                     // Show the fishing buttons
                     $("#cast-out-button")
                         .fadeIn();
+                    // Set opacity to the default disabled opacity then reset the value
                     const reel_in = $("#reel-in-button")
-                        // Set opacity to the default disabled opacity then reset the value
                         .fadeTo(400, 0.4, () => reel_in.attr("style", ""));
 
-                    $("#area-art")
-                        .text("");
+                    // Reset area art
+                    art.text(art_data.get("areas", "lake"))
+                        .hide()
+                        .fadeIn();
 
                     // Remove the grid
-                    grid.remove();
+                    $("#worm-grid").remove();
 
                     // Remove minigame CSS
                     css.remove(["minigames/worms"]);
@@ -113,7 +121,7 @@ class worms {
             // Get the current worm cell
             const cell = $("#worm-cell-" + (index + 1));
 
-            const worm = $("<div>")
+            $("<div>")
                 // Set the current texture for this worm
                 .attr("texture", 1)
                 // Set the current texture timer of this worm
@@ -124,9 +132,11 @@ class worms {
                 // Create a random minor offset of the X and Y
                 .css("margin", utils.random(-20, 20) + "px 0px 0px " + utils.random(-20, 20) + "px")
                 .html(art_data.get("worm_game", "state-1"))
-                .click(() => {
+                .click((event) => {
                     // Check if the max amount of worms is being held
                     if (data.count != data.max) {
+                        floaters.create(event.pageX - 7, event.pageY, "+1", floaters.types.standard);
+
                         const counter = $("#worms-count")
                             .text(++data.count);
 
@@ -172,12 +182,6 @@ class worms {
                 .hide()
                 .fadeIn()
                 .appendTo(cell);
-
-            // Create a floater on the cell
-            floaters.register(worm, "+1", floaters.types.standard, () => {
-                // Check if he max amount of worms is being held
-                return data.count != data.max;
-            });
         }
     }
 

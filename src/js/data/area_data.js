@@ -2,10 +2,12 @@ class area_data {
     static initialize() {
         const data = area_data.get_data();
 
-        // Fill in default fish information
+        // Fill in default information
         for (const area_index in data) {
             // Get the current area
             const area = data[area_index];
+            
+            area.purchased = false;
 
             for (const fish_index in area.fish) {
                 // Get the current fish
@@ -104,6 +106,7 @@ class area_data {
         river: {
             internal: "river",
             display: "River",
+            price: 300,
             fish: {
                 salmon: {
                     internal: "salmon",
@@ -191,6 +194,7 @@ class area_data {
         pier: {
             internal: "pier",
             display: "Pier",
+            price: 500,
             fish: {
                 redfish: {
                     internal: "redfish",
@@ -303,6 +307,7 @@ class area_data {
         reef: {
             internal: "reef",
             display: "Reef",
+            price: 1000,
             fish: {
                 snapper: {
                     internal: "snapper",
@@ -405,6 +410,7 @@ class area_data {
         spear_fishing: {
             internal: "spear_fishing",
             display: "Spear Fishing",
+            price: 1750,
             fish: {
                 lobster: {
                     internal: "lobster",
@@ -517,6 +523,7 @@ class area_data {
         deep_sea: {
             internal: "deep_sea",
             display: "Deep Sea",
+            price: 2500,
             fish: {
                 whitefish: {
                     display: "Whitefish",
