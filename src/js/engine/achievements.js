@@ -6,11 +6,11 @@ class achievements {
             .addClass("achievement flex")
             .animate({
                 marginTop: 100
-            }, 1000, function() {
-                setTimeout(function() {
+            }, 1000, () => {
+                setTimeout(() => {
                     element.animate({
                         marginTop: 0
-                    }, 1000, function() {
+                    }, 1000, () => {
                         element.remove();
                     });
                 }, 5000);
