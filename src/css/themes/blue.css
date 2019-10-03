@@ -52,3 +52,17 @@ a:hover, .link:hover {
     background: #111125;
     border: 1px solid #444465;
 }
+
+/* Achievements */
+.achievement {
+    background-color: #111125;
+    border: 1px solid #444465;
+}
+
+.achievement-art {
+    border-right: 1px solid #444465;
+}
+
+.achievement-title {
+    border-bottom: 1px solid #444465;
+}
