@@ -1,6 +1,12 @@
 class achievements {
     static award(id) {
         const data = achievements.achievement_list[id];
+        
+        if (data.awarded == true) {
+            return;
+        } else {
+            data.awarded = true;
+        }
 
         const element = $("<div>")
             .addClass("achievement flex")
