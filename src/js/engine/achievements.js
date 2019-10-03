@@ -1,12 +1,23 @@
 class achievements {
+    static queue = [];
+    static running = false;
+
     static award(id) {
         const data = achievements.achievement_list[id];
+        const queue = achievements.queue;
         
         if (data.awarded == true) {
             return;
         } else {
             data.awarded = true;
+
+            if (achievements.running) {
+                queue.push(id);
+                return;
+            }
         }
+
+        achievements.running = true;
 
         const element = $("<div>")
             .addClass("achievement flex")
@@ -18,6 +29,11 @@ class achievements {
                         marginTop: 0
                     }, 1000, () => {
                         element.remove();
+                        achievements.running = false;
+
+                        if (queue.length != 0) {
+                            achievements.award(queue.shift());
+                        }
                     });
                 }, 5000);
             })
