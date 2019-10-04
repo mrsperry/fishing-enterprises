@@ -22,6 +22,9 @@ class main {
         settings.initialize();
         // Load default theme
         themes.initialize();
+
+        // Initialize achievements menu
+        achievements_menu.initialize();
         // Load the main menu
         main_menu.initialize();
 

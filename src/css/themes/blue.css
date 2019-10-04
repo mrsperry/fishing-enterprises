@@ -54,7 +54,7 @@ a:hover, .link:hover {
 }
 
 /* Achievements */
-.achievement {
+.achievement, .achievement-display {
     background-color: #111125;
     border: 1px solid #444465;
 }

@@ -59,6 +59,10 @@ class achievements {
             .appendTo(text);
     }
 
+    static get_list() {
+        return achievements.achievement_list;
+    }
+
     static achievement_list = {
         "10-fish": {
             title: "Beginner's Luck",
