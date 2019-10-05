@@ -64,9 +64,37 @@ class achievements {
     }
 
     static achievement_list = {
-        "10-fish": {
+        "catch-100-fish": {
             title: "Beginner's Luck",
-            description: "Catch your first 10 fish."
+            description: "Catch your first 100 fish."
+        },
+        "catch-1000-fish": {
+            title: "Intermediate Angling",
+            description: "Catch 1,000 fish."
+        },
+        "catch-100000-fish": {
+            title: "Piscator Excellence",
+            description: "Catch 100,000 fish."
+        },
+        "catch-all-fish": {
+            title: "Nautical Diversity",
+            description: "Catch at least one of every fish."
+        },
+        "buy-all-items": {
+            title: "Cleaning Out The House",
+            description: "Purchase at least one of every item in the shop."
+        },
+        "buy-shop": {
+            title: "Prime Real Estate",
+            description: "Purchase the shop."
+        },
+        "get-cat": {
+            title: "Feline Rescue",
+            description: "Obtain a furry friend."
+        },
+        "buy-enterprise": {
+            title: "Entrepreneurial Ambitions",
+            description: "Turn your business into an enterprise."
         }
     };
 }
