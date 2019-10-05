@@ -136,6 +136,14 @@ a:hover, .link:hover {
     margin: 10px;
 }
 
+.achievement-header-item {
+    width: 100px;
+}
+
+.achievement-header-item:first-child {
+    text-align: right;
+}
+
 /* Misc generic styles */
 .flex {
     display: flex;

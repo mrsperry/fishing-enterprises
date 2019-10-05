@@ -2,18 +2,43 @@ class achievements_menu {
     static initialize() {
         achievements_menu.current_page = 1;
 
-        let size = Object.keys(achievements.get_list()).length;
-        achievements_menu.max_pages = Math.ceil(size / 4);
+        achievements_menu.size = Object.keys(achievements.get_list()).length;
+        achievements_menu.max_pages = Math.ceil(achievements_menu.size / 4);
     }
 
     static show() {
         const popup = new modal("Achievements");
         const box = popup.get_box();
 
-        $("<div>")
-            .addClass("centered")
-            .html("Page <span id='page-count'>1</span>/" + achievements_menu.max_pages)
+        const header = $("<div>")
+            .addClass("flex flex-justify-center pre")
             .appendTo(box);
+        const pages = $("<span>")
+            .addClass("achievement-header-item")
+            .text("Page ")
+            .appendTo(header);
+        $("<span>")
+            .attr("id", "page-count")
+            .text(1)
+            .appendTo(pages);
+        $("<span>")
+            .text("/" + achievements_menu.max_pages)
+            .appendTo(pages);
+        $("<div>")
+            .attr("id", "achievement-divider")
+            .text(" | ")
+            .appendTo(header);
+        const achieved = $("<span>")
+            .addClass("achievement-header-item")
+            .text("Achieved ")
+            .appendTo(header);
+        $("<span>")
+            .attr("id", "achievement-count")
+            .text(achievements.achieved)
+            .appendTo(achieved);
+        $("<span>")
+            .text("/" + achievements_menu.size)
+            .appendTo(achieved);
 
         $("<div>")
             .attr("id", "achievement-holder")

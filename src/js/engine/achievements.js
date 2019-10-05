@@ -1,6 +1,7 @@
 class achievements {
     static queue = [];
     static running = false;
+    static achieved = 0;
 
     static award(id) {
         const data = achievements.achievement_list[id];
@@ -9,6 +10,7 @@ class achievements {
         if (data.awarded == true) {
             return;
         } else {
+            achievements.update_achieved();
             data.awarded = true;
 
             if (achievements.running) {
@@ -57,6 +59,13 @@ class achievements {
             .addClass("achievement-desc")
             .text(data.description)
             .appendTo(text);
+    }
+
+    static update_achieved() {
+        achievements.achieved++;
+
+        $("#achievement-count")
+            .text(achievements.achieved);
     }
 
     static get_list() {
