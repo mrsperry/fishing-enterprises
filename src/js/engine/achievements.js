@@ -10,7 +10,7 @@ class achievements {
         if (data.awarded == true) {
             return;
         } else {
-            achievements.update_achieved();
+            achievements.update_elements(id);
             data.awarded = true;
 
             if (achievements.running) {
@@ -61,11 +61,14 @@ class achievements {
             .appendTo(text);
     }
 
-    static update_achieved() {
+    static update_elements(id) {
         achievements.achieved++;
 
         $("#achievement-count")
             .text(achievements.achieved);
+
+        $("#" + id + "-display")
+            .removeClass("disabled");
     }
 
     static get_list() {

@@ -87,13 +87,15 @@ class achievements_menu {
         const keys = Object.keys(list);
 
         for (let index = 0; index < 4; index++) {
-            const data = list[keys[((current - 1) * 4) + index]];
+            const name = keys[((current - 1) * 4) + index];
+            const data = list[name];
             
             if (data == null) {
                 return;
             }
             
             const holder = $("<div>")
+                .attr("id", name + "-display")
                 .addClass("achievement-display achievement-text")
                 .appendTo(parent);
 
