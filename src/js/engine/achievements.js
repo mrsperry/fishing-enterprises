@@ -1,20 +1,29 @@
 class achievements {
+    // Current queue of achievements
     static queue = [];
+    // If achievements are currently being displayed
     static running = false;
+    // The total number of achievements awarded
     static achieved = 0;
 
     static award(id) {
         const queue = achievements.queue;
+        // Get the current achievement
         const data = achievements.achievement_list[id];
 
+        // Check if this achievement has already been awarded
         if (data.awarded == true) {
             return;
         }
 
+        // Push the achievement to the display queue
         data.awarded = true;
         queue.push(id);
+
+        // Update the achievement menu so data isn't lost if the page is reloaded
         achievements.update_elements(id);
 
+        // Check if the display queue is already being emptied
         if (achievements.running == false) {
             achievements.running = true;
             achievements.display();
@@ -26,17 +35,21 @@ class achievements {
         const id = queue.shift();
         const data = achievements.achievement_list[id];
 
+        // Create the achievement box
         const element = $("<div>")
             .addClass("achievement flex")
+            // Have the box slide down
             .animate({
                 marginTop: 100
             }, 1000, () => {
+                // Make the box slide up after a delay
                 window.setTimeout(() => {
                     element.animate({
                         marginTop: 0
                     }, 1000, () => {
                         element.remove();
 
+                        // Check if there are more achievements in the display queue
                         if (queue.length != 0) {
                             achievements.display();
                         } else {
@@ -47,32 +60,39 @@ class achievements {
             })
             .appendTo($("body"));
 
+        // Art section
         $("<div>")
             .addClass("achievement-art pre bold flex flex-centered")
             .text(art_data.get("achievements", id))
             .appendTo(element);
 
+        // Text section
         const text = $("<div>")
             .addClass("achievement-text centered") 
             .appendTo(element);
         
+        // Achievement title
         $("<div>")
             .addClass("achievement-title bold")
             .text(data.title)
             .appendTo(text);
 
+        // Achievement description
         $("<div>")
             .addClass("achievement-desc")
             .text(data.description)
             .appendTo(text);
     }
 
+    // Updates the achievement menu elements if the menu is open
     static update_elements(id) {
         achievements.achieved++;
 
+        // Update the achievements awarded counter
         $("#achievement-count")
             .text(achievements.achieved);
 
+        // Highlight the achievement box
         $("#" + id + "-display")
             .removeClass("disabled");
     }
