@@ -4,37 +4,43 @@ class achievements {
     static achieved = 0;
 
     static award(id) {
-        const data = achievements.achievement_list[id];
         const queue = achievements.queue;
-        
+        const data = achievements.achievement_list[id];
+
         if (data.awarded == true) {
             return;
-        } else {
-            achievements.update_elements(id);
-            data.awarded = true;
-
-            if (achievements.running) {
-                queue.push(id);
-                return;
-            }
         }
 
-        achievements.running = true;
+        data.awarded = true;
+        queue.push(id);
+        achievements.update_elements(id);
+
+        if (achievements.running == false) {
+            achievements.running = true;
+            achievements.display();
+        }
+    }
+
+    static display() {
+        const queue = achievements.queue;
+        const id = queue.shift();
+        const data = achievements.achievement_list[id];
 
         const element = $("<div>")
             .addClass("achievement flex")
             .animate({
                 marginTop: 100
             }, 1000, () => {
-                setTimeout(() => {
+                window.setTimeout(() => {
                     element.animate({
                         marginTop: 0
                     }, 1000, () => {
                         element.remove();
-                        achievements.running = false;
 
                         if (queue.length != 0) {
-                            achievements.award(queue.shift());
+                            achievements.display();
+                        } else {
+                            achievements.running = false;
                         }
                     });
                 }, 5000);
