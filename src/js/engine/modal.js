@@ -62,6 +62,7 @@ class modal {
 
     add_close_button() {
         const holder = $("<div>")
+            .attr("id", "button-holder")
             .addClass("flex flex-justify-center")
             .appendTo(this.box);
 
