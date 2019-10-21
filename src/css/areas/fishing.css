@@ -45,7 +45,7 @@
     float: right;
 }
 
-#lake-selector-button {
+#lake-selector-button, #catalog-selector-button {
     margin-top: 5px;
 }
 

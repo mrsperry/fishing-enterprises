@@ -117,6 +117,10 @@ a:hover, .link:hover {
     align-items: center;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
 /* Misc text styles */
 .bold {
     font-weight: bold;
@@ -124,6 +128,10 @@ a:hover, .link:hover {
 
 .centered {
     text-align: center;
+}
+
+.pre {
+    white-space: pre;
 }
 
 .no-select {

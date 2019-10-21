@@ -236,6 +236,22 @@ class fishing {
                 });
             }
 
+            // Create catalog button
+            $("<div>")
+                .attr("id", "catalog-break")
+                .addClass("counter-break")
+                .hide()
+                .appendTo(selector);
+            new button({
+                parent: selector,
+                id: "catalog-selector",
+                text: "Catalog",
+                hide: true,
+                on_click: () => {
+                    catalog.show();
+                }
+            });
+
             data = fishing_data.get_data();
             for (const type in data) {
                 for (const name in data[type]) {

@@ -1,0 +1,123 @@
+.modal-box {
+    height: 750px;
+}
+
+#catalog-content {
+    height: 700px;
+}
+
+.page {
+    position: relative;
+    width: 395px;
+}
+
+.catalog-area-break {
+    margin-left: 10%;
+    width: 80%;
+}
+
+#catalog-divider {
+    border: 0.5px solid black;
+    margin: 0px 20px;
+    width: 0px;
+    height: 100%;
+}
+
+#catalog-title {
+    font-size: 24pt;
+    margin-top: 50%;
+}
+
+#catalog-subtitle {
+    font-size: 16pt;
+    margin-bottom: 50px;
+}
+
+#catalog-area-selector {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.catalog-area {
+    margin-top: 10px;
+    width: 150px;
+}
+
+.area-fish-list {
+    text-align: left;
+    padding-left: 25px;
+    margin: 5px 0px 0px 0px;
+}
+
+/* Area Page */
+.area-page {
+    position: relative;
+}
+
+.area-page-header {
+    position: absolute;
+}
+
+/* Fish page */
+.fish-content {
+    height: 100%;
+}
+
+.header-break {
+    margin-bottom: 10px;
+}
+
+.fish-table {
+    justify-content: space-evenly;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px 5px 0px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px 7px;
+}
+
+td:nth-child(odd) {
+    width: 120px;
+}
+
+.none-message {
+    width: 159px;
+    margin: 43px 5px 0px;
+}
+
+.description-paragraph {
+    margin-top: 20px;
+}
+
+.fish-page-top-decor {
+    margin-bottom: 100px;
+}
+
+.fish-page-bottom-decor {
+    position: absolute;
+    bottom: 0px;
+}
+
+.fish-page-number {
+    position: absolute;
+    margin-top: -7px;
+    top: 50%;
+    width: 100%;
+}
+
+/* Button holder */
+#button-holder {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.modal-close-button, #previous-page-button, #next-page-button {
+    width: 120px;
+    height: 40px;
+    margin: 0px 5px;
+}

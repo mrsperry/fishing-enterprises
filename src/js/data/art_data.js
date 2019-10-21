@@ -1,6 +1,6 @@
 class art_data {
     // List of all files to parse art from
-    static files = ["worm_game", "shop", "areas"];
+    static files = ["worm_game", "shop", "areas", "catalog"];
 
     static initialize() {
         // Set the holder object

@@ -28,7 +28,7 @@ button:disabled {
     border: 0.5px solid #000000;
 }
 
-.counter-break {
+.counter-break, .catalog-area-break {
     border: 0.5px solid #aaaaaa;
 }
 
