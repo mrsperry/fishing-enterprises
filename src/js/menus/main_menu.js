@@ -40,6 +40,11 @@ class main_menu {
         });
         new button({
             parent: parent,
+            text: "Achievements",
+            on_click: achievements_menu.show
+        });
+        new button({
+            parent: parent,
             text: "About",
             on_click: about_menu.show
         });
@@ -68,6 +73,7 @@ class main_menu {
             // Create the footer
             $("<span>")
                 .html("- <a onclick='settings_menu.show()'>Settings</a>"
+                    + " | <a onclick='achievements_menu.show()'>Achievements</a>"
                     + " | <a onclick='about_menu.show()'>About</a>"
                     + " | <a onclick='support_menu.show()'>Support me</a>"
                     + " | <a href='https://github.com/mrsperry/mrsperry.github.io/' target='_blank'>Github</a> -")

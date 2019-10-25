@@ -51,7 +51,7 @@ button {
     cursor: pointer;
 }
 
-button:disabled {
+button:disabled, .disabled {
     opacity: 0.4;
     cursor: default;
 }
@@ -87,7 +87,7 @@ a:hover, .link:hover {
     height: 100%;
 }
 
-.modal-background {
+.modal-background, .achievement-hidden {
     opacity: 0.6;
     background-color: #000000;
 }
@@ -97,6 +97,51 @@ a:hover, .link:hover {
     position: absolute;
     cursor: default;
     pointer-events: none;
+}
+
+/* Achievements */
+.achievement, .achievement-art, .achievement-text, .achievement-display {
+    height: 100px;
+}
+
+.achievement {
+    position: fixed;
+    z-index: 1;
+    top: -100px;
+    right: 0px;
+    width: 300px;
+}
+
+.achievement-art {
+    font-size: 7pt;
+    width: 100px;
+}
+
+.achievement-text, .achievement-display {
+    width: 200px;
+}
+
+.achievement-title {
+    width: 80%;
+    padding-top: 10px;
+    margin: 0px 0px 5px 10%;
+}
+
+#achievement-holder {
+    width: 450px;
+    height: 244px;
+}
+
+.achievement-display {
+    margin: 10px;
+}
+
+.achievement-header-item {
+    width: 100px;
+}
+
+.achievement-header-item:first-child {
+    text-align: right;
 }
 
 /* Misc generic styles */
@@ -119,6 +164,18 @@ a:hover, .link:hover {
 
 .flex-column {
     flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.inline {
+    display: inline;
+}
+
+.right {
+    float: right;
 }
 
 /* Misc text styles */
