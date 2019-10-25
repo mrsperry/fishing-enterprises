@@ -30,8 +30,6 @@ class main {
         art_data.initialize();
         fishing_data.initialize();
         misc_data.initialize();
-
-        window.setTimeout(main.update, 1000);
     }
 
     static update() {
