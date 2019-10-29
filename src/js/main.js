@@ -63,6 +63,11 @@ class main {
         }
     }
 
+    static set_interval(timeout) {
+        window.clearInterval(this.interval);
+        this.interval = window.setInterval(main.update, timeout);
+    }
+
     static transition(callback) {
         const content = $("#content");
         // Fade out all content

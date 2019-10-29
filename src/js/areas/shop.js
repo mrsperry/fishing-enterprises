@@ -133,7 +133,7 @@ class shop {
                     .addClass("shop-item no-select flex flex-justify-center")
                     .click((event) => {
                         // Check if the item was purchased
-                        if (shop.buy_consumable(item)) {
+                        if (shop.buy_consumable(item, false)) {
                             // Create a floater in a random direction
                             floaters.create(event.pageX - 7, event.pageY, "+1", floaters.types.random);
                         }
@@ -247,40 +247,42 @@ class shop {
     }
 
     // Generic buy checks
-    static buy(item) {
-        const money = misc_data.get("money");
+    static buy(item, free) {
+        if (!free) {
+            const money = misc_data.get("money");
 
-        // Check if the player has enough money to buy this item
-        if (money.count < item.price) {
-            messenger.write("You don't have enough money!");
-            return false;
-        }
+            // Check if the player has enough money to buy this item
+            if (money.count < item.price) {
+                messenger.write("You don't have enough money!");
+                return false;
+            }
 
-        // Check if the player can hold this item
-        if (item.count == item.max) {
-            messenger.write("You can't hold any more!");
-            return false;
-        }
+            // Check if the player can hold this item
+            if (item.count == item.max) {
+                messenger.write("You can't hold any more!");
+                return false;
+            }
 
-        // Check if the item's message should be displayed
-        if (item.show_message != true) {
-            messenger.write(item.display + ": " + item.message);
-            item.show_message = true;
+            // Check if the item's message should be displayed
+            if (item.show_message != true) {
+                messenger.write(item.display + ": " + item.message);
+                item.show_message = true;
+            }
+
+            // Subtract the cost of the item
+            misc_data.update_money(-item.price);
         }
 
         // Mark this item as purchased for saving
         item.purchased = true;
 
-        // Subtract the cost of the item
-        misc_data.update_money(-item.price);
-
         return true;
     }
 
     // Handles buying of bait or tackle
-    static buy_consumable(item) {
+    static buy_consumable(item, free) {
         // Check base conditions
-        if (!shop.buy(item)) {
+        if (!shop.buy(item, free)) {
             return false;
         }
 

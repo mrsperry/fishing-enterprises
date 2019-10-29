@@ -129,8 +129,7 @@ class settings_menu {
                         // Select the new enable state
                         settings_menu.swap_select("dev-tools-" + string(state), "dev-tools-" + string(!state));
 
-                        // Set the enable state
-                        settings.set("dev-tools", !current_state);
+                        settings.toggle_dev_tools(!current_state);
                     }
                 })
                 .appendTo(dev_tools);

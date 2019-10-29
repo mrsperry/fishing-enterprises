@@ -24,6 +24,10 @@ body {
     padding-bottom: 15px;
 }
 
+#dev-tools {
+    margin: 10px;
+}
+
 /* Message history */
 #message-history {
     width: 1075px;

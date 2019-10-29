@@ -64,7 +64,7 @@ class main_menu {
             messenger.initialize();
 
             fishing.initialize("lake");
-            window.setInterval(main.update, 1000);
+            main.set_interval(1000);
 
             // Fade in the bottom section
             const parent = $("#bottom-section")
