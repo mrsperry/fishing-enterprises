@@ -3,7 +3,8 @@ class shop {
         {
             name: "shopkeeper",
             text: () => {
-                return "Sell your fish (+$" + shop.get_fish_value(false) + ")";
+                const amount = utils.stringify(shop.get_fish_value(false));
+                return "Sell your fish (+$" + amount + ")";
             },
             on_click: () => {
                 const value = shop.get_fish_value(true);
