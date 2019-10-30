@@ -205,6 +205,37 @@ class fishing {
                 $("<span>")
                     .text(settings.display)
                     .appendTo(header);
+                // Create the amount of fish caught counter
+                const amount = $("<span>")
+                    .attr("id", settings.internal + "-amount")
+                    .appendTo(header);
+                $("<span>")
+                    .text(" (")
+                    .appendTo(amount);
+                // Find the number of fish caught
+                let count = 0;
+                for (let index in settings.fish) {
+                    if (settings.fish[index].caught) {
+                        count++;
+                    }
+                }
+                // Remove minnows from the count
+                if (count != 0 && settings.internal == "lake") {
+                    count--;
+                }
+                $("<span>")
+                    .attr("id", settings.internal + "-amount-caught")
+                    .text(count)
+                    .appendTo(amount);
+                let max = Object.keys(settings.fish).length;
+                let max_element = $("<span>")
+                    // Handle edge case for minnows
+                    .text("/" + (settings.internal == "lake" ? --max : max) + ")")
+                    .appendTo(amount);
+                if (count == max) {
+                    max_element.addClass("counter-max");
+                }
+                // Add a line break
                 $("<div>")
                     .addClass("counter-break")
                     .appendTo(header);
@@ -316,7 +347,19 @@ class fishing {
                     fish.caught = true;
                     counter.parent().fadeIn();
 
-                    // Show the unique fish message (only on first catch)
+                    // Update the number of fish caught in this area
+                    const element = $("#" + data.internal + "-amount-caught");
+                    const amount = Number.parseInt(element.text()) + 1;
+                    element.text(amount);
+
+                    // Check if the counter should be grayed out
+                    let max = Object.keys(data.fish).length;
+                    if (amount == (data.internal == "lake" ? --max : max)) {
+                        $("#" + data.internal + "-amount")
+                            .addClass("counter-max");
+                    }
+
+                    // Show the unique fish message
                     messenger.write(fish.display + ": " + fish.message);
                 }
 
