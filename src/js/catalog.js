@@ -246,7 +246,7 @@ class catalog {
             if (elements == null || !caught) {
                 $("<div>")
                     .addClass("centered none-message")
-                    .text(caught ? ("No " + header.toLowerCase() + " required!") : "???")
+                    .text(caught ? ("No " + header.toLowerCase() + " required!") : "")
                     .appendTo(tables);
                 return;
             }
@@ -302,11 +302,6 @@ class catalog {
                     .text(paragraph)
                     .appendTo(element);
             }
-        } else {
-            $("<div>")
-                .addClass("centered description-paragraph")
-                .text("???")
-                .appendTo(element);
         }
     }
     
