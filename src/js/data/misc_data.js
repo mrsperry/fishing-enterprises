@@ -27,7 +27,7 @@ class misc_data {
 
         // Set the difference display
         $("#money-difference")
-            .text(" (\n" + (money.difference >= 0 ? "+" : "-") + utils.stringify(Math.abs(money.difference)) + ")")
+            .text(" (" + (money.difference >= 0 ? "+" : "-") + utils.stringify(Math.abs(money.difference)) + ")")
             // When updating, stop any animation and show the display, this creates a refresh look
             .stop()
             .show()
