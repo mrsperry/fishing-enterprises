@@ -40,6 +40,11 @@
     width: 108%;
 }
 
+#boat-separator {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 /* Area selector */
 #area-selector {
     float: right;

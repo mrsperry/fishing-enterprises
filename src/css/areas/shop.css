@@ -8,7 +8,9 @@
 /* Clickable holders */ 
 #bait-item-holder, #tackle-item-holder, #shopkeeper-holder,
     #catalog-holder, #license-holder, #contract-holder,
-    #chest-holder, #door-holder {
+    #chest-holder, #door-holder, #door-outside-holder,
+    #fishing-rods-holder, #diving-equipment-holder, #fuel-holder,
+    #boat-holder {
     pointer-events: auto;
 }
 
@@ -129,7 +131,7 @@
     height: 50px;
 }
 
-#door-holder {
+#door-holder, #door-outside-holder {
     font-size: 11pt;
     display: block;
     top: -871px;
@@ -138,11 +140,51 @@
     height: 295px;
 }
 
-#door-decor {
+#door-decor, #door-outside-decor {
     top: 160px;
     left: -110px;
     width: 0px;
     height: 0px;
+}
+
+/* Outside items */
+#door-outside-holder {
+    top: -357px;
+    left: -6px;
+}
+
+#fishing-rods-holder {
+    display: block;
+    font-size: 11pt;
+    top: -618px;
+    left: 182px;
+    width: 102px;
+    height: 135px;
+}
+
+#diving-equipment-holder {
+    display: block;
+    top: -600px;
+    left: 187px;
+    width: 93px;
+    height: 110px;
+}
+
+#fuel-holder {
+    display: block;
+    top: -710px;
+    left: 310px;
+    width: 70px;
+    height: 110px;
+    z-index: 1;
+}
+
+#boat-holder {
+    display: block;
+    top: -920px;
+    left: 340px;
+    width: 182px;
+    height: 210px;
 }
 
 /* Tooltips */
@@ -179,4 +221,8 @@
 
 .tackle-tooltip {
     margin-top: 47px;
+}
+
+#boat-tooltip {
+    margin: 80px 0px 0px 25px;
 }

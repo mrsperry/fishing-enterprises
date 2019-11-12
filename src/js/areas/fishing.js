@@ -182,6 +182,15 @@ class fishing {
                     .appendTo(counter);
             }
 
+            // Create the fuel counter
+            const boat_counters = $("#boat-counters");
+            create_counter(boat_counters, misc_data.get("fuel"), false);
+            $("<div>")
+                .attr("id", "boat-separator")
+                .addClass("line-break")
+                .hide()
+                .appendTo(boat_counters);
+
             // Set area specific data
             let data = area_data.get_data();
             for (const name in data) {

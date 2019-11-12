@@ -1,90 +1,155 @@
 class shop {
-    static clickables = [
-        {
-            name: "shopkeeper",
-            text: () => {
-                const amount = utils.stringify(shop.get_fish_value(false));
-                return "Sell your fish (+$" + amount + ")";
-            },
-            on_click: () => {
-                const value = shop.get_fish_value(true);
+    static clickables = {
+        inside: [
+            {
+                name: "shopkeeper",
+                text: () => {
+                    const amount = utils.stringify(shop.get_fish_value(false));
+                    return "Sell your fish (+$" + amount + ")";
+                },
+                on_click: () => {
+                    const value = shop.get_fish_value(true);
 
-                if (value > 0) {
-                    // Add the total value of all fish and reset their values
-                    misc_data.update_money(value);
-                } else {
-                    messenger.write("You don't have any fish to sell!");
-                }
-            }
-        },
-        {
-            name: "catalog",
-            text: "Fish Catalog ($250)",
-            on_click: () => {
-                $("#catalog-break")
-                    .fadeIn();
-                $("#catalog-selector-button")
-                    .fadeIn();
-                $("#catalog-holder")
-                    .css("visibility", "hidden");
-            }
-        },
-        {
-            name: "license",
-            decor: true,
-            text: () => {
-                const data = shop.get_next_area();
-                if (data != null) {
-                    return data.display + " License ($" + utils.stringify(data.price) + ")";
-                }
-            },
-            on_click: () => {
-                const money = misc_data.get("money").count;
-                const data = shop.get_next_area();
-
-                if (money > data.price) {
-                    misc_data.update_money(-data.price);
-
-                    // Show the area selector button
-                    $("#" + data.internal + "-selector-button")
-                        .fadeIn();
-
-                    data.purchased = true;
-
-                    // Remove the license art if the last one has been purchased
-                    if (shop.get_next_area() == null) {
-                        // Remove the license
-                        $("#license-holder")
-                            .css("visibility", "hidden");
+                    if (value > 0) {
+                        // Add the total value of all fish and reset their values
+                        misc_data.update_money(value);
+                    } else {
+                        messenger.write("You don't have any fish to sell!");
                     }
-                } else {
-                    messenger.write("You don't have enough money!");
+                }
+            },
+            {
+                name: "catalog",
+                text: "Fish Catalog ($250)",
+                on_click: () => {
+                    $("#catalog-break")
+                        .fadeIn();
+                    $("#catalog-selector-button")
+                        .fadeIn();
+                    $("#catalog-holder")
+                        .css("visibility", "hidden");
+                }
+            },
+            {
+                name: "license",
+                decor: true,
+                text: () => {
+                    const data = shop.get_next_area();
+                    if (data != null) {
+                        return data.display + " License ($" + utils.stringify(data.price) + ")";
+                    }
+                },
+                on_click: () => {
+                    const money = misc_data.get("money").count;
+                    const data = shop.get_next_area();
+
+                    if (money > data.price) {
+                        misc_data.update_money(-data.price);
+
+                        // Show the area selector button
+                        $("#" + data.internal + "-selector-button")
+                            .fadeIn();
+
+                        data.purchased = true;
+
+                        // Remove the license art if the last one has been purchased
+                        if (shop.get_next_area() == null) {
+                            // Remove the license
+                            $("#license-holder")
+                                .css("visibility", "hidden");
+                        }
+                    } else {
+                        messenger.write("You don't have enough money!");
+                    }
+                }
+            },
+            {
+                name: "contract",
+                decor: true,
+                text: "Buy the Shop ($15,000)",
+                on_click: () => {
+                }
+            },
+            {
+                name: "chest",
+                text: () => {
+                    return "Requires key";
+                },
+                on_click: () => {
+                }
+            },
+            {
+                name: "door",
+                decor: true,
+                text: "",
+                on_click: () => {
+                    $("#area-art")
+                        .fadeOut(400, () => {
+                            shop.load_outside();
+                        });
                 }
             }
-        },
-        {
-            name: "contract",
-            decor: true,
-            text: "Buy the Shop ($15,000)",
-            on_click: () => {
-            }
-        },
-        {
-            name: "chest",
-            text: () => {
-                return "Requires key";
+        ],
+        outside: [
+            {
+                name: "door-outside",
+                decor: true,
+                text: "",
+                on_click: () => {
+                    $("#area-art")
+                        .fadeOut(400, () => {
+                            shop.load_inside();
+                        });
+                }
             },
-            on_click: () => {
-            }
-        },
-        {
-            name: "door",
-            decor: true,
-            text: "",
-            on_click: () => {
-            }
-        }
-    ];
+            {
+                name: "fishing-rods",
+                text: "High Tension Rods ($1,500)",
+                on_click: () => {
+                    const boat = misc_data.get("boat");
+                    if (boat.purchased) {
+                        if (boat.diving.purchased) {
+                            shop.buy_boat_part("deep_sea", boat.rods);
+                        } else {
+                            messenger.write("You'll want some diving experience before buying that!")
+                        }
+                    } else {
+                        messenger.write("You'll want a boat before buying that!");
+                    }
+                }
+            },
+            {
+                name: "diving-equipment",
+                text: "Diving Equipment ($1,250)",
+                on_click: () => {
+                    const boat = misc_data.get("boat");
+                    if (boat.purchased) {
+                        shop.buy_boat_part("spear_fishing", boat.diving);
+                    } else {
+                        messenger.write("You'll want a boat before buying that!");
+                    }
+                }
+            },
+            {
+                name: "fuel",
+                text: "Fuel ($5)",
+                on_click: () => {
+                    if (misc_data.get("boat").purchased) {
+                        shop.buy_consumable(misc_data.get("fuel"), false);
+                    } else {
+                        messenger.write("You'll want a boat before buying that!");
+                    }
+                }
+            },
+            {
+                name: "boat",
+                text: "Boat ($2,000)",
+                on_click: () => {
+                    shop.buy_boat_part("reef", misc_data.get("boat"));
+                }
+            },
+        ]
+    };
 
     static initialize() {
         // Disable the area selector button
@@ -107,11 +172,11 @@ class shop {
                 $("#resource-buttons")
                     .empty();
 
-                shop.load_elements();
+                shop.load_inside();
             });
     }
 
-    static load_elements() {
+    static load_inside() {
         // Load shop art
         const art = $("#area-art")
             .html(art_data.get("shop", "background"))
@@ -174,7 +239,28 @@ class shop {
         }
 
         // Create desk clickables
-        for (const item of shop.clickables) {
+        shop.create_clickables(shop.clickables.inside, false);
+
+        // Hide the contract until all upgrades are bought
+        $("#contract-holder")
+            .css("visibility", "hidden");
+    }
+
+    static load_outside() {
+        $("#area-art")
+            .text(art_data.get("shop", "outside"))
+            .fadeIn();
+
+        // Create all clickables
+        shop.create_clickables(shop.clickables.outside, true);
+
+        // Hide purchased items
+    }
+
+    static create_clickables(clickables, outside) {
+        const art = $("#area-art");
+
+        for (const item of clickables) {
             const holder = $("<div>")
                 .attr("id", item.name + "-holder")
                 .addClass("art shop-item no-select")
@@ -223,27 +309,24 @@ class shop {
             });
         }
 
-        // Hide the contract until all upgrades are bought
-        $("#contract-holder")
-            .css("visibility", "hidden");
-
         // Special behavior for door hover
-        $("#door-holder")
+        const door_name = outside ? "door-outside" : "door";
+        $("#" + door_name + "-holder")
             .off("hover")
             .hover(() => {
-                $("#door-decor")
+                $("#" + door_name + "-decor")
                     .stop()
                     .fadeIn(200);
             }, () => {
-                $("#door-decor")
+                $("#" + door_name + "-decor")
                     .stop()
                     .fadeOut(200);
             });
         // Hide the door arrow
-        $("#door-decor")
+        $("#" + door_name + "-decor")
             .hide();
         // Remove door tooltip
-        $("#door-tooltip")
+        $("#" + door_name + "-tooltip")
             .remove();
     }
 
@@ -259,9 +342,11 @@ class shop {
             }
 
             // Check if the player can hold this item
-            if (item.count == item.max) {
-                messenger.write("You can't hold any more!");
-                return false;
+            if (item.count != null && item.max != null) {
+                if (item.count == item.max) {
+                    messenger.write("You can't hold any more!");
+                    return false;
+                }
             }
 
             // Check if the item's message should be displayed
@@ -320,6 +405,34 @@ class shop {
         }
 
         return true;
+    }
+
+    // Handles purchasing the boat and subsequent parts
+    static buy_boat_part(area, data) {
+        if (!data.purchased) {
+            // Check if the area can be unlocked
+            if (shop.buy(data, false)) {
+                area_data.get(area).purchased = true;
+
+                // Hide the purchased item
+                $("#" + data.internal + "-holder")
+                    .css("visibility", "hidden");
+
+
+                // Show the bought item in the bout counters
+                if (data.internal != "boat") {
+                    $("#boat-separator")
+                        .fadeIn();
+
+                    $("<div>")
+                        .addClass("counter")
+                        .text(data.display)
+                        .hide()
+                        .fadeIn()
+                        .appendTo($("#boat-counters"));
+                }
+            }
+        }
     }
 
     /*

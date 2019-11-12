@@ -52,8 +52,27 @@ class misc_data {
         fuel: {
             internal: "fuel",
             display: "Fuel",
+            message: "Diesel for any length trip out on the water.",
             max: 30,
             price: 5
+        },
+        boat: {
+            internal: "boat",
+            display: "Boat",
+            message: "An older vessel that may need a few patches before setting sail.",
+            price: 2000,
+            diving: {
+                internal: "diving-equipment",
+                display: "Diving Equipment",
+                message: "An assortment of aquatic gear including oxygen tanks, a mask and a snorkel.",
+                price: 1250
+            },
+            rods: {
+                internal: "fishing-rods",
+                display: "High Tension Rods",
+                message: "Rods built with reinforced materials and lines, allowing you to catch the strongest of fish.",
+                price: 1500
+            }
         }
     };
 }
