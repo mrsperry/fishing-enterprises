@@ -413,8 +413,11 @@ class shop {
                 $("#" + data.internal + "-holder")
                     .css("visibility", "hidden");
 
+                // Display the area selector button
+                $("#" + area + "-selector-button")
+                    .fadeIn();
 
-                // Show the bought item in the bout counters
+                // Show the bought item in the boat counters
                 if (data.internal != "boat") {
                     $("#boat-separator")
                         .fadeIn();
