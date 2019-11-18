@@ -22,7 +22,7 @@ class shop {
                 name: "catalog",
                 text: "Fish Catalog ($250)",
                 on_click: () => {
-                    if (shop.buy(misc_data.get("catalog"))) {
+                    if (shop.buy(misc_data.get("catalog"), false, true)) {
                         $("#catalog-break")
                             .fadeIn();
                         $("#catalog-selector-button")
@@ -42,17 +42,12 @@ class shop {
                     }
                 },
                 on_click: () => {
-                    const money = misc_data.get("money").count;
                     const data = shop.get_next_area();
 
-                    if (money > data.price) {
-                        misc_data.update_money(-data.price);
-
+                    if (shop.buy(data, false, false)) {
                         // Show the area selector button
                         $("#" + data.internal + "-selector-button")
                             .fadeIn();
-
-                        data.purchased = true;
 
                         // Remove the license art if the last one has been purchased
                         if (shop.get_next_area() == null) {
@@ -60,8 +55,6 @@ class shop {
                             $("#license-holder")
                                 .css("visibility", "hidden");
                         }
-                    } else {
-                        messenger.write("You don't have enough money!");
                     }
                 }
             },
@@ -333,7 +326,7 @@ class shop {
     }
 
     // Generic buy checks
-    static buy(item, free) {
+    static buy(item, free, message) {
         if (!free) {
             const money = misc_data.get("money");
 
@@ -352,7 +345,7 @@ class shop {
             }
 
             // Check if the item's message should be displayed
-            if (item.show_message != true) {
+            if (message && !item.show_message) {
                 messenger.write(item.display + ": " + item.message);
                 item.show_message = true;
             }
@@ -370,7 +363,7 @@ class shop {
     // Handles buying of bait or tackle
     static buy_consumable(item, free) {
         // Check base conditions
-        if (!shop.buy(item, free)) {
+        if (!shop.buy(item, free, true)) {
             return false;
         }
 
@@ -413,7 +406,7 @@ class shop {
     static buy_boat_part(area, data) {
         if (!data.purchased) {
             // Check if the area can be unlocked
-            if (shop.buy(data, false)) {
+            if (shop.buy(data, false, true)) {
                 area_data.get(area).purchased = true;
 
                 // Hide the purchased item
@@ -483,7 +476,10 @@ class shop {
             const area = data[internal];
 
             if (area.purchased != true) {
-                return area;
+                // Filter out ocean areas
+                if (!["reef", "spear_fishing", "deep_sea"].includes(area.internal)) {
+                    return area;
+                }
             }
         }
 
