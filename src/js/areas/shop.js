@@ -22,12 +22,14 @@ class shop {
                 name: "catalog",
                 text: "Fish Catalog ($250)",
                 on_click: () => {
-                    $("#catalog-break")
-                        .fadeIn();
-                    $("#catalog-selector-button")
-                        .fadeIn();
-                    $("#catalog-holder")
-                        .css("visibility", "hidden");
+                    if (shop.buy(misc_data.get("catalog"))) {
+                        $("#catalog-break")
+                            .fadeIn();
+                        $("#catalog-selector-button")
+                            .fadeIn();
+                        $("#catalog-holder")
+                            .css("visibility", "hidden");
+                    }
                 }
             },
             {

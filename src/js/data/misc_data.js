@@ -49,6 +49,12 @@ class misc_data {
             internal: "fish_meta",
             display: "Total fish caught"
         },
+        catalog: { 
+            internal: "catalog",
+            display: "Fishing Catalog",
+            message: "A handy book that allows you to view common information on fish.",
+            price: 250
+        },
         fuel: {
             internal: "fuel",
             display: "Fuel",
