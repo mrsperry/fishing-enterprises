@@ -35,9 +35,13 @@
 }
 
 /* Line breaks */
-.counter-break {
-    margin: 10px 0px 10px -4%;
+.counter-break, .area-break {
+    margin: 5px 0px 5px -4%;
     width: 108%;
+}
+
+.area-break {
+    margin: 10px 0px 10px -4%;
 }
 
 #boat-separator {

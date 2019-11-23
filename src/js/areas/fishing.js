@@ -135,7 +135,7 @@ class fishing {
                 }
             });
             $("<div>")
-                .addClass("counter-break")
+                .addClass("area-break")
                 .appendTo(selector);
 
             // Create the fish counters
@@ -279,7 +279,7 @@ class fishing {
             // Create catalog button
             $("<div>")
                 .attr("id", "catalog-break")
-                .addClass("counter-break")
+                .addClass("area-break")
                 .hide()
                 .appendTo(selector);
             new button({

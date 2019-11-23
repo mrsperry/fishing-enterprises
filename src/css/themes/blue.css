@@ -24,7 +24,7 @@ button:disabled {
 }
 
 /* Line break colors */
-.line-break, .counter-break, .catalog-area-break {
+.line-break, .counter-break, .catalog-area-break, .area-break {
     border: 0.5px solid #444465;
 }
 
