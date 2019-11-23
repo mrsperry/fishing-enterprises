@@ -21,6 +21,7 @@ class shop {
             {
                 name: "catalog",
                 text: "Fish Catalog ($250)",
+                ref: misc_data.get("catalog"),
                 on_click: () => {
                     if (shop.buy(misc_data.get("catalog"), false, true)) {
                         $("#catalog-break")
@@ -35,6 +36,7 @@ class shop {
             {
                 name: "license",
                 decor: true,
+                ref: area_data.get("pier"),
                 text: () => {
                     const data = shop.get_next_area();
                     if (data != null) {
@@ -100,6 +102,7 @@ class shop {
             {
                 name: "fishing-rods",
                 text: "High Tension Rods ($1,500)",
+                ref: misc_data.get("boat").rods,
                 on_click: () => {
                     const boat = misc_data.get("boat");
                     if (boat.purchased) {
@@ -116,6 +119,7 @@ class shop {
             {
                 name: "diving-equipment",
                 text: "Diving Equipment ($1,250)",
+                ref: misc_data.get("boat").diving,
                 on_click: () => {
                     const boat = misc_data.get("boat");
                     if (boat.purchased) {
@@ -139,6 +143,7 @@ class shop {
             {
                 name: "boat",
                 text: "Boat ($2,000)",
+                ref: misc_data.get("boat"),
                 on_click: () => {
                     shop.buy_boat_part("reef", misc_data.get("boat"));
                 }
@@ -261,6 +266,12 @@ class shop {
                 .addClass("art shop-item no-select")
                 .click(item.on_click)
                 .appendTo(art);
+
+            if (item.ref != null && item.ref.purchased) {
+                holder.css("visibility", "hidden");
+                continue;
+            }
+            
             // Create the art element
             const child = $("<div>")
                 .addClass("flex flex-justify-center")
