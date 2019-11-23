@@ -57,6 +57,16 @@ class shop {
                             $("#license-holder")
                                 .css("visibility", "hidden");
                         }
+
+                        if (data.internal == "pier") {
+                            // Reset door cursor CSS
+                            $("#door-holder")
+                                .css("cursor", "");
+                            
+                            // Remove the door lock
+                            $("#door-lock")
+                                .fadeOut();
+                        }
                     }
                 }
             },
@@ -80,10 +90,14 @@ class shop {
                 decor: true,
                 text: "",
                 on_click: () => {
-                    $("#area-art")
-                        .fadeOut(400, () => {
-                            shop.load_outside();
-                        });
+                    if (area_data.get("pier").purchased) {
+                        $("#area-art")
+                            .fadeOut(400, () => {
+                                shop.load_outside();
+                            });
+                    } else {
+                        messenger.write("The door is locked.");
+                    }
                 }
             }
         ],
@@ -313,6 +327,16 @@ class shop {
             holder.click(() => {
                 tooltip.text(tooltip_text());
             });
+
+            // Display the door lock f the prerequisites are not met
+            if (item.name == "door" && !area_data.get("pier").purchased) {
+                $("<div>")
+                    .attr("id", "door-lock")
+                    .text(art_data.get("shop", "door-lock"))
+                    .appendTo(holder);
+
+                holder.css("cursor", "default");
+            }
         }
 
         // Special behavior for door hover
@@ -320,14 +344,18 @@ class shop {
         $("#" + door_name + "-holder")
             .off("hover")
             .hover(() => {
-                $("#" + door_name + "-decor")
-                    .stop()
-                    .fadeIn(200);
+                // Don't fade in if the door is locked
+                if (door_name == "door" && area_data.get("pier").purchased) {
+                    $("#" + door_name + "-decor")
+                        .stop()
+                        .fadeIn(200);
+                }
             }, () => {
                 $("#" + door_name + "-decor")
                     .stop()
                     .fadeOut(200);
             });
+        
         // Hide the door arrow
         $("#" + door_name + "-decor")
             .hide();

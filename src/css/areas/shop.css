@@ -226,3 +226,10 @@
 #boat-tooltip {
     margin: 80px 0px 0px 25px;
 }
+
+/* Misc */
+#door-lock {
+    position: relative;
+    top: -120px;
+    left: 21.5px;
+}
