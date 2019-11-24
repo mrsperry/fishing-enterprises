@@ -313,7 +313,6 @@ class catalog {
     }
     
     static find_page(internal) {
-        console.log(catalog.pages);
         for (let index = 0; index < catalog.pages.length; index++) {
             const data = catalog.pages[index];
 
@@ -323,7 +322,6 @@ class catalog {
                     result--;
                 }
 
-                console.log("Jumping to: " + ((result / 2) + 2));
                 return (result / 2) + 2;
             }
         }
