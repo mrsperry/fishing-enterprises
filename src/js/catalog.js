@@ -25,6 +25,12 @@ class catalog {
             .appendTo(content);
 
         catalog.popup.add_close_button();
+        // Remove catalog CSS when the catalog is closed
+        $(".modal-close-button")
+            .click(() => {
+                css.remove(["catalog"]);
+            });
+
         new button({
             parent: "#button-holder",
             id: "previous-page",
