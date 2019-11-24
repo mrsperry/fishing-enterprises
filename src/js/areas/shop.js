@@ -485,7 +485,6 @@ class shop {
 
     // Handles display of unlocked items when buying an area
     static buy_area(data) {
-        console.log(data);
         // Add clickable unlocks
         let unlocks = data.unlocks;
         shop.unlocked = shop.unlocked.concat(unlocks);
