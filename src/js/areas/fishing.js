@@ -382,14 +382,17 @@ class fishing {
                     // Check if the selector buttons are hidden
                     const lake = $("#lake-selector-button");
                     if (lake.is(":hidden")) {
+                        let data = area_data.get("lake");
+
                         // Indicate the lake has been unlocked
-                        area_data.get("lake").purchased = true;
+                        data.purchased = true;
                         
                         // Show lake and shop buttons
                         lake.fadeIn();
 
                         $("#shop-selector-button")
                             .fadeIn();
+                        shop.unlocked = [...data.unlocks];
                     }
                 }
 

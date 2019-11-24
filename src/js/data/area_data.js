@@ -32,6 +32,9 @@ class area_data {
         lake: {
             internal: "lake",
             display: "Lake",
+            unlocks: [
+                "worms"
+            ],
             fish: {
                 bass: {
                     internal: "bass",
@@ -142,6 +145,11 @@ class area_data {
             internal: "river",
             display: "River",
             price: 300,
+            unlocks: [
+                "guppies",
+                "fly_tackle",
+                "cages"
+            ],
             fish: {
                 salmon: {
                     internal: "salmon",
@@ -266,6 +274,11 @@ class area_data {
             internal: "pier",
             display: "Pier",
             price: 500,
+            unlocks: [
+                "insects",
+                "bobber",
+                "spoon_lure"
+            ],
             fish: {
                 redfish: {
                     internal: "redfish",
@@ -424,6 +437,11 @@ class area_data {
             internal: "reef",
             display: "Reef",
             price: 1000,
+            unlocks: [
+                "mussels",
+                "crustaceans",
+                "spoon_lure"
+            ],
             fish: {
                 snapper: {
                     internal: "snapper",
@@ -572,6 +590,10 @@ class area_data {
             internal: "spear_fishing",
             display: "Spear Fishing",
             price: 1750,
+            unlocks: [
+                "squid",
+                "harpoon"
+            ],
             fish: {
                 lobster: {
                     internal: "lobster",
@@ -730,6 +752,10 @@ class area_data {
             internal: "deep_sea",
             display: "Deep Sea",
             price: 2500,
+            unlocks: [
+                "ground_fish",
+                "spinner_lure"
+            ],
             fish: {
                 whitefish: {
                     display: "Whitefish",

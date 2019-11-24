@@ -58,6 +58,9 @@ class shop {
                                 .css("visibility", "hidden");
                         }
 
+                        // Fade in unlocked items
+                        shop.buy_area(data);
+
                         if (data.internal == "pier") {
                             // Reset door cursor CSS
                             $("#door-holder")
@@ -210,6 +213,7 @@ class shop {
                 const item = data[type][internal];
 
                 const holder = $("<div>")
+                    .attr("id", internal + "-item-holder")
                     .addClass("shop-item no-select flex flex-justify-center")
                     .click((event) => {
                         // Check if the item was purchased
@@ -229,6 +233,10 @@ class shop {
                             .fadeOut(200);
                     })
                     .appendTo(parent);
+                
+                if (!shop.unlocked.includes(internal)) {
+                    holder.css("visibility", "hidden");
+                }
 
                 // Add type specific data
                 if (type == "bait") {
@@ -442,18 +450,19 @@ class shop {
     }
 
     // Handles purchasing the boat and subsequent parts
-    static buy_boat_part(area, data) {
+    static buy_boat_part(area_name, data) {
         if (!data.purchased) {
             // Check if the area can be unlocked
             if (shop.buy(data, false, true)) {
-                area_data.get(area).purchased = true;
+                let area = area_data.get(area_name);
+                area.purchased = true;
 
                 // Hide the purchased item
                 $("#" + data.internal + "-holder")
                     .css("visibility", "hidden");
 
                 // Display the area selector button
-                $("#" + area + "-selector-button")
+                $("#" + area_name + "-selector-button")
                     .fadeIn();
 
                 // Show the bought item in the boat counters
@@ -468,7 +477,25 @@ class shop {
                         .fadeIn()
                         .appendTo($("#boat-counters"));
                 }
+
+                shop.buy_area(area);
             }
+        }
+    }
+
+    // Handles display of unlocked items when buying an area
+    static buy_area(data) {
+        console.log(data);
+        // Add clickable unlocks
+        let unlocks = data.unlocks;
+        shop.unlocked = shop.unlocked.concat(unlocks);
+
+        // Fade in the unlocked items
+        for (let item of unlocks) {
+            $("#" + item + "-item-holder")
+                .css("visibility", "")
+                .hide()
+                .fadeIn();
         }
     }
 
