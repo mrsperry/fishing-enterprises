@@ -17,7 +17,6 @@
 }
 
 #catalog-divider {
-    border: 0.5px solid black;
     margin: 0px 20px;
     width: 0px;
     height: 100%;
@@ -71,13 +70,12 @@
     justify-content: space-evenly;
 }
 
-table {
+.catalog-table {
     border-collapse: collapse;
     margin: 20px 5px 0px;
 }
 
-th, td {
-    border: 1px solid black;
+.catalog-table > tr > th, .catalog-table > tr > td {
     padding: 5px 7px;
 }
 

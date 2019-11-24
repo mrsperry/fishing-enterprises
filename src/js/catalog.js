@@ -252,6 +252,7 @@ class catalog {
             }
 
             const table = $("<table>")
+                .addClass("catalog-table")
                 .appendTo(tables);
             $("<div>")
                 .addClass("centered bold")

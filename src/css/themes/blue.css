@@ -66,3 +66,12 @@ a:hover, .link:hover {
 .achievement-title {
     border-bottom: 1px solid #444465;
 }
+
+/* Catalog */
+#catalog-divider {
+    border: 0.5px solid #444465;
+}
+
+.catalog-table > tr > th, .catalog-table > tr > td {
+    border: 1px solid #444465;
+}
