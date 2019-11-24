@@ -359,7 +359,9 @@ class fishing {
                     // Update the number of fish caught in this area
                     const element = $("#" + data.internal + "-amount-caught");
                     const amount = Number.parseInt(element.text()) + 1;
-                    element.text(amount);
+                    if (fish.internal != "minnows") {
+                        element.text(amount);
+                    }
 
                     // Check if the counter should be grayed out
                     let max = Object.keys(data.fish).length;
