@@ -12,10 +12,6 @@ class misc_data {
         }
     }
 
-    static get(index) {
-        return misc_data.data[index];
-    }
-
     static update_money(amount) {
         const money = misc_data.get("money");
         money.count += amount;
@@ -36,6 +32,14 @@ class misc_data {
                 // Reset the difference
                 money.difference = 0;
             });
+    }
+
+    static get(index) {
+        return misc_data.data[index];
+    }
+
+    static get_data() {
+        return misc_data.data;
     }
 
     static data = {
