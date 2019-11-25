@@ -59,18 +59,20 @@ class misc_data {
             message: "A handy book that allows you to view common information on fish.",
             price: 250
         },
-        fuel: {
-            internal: "fuel",
-            display: "Fuel",
-            message: "Diesel for any length trip out on the water.",
-            max: 30,
-            price: 5
-        },
         boat: {
             internal: "boat",
             display: "Boat",
             message: "An older vessel that may need a few patches before setting sail.",
             price: 2000,
+            fuel: {
+                internal: "fuel",
+                display: "Fuel",
+                message: "Diesel for any length trip out on the water.",
+                max: 30,
+                price: 5,
+                count: 0,
+                total: 0
+            },
             diving: {
                 internal: "diving-equipment",
                 display: "Diving Equipment",

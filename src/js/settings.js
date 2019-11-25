@@ -89,7 +89,7 @@ class settings {
                     }
 
                     // Set fuel
-                    const fuel = misc_data.get("fuel");
+                    const fuel = misc_data.get("boat").fuel;
                     while (fuel.count != fuel.max) {
                         shop.buy_consumable(fuel, true);
                     }

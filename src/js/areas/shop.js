@@ -151,7 +151,7 @@ class shop {
                 text: "Fuel ($5)",
                 on_click: () => {
                     if (misc_data.get("boat").purchased) {
-                        shop.buy_consumable(misc_data.get("fuel"), false);
+                        shop.buy_consumable(misc_data.get("boat").fuel, false);
                     } else {
                         messenger.write("You'll want a boat before buying that!");
                     }

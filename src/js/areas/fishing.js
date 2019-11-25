@@ -184,7 +184,7 @@ class fishing {
 
             // Create the fuel counter
             const boat_counters = $("#boat-counters");
-            create_counter(boat_counters, misc_data.get("fuel"), false);
+            create_counter(boat_counters, misc_data.get("boat").fuel, false);
             $("<div>")
                 .attr("id", "boat-separator")
                 .addClass("line-break")
