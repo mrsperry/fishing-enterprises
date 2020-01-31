@@ -1,0 +1,14 @@
+#footer {
+    position: fixed;
+    font-size: 1em;
+    bottom: 1em;
+}
+
+#footer > a {
+    padding: 0em 1em;
+    border-right: 1px solid #000000;
+}
+
+#footer > a:last-child {
+    border-right: none;
+}

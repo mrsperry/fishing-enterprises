@@ -7,6 +7,7 @@ class Main {
     }
 
     static startGame() {
+        Modules.loadView("footer", true);
         Modules.loadView("fishing", false);
     }
 }
