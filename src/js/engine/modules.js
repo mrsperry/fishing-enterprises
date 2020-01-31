@@ -28,26 +28,33 @@ class Modules {
     static loadView(id, persistent) {
         Debug.write("Modules", "Loading view '" + id + "'");
 
+        // Get the view HTML
+        const view = Modules.data.views[id];
+
+        if (persistent) {
+            $(view)
+                .hide()
+                .fadeIn()
+                .appendTo("body");
+            return;
+        }
+
         const loadContainer = () => {
-            const view = Modules.data.views[id];
-                
-            const container = $("<div>")
+            $("<div>")
+                .attr("id", "module-container")
                 .html(view)
                 .hide()
                 .fadeIn()
                 .appendTo("body");
-
-            // Mark this container as removable
-            if (persistent == false) {
-                container.attr("id", "module-container");
-            }
         };
 
         // Check if a container already exists
         const container = $("#module-container");
         if (container.length != 0) {
-            // Fade out the container
+            // Fade out and remove the container
             container.fadeOut(400, () => {
+                container.remove();
+
                 loadContainer();
             });
         } else {
