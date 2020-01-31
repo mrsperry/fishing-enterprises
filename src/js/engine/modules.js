@@ -25,13 +25,33 @@ class Modules {
         }
     }
 
-    static loadView(id) {
+    static loadView(id, persistent) {
         Debug.write("Modules", "Loading view '" + id + "'");
-        const view = Modules.data.views[id];
-        
-        $("<div>")
-            .addClass("module-container")
-            .html(view)
-            .appendTo("body");
+
+        const loadContainer = () => {
+            const view = Modules.data.views[id];
+                
+            const container = $("<div>")
+                .html(view)
+                .hide()
+                .fadeIn()
+                .appendTo("body");
+
+            // Mark this container as removable
+            if (persistent == false) {
+                container.attr("id", "module-container");
+            }
+        };
+
+        // Check if a container already exists
+        const container = $("#module-container");
+        if (container.length != 0) {
+            // Fade out the container
+            container.fadeOut(400, () => {
+                loadContainer();
+            });
+        } else {
+            loadContainer();
+        }
     }
 }
