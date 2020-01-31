@@ -1,0 +1,14 @@
+#main-menu-container {
+    width: 62.5em;
+}
+
+#main-menu-logo {
+    width: 25em;
+    height: 12.5em;
+}
+
+#main-menu-header {
+    font-size: 2.5em;
+    padding: 0em 1em;
+    margin: 0em 0em 0.5em;
+}

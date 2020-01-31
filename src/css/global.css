@@ -1,0 +1,56 @@
+:root {
+    font-family: monospace;
+    font-size: 16px;
+}
+
+body {
+    margin: 0em;
+}
+
+/* Button styles */
+button {
+    font-family: monospace;
+    font-size: 0.8em;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    width: 16em;
+    height: 3.5rem;
+    padding: 0.5em;
+    border: 1px solid #000000;
+    margin: 0.3em;
+}
+
+button:hover {
+    background-color: #DFDFDF;
+}
+
+/* Flex styles */
+.flex {
+    display: flex;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+/* Text styles */
+.bold {
+    font-weight: bold;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Border styles */
+.border-bottom {
+    border-bottom: 1px solid #000000;
+}
