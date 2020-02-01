@@ -11,7 +11,7 @@ class Main {
         Modules.loadView("fishing", false);
     }
 
-    static loadSettings() {
-        Modules.loadView("menus/settings-menu", true);
+    static loadMenu(type) {
+        Modules.loadView("menus/" + type + "-menu", true);
     }
 }
