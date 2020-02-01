@@ -35,6 +35,39 @@ a:hover {
     color: hsl(200, 100%, 50%);
 }
 
+/* Modals */
+.modal-container {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    background-color: #FFFFFF;
+    padding: 1em;
+    border: 1px solid #000000;
+}
+
+.modal-header {
+    align-self: center;
+    width: 90%;
+    margin: 0em 0em 0.5em;
+}
+
+.modal-active, .modal-active:hover  {
+    color: #000000;
+    font-weight: bold;
+    cursor: default;
+}
+
+.modal-close {
+    align-self: center;
+    width: 15em;
+    height: 3.5em;
+    margin: 1em 0em 0em;
+}
+
 /* Flex styles */
 .flex {
     display: flex;
@@ -45,6 +78,11 @@ a:hover {
 }
 
 .flex-align-center {
+    align-items: center;
+}
+
+.flex-centered {
+    justify-content: center;
     align-items: center;
 }
 

@@ -1,0 +1,24 @@
+#settings-modal > div {
+    margin: 0.5em 0em;
+}
+
+#settings-modal > div > p {
+    margin: 0em;
+}
+
+#settings-modal > div > a {
+    padding: 0em 0.5em;
+    border-right: 1px solid #000000;
+}
+
+#settings-modal > div > a:last-child {
+    border-right: none;
+}
+
+#settings-modal > #settings-dev-tools {
+    margin-bottom: 0.1em;
+}
+
+#settings-modal > #settings-logging {
+    margin-top: 0em;
+}

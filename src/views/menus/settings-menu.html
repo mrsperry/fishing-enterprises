@@ -1,0 +1,29 @@
+<div class="modal-container flex flex-centered">
+    <div id="settings-modal" class="modal flex flex-column">
+        <h2 class="modal-header centered bold border-bottom">Settings</h2>
+        <div id="settings-color-theme" class="flex">
+            <p>Color theme:</p>
+            <a id="settings-color-theme-light" class="modal-active">Light</a>
+            <a id="settings-color-theme-dark">Dark</a>
+            <a id="settings-color-theme-blue">Blue</a>
+        </div>
+        <div id="settings-saves" class="flex">
+            <p>Saves:</p>
+            <a id="settings-saves-download">Download save</a>
+            <a id="settings-saves-upload">Load save</a>
+            <a id="settings-saves-restart">Restart game</a>
+        </div>
+        <div id="settings-dev-tools" class="flex">
+            <p>Dev tools:</p>
+            <a id="settings-dev-tools-true" class="modal-active">Enabled</a>
+            <a id="settings-dev-tools-false">Disabled</a>
+        </div>
+        <div id="settings-logging" class="flex">
+            <p>Console logging:</p>
+            <a id="settings-logging-true">Enabled</a>
+            <a id="settings-logging-false" class="modal-active">Disabled</a>
+        </div>
+        <div id="settings-version">Version: dev-0.3</div>
+        <button class="modal-close" onclick="Modules.clearModal();">Close</button>
+    </div>
+</div>

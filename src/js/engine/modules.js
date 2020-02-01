@@ -61,4 +61,11 @@ class Modules {
             loadContainer();
         }
     }
+
+    static clearModal() {
+        const modal = $(".modal-container")
+            .fadeOut(400, () => {
+                modal.remove();
+            });
+    }
 }

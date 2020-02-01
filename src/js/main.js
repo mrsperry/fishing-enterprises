@@ -10,4 +10,8 @@ class Main {
         Modules.loadView("footer", true);
         Modules.loadView("fishing", false);
     }
+
+    static loadSettings() {
+        Modules.loadView("menus/settings-menu", true);
+    }
 }
