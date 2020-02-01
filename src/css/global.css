@@ -24,6 +24,17 @@ button:hover {
     background-color: #DFDFDF;
 }
 
+/* Link styles */
+a {
+    color: hsl(200, 100%, 35%);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: hsl(200, 100%, 50%);
+}
+
 /* Flex styles */
 .flex {
     display: flex;

@@ -4,18 +4,11 @@
     bottom: 1em;
 }
 
-#footer > a, #footer > a:visited {
-    color: hsl(200, 100%, 35%);
-    text-decoration: none;
-    cursor: pointer;
+#footer > a {
     padding: 0em 1em;
     border-right: 1px solid #000000;
 }
 
 #footer > a:last-child {
     border-right: none;
-}
-
-#footer > a:hover {
-    color: hsl(200, 100%, 50%);
 }
