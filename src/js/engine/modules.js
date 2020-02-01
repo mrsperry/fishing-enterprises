@@ -18,8 +18,23 @@ class Modules {
             Modules.data[source] = {};
 
             // Load all files in the manifest
-            for (const file of manifest.split("\n")) {
-                const fileName = file.split(".")[0];
+            for (let file of manifest.split("\n")) {
+                let fileName = file.split(".")[0];
+
+                // Check if a stylesheet should be loaded with this module
+                if (fileName.startsWith("+")) {
+                    fileName = fileName.substring(1);
+                    file = file.substring(1);
+
+                    Debug.write("Modules", "Adding stylesheet: " + fileName + ".css");
+                    // Add the stylesheet
+                    $("<link>")
+                        .attr("rel", "stylesheet")
+                        .attr("type", "text/css")
+                        .attr("href", "src/css/" + fileName + ".css")
+                        .appendTo("head");
+                }
+
                 Modules.data[source][fileName] = await $.get(path + file);
             }
         }
