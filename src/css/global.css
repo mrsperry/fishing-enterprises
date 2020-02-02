@@ -99,6 +99,10 @@ a:hover {
     text-align: center;
 }
 
+.pre {
+    white-space: pre;
+}
+
 /* Border styles */
 .border-bottom {
     border-bottom: 1px solid #000000;

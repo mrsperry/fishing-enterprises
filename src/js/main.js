@@ -8,7 +8,10 @@ class Main {
 
     static startGame() {
         Modules.loadView("footer", true);
-        Modules.loadView("fishing", false);
+
+        $.when(Modules.loadView("fishing", false)).done(() => {
+            Areas.switchTo("lake", false);
+        });
     }
 
     static loadMenu(type) {

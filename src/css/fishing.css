@@ -1,0 +1,15 @@
+#fishing-content {
+    position: relative;
+}
+
+#fishing-content-buttons {
+    position: absolute;
+    width: min-content;
+    top: 0em;
+    left: 0em;
+}
+
+#fishing-content-buttons > button {
+    width: 10rem;
+    height: 2.75rem;
+}
