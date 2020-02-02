@@ -4,7 +4,7 @@ class Modules {
         Modules.data = {};
 
         // Source folders to find modules
-        const sources = ["views"];
+        const sources = ["views", "art"];
 
         for (const source of sources) {
             // Get the path for this data folder
@@ -35,7 +35,35 @@ class Modules {
                         .appendTo("head");
                 }
 
-                Modules.data[source][fileName] = await $.get(path + file);
+                const contents = await $.get(path + file);
+
+                // Split art files into their individual assets
+                if (source == "art") {
+                    Modules.data.art[fileName] = {};
+
+                    // The name of this art piece
+                    let name = "";
+                    // The art piece contents
+                    let art = "";
+
+                    for (const line of contents.split("\n")) {
+                        // Check if this line is the ID of a new piece
+                        if (line.startsWith("#")) {
+                            // Make sure an empty piece is not added
+                            if (name != "") {
+                                Modules.data.art[fileName][name] = art;
+                                
+                                art = "";
+                            }
+
+                            name = line.split(":")[1].trim();
+                        } else {
+                            art += line;
+                        }
+                    }
+                } else {
+                    Modules.data[source][fileName] = contents;
+                }
             }
         }
     }
@@ -82,5 +110,9 @@ class Modules {
             .fadeOut(400, () => {
                 modal.remove();
             });
+    }
+
+    static getArt(file, id) {
+        return Modules.data.art[file][id];
     }
 }
