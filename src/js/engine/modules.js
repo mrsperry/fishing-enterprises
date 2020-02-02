@@ -110,11 +110,19 @@ class Modules {
         });
     }
 
+    static clearElement(selector) {
+        return new Promise((resolve, reject) => {
+            const element = $(selector)
+                .fadeOut(400, () => {
+                    element.remove();
+
+                    resolve();
+                });
+        });
+    }
+
     static clearModal() {
-        const modal = $(".modal-container")
-            .fadeOut(400, () => {
-                modal.remove();
-            });
+        Modules.clearElement(".module-container");
     }
 
     static getArt(file, id) {
