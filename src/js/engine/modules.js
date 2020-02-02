@@ -82,27 +82,32 @@ class Modules {
             return;
         }
 
-        const loadContainer = () => {
+        const loadContainer = (resolve) => {
             $("<div>")
                 .attr("id", "module-container")
                 .html(view)
                 .hide()
                 .fadeIn()
                 .appendTo("body");
+
+            resolve();
         };
 
-        // Check if a container already exists
-        const container = $("#module-container");
-        if (container.length != 0) {
-            // Fade out and remove the container
-            container.fadeOut(400, () => {
-                container.remove();
+        return new Promise((resolve, reject) => {
+            // Check if a container already exists
+            const container = $("#module-container");
 
-                loadContainer();
-            });
-        } else {
-            loadContainer();
-        }
+            if (container.length != 0) {
+                // Fade out and remove the container
+                container.fadeOut(400, () => {
+                    container.remove();
+
+                    loadContainer(resolve);
+                });
+            } else {
+                loadContainer(resolve);
+            }
+        });
     }
 
     static clearModal() {
