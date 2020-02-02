@@ -12,7 +12,7 @@ class Modules {
 
             // Get the manifest for this data folder
             const manifest = await $.get(path + source + ".manifest");
-            Debug.write("Modules", "Found source tree for '" + source + "'");
+            Debug.write("Modules", "Found manifest: " + source + ".manifest");
 
             // Initialize this data folder's object
             Modules.data[source] = {};
@@ -69,7 +69,7 @@ class Modules {
     }
 
     static loadView(id, persistent) {
-        Debug.write("Modules", "Loading view '" + id + "'");
+        Debug.write("Modules", "Loading view: " + id + ".html");
 
         // Get the view HTML
         const view = Modules.data.views[id];
