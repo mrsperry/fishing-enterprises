@@ -68,40 +68,24 @@ class Modules {
         }
     }
 
-    static loadView(id, persistent) {
+    static loadView(id, parent, remove) {
         Debug.write("Modules", "Loading view: " + id + ".html");
 
         // Get the view HTML
         const view = Modules.data.views[id];
 
-        if (persistent) {
+        const loadContainer = (resolve) => {
             $(view)
                 .hide()
                 .fadeIn()
-                .appendTo("body");
-            return;
-        }
-
-        const loadContainer = (resolve) => {
-            $("<div>")
-                .attr("id", "module-container")
-                .html(view)
-                .hide()
-                .fadeIn()
-                .appendTo("body");
+                .appendTo(parent == null ? "#content" : parent);
 
             resolve();
         };
 
-        return new Promise((resolve, reject) => {
-            // Check if a container already exists
-            const container = $("#module-container");
-
-            if (container.length != 0) {
-                // Fade out and remove the container
-                container.fadeOut(400, () => {
-                    container.remove();
-
+        return new Promise((resolve) => {
+            if (remove != null) {
+                $.when(Modules.clearElements(remove)).done(() => {
                     loadContainer(resolve);
                 });
             } else {
@@ -110,19 +94,31 @@ class Modules {
         });
     }
 
-    static clearElement(selector) {
-        return new Promise((resolve, reject) => {
-            const element = $(selector)
-                .fadeOut(400, () => {
-                    element.remove();
+    static clearElements(selectors) {
+        return new Promise((resolve) => {
+            // Convert a single selector into an array
+            if (typeof(selectors) == "string") {
+                selectors = [selectors];
+            }
 
-                    resolve();
-                });
+            for (let index = 0; index < selectors.length; index++) {
+                const current = selectors[index];
+
+                const element = $(current)
+                    .fadeOut(400, () => {
+                        element.remove();
+
+                        // Only resolve the promise on the last 
+                        if (index == selectors.length - 1) {
+                            resolve();
+                        }
+                    });
+                }
         });
     }
 
     static clearModal() {
-        Modules.clearElement(".module-container");
+        Modules.clearElements(".modal-container");
     }
 
     static getArt(file, id) {
