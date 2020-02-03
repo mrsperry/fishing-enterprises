@@ -4,7 +4,7 @@ class Modules {
         Modules.data = {};
 
         // Source folders to find modules
-        const sources = ["views", "art"];
+        const sources = ["views", "art", "data"];
 
         for (const source of sources) {
             // Get the path for this data folder
