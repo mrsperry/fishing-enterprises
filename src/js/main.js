@@ -8,6 +8,7 @@ class Main {
 
     static startGame() {
         $.when(Modules.loadView("fishing/messenger", null, ["#main-menu-container"])).done(() => {
+            Modules.loadView("fishing/misc", null, null);
             Modules.loadView("fishing/fishing", null, null);
             Modules.loadView("footer", null, null);
             

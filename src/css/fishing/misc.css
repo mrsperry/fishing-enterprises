@@ -1,0 +1,9 @@
+#misc-counters {
+    justify-content: space-between;
+    width: 100%;
+    margin: 0.5em 0em;
+}
+
+#total-fish {
+    visibility: hidden;
+}
