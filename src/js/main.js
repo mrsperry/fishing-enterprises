@@ -3,18 +3,19 @@ class Main {
         Debug.initialize();
         await Modules.initialize();
 
-        Modules.loadView("menus/main-menu", false);
+        Modules.loadView("menus/main-menu");
     }
 
     static startGame() {
-        Modules.loadView("footer", true);
-
-        $.when(Modules.loadView("fishing", false)).done(() => {
-            Areas.switchTo("lake", false);
+        $.when(Modules.loadView("fishing/messenger", null, ["#main-menu-container"])).done(() => {
+            Modules.loadView("fishing/fishing", null, null);
+            Modules.loadView("footer", null, null);
+            
+            Areas.switchTo("lake");
         });
     }
 
     static loadMenu(type) {
-        Modules.loadView("menus/" + type + "-menu", true);
+        Modules.loadView("menus/" + type + "-menu", "body", null);
     }
 }

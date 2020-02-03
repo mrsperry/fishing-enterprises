@@ -7,6 +7,10 @@ body {
     margin: 0em;
 }
 
+#content {
+    width: 62.5em;
+}
+
 /* Button styles */
 button {
     font-family: monospace;

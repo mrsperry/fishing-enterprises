@@ -1,5 +1,6 @@
 +menus/main-menu.html
 +menus/settings-menu.html
 +menus/about-menu.html
-+fishing.html
++fishing/fishing.html
++fishing/messenger.html
 +footer.html
