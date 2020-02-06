@@ -35,7 +35,7 @@
                 "message": "Little fish that make excellent bait for larger fish.",
                 "price": 1,
                 "max": 20,
-                "max_caught": 2,
+                "max-caught": 2,
                 "chance": 60,
                 "after": "bass",
                 "bait": [
@@ -117,7 +117,7 @@
         "price": 300,
         "unlocks": [
             "guppies",
-            "fly_tackle",
+            "fly-tackle",
             "cages"
         ],
         "fish": {
@@ -136,7 +136,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "fly_tackle",
+                        "type": "fly-tackle",
                         "amount": 1
                     }
                 ],
@@ -170,7 +170,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "fly_tackle",
+                        "type": "fly-tackle",
                         "amount": 1
                     }
                 ],
@@ -224,7 +224,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "fly_tackle",
+                        "type": "fly-tackle",
                         "amount": 1
                     }
                 ],
@@ -247,7 +247,7 @@
         "unlocks": [
             "insects",
             "bobber",
-            "spoon_lure"
+            "spoon-lure"
         ],
         "fish": {
             "redfish": {
@@ -337,8 +337,8 @@
                     ]
                 }
             },
-            "black_drum": {
-                "internal": "black_drum",
+            "black-drum": {
+                "internal": "black-drum",
                 "display": "Black Drum",
                 "message": "This bottom-feeder won't hesitate to fight the line.",
                 "price": 35,
@@ -378,7 +378,7 @@
                 "price": 45,
                 "max": 1,
                 "chance": 5,
-                "after": "black_drum",
+                "after": "black-drum",
                 "bait": [
                     {
                         "type": "insects",
@@ -387,7 +387,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spoon_lure",
+                        "type": "spoon-lure",
                         "amount": 1
                     }
                 ],
@@ -410,7 +410,7 @@
         "unlocks": [
             "mussels",
             "crustaceans",
-            "spoon_lure"
+            "spoon-lure"
         ],
         "fish": {
             "snapper": {
@@ -458,7 +458,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spoon_lure",
+                        "type": "spoon-lure",
                         "amount": 1
                     }
                 ],
@@ -472,8 +472,8 @@
                     ]
                 }
             },
-            "moray_eel": {
-                "internal": "moray_eel",
+            "moray-eel": {
+                "internal": "moray-eel",
                 "display": "Moray Eel",
                 "message": "When a fish bites your heel and it looks like an eel...",
                 "price": 55,
@@ -507,10 +507,10 @@
                 "price": 70,
                 "max": 3,
                 "chance": 10,
-                "after": "moray_eel",
+                "after": "moray-eel",
                 "tackle": [
                     {
-                        "type": "spoon_lure",
+                        "type": "spoon-lure",
                         "amount": 2
                     }
                 ],
@@ -524,8 +524,8 @@
                     ]
                 }
             },
-            "lemon_shark": {
-                "internal": "lemon_shark",
+            "lemon-shark": {
+                "internal": "lemon-shark",
                 "display": "Lemon Shark",
                 "message": "A sand colored shark, its meat is a delicacy to some.",
                 "price": 80,
@@ -540,7 +540,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],
@@ -556,8 +556,8 @@
             }
         }
     },
-    "spear_fishing": {
-        "internal": "spear_fishing",
+    "spear-fishing": {
+        "internal": "spear-fishing",
         "display": "Spear Fishing",
         "price": 1750,
         "unlocks": [
@@ -682,8 +682,8 @@
                     ]
                 }
             },
-            "tiger_shark": {
-                "internal": "tiger_shark",
+            "tiger-shark": {
+                "internal": "tiger-shark",
                 "display": "Tiger Shark",
                 "message": "A nocturnal hunter that will eat almost anything, including you.",
                 "price": 100,
@@ -696,7 +696,7 @@
                         "amount": 3
                     },
                     {
-                        "type": "ground_fish",
+                        "type": "ground-fish",
                         "amount": 1
                     }
                 ],
@@ -718,13 +718,13 @@
             }
         }
     },
-    "deep_sea": {
-        "internal": "deep_sea",
+    "deep-sea": {
+        "internal": "deep-sea",
         "display": "Deep Sea",
         "price": 2500,
         "unlocks": [
-            "ground_fish",
-            "spinner_lure"
+            "ground-fish",
+            "spinner-lure"
         ],
         "fish": {
             "whitefish": {
@@ -746,7 +746,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spoon_lure",
+                        "type": "spoon-lure",
                         "amount": 1
                     }
                 ],
@@ -776,7 +776,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],
@@ -806,7 +806,7 @@
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],
@@ -835,13 +835,13 @@
                         "amount": 3
                     },
                     {
-                        "type": "ground_fish",
+                        "type": "ground-fish",
                         "amount": 1
                     }
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],
@@ -855,8 +855,8 @@
                     ]
                 }
             },
-            "mako_shark": {
-                "internal": "mako_shark",
+            "mako-shark": {
+                "internal": "mako-shark",
                 "display": "Mako Shark",
                 "message": "The fastest species of shark, it's known to rip prey apart.",
                 "price": 125,
@@ -865,13 +865,13 @@
                 "after": "marlin",
                 "bait": [
                     {
-                        "type": "ground_fish",
+                        "type": "ground-fish",
                         "amount": 3
                     }
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],
@@ -885,27 +885,27 @@
                     ]
                 }
             },
-            "thresher_shark": {
-                "internal": "thresher_shark",
+            "thresher-shark": {
+                "internal": "thresher-shark",
                 "display": "Thresher Shark",
                 "message": "These predators use their long tail to slap and stun their prey.",
                 "price": 175,
                 "max": 1,
                 "chance": 5,
-                "after": "mako_shark",
+                "after": "mako-shark",
                 "bait": [
                     {
                         "type": "squid",
                         "amount": 3
                     },
                     {
-                        "type": "ground_fish",
+                        "type": "ground-fish",
                         "amount": 2
                     }
                 ],
                 "tackle": [
                     {
-                        "type": "spinner_lure",
+                        "type": "spinner-lure",
                         "amount": 1
                     }
                 ],

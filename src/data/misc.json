@@ -1,0 +1,18 @@
+{
+    "money": {
+        "internal": "money",
+        "display": "Money",
+        "message": "Money often costs too much, but I doubt the fish care.",
+        "difference": 0
+    },
+    "fish-meta": {
+        "internal": "fish-meta",
+        "display": "Total fish caught"
+    },
+    "catalog": {
+        "internal": "catalog",
+        "display": "Fishing Catalog",
+        "message": "A handy book that allows you to view common information on fish.",
+        "price": 250
+    }
+}

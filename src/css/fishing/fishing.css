@@ -1,3 +1,42 @@
+#fishing-counters {
+    align-self: flex-start;
+}
+
+.fishing-counter {
+    position: relative;
+    font-size: 0.9rem;
+    padding: 0.5em;
+    border: 1px solid #000000;
+    margin: 0em 0.5em 1.5em;
+}
+
+.fishing-counter::before {
+    position: absolute;
+    content: attr(header);
+    background-color: #FFFFFF;
+    top: -1em;
+    padding: 0em 0.1em;
+}
+
+.fishing-counter-section > div {
+    padding: 0em 0.3em;
+}
+
+.fishing-counter-section > div.fishing-section-header {
+    padding: 0.3em 0em;
+    margin: 0.3em 0em;
+}
+
+#fishing-fish-counters {
+    margin-left: 0em;
+    margin-bottom: 0em;
+}
+
+#lake-fishing-counters .fishing-section-header {
+    padding-top: 0em;
+    margin-top: 0em;
+}
+
 #fishing-content {
     position: relative;
 }
@@ -12,4 +51,8 @@
 #fishing-content-buttons > button {
     width: 10rem;
     height: 2.75rem;
+}
+
+#fishing-content-buttons > button:first-child {
+    margin-top: 0em;
 }

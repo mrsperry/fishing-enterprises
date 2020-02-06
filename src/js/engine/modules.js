@@ -124,4 +124,21 @@ class Modules {
     static getArt(file, id) {
         return Modules.data.art[file][id];
     }
+
+    static getAreas() {
+        const areas = [];
+        for (const key in Modules.data.data.areas) {
+            areas.push(Modules.data.data.areas[key]);
+        }
+        return areas;
+    }
+
+    static getResources(type) {
+        const resources = [];
+        for (const key in Modules.data.data.fishing[type]) {
+            resources.push(Modules.data.data.fishing[type][key]);
+        }
+
+        return resources;
+    }
 }

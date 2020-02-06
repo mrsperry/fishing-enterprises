@@ -1,0 +1,125 @@
+{
+    "bait": {
+        "worms": {
+            "internal": "worms",
+            "display": "Worms",
+            "message": "Writing around in the mud, these would make good bait.",
+            "price": 1,
+            "max": 30,
+            "max-caught": 3
+        },
+        "guppies": {
+            "internal": "guppies",
+            "display": "Guppies",
+            "message": "Small fish to catch big fish.",
+            "price": 2,
+            "max": 20
+        },
+        "insects": {
+            "internal": "insects",
+            "display": "Insects",
+            "message": "The nastier the critter, the tastier it is.",
+            "price": 3,
+            "max": 20
+        },
+        "mussels": {
+            "internal": "mussels",
+            "display": "Mussels",
+            "message": "Hard shells protect their squishy and edible interior.",
+            "price": 4,
+            "max": 20
+        },
+        "crustaceans": {
+            "internal": "crustaceans",
+            "display": "Crustaceans",
+            "message": "All manner of shrimp and krill fill the bucket.",
+            "price": 5,
+            "max": 15
+        },
+        "squid": {
+            "internal": "squid",
+            "display": "Squid",
+            "message": "Tentacled, translucent, smelly and yet perfect bait.",
+            "price": 6,
+            "max": 15
+        },
+        "ground-fish": {
+            "internal": "ground-fish",
+            "display": "Ground Fish",
+            "message": "Various fish bits and guts compiled for large hunters.",
+            "price": 7,
+            "max": 5
+        }
+    },
+    "tackle": {
+        "fly-tackle": {
+            "internal": "fly-tackle",
+            "display": "Fly Tackle",
+            "message": "Brightly colored and fuzzy, used to attract River fish.",
+            "price": 2,
+            "max": 20
+        },
+        "cages": {
+            "internal": "cages",
+            "display": "Cages",
+            "message": "Traps of varying sizes to catch all manner of crustaceans.",
+            "price": 4,
+            "max": 20
+        },
+        "bobber": {
+            "internal": "bobber",
+            "display": "Bobber",
+            "message": "Spherical bi-colored floatation devices.",
+            "price": 6,
+            "max": 15
+        },
+        "spoon-lure": {
+            "internal": "spoon-lure",
+            "display": "Spoon Lure",
+            "message": "A small lure made to resemble the shape of a fish.",
+            "price": 8,
+            "max": 15
+        },
+        "harpoon": {
+            "internal": "harpoon",
+            "display": "Harpoon",
+            "message": "A manual weapon loaded with a large barb tipped spear.",
+            "price": 10,
+            "max": 10
+        },
+        "spinner-lure": {
+            "internal": "spinner-lure",
+            "display": "Spinner Lure",
+            "message": "Long strands extend out of this lure, giving the impression of a squid.",
+            "price": 12,
+            "max": 5
+        }
+    },
+    "boat": {
+        "internal": "boat",
+        "display": "Boat",
+        "message": "An older vessel that may need a few patches before setting sail.",
+        "price": 2000,
+        "fuel": {
+            "internal": "fuel",
+            "display": "Fuel",
+            "message": "Diesel for any length trip out on the water.",
+            "max": 30,
+            "price": 5,
+            "count": 0,
+            "total": 0
+        },
+        "diving": {
+            "internal": "diving-equipment",
+            "display": "Diving Equipment",
+            "message": "An assortment of aquatic gear including oxygen tanks, a mask and a snorkel.",
+            "price": 1250
+        },
+        "rods": {
+            "internal": "fishing-rods",
+            "display": "High Tension Rods",
+            "message": "Rods built with reinforced materials and lines, allowing you to catch the strongest of fish.",
+            "price": 1500
+        }
+    }
+}

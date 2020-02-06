@@ -108,6 +108,10 @@ a:hover {
 }
 
 /* Border styles */
+.border-top {
+    border-top: 1px solid #000000;
+}
+
 .border-bottom {
     border-bottom: 1px solid #000000;
 }
