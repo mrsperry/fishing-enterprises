@@ -26,7 +26,12 @@ class Fishing {
             }
 
             for (const key in area.fish) {
-                Utils.createCounter(area.fish[key], section);
+                const fish = area.fish[key];
+                Utils.createCounter(fish, section);
+
+                // Set default fish values
+                fish.count = 0;
+                fish.total = 0;
             }
         }
 
