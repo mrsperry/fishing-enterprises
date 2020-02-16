@@ -133,6 +133,10 @@ class Modules {
         return areas;
     }
 
+    static getAreasAsObject() {
+        return Modules.data.data.areas;
+    }
+
     static getResources(type) {
         const resources = [];
         for (const key in Modules.data.data.fishing[type]) {
@@ -140,5 +144,9 @@ class Modules {
         }
 
         return resources;
+    }
+
+    static getResourcesAsObject() {
+        return Modules.data.data.fishing;
     }
 }

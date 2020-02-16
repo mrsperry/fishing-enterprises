@@ -3,6 +3,8 @@ class Areas {
         Debug.write("Areas", "Switching to area: " + area)
 
         const setData = () => {
+            Areas.currentArea = area;
+
             // Set the area art
             $("#fishing-content-art")
                 .html(Modules.getArt("areas", area));

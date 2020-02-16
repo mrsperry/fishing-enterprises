@@ -1,4 +1,8 @@
 class Utils {
+    static random(min, max) {
+        return min + (Math.random() * (max - min))
+    }
+    
     static createCounter(data, parent) {
         const counter = $("<div>")
             .attr("id", data.internal + "-counter")
