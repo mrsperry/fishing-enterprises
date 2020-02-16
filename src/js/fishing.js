@@ -37,5 +37,7 @@ class Fishing {
                 Misc.createCounter(value, section);
             }
         }
+
+        Modules.loadView("fishing/area-selector", "#fishing-counters", false);
     }
 }

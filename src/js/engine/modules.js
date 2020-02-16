@@ -84,7 +84,7 @@ class Modules {
         };
 
         return new Promise((resolve) => {
-            if (remove != null) {
+            if (remove) {
                 $.when(Modules.clearElements(remove)).done(() => {
                     loadContainer(resolve);
                 });
