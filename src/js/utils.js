@@ -5,7 +5,7 @@ class Utils {
             .text(data.display + ": ")
             .appendTo(parent);
         $("<span>")
-            .attr("id", data.internal + "-counter")
+            .attr("id", data.internal + "-count")
             .text("0")
             .appendTo(counter);
         $("<span>")
