@@ -26,7 +26,7 @@ class Fishing {
             }
 
             for (const key in area.fish) {
-                Misc.createCounter(area.fish[key], section);
+                Utils.createCounter(area.fish[key], section);
             }
         }
 
@@ -34,7 +34,7 @@ class Fishing {
             const section = $("#fishing-" + key + "-counters");
 
             for (const value of Modules.getResources(key)) {
-                Misc.createCounter(value, section);
+                Utils.createCounter(value, section);
             }
         }
 

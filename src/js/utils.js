@@ -1,4 +1,4 @@
-class Misc {
+class Utils {
     static createCounter(data, parent) {
         const counter = $("<div>")
             .attr("id", data.internal + "-counter")
