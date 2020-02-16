@@ -1,5 +1,7 @@
 class Areas {
     static switchTo(area, fadeOut) {
+        Debug.write("Areas", "Switching to area: " + area)
+
         const setData = () => {
             // Set the area art
             $("#fishing-content-art")
