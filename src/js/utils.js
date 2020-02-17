@@ -2,7 +2,13 @@ class Utils {
     static random(min, max) {
         return min + Math.floor(Math.random() * (max - min));
     }
-    
+
+    // Get a random object child from an object
+    static randomObject(object) {
+        const keys = Object.keys(object);
+        return object[keys[Utils.random(0, keys.length)]];
+    }
+
     static createCounter(data, parent) {
         const counter = $("<div>")
             .attr("id", data.internal + "-counter")
