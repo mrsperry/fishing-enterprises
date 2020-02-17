@@ -1,6 +1,6 @@
 class Utils {
     static random(min, max) {
-        return min + (Math.random() * (max - min))
+        return min + Math.floor(Math.random() * (max - min));
     }
     
     static createCounter(data, parent) {
