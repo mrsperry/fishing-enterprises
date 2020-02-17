@@ -2,6 +2,7 @@ class Main {
     static async initialize() {
         Debug.initialize();
         await Modules.initialize();
+        Messenger.initialize();
 
         Modules.loadView("menus/main-menu");
     }

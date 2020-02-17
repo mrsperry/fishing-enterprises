@@ -66,8 +66,10 @@ class Fishing {
 
         if (state) {
             Fishing.interval = window.setInterval(Fishing.catchFish, 1250);
+            Messenger.write("You cast out your line as far as your arm permits");
         } else {
             window.clearInterval(Fishing.interval);
+            Messenger.write("You reel your line in")
         }
     }
 
@@ -119,6 +121,10 @@ class Fishing {
         // Add the fish
         const amount = Utils.random(1, fish["max-caught"] == null ? 1 : fish["max-caught"]);
         fish.count += amount;
+
+        if (!fish.caught) {
+            Messenger.write(fish.display + ": " + fish.message);
+        }
         fish.caught = true;
         
         // Update area section
