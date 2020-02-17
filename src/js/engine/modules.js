@@ -104,9 +104,9 @@ class Modules {
             for (let index = 0; index < selectors.length; index++) {
                 const current = selectors[index];
 
-                const element = $(current)
-                    .fadeOut(400, () => {
-                        element.remove();
+                for (const selected of $(current)) {
+                    $(selected).fadeOut(400, () => {
+                        $(selected).remove();
 
                         // Only resolve the promise on the last 
                         if (index == selectors.length - 1) {
@@ -114,6 +114,7 @@ class Modules {
                         }
                     });
                 }
+            }
         });
     }
 
