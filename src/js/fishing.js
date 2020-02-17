@@ -9,6 +9,7 @@ class Fishing {
             const section = $("<div>")
                 .attr("id", area.internal + "-fishing-counters")
                 .addClass("fishing-counter-section")
+                .hide()
                 .appendTo(parent);
 
             const header = $("<div>")
@@ -30,7 +31,7 @@ class Fishing {
 
             for (const key in area.fish) {
                 const fish = area.fish[key];
-                Utils.createCounter(fish, section);
+                Utils.createCounter(fish, section, true);
 
                 // Set default fish values
                 fish.count = 0;
@@ -42,7 +43,7 @@ class Fishing {
             const section = $("#fishing-" + key + "-counters");
 
             for (const value of Modules.getResources(key)) {
-                Utils.createCounter(value, section);
+                Utils.createCounter(value, section, true);
 
                 // Set default bait and tackle values
                 value.count = 0;
@@ -72,7 +73,8 @@ class Fishing {
 
     static catchFish() {
         const areas = Modules.getAreasAsObject();
-        const fish = Utils.randomObject(areas[Areas.getCurrentArea()].fish);
+        const area = areas[Areas.getCurrentArea()];
+        const fish = Utils.randomObject(area.fish);
         
         // Check if the fish passes the random check
         if (Utils.random(0, 100) > fish.chance) {
@@ -119,9 +121,23 @@ class Fishing {
         fish.count += amount;
         fish.caught = true;
         
-        // Update the counters
-        $("#" + fish.internal + "-count")
+        // Update area section
+        $("#" + area.internal + "-fishing-counters")
+            .fadeIn();
+
+        // Update counters
+        $("#" + fish.internal + "-counter")
+            .fadeIn();
+        const fishCount = $("#" + fish.internal + "-count")
             .text(fish.count);
+
+        if (fish.count == fish.max) {
+            fish["show-max"] = true;
+
+            fishCount.addClass("fishing-max");
+            $("#" + fish.internal + "-max")
+                .fadeIn();
+        }
 
         Debug.write("Fishing", "Caught " + amount + " " + fish.internal);
     }

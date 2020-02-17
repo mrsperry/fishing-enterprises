@@ -4,6 +4,7 @@
 
 #fishing-fish-counters, #misc-counters {
     flex-shrink: 0;
+    height: min-content;
 }
 
 .fishing-counter {
@@ -59,4 +60,8 @@
 
 #fishing-content-buttons > button:first-child {
     margin-top: 0em;
+}
+
+.fishing-max {
+    opacity: 0.5;
 }

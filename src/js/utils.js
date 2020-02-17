@@ -9,7 +9,7 @@ class Utils {
         return object[keys[Utils.random(0, keys.length)]];
     }
 
-    static createCounter(data, parent) {
+    static createCounter(data, parent, hidden) {
         const counter = $("<div>")
             .attr("id", data.internal + "-counter")
             .text(data.display + ": ")
@@ -20,7 +20,13 @@ class Utils {
             .appendTo(counter);
         $("<span>")
             .attr("id", data.internal + "-max")
+            .addClass("fishing-max")
             .text("/" + data.max)
+            .hide()
             .appendTo(counter);
+
+        if (hidden) {
+            counter.hide();
+        }
     }
 }
