@@ -13,9 +13,8 @@ class Main {
             Modules.loadView("fishing/fishing", null, null);
             Modules.loadView("footer", null, null);
             
-            Areas.switchTo("lake");
-            
             Fishing.initialize();
+            Areas.switchTo("lake");
         });
     }
 

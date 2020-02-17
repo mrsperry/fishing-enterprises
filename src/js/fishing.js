@@ -1,6 +1,6 @@
 class Fishing {
     static initialize() {
-        Fishing.isFishing = Fishing.toggleLine(false);
+        Fishing.isFishing = false;
         Fishing.interval = null;
 
         const parent = $("#fishing-fish-counters");
@@ -56,6 +56,10 @@ class Fishing {
     }
 
     static toggleLine(state) {
+        if (Fishing.isFishing == state) {
+            return;
+        }
+
         Fishing.isFishing = state;
         Debug.write("Fishing", "Fishing state: " + state);
 
