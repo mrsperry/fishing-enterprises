@@ -1,6 +1,7 @@
 class Areas {
     static switchTo(area, fadeOut) {
-        Debug.write("Areas", "Switching to area: " + area)
+        Debug.write("Areas", "Switching to area: " + area);
+        Fishing.toggleLine(false);
 
         const setData = () => {
             Areas.currentArea = area;
