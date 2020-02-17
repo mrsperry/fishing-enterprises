@@ -1,5 +1,8 @@
 class Fishing {
     static initialize() {
+        Fishing.isFishing = Fishing.toggleLine(false);
+        Fishing.interval = null;
+
         const parent = $("#fishing-fish-counters");
 
         for (const area of Modules.getAreas()) {
@@ -51,7 +54,26 @@ class Fishing {
         Modules.loadView("fishing/area-selector", "#fishing-counters", false);
     }
 
-    static catchFish(fish) {
+    static toggleLine(state) {
+        Fishing.isFishing = state;
+        Debug.write("Fishing", "Fishing state: " + state);
+
+        $("#cast-out-line-button")
+            .prop("disabled", state);
+        $("#reel-in-line-button")
+            .prop("disabled", !state);
+
+        if (state) {
+            Fishing.interval = window.setInterval(Fishing.catchFish, 1250);
+        } else {
+            window.clearInterval(Fishing.interval);
+        }
+    }
+
+    static catchFish() {
+        const areas = Modules.getAreasAsObject();
+        const fish = Utils.randomObject(areas[Areas.getCurrentArea()].fish);
+        
         // Check if the fish passes the random check
         if (Utils.random(0, 100) > fish.chance) {
             return;
@@ -63,9 +85,8 @@ class Fishing {
         }
 
         // Check if there is a prerequisite fish and if it has been caught
-        const areas = Modules.getAreasAsObject();
         if (fish.after != null) {
-            if (!areas[Areas.currentArea].fish[fish.after].caught) {
+            if (!areas[Areas.getCurrentArea()].fish[fish.after].caught) {
                 return;
             }
         }

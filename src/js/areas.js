@@ -30,4 +30,8 @@ class Areas {
             setData();
         }
     }
+
+    static getCurrentArea() {
+        return Areas.currentArea;
+    }
 }
