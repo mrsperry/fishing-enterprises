@@ -40,6 +40,11 @@ class Fishing {
 
             for (const value of Modules.getResources(key)) {
                 Utils.createCounter(value, section);
+
+                // Set default bait and tackle values
+                value.count = 0;
+                value.total = 0;
+                value.purchased = false;
             }
         }
 
@@ -58,8 +63,9 @@ class Fishing {
         }
 
         // Check if there is a prerequisite fish and if it has been caught
+        const areas = Modules.getAreasAsObject();
         if (fish.after != null) {
-            if (!Modules.getAreasAsObject()[Areas.currentArea].fish[fish.after].caught) {
+            if (!areas[Areas.currentArea].fish[fish.after].caught) {
                 return;
             }
         }
@@ -72,6 +78,15 @@ class Fishing {
             }
 
             for (const resource of fish[type]) {
+                // Edge case for minnows as they are used as bait but can be caught
+                if (resource.type == "minnows") {
+                    if (areas["lake"].fish.minnows.count < resource.amount) {
+                        return;
+                    } else {
+                        continue;
+                    }
+                }
+
                 if (resources[type][resource.type].count < resource.amount) {
                     return;
                 }
