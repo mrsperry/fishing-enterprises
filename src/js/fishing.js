@@ -1,6 +1,5 @@
 class Fishing {
     static initialize() {
-        Fishing.isFishing = false;
         Fishing.interval = null;
 
         const parent = $("#fishing-fish-counters");
