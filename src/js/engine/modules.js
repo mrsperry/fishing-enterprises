@@ -94,6 +94,17 @@ class Modules {
         });
     }
 
+    static loadCSS(path) {
+        Debug.write("Modules", "Loading CSS: " + path + ".css");
+
+        $("<link>")
+            .attr("rel", "stylesheet")
+            .attr("type", "text/css")
+            .attr("href", "src/css/" + path + ".css")
+            .addClass("temp-css")
+            .appendTo("head");
+    }
+
     static clearElements(selectors) {
         return new Promise((resolve) => {
             // Convert a single selector into an array

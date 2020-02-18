@@ -1,0 +1,8 @@
+:root {
+    --text-color: #CCCCCC;
+    --bg-color: #111125;
+    --bg-hover-color: #222245;
+    --border-color: #444465;
+    --link-color: hsl(200, 100%, 50%);
+    --link-hover-color: hsl(190, 100%, 50%);;
+}

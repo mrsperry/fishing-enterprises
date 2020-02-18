@@ -11,14 +11,14 @@
     position: relative;
     font-size: 0.9rem;
     padding: 0.5em;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     margin: 0em 0.5em 1.5em;
 }
 
 .fishing-counter::before {
     position: absolute;
     content: attr(header);
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     top: -1em;
     padding: 0em 0.1em;
 }

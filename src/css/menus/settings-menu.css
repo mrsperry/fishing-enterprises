@@ -8,7 +8,7 @@
 
 #settings-modal > div > a {
     padding: 0em 0.5em;
-    border-right: 1px solid #000000;
+    border-right: 1px solid var(--border-color);
 }
 
 #settings-modal > div > a:last-child {

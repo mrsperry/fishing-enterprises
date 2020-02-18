@@ -3,6 +3,8 @@ class Main {
         Debug.initialize();
         await Modules.initialize();
         Messenger.initialize();
+        
+        Theme.swapTheme("light");
 
         Modules.loadView("menus/main-menu");
     }

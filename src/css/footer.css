@@ -6,7 +6,7 @@
 
 #footer > a {
     padding: 0em 1em;
-    border-right: 1px solid #000000;
+    border-right: 1px solid var(--border-color);
 }
 
 #footer > a:last-child {

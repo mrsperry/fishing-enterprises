@@ -4,6 +4,8 @@
 }
 
 body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0em;
 }
 
@@ -11,17 +13,18 @@ body {
 button {
     font-family: monospace;
     font-size: 0.8em;
-    background-color: #FFFFFF;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     cursor: pointer;
     width: 16em;
     height: 3.5rem;
     padding: 0.5em;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     margin: 0.3em;
 }
 
 button:hover, button:disabled {
-    background-color: #DFDFDF;
+    background-color: var(--bg-hover-color);
 }
 
 button:disabled {
@@ -31,13 +34,13 @@ button:disabled {
 
 /* Link styles */
 a {
-    color: hsl(200, 100%, 35%);
+    color: var(--link-color);
     text-decoration: none;
     cursor: pointer;
 }
 
 a:hover {
-    color: hsl(200, 100%, 50%);
+    color: var(--link-hover-color);
 }
 
 /* Modals */
@@ -49,9 +52,9 @@ a:hover {
 }
 
 .modal {
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     padding: 1em;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
 }
 
 .modal-header {
@@ -61,7 +64,7 @@ a:hover {
 }
 
 .modal-active, .modal-active:hover  {
-    color: #000000;
+    color: var(--text-color);
     font-weight: bold;
     cursor: default;
 }
@@ -110,9 +113,9 @@ a:hover {
 
 /* Border styles */
 .border-top {
-    border-top: 1px solid #000000;
+    border-top: 1px solid var(--border-color);
 }
 
 .border-bottom {
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid var(--border-color);
 }
