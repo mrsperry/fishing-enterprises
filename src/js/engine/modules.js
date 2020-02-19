@@ -36,34 +36,44 @@ class Modules {
                 }
 
                 const contents = await $.get(path + file);
-
-                // Split art files into their individual assets
                 if (source == "art") {
-                    Modules.data.art[fileName] = {};
-
-                    // The name of this art piece
-                    let name = "";
-                    // The art piece contents
-                    let art = "";
-
-                    for (const line of contents.split("\n")) {
-                        // Check if this line is the ID of a new piece
-                        if (line.startsWith("#")) {
-                            // Make sure an empty piece is not added
-                            if (name != "") {
-                                Modules.data.art[fileName][name] = art;
-                                
-                                art = "";
-                            }
-
-                            name = line.split(":")[1].trim();
-                        } else {
-                            art += line;
-                        }
-                    }
+                    Modules.loadArt(contents, fileName);
                 } else {
                     Modules.data[source][fileName] = contents;
                 }
+            }
+        }
+    }
+
+    static loadArt(contents, fileName) {
+        Modules.data.art[fileName] = {};
+
+        // The name of this art piece
+        let name = "";
+        // The art piece contents
+        let art = "";
+
+        const lines = contents.split("\n");
+        for (let index = 0; index < lines.length; index++) {
+            const line = lines[index];
+
+            // Check if this line is the ID of a new piece
+            if (line.startsWith("#")) {
+                // Make sure an empty piece is not added
+                if (name != "") {
+                    Modules.data.art[fileName][name] = art;
+                    
+                    art = "";
+                }
+
+                name = line.split(":")[1].trim();
+            } else {
+                art += line;
+            }
+
+            // Add the final art piece in the file
+            if (index == lines.length - 1) {
+                Modules.data.art[fileName][name] = art;
             }
         }
     }
