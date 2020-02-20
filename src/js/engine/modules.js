@@ -171,4 +171,29 @@ class Modules {
     static getResourcesAsObject() {
         return Modules.data.data.fishing;
     }
+
+    static updateResource(type, id, amount) {
+        const resource = Modules.getResourcesAsObject()[type][id];
+        resource.count += amount;
+        
+        if (resource.count > resource.max) {
+            resource.count = resource.max;
+        } else if (resource.count < 0) {
+            resource.count = 0;
+        }
+
+        // Update elements
+        $("#fishing-" + type + "-counters").fadeIn();
+        $("#" + id + "-counter").fadeIn();
+        const count = $("#" + id + "-count").text(resource.count);
+
+        if (resource.count == resource.max) {
+            count.addClass("fishing-max");
+
+            resource["show-max"] = true;
+            $("#" + id + "-max").show();
+        } else {
+            count.removeClass("fishing-max");
+        }
+    }
 }
