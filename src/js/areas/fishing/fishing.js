@@ -106,7 +106,7 @@ class Fishing {
             for (const resource of fish[type]) {
                 // Edge case for minnows as they are used as bait but can be caught
                 if (resource.type == "minnows") {
-                    if (areas["lake"].fish.minnows.count < resource.amount) {
+                    if (areas.lake.fish.minnows.count < resource.amount) {
                         return;
                     } else {
                         continue;
@@ -127,6 +127,20 @@ class Fishing {
             Messenger.write(fish.display + ": " + fish.message);
         }
         fish.caught = true;
+
+        // Remove bait and tackle
+        for (const type of ["bait", "tackle"]) {
+            for (const resource of fish[type] || []) {
+                if (resource.type == "minnows") {
+                    const count = areas.lake.fish.minnows.count -= resource.amount;
+                    $("#minnows-count")
+                        .text(count)
+                        .removeClass("fishing-max");
+                } else {
+                    Modules.updateResource(type, resource.type, -resource.amount);
+                }
+            }
+        }
         
         // Update area section
         $("#" + area.internal + "-fishing-counters").fadeIn();
