@@ -81,12 +81,14 @@ class WormGame {
                 .css("visibility", "visible")
                 .css("transform", "rotate(" + Utils.random(0, 360) + "deg)")
                 .off()
-                .click(() => {
+                .click((event) => {
                     if (Modules.updateResource("bait", "worms", 1)) {
                         art.css("visibility", "hidden");
 
                         WormGame.count--;
                         WormGame.grid[tile] = null;
+
+                        new Floater(event, "+1");
                     } else {
                         Messenger.write("You can't hold any more worms");
                     }

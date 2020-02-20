@@ -119,3 +119,9 @@ a:hover {
 .border-bottom {
     border-bottom: 1px solid var(--border-color);
 }
+
+/* Floaters */
+.floater {
+    position: absolute;
+    z-index: 1;
+}
