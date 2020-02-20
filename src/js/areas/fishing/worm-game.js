@@ -82,12 +82,14 @@ class WormGame {
                 .css("transform", "rotate(" + Utils.random(0, 360) + "deg)")
                 .off()
                 .click(() => {
-                    Modules.updateResource("bait", "worms", 1);
-                    
-                    art.css("visibility", "hidden");
+                    if (Modules.updateResource("bait", "worms", 1)) {
+                        art.css("visibility", "hidden");
 
-                    WormGame.count--;
-                    WormGame.grid[tile] = null;
+                        WormGame.count--;
+                        WormGame.grid[tile] = null;
+                    } else {
+                        Messenger.write("You can't hold any more worms");
+                    }
                 });;
         }
     }

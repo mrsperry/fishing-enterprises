@@ -176,8 +176,10 @@ class Modules {
         const resource = Modules.getResourcesAsObject()[type][id];
         resource.count += amount;
         
+        let result = true;
         if (resource.count > resource.max) {
             resource.count = resource.max;
+            result = false;
         } else if (resource.count < 0) {
             resource.count = 0;
         }
@@ -195,5 +197,7 @@ class Modules {
         } else {
             count.removeClass("fishing-max");
         }
+
+        return result;
     }
 }
