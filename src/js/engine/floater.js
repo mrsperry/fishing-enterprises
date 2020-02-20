@@ -1,7 +1,7 @@
 class Floater {
     constructor(event, text, interval, distance) {
         const floater = $("<div>")
-            .addClass("floater")
+            .addClass("floater no-select")
             .css("left", event.clientX)
             .css("top", event.clientY)
             .animate({

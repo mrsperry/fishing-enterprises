@@ -111,6 +111,14 @@ a:hover {
     white-space: pre;
 }
 
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* Border styles */
 .border-top {
     border-top: 1px solid var(--border-color);
@@ -123,5 +131,7 @@ a:hover {
 /* Floaters */
 .floater {
     position: absolute;
+    cursor: default;
+    pointer-events: none;
     z-index: 1;
 }

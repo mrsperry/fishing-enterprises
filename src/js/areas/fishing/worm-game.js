@@ -78,6 +78,7 @@ class WormGame {
                 .hide()
                 .fadeIn();
             const art = $("#worm-game-tile-" + (tile + 1) + " .worm-game-art")
+                .addClass("no-select")
                 .css("visibility", "visible")
                 .css("transform", "rotate(" + Utils.random(0, 360) + "deg)")
                 .off()
