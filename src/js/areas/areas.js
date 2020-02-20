@@ -28,6 +28,12 @@ class Areas {
         } else {
             setData();
         }
+
+        for (const button of $("#area-selector").children("button")) {
+            // Check if the button ID matches the area
+            const match = $(button).attr("id").substring(0, area.length) == area;
+            $(button).prop("disabled", match);
+        }
     }
 
     static getCurrentArea() {
