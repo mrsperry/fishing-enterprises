@@ -10,13 +10,12 @@ class Areas {
             $("#fishing-content-art")
                 .html(Modules.getArt("areas", area));
 
-            // Add an additional button if the area is the lake
+            // Show an additional button if the area is the lake
+            const element = $("#forage-for-worms-button");
             if (area == "lake") {
-                $("<button>")
-                    .attr("id", "forage-for-worms-button")
-                    .addClass("fishing-button")
-                    .text("Forage for worms")
-                    .prependTo("#fishing-content-buttons");
+                element.show();
+            } else {
+                element.hide();
             }
         };
 

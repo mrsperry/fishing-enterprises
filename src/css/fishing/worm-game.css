@@ -1,0 +1,23 @@
+#worm-game-grid {
+    position: absolute;
+    flex-wrap: wrap;
+    top: 3em;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.worm-game-tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 33%;
+    height: min-content;
+}
+
+.worm-game-tile .worm-game-art {
+    cursor: pointer;
+    font-size: 0.4em;
+    font-weight: 1000;
+    background-color: var(--bg-color);
+}
