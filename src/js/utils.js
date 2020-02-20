@@ -29,4 +29,16 @@ class Utils {
             counter.hide();
         }
     }
+
+    static fadeVisibility(elements) {
+        if (typeof(elements) != "array") {
+            elements = [elements];
+        }
+
+        for (const element of elements) {
+            $(element).css("visibility", "visible")
+                .hide()
+                .fadeIn();
+        }
+    }
 }

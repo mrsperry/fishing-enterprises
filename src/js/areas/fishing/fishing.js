@@ -144,9 +144,7 @@ class Fishing {
 
         const counters = $("#fishing-fish-counters");
         if (counters.css("visibility") == "hidden") {
-            counters.css("visibility", "visible")
-                .hide()
-                .fadeIn();
+            Utils.fadeVisibility(counters[0]);
         }
         
         // Update area section

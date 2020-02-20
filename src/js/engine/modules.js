@@ -187,9 +187,7 @@ class Modules {
         // Update elements
         const counters = $("#fishing-" + type + "-counters");
         if (counters.css("visibility") == "hidden") {
-            counters.css("visibility", "visible")
-                .hide()
-                .fadeIn();
+            Utils.fadeVisibility(counters[0]);
         }
 
         $("#" + id + "-counter").fadeIn();
