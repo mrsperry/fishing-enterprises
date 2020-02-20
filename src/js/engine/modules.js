@@ -61,7 +61,7 @@ class Modules {
             if (line.startsWith("#")) {
                 // Make sure an empty piece is not added
                 if (name != "") {
-                    Modules.data.art[fileName][name] = art;
+                    Modules.data.art[fileName][name] = art.substring(0, art.length - 2);
                     
                     art = "";
                 }
@@ -73,7 +73,7 @@ class Modules {
 
             // Add the final art piece in the file
             if (index == lines.length - 1) {
-                Modules.data.art[fileName][name] = art;
+                Modules.data.art[fileName][name] = art.substring(0, art.length - 2);
             }
         }
     }
