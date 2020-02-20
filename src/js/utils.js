@@ -1,6 +1,6 @@
 class Utils {
     static random(min, max) {
-        return min + Math.floor(Math.random() * (max - min));
+        return min + Math.round(Math.random() * (max - min));
     }
 
     // Get a random object child from an object
