@@ -6,7 +6,7 @@ class Utils {
     // Get a random object child from an object
     static randomObject(object) {
         const keys = Object.keys(object);
-        return object[keys[Utils.random(0, keys.length)]];
+        return object[keys[Utils.random(0, keys.length - 1)]];
     }
 
     static createCounter(data, parent, hidden) {
