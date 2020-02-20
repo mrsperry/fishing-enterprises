@@ -159,6 +159,10 @@ class Fishing {
 
             fishCount.addClass("fishing-max");
             $("#" + fish.internal + "-max").show();
+
+            if (!Shop.unlocked) {
+                Shop.unlock();
+            }
         }
 
         Debug.write("Fishing", "Caught " + amount + " " + fish.internal);
