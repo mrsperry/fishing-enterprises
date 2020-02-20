@@ -185,7 +185,13 @@ class Modules {
         }
 
         // Update elements
-        $("#fishing-" + type + "-counters").fadeIn();
+        const counters = $("#fishing-" + type + "-counters");
+        if (counters.css("visibility") == "hidden") {
+            counters.css("visibility", "visible")
+                .hide()
+                .fadeIn();
+        }
+
         $("#" + id + "-counter").fadeIn();
         const count = $("#" + id + "-count").text(resource.count);
 

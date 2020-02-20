@@ -141,6 +141,13 @@ class Fishing {
                 }
             }
         }
+
+        const counters = $("#fishing-fish-counters");
+        if (counters.css("visibility") == "hidden") {
+            counters.css("visibility", "visible")
+                .hide()
+                .fadeIn();
+        }
         
         // Update area section
         $("#" + area.internal + "-fishing-counters").fadeIn();
