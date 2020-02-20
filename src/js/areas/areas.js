@@ -13,8 +13,10 @@ class Areas {
             const element = $("#forage-for-worms-button");
             if (area == "lake") {
                 element.show();
+                $("#cast-out-line-button").css("margin-top", "");
             } else {
                 element.hide();
+                $("#cast-out-line-button").css("margin-top", "0em");
             }
         };
 

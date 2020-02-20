@@ -1,3 +1,7 @@
+#area-selector {
+    margin-left: 0.5em;
+}
+
 #area-selector > button {
     visibility: hidden;
     width: 10em;
