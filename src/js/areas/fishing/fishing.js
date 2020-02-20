@@ -62,10 +62,8 @@ class Fishing {
         Fishing.isFishing = state;
         Debug.write("Fishing", "Fishing state: " + state);
 
-        $("#cast-out-line-button")
-            .prop("disabled", state);
-        $("#reel-in-line-button")
-            .prop("disabled", !state);
+        $("#cast-out-line-button").prop("disabled", state);
+        $("#reel-in-line-button").prop("disabled", !state);
 
         if (state) {
             Fishing.interval = window.setInterval(Fishing.catchFish, 1250);
@@ -131,21 +129,17 @@ class Fishing {
         fish.caught = true;
         
         // Update area section
-        $("#" + area.internal + "-fishing-counters")
-            .fadeIn();
+        $("#" + area.internal + "-fishing-counters").fadeIn();
 
         // Update counters
-        $("#" + fish.internal + "-counter")
-            .fadeIn();
-        const fishCount = $("#" + fish.internal + "-count")
-            .text(fish.count);
+        $("#" + fish.internal + "-counter").fadeIn();
+        const fishCount = $("#" + fish.internal + "-count").text(fish.count);
 
         if (fish.count == fish.max) {
             fish["show-max"] = true;
 
             fishCount.addClass("fishing-max");
-            $("#" + fish.internal + "-max")
-                .fadeIn();
+            $("#" + fish.internal + "-max").show();
         }
 
         Debug.write("Fishing", "Caught " + amount + " " + fish.internal);

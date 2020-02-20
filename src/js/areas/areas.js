@@ -7,8 +7,7 @@ class Areas {
             Areas.currentArea = area;
 
             // Set the area art
-            $("#fishing-content-art")
-                .html(Modules.getArt("areas", area));
+            $("#fishing-content-art").html(Modules.getArt("areas", area));
 
             // Show an additional button if the area is the lake
             const element = $("#forage-for-worms-button");
